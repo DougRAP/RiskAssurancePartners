@@ -325,6 +325,53 @@ Required sequence:
 
 Each gate requires explicit approval before the next phase begins.
 
+## Decision 019 — Public Pricing Presentation
+
+**Status:** Approved / Locked (Owner, 2026-08-23)
+
+The website leads with the FurnitureRx Subscription at **$19.99/month**. That is the focus.
+
+Product hierarchy:
+1. **FurnitureRx Subscription ($19.99/month)** — primary; the lead offer of the main site.
+2. **Care Kits** — secondary.
+3. **Repair Safety Net** — tertiary; designed to appeal to consumers at checkout. It is **not** a lead offer on the main site.
+
+Do not present "from $9.99/mo" framing on the corporate site.
+
+## Decision 020 — Dealer Commission Facts
+
+**Status:** Approved / Locked (Owner, 2026-08-23)
+
+Clarifies Decision 005. The "$8 dealer payment" is a **dealer commission**: when a customer makes a successful $19.99 subscription payment, the dealer earns an $8 commission.
+
+The dealer pays nothing to participate — the dealer sells the subscription program, which is designed to **complement** Multi-Year programs and capture the ~70% of customers who say "no" to Multi-Year plans (owner-supplied figure; usable).
+
+Full commission schedule (owner-supplied):
+- $19.99 subscription payment → **$8** dealer commission;
+- Care Kit sale → **$20** dealer commission;
+- Repair Safety Net sale → **$8** dealer commission;
+- Stain plan → **$2** dealer commission.
+
+Only the $19.99 subscription and its $8 commission are the main-site story (see Decision 019).
+
+## Decision 021 — RAP Google Rating
+
+**Status:** Approved (Owner, 2026-08-23)
+
+RAP's Google rating is **4.5 stars**. The 4.7 figure appearing in the research draft is incorrect. Use 4.5 wherever a rating is cited.
+
+## Decision 022 — Reinsurance Terminology
+
+**Status:** Approved / Locked (Owner, 2026-08-23)
+
+"Captive" and "Reinsurance" refer to the same RAP program. The website uses **Reinsurance** because dealers understand that term. Do not introduce "Captive" as a separate offering.
+
+## Decision 023 — Customer Utility Function URLs
+
+**Status:** Approved Direction (Owner, 2026-08-23)
+
+Customer/dealer utility functions (File a Claim, Manage My Plan, Customer Support, Dealer Login) link to the existing kiosk site (kiosk.furniturerx.net) URLs. Exact route inventory happens in Phase 12.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

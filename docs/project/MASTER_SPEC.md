@@ -87,10 +87,12 @@ FurnitureRx is RAP's subscription-protection product.
 
 Current program economics:
 - Customer payment: **$19.99/month**
-- Dealer remit: **$0**
-- Dealer payment: **$8 per successful monthly payment**
+- Dealer remit: **$0** (dealer pays nothing to participate)
+- Dealer commission: **$8 per successful $19.99 monthly subscription payment**
 
-FurnitureRx gives dealers another protection-buying path for customers who may decline a large upfront protection purchase.
+FurnitureRx gives dealers another protection-buying path for customers who may decline a large upfront protection purchase. It is designed to complement Multi-Year programs and capture the ~70% of customers who say "no" to Multi-Year plans (owner-supplied figure).
+
+The corporate site leads with $19.99/month only. Care Kits are secondary and Repair Safety Net is a checkout-oriented consumer product, not a main-site lead (see DECISIONS.md 019–020 for the full commission schedule).
 
 FurnitureRx does **not** automatically replace the dealer's Multi-Year Protection program.
 
