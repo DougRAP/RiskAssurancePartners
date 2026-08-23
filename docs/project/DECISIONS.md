@@ -1,0 +1,346 @@
+# Risk Assurance Partners Website Refactor — DECISIONS
+
+## Purpose
+
+This is the authoritative project decision log.
+
+Only approved project decisions should be recorded here.
+
+When a later decision changes an earlier decision:
+- add a new dated entry;
+- identify the superseded decision;
+- do not silently rewrite history.
+
+## Decision 001 — Master Brand
+
+**Status:** Approved / Locked
+
+**Decision:** Risk Assurance Partners is the master corporate brand. RAP is accepted shorthand. FurnitureRx is a product of Risk Assurance Partners.
+
+**Implications:**
+- Global header/footer belong to Risk Assurance Partners.
+- FurnitureRx may have a distinct product treatment but cannot become the master site brand.
+- RAP Research, Newswire, Market Intelligence, Dealer Economics, Multi-Year Protection, and Reinsurance remain RAP properties.
+
+## Decision 002 — Dealer-First Website Strategy
+
+**Status:** Approved / Locked
+
+**Decision:** The website will be dealer-need-first rather than provider-first.
+
+**Required narrative:**
+
+Dealer Need  
+→ Market Conditions  
+→ Economic Opportunity  
+→ Three Economic Paths  
+→ Changed Customer Behavior  
+→ RAP Solutions  
+→ Economic Proof  
+→ Newswire / Market Intelligence / Research  
+→ Why RAP  
+→ Conversion
+
+## Decision 003 — Core Dealer Economic Premise
+
+**Status:** Approved / Locked
+
+**Decision:** The website will be built around the premise that furniture dealers face recurring operating expenses while furniture transactions are episodic, so dealers need to create more economic value from customers they have already paid to acquire.
+
+## Decision 004 — Three Economic Paths
+
+**Status:** Approved / Locked
+
+**Decision:** RAP will present three distinct economic paths:
+
+1. FurnitureRx Subscription
+2. Multi-Year Protection
+3. Reinsurance
+
+**Implications:**
+- FurnitureRx does not replace Multi-Year Protection.
+- Multi-Year Protection must not be disparaged.
+- Reinsurance must not be represented as universally immediate profit.
+- All three are RAP strategies.
+
+Working concept:
+
+> **Three Ways to Create More Value From the Same Customer**
+
+Exact wording remains flexible.
+
+## Decision 005 — FurnitureRx Economics
+
+**Status:** Approved / Locked
+
+Current FurnitureRx economics:
+- Customer payment: **$19.99/month**
+- Dealer remit: **$0**
+- Dealer payment: **$8 per successful monthly payment**
+
+Do not change these values without owner instruction.
+
+## Decision 006 — Separate Information Products
+
+**Status:** Approved / Locked
+
+Newswire, Market Intelligence, and RAP Research remain separate.
+
+### Newswire
+**What happened?**
+
+### Market Intelligence
+**What is changing?**
+
+### RAP Research
+**What does it mean?**
+
+They must not be collapsed into a generic Blog or Insights section without owner approval.
+
+## Decision 007 — Newswire Operating Model
+
+**Status:** Approved Direction
+
+Newswire should be substantially self-maintaining.
+
+Routine human editorial labor is not acceptable.
+
+The eventual system should support automated:
+- discovery;
+- relevance filtering;
+- quality filtering;
+- deduplication;
+- categorization;
+- concise summaries;
+- source attribution;
+- original-source links.
+
+Exact provider/architecture is not yet selected.
+
+## Decision 008 — Market Intelligence Operating Model
+
+**Status:** Approved Direction
+
+Market Intelligence should be substantially self-maintaining through authoritative data feeds and automated updating.
+
+The eventual page should support:
+- latest value;
+- trend;
+- source;
+- last updated;
+- historical visualization.
+
+Exact source list and technical architecture are not yet selected.
+
+## Decision 009 — Primary Site Architecture
+
+**Status:** Approved / Working Locked Version 1
+
+Primary navigation:
+- Dealer Economics
+- Programs
+  - FurnitureRx Subscription
+  - Multi-Year Protection
+  - Reinsurance
+- Newswire
+- Market Intelligence
+- Research
+- Why RAP
+
+Primary CTA:
+- **See My Economics**
+
+Utility navigation:
+- File a Claim
+- Manage My Plan
+- Customer Support
+- Dealer Login
+
+## Decision 010 — Homepage Narrative Order
+
+**Status:** Approved / Locked Version 1
+
+Homepage sections:
+1. Utility Bar
+2. Primary Header
+3. Hero — dealer economic problem
+4. Market Pulse
+5. Fundamental Dealer Problem
+6. Three Economic Paths
+7. Changed Customer
+8. FurnitureRx
+9. Dealer Economics / Calculator Teaser
+10. Furniture Retail Newswire
+11. RAP Research
+12. Why RAP
+13. Final CTA
+14. Footer
+
+Structural sequence changes require owner approval.
+
+## Decision 011 — Hero Strategy
+
+**Status:** Approved Direction
+
+The homepage hero begins with the dealer's economic problem, not RAP features, FurnitureRx, coverage, pricing, or generic furniture imagery.
+
+Working hero:
+
+> **YOUR EXPENSES RECUR EVERY MONTH.  
+> YOUR FURNITURE SALE DOESN'T.**
+
+Exact wording remains flexible.
+
+Preferred visual:
+- recurring dealer expenses versus episodic furniture transactions.
+
+## Decision 012 — Multi-Year Positioning
+
+**Status:** Approved / Locked
+
+Multi-Year Protection remains an important RAP solution and must not be attacked or described as obsolete.
+
+Working positioning:
+
+> **Keep the sale that works. Add another way to say yes.**
+
+## Decision 013 — Gated Dealer Economics Calculator
+
+**Status:** Approved / Locked
+
+The detailed dealer economics calculator will not be anonymously public.
+
+Public pages show enough value to create interest, but the detailed model requires verified access.
+
+Objectives:
+1. deter casual competitor access;
+2. capture qualified leads;
+3. provide sales context.
+
+The tool will be branded:
+
+> **RAP Dealer Economics Calculator**
+
+Initial access fields:
+- First Name
+- Last Name
+- Company / Dealership
+- Business Email
+- Phone
+- Role / Title
+
+Preferred user experience:
+- sales approval;
+- secure email access / magic-link style access if appropriate;
+- no unnecessary password creation.
+
+## Decision 014 — Calculator Scope
+
+**Status:** Approved Direction
+
+Initial calculator focus:
+- FurnitureRx Subscription economics.
+
+Future expansion may include:
+- Multi-Year Protection;
+- Reinsurance.
+
+Architecture should not unnecessarily prevent later expansion.
+
+## Decision 015 — Visual Direction
+
+**Status:** Approved Direction
+
+Design character:
+
+Modern B2B financial intelligence  
++ furniture retail  
++ modern technology  
++ editorial research
+
+Avoid:
+- traditional insurance/warranty visual clichés;
+- excessive shield imagery;
+- generic sofa hero photography;
+- decorative icon grids;
+- gratuitous glassmorphism;
+- excessive gradients;
+- unnecessary animation.
+
+Exact typography, palette, spacing, and final design system remain pending UI approval.
+
+## Decision 016 — Development Environment
+
+**Status:** Approved Direction
+
+The project will use:
+- Git repository;
+- Netlify production deployment;
+- Supabase if needed/appropriate;
+- Claude Code multi-agent development.
+
+Exact frontend framework and backend architecture are not yet approved.
+
+## Decision 017 — Agent Structure
+
+**Status:** Approved Direction
+
+Master:
+- Fabel
+- owns requirements integrity, coordination, integration, QA, and decision control.
+
+UI/UX:
+- Opus 5 specialist agent.
+
+Implementation:
+- additional Opus 5 maker agents after UI and technical architecture approval.
+
+Maker agents should not begin before the shared foundation/design system is established.
+
+## Decision 018 — Approval Gates
+
+**Status:** Approved / Locked
+
+Required sequence:
+
+1. Source materials
+2. Master requirements
+3. Locked wireframe
+4. Fabel confirms understanding
+5. UI/UX phase
+6. Owner approves UI
+7. UI specification locked
+8. Fabel proposes technical architecture
+9. Owner approves architecture
+10. Foundation build
+11. Parallel implementation
+12. Gated calculator / Supabase
+13. Market Intelligence automation
+14. Newswire automation
+15. Research implementation
+16. QA
+17. Netlify staging
+18. Owner approval
+19. Production
+
+Each gate requires explicit approval before the next phase begins.
+
+## Open / Not Yet Decided
+
+The following remain intentionally unresolved:
+- frontend framework;
+- exact Netlify application architecture;
+- Supabase schema;
+- exact authentication/magic-link implementation;
+- Newswire feed/provider;
+- Market Intelligence data-source list;
+- exact caching strategy;
+- exact typography;
+- exact color palette;
+- final homepage copy;
+- final chart library/style;
+- exact calculator model implementation;
+- exact analytics platform;
+- whether a CMS is needed for Research.
+
+These are not blockers for the initial UI phase.
