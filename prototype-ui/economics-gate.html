@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RAP Dealer Economics Calculator — Access Flow Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RAP DEALER ECONOMICS — gated access flow, four states.
+   DESIGN ONLY. No real model logic, no proprietary assumptions.
+   ============================================================ */
+:root{
+  --rap-ink:#0C172A;--rap-ink-800:#16243C;--rap-ink-700:#22334F;
+  --rap-paper:#FFFFFF;--rap-mist:#F3F5F8;--rap-cream:#FCF8F5;
+  --rap-blue:#204374;--rap-blue-600:#2E5A96;--rap-blue-050:#E8EEF6;
+  --rap-ember:#C8581B;--rap-ember-700:#A3450F;--rap-ember-050:#FBEFE8;
+  --rap-brass:#C19541;
+  --rap-slate-700:#3D4A5C;--rap-slate-500:#64748B;--rap-slate-300:#C3CBD6;
+  --rap-slate-200:#DFE4EB;--rap-slate-100:#EEF1F5;
+  --rap-up:#1E6F50;--rap-down:#A8331F;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;
+  --radius-sm:2px;--radius-md:4px;--margin:48px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--rap-paper);color:var(--rap-ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul,dl,dd,figure{margin:0}ul{padding:0;list-style:none}
+a{color:inherit}button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 var(--margin)}
+.wrap-wide{max-width:1240px;margin:0 auto;padding:0 var(--margin)}
+
+.eyebrow{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
+.d2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,52px);line-height:1.05;letter-spacing:-.02em}
+.d3{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.6vw,34px);line-height:1.12}
+.acc{font-style:italic;color:var(--rap-ember)}
+.lead{font-size:clamp(17px,1.4vw,20px);line-height:1.55;color:var(--rap-slate-700);max-width:60ch}
+.body{color:var(--rap-slate-700);max-width:66ch}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;font-weight:600;font-size:15px;line-height:1;text-decoration:none;border-radius:var(--radius-sm);border:1px solid transparent;min-height:46px;transition:background .12s,color .12s}
+.btn--primary{background:var(--rap-ember-700);color:#fff}
+.btn--primary:hover{background:#8E3B0C}
+.btn--secondary{border-color:var(--rap-ink);color:var(--rap-ink);background:transparent}
+.btn--secondary:hover{background:var(--rap-ink);color:#fff}
+.btn--ghost{border-color:var(--rap-slate-300);color:var(--rap-slate-700);background:transparent;padding:10px 18px;min-height:0;font-size:14px}
+.btns{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-7)}
+.qlink{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+/* ---- prototype chrome ---- */
+.proto{background:#FFF6E8;border-bottom:1px solid #E8D5AE;color:#5A4413;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px var(--margin);text-align:center}
+.proto b{color:#8E3B0C}
+.switch{position:sticky;top:0;z-index:50;background:var(--rap-ink);color:#fff;padding:10px var(--margin);display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap}
+.switch p{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-right:auto}
+.switch a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);padding:7px 12px}
+.switch a:hover{background:#fff;color:var(--rap-ink)}
+
+/* ---- state shell ---- */
+.state{border-top:1px solid var(--rap-slate-200);padding:var(--s-9) 0}
+.state--mist{background:var(--rap-mist)}
+.state--ink{background:var(--rap-ink);color:#fff;border-top:0}
+.state--ink .lead{color:rgba(255,255,255,.78)}
+.state--ink .eyebrow{color:var(--rap-brass)}
+.state__tag{display:inline-flex;align-items:center;gap:10px;background:var(--rap-ink);color:#fff;border-radius:var(--radius-sm);padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-6)}
+.state--ink .state__tag{background:rgba(255,255,255,.14)}
+.state__tag b{color:var(--rap-brass)}
+
+/* ---- flow diagram ---- */
+.flow{display:flex;align-items:stretch;gap:var(--s-2);flex-wrap:wrap;margin-top:var(--s-7)}
+.flow__step{flex:1 1 140px;border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:var(--s-4);background:#fff}
+.flow__step[data-now]{border-top-color:var(--rap-ember);background:var(--rap-ember-050)}
+.flow__n{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--rap-slate-500)}
+.flow__t{font-weight:600;font-size:14px;margin-top:6px;line-height:1.3}
+
+/* ---- public teaser ---- */
+.pub{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);border-top:2px solid var(--rap-ink);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0;margin-top:var(--s-7)}
+.pub__v{font-family:var(--serif);font-size:clamp(34px,3.6vw,48px);font-weight:500;line-height:1}
+.pub__k{font-size:14px;color:var(--rap-slate-700);margin-top:var(--s-2)}
+.panel{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
+.gate{position:relative;overflow:hidden;margin-top:var(--s-6)}
+.gate__blur{filter:blur(3px);opacity:.5;pointer-events:none;user-select:none}
+.gate__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4)}
+.gate__field{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:10px 12px}
+.gate__field b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
+.gate__field span{font-family:var(--mono);font-size:16px}
+.gate__chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--rap-ink);color:#fff;border-radius:var(--radius-sm);padding:12px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;display:flex;align-items:center;gap:10px;text-align:center}
+.will{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7)}
+.will ul li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--rap-slate-200);font-size:15px;color:var(--rap-slate-700)}
+.will h3{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-3)}
+.tick{color:var(--rap-up);font-weight:700}.lock{color:var(--rap-slate-500)}
+
+/* ---- form ---- */
+.form{display:grid;grid-template-columns:5fr 4fr;gap:var(--s-8);align-items:start;margin-top:var(--s-7)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4) var(--s-5)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field--full{grid-column:1/-1}
+.field label{font-weight:600;font-size:13px}
+.field label i{color:var(--rap-ember-700);font-style:normal}
+.field input,.field select{
+  height:46px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
+  padding:0 12px;font-family:var(--sans);font-size:16px;color:var(--rap-ink);background:#fff;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
+.field small{font-family:var(--mono);font-size:12px;color:var(--rap-slate-500)}
+.field--error input{border-color:var(--rap-down)}
+.err{color:var(--rap-down);font-size:13px;font-weight:500;display:flex;gap:6px;align-items:center}
+.aside{background:var(--rap-mist);border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
+.aside h3{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-4)}
+.aside li{display:flex;gap:10px;font-size:14px;color:var(--rap-slate-700);padding:8px 0;border-bottom:1px solid var(--rap-slate-200)}
+.aside li:last-child{border-bottom:0}
+.privacy{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-500)}
+
+/* ---- pending ---- */
+.pending{max-width:640px}
+.track{margin-top:var(--s-7);border-left:2px solid var(--rap-ink-700);padding-left:var(--s-5)}
+.track__i{position:relative;padding:0 0 var(--s-6) 0}
+.track__i::before{content:"";position:absolute;left:calc(-1 * var(--s-5) - 6px);top:6px;width:10px;height:10px;border-radius:50%;background:var(--rap-ink-700);border:2px solid var(--rap-ink)}
+.track__i[data-done]::before{background:var(--rap-brass)}
+.track__i[data-now]::before{background:var(--rap-ember);box-shadow:0 0 0 4px rgba(200,88,27,.25)}
+.track__t{font-weight:600;font-size:16px}
+.track__d{font-size:14px;color:rgba(255,255,255,.65);margin-top:2px}
+.track__ts{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+.recap{margin-top:var(--s-7);border:1px solid var(--rap-ink-700);border-radius:var(--radius-md);padding:var(--s-5)}
+.recap dl{display:grid;grid-template-columns:auto 1fr;gap:8px var(--s-5);font-size:14px}
+.recap dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);align-self:center}
+
+/* ---- calculator ---- */
+.calc__bar{background:var(--rap-ink);color:#fff;padding:var(--s-4) 0}
+.calc__bar .wrap-wide{display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap}
+.calc__who{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.calc__who b{color:var(--rap-brass)}
+.sample{background:var(--rap-ember-050);border:1px solid var(--rap-ember);border-radius:var(--radius-sm);padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-6);display:inline-block}
+.calc{display:grid;grid-template-columns:320px 1fr;gap:var(--s-6);margin-top:var(--s-6);align-items:start}
+.controls{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:#fff;padding:var(--s-5);position:sticky;top:120px}
+.controls h3{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-5)}
+.ctl{padding:var(--s-4) 0;border-top:1px solid var(--rap-slate-200)}
+.ctl:first-of-type{border-top:0;padding-top:0}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:13px;margin-bottom:8px}
+.ctl label span{font-family:var(--mono);font-size:14px;color:var(--rap-blue)}
+.ctl input[type=range]{width:100%;accent-color:var(--rap-blue)}
+.seg{display:flex;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);overflow:hidden}
+.seg button{flex:1;background:#fff;border:0;padding:10px 0;font-family:var(--mono);font-size:12px;color:var(--rap-slate-700);border-left:1px solid var(--rap-slate-200)}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed=true]{background:var(--rap-ink);color:#fff}
+.ctl select{width:100%;height:44px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 10px;font-size:15px;background:#fff}
+.ctl small{display:block;font-family:var(--mono);font-size:11px;color:var(--rap-slate-500);margin-top:8px}
+.out{display:grid;gap:var(--s-5)}
+.outrow{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5)}
+.outtile{border-top:2px solid var(--rap-ink);padding-top:var(--s-4)}
+.outtile b{display:block;font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);min-height:2.6em}
+.outtile span{display:block;font-family:var(--serif);font-size:clamp(30px,3vw,44px);font-weight:500;line-height:1;margin-top:var(--s-3);color:var(--rap-slate-300)}
+.outtile em{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);font-style:normal;margin-top:var(--s-3);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200)}
+.chartbox{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:#fff;padding:var(--s-6)}
+.tabs{display:flex;gap:var(--s-5);border-bottom:1px solid var(--rap-slate-200);margin-bottom:var(--s-6)}
+.tabs button{background:none;border:0;padding:0 0 12px;font-weight:600;font-size:14px;color:var(--rap-slate-500);border-bottom:2px solid transparent}
+.tabs button[aria-selected=true]{color:var(--rap-ink);border-bottom-color:var(--rap-ember)}
+.tabs button[disabled]{opacity:.45;cursor:not-allowed}
+.scenario{display:flex;justify-content:space-between;gap:var(--s-4);align-items:center;flex-wrap:wrap;margin-top:var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200)}
+.watermark{margin-top:var(--s-7);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200)}
+
+@media (max-width:960px){
+  :root{--margin:24px}
+  .form,.calc,.will{grid-template-columns:1fr}
+  .controls{position:static}
+  .gate__grid{grid-template-columns:1fr 1fr}
+  .outrow{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .state{padding:var(--s-8) 0}
+  .fields{grid-template-columns:1fr}
+  .pub{grid-template-columns:1fr}
+  .gate__grid,.outrow{grid-template-columns:1fr}
+  .btns .btn{width:100%}
+  .flow__step{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="proto">
+  Phase 2 UI/UX prototype &mdash; access-flow design only.
+  <b>The authorized state is a shell: no model logic, no assumptions, no proprietary economics.</b>
+</div>
+
+<nav class="switch" aria-label="Prototype state switcher">
+  <p>RAP Dealer Economics &mdash; four states</p>
+  <a href="#state-a">A &middot; Public teaser</a>
+  <a href="#state-b">B &middot; Request access</a>
+  <a href="#state-c">C &middot; Pending approval</a>
+  <a href="#state-d">D &middot; Authorized calculator</a>
+  <a href="home.html">&larr; Home</a>
+</nav>
+
+<main>
+
+<!-- ==================== STATE A — PUBLIC TEASER ==================== -->
+<section class="state" id="state-a" aria-labelledby="a-h">
+  <div class="wrap-wide">
+    <p class="state__tag"><b>State A</b> Public &middot; anonymous visitor &middot; /dealer-economics</p>
+
+    <p class="eyebrow">RAP Dealer Economics</p>
+    <h1 class="d2" id="a-h" style="max-width:20ch">What could this mean for <span class="acc">your dealership?</span></h1>
+    <p class="lead" style="margin-top:var(--s-5)">
+      The public page shows the program economics that are public. The detailed model behind them
+      is reviewed before release &mdash; it is how RAP keeps dealer economics out of competitor hands.
+    </p>
+
+    <div class="pub">
+      <div><p class="pub__v">$19.99</p><p class="pub__k">the customer pays, monthly</p></div>
+      <div><p class="pub__v">$0</p><p class="pub__k">the dealer remits to participate</p></div>
+      <div><p class="pub__v">$8</p><p class="pub__k">dealer commission per successful monthly payment</p></div>
+    </div>
+
+    <div class="panel" style="margin-top:var(--s-7)">
+      <p class="eyebrow" style="margin-bottom:var(--s-5)">Illustrative recurring contribution &mdash; shape only</p>
+      <svg viewBox="0 0 900 220" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating from month one to month thirty-six. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
+        <line x1="0" y1="180" x2="900" y2="180" stroke="#C3CBD6"/>
+        <g stroke="#EEF1F5"><line x1="0" y1="140" x2="900" y2="140"/><line x1="0" y1="100" x2="900" y2="100"/><line x1="0" y1="60" x2="900" y2="60"/></g>
+        <path d="M0 180 L0 174 L75 174 L75 162 L150 162 L150 150 L225 150 L225 138 L300 138 L300 126 L375 126 L375 114 L450 114 L450 102 L525 102 L525 90 L600 90 L600 78 L675 78 L675 66 L750 66 L750 54 L825 54 L825 42 L900 42 L900 180 Z" fill="#E8EEF6"/>
+        <path d="M0 174 L75 174 L75 162 L150 162 L150 150 L225 150 L225 138 L300 138 L300 126 L375 126 L375 114 L450 114 L450 102 L525 102 L525 90 L600 90 L600 78 L675 78 L675 66 L750 66 L750 54 L825 54 L825 42 L900 42" fill="none" stroke="#204374" stroke-width="2"/>
+        <g font-family="IBM Plex Mono" font-size="11" fill="#64748B">
+          <text x="0" y="200">M1</text><text x="280" y="200">M12</text><text x="580" y="200">M24</text><text x="860" y="200">M36</text>
+          <text x="0" y="18">NO SCALE SHOWN</text>
+        </g>
+      </svg>
+      <p style="margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)">
+        <b class="meta" style="display:block;color:var(--rap-ember-700);margin-bottom:4px">Figure 1 &middot; Illustrative</b>
+        Recurring commission accumulates for as long as payments succeed. The vertical scale is
+        deliberately omitted. This is not a forecast and not an offer.
+      </p>
+    </div>
+
+    <div class="panel gate">
+      <p class="eyebrow" style="margin-bottom:var(--s-5)">RAP Dealer Economics Calculator</p>
+      <div class="gate__blur" aria-hidden="true">
+        <div class="gate__grid">
+          <div class="gate__field"><b>Active subscribers</b><span>0,000</span></div>
+          <div class="gate__field"><b>Locations</b><span>00</span></div>
+          <div class="gate__field"><b>Horizon</b><span>12 / 24 / 36 months</span></div>
+          <div class="gate__field"><b>Cancellation assumption</b><span>0.0%</span></div>
+          <div class="gate__field"><b>Cumulative dealer commission</b><span>$000,000</span></div>
+          <div class="gate__field"><b>Multi-Year comparison</b><span>$000,000</span></div>
+        </div>
+        <svg viewBox="0 0 900 120" style="width:100%;height:auto;margin-top:20px" aria-hidden="true">
+          <path d="M0 108 L112 96 L225 88 L338 72 L450 62 L562 46 L675 34 L788 22 L900 14" fill="none" stroke="#204374" stroke-width="2"/>
+          <path d="M0 112 L112 108 L225 104 L338 98 L450 94 L562 88 L675 82 L788 78 L900 72" fill="none" stroke="#C8581B" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="gate__chip"><span aria-hidden="true">&#128274;</span> Requires approved access</div>
+    </div>
+
+    <div class="will">
+      <div>
+        <h3>Public on this page</h3>
+        <ul>
+          <li><span class="tick">&#10003;</span> Customer price, dealer remit, dealer commission</li>
+          <li><span class="tick">&#10003;</span> The recurring-income concept</li>
+          <li><span class="tick">&#10003;</span> An illustrative accumulation shape with no scale</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Behind approved access</h3>
+        <ul>
+          <li><span class="lock">&#128274;</span> Editable subscriber volumes and locations</li>
+          <li><span class="lock">&#128274;</span> 12 / 24 / 36-month scenarios</li>
+          <li><span class="lock">&#128274;</span> Approved cancellation assumptions</li>
+          <li><span class="lock">&#128274;</span> Cumulative dealer commission modelling</li>
+          <li><span class="lock">&#128274;</span> Future Multi-Year and Reinsurance comparisons</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a class="btn btn--primary" href="#state-b">Get access to the RAP Dealer Economics Calculator &rarr;</a>
+    </div>
+    <p class="meta" style="margin-top:var(--s-4)">Six fields &middot; reviewed by RAP Sales &middot; no password to create</p>
+
+    <div class="flow">
+      <div class="flow__step" data-now><p class="flow__n">01</p><p class="flow__t">Request access</p></div>
+      <div class="flow__step"><p class="flow__n">02</p><p class="flow__t">Lead saved</p></div>
+      <div class="flow__step"><p class="flow__n">03</p><p class="flow__t">RAP Sales review</p></div>
+      <div class="flow__step"><p class="flow__n">04</p><p class="flow__t">Approve or decline</p></div>
+      <div class="flow__step"><p class="flow__n">05</p><p class="flow__t">Secure email access</p></div>
+      <div class="flow__step"><p class="flow__n">06</p><p class="flow__t">Calculator opens</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATE B — REQUEST ACCESS ==================== -->
+<section class="state state--mist" id="state-b" aria-labelledby="b-h">
+  <div class="wrap-wide">
+    <p class="state__tag"><b>State B</b> Request access &middot; six fields</p>
+
+    <p class="eyebrow">Step 1 of 3</p>
+    <h2 class="d3" id="b-h" style="max-width:24ch;margin-top:var(--s-3)">
+      Get access to the <span class="acc">RAP Dealer Economics Calculator.</span>
+    </h2>
+    <p class="lead" style="margin-top:var(--s-4)">
+      Six fields. A RAP Sales representative reviews every request. Approved dealers receive a
+      secure link by email &mdash; there is no password to create.
+    </p>
+
+    <div class="form">
+      <form class="panel" onsubmit="return false" novalidate>
+        <div class="fields">
+          <div class="field">
+            <label for="fn">First name <i aria-hidden="true">&bull;</i></label>
+            <input id="fn" name="fn" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="ln">Last name <i aria-hidden="true">&bull;</i></label>
+            <input id="ln" name="ln" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="field field--full">
+            <label for="co">Company / dealership <i aria-hidden="true">&bull;</i></label>
+            <input id="co" name="co" type="text" autocomplete="organization" required>
+          </div>
+          <div class="field field--full field--error">
+            <label for="em">Business email <i aria-hidden="true">&bull;</i></label>
+            <input id="em" name="em" type="email" autocomplete="email" value="dwright@" aria-describedby="em-err" required>
+            <p class="err" id="em-err"><span aria-hidden="true">&#9888;</span> Enter a valid business email address. The access link is sent here.</p>
+          </div>
+          <div class="field">
+            <label for="ph">Phone <i aria-hidden="true">&bull;</i></label>
+            <input id="ph" name="ph" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="rl">Role / title <i aria-hidden="true">&bull;</i></label>
+            <select id="rl" name="rl" required>
+              <option value="">Select&hellip;</option>
+              <option>Owner / Principal</option>
+              <option>President / CEO</option>
+              <option>CFO / Controller</option>
+              <option>VP / Director of Operations</option>
+              <option>Sales Manager</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btns" style="margin-top:var(--s-6)">
+          <button class="btn btn--primary" type="submit">Request access &rarr;</button>
+        </div>
+        <p class="privacy">
+          <i aria-hidden="true">&bull;</i> All six fields required. RAP collects only what is needed to
+          verify a dealer and route the request to Sales. Your details are not used for anything else.
+        </p>
+      </form>
+
+      <aside class="aside">
+        <h3>What happens next</h3>
+        <ul>
+          <li><span class="mono">01</span> Your request is saved and RAP Sales is notified.</li>
+          <li><span class="mono">02</span> A representative reviews it, typically within one business day.</li>
+          <li><span class="mono">03</span> On approval you receive a secure link by email that opens the calculator directly.</li>
+          <li><span class="mono">04</span> Access can be revoked, and the calculator is never publicly indexed.</li>
+        </ul>
+        <p class="privacy" style="border-top-color:var(--rap-slate-300)">
+          Why the gate: the detailed model contains RAP&rsquo;s dealer economics. Keeping it behind
+          review protects the dealers already using it.
+        </p>
+      </aside>
+    </div>
+
+    <div class="flow">
+      <div class="flow__step" data-now><p class="flow__n">01</p><p class="flow__t">Request access</p></div>
+      <div class="flow__step"><p class="flow__n">02</p><p class="flow__t">Lead saved</p></div>
+      <div class="flow__step"><p class="flow__n">03</p><p class="flow__t">RAP Sales review</p></div>
+      <div class="flow__step"><p class="flow__n">04</p><p class="flow__t">Approve or decline</p></div>
+      <div class="flow__step"><p class="flow__n">05</p><p class="flow__t">Secure email access</p></div>
+      <div class="flow__step"><p class="flow__n">06</p><p class="flow__t">Calculator opens</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATE C — PENDING APPROVAL ==================== -->
+<section class="state state--ink" id="state-c" aria-labelledby="c-h">
+  <div class="wrap-wide">
+    <p class="state__tag"><b>State C</b> Pending &middot; submitted, awaiting RAP Sales review</p>
+
+    <div class="pending">
+      <p class="eyebrow">Step 2 of 3</p>
+      <h2 class="d3" id="c-h" style="margin-top:var(--s-3)">
+        Request received. It&rsquo;s with <span class="acc" style="color:var(--rap-brass)">RAP Sales now.</span>
+      </h2>
+      <p class="lead" style="margin-top:var(--s-4)">
+        A representative reviews every request personally. When it is approved you will receive a
+        secure link at the address below that opens the calculator directly &mdash; no password, no
+        account to set up.
+      </p>
+
+      <div class="track">
+        <div class="track__i" data-done>
+          <p class="track__t">Request submitted</p>
+          <p class="track__d">Six fields received and validated.</p>
+          <p class="track__ts">24 Aug 2026 &middot; 10:42 AM ET</p>
+        </div>
+        <div class="track__i" data-done>
+          <p class="track__t">Lead saved</p>
+          <p class="track__d">Routed to the RAP Sales queue with dealership context.</p>
+          <p class="track__ts">24 Aug 2026 &middot; 10:42 AM ET</p>
+        </div>
+        <div class="track__i" data-now>
+          <p class="track__t">RAP Sales review</p>
+          <p class="track__d">In progress. Typically completed within one business day.</p>
+          <p class="track__ts">Expected by 25 Aug 2026</p>
+        </div>
+        <div class="track__i">
+          <p class="track__t">Secure access sent</p>
+          <p class="track__d">A single-use link is emailed on approval.</p>
+        </div>
+        <div class="track__i" style="padding-bottom:0">
+          <p class="track__t">Calculator opens</p>
+          <p class="track__d">FurnitureRx Subscription economics, with your inputs.</p>
+        </div>
+      </div>
+
+      <div class="recap">
+        <dl>
+          <dt>Name</dt><dd>Dana Wright</dd>
+          <dt>Dealership</dt><dd>Placeholder Home Furnishings</dd>
+          <dt>Email</dt><dd>dana@placeholder-furniture.com</dd>
+          <dt>Role</dt><dd>Owner / Principal</dd>
+        </dl>
+        <p style="margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700);font-size:13px;color:rgba(255,255,255,.6)">
+          Something wrong? <a class="qlink" style="color:var(--rap-brass)" href="#state-b">Edit your request &rarr;</a>
+        </p>
+      </div>
+
+      <div class="btns">
+        <a class="btn btn--secondary" href="home.html" style="border-color:rgba(255,255,255,.45);color:#fff">Back to Risk Assurance Partners</a>
+      </div>
+      <p class="meta" style="margin-top:var(--s-5);color:rgba(255,255,255,.5)">
+        Declined requests receive a reply from a named RAP representative, not an automated rejection.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATE D — AUTHORIZED CALCULATOR ==================== -->
+<section id="state-d" aria-labelledby="d-h">
+  <div class="calc__bar">
+    <div class="wrap-wide">
+      <p class="calc__who"><b>Authorized</b> &middot; Dana Wright &middot; Placeholder Home Furnishings &middot; access expires 23 Nov 2026</p>
+      <p class="calc__who">RAP Dealer Economics Calculator &middot; v1 &middot; not indexed</p>
+    </div>
+  </div>
+
+  <div class="state" style="border-top:0;padding-top:var(--s-7)">
+    <div class="wrap-wide">
+      <p class="state__tag"><b>State D</b> Authorized &middot; calculator shell</p>
+      <p class="sample">Shell only &mdash; controls are illustrative, outputs are not modelled, no RAP assumptions are present</p>
+
+      <p class="eyebrow">Step 3 of 3</p>
+      <h2 class="d3" id="d-h" style="margin-top:var(--s-3);max-width:26ch">
+        RAP Dealer Economics Calculator &mdash; <span class="acc">FurnitureRx Subscription.</span>
+      </h2>
+
+      <div class="tabs" role="tablist" aria-label="Program" style="margin-top:var(--s-6)">
+        <button role="tab" aria-selected="true">FurnitureRx Subscription</button>
+        <button role="tab" aria-selected="false" disabled>Multi-Year Protection &middot; planned</button>
+        <button role="tab" aria-selected="false" disabled>Reinsurance &middot; planned</button>
+      </div>
+
+      <div class="calc">
+        <form class="controls" onsubmit="return false">
+          <h3>Your inputs</h3>
+
+          <div class="ctl">
+            <label for="subs">Active subscribers <span class="mono">1,200</span></label>
+            <input id="subs" type="range" min="0" max="5000" value="1200" step="50">
+            <small>Illustrative control. Range and defaults set during implementation.</small>
+          </div>
+
+          <div class="ctl">
+            <label for="locs">Locations <span class="mono">4</span></label>
+            <input id="locs" type="range" min="1" max="40" value="4">
+          </div>
+
+          <div class="ctl">
+            <label>Horizon</label>
+            <div class="seg" role="group" aria-label="Horizon">
+              <button type="button" aria-pressed="false">12 mo</button>
+              <button type="button" aria-pressed="true">24 mo</button>
+              <button type="button" aria-pressed="false">36 mo</button>
+            </div>
+          </div>
+
+          <div class="ctl">
+            <label for="canc">Cancellation assumption</label>
+            <select id="canc">
+              <option>RAP approved assumption &mdash; set A</option>
+              <option>RAP approved assumption &mdash; set B</option>
+              <option>RAP approved assumption &mdash; set C</option>
+            </select>
+            <small>Named assumption sets only. Free-entry rates are not exposed, and the underlying
+            values are not shown in this prototype.</small>
+          </div>
+
+          <div class="ctl">
+            <label for="ramp">Enrollment ramp</label>
+            <select id="ramp">
+              <option>Placeholder ramp &mdash; option 1</option>
+              <option>Placeholder ramp &mdash; option 2</option>
+            </select>
+          </div>
+
+          <div class="btns" style="margin-top:var(--s-5)">
+            <button class="btn btn--primary" type="submit" style="width:100%">Run scenario &rarr;</button>
+          </div>
+        </form>
+
+        <div class="out">
+          <div class="outrow">
+            <div class="outtile">
+              <b>Cumulative dealer commission</b>
+              <span>$&mdash;&mdash;&mdash;</span>
+              <em>Computed from the approved model</em>
+            </div>
+            <div class="outtile">
+              <b>Monthly commission at horizon</b>
+              <span>$&mdash;&mdash;&mdash;</span>
+              <em>Computed from the approved model</em>
+            </div>
+            <div class="outtile">
+              <b>Commission per location</b>
+              <span>$&mdash;&mdash;&mdash;</span>
+              <em>Computed from the approved model</em>
+            </div>
+          </div>
+
+          <div class="chartbox">
+            <p class="eyebrow" style="margin-bottom:var(--s-5)">Cumulative contribution over the selected horizon</p>
+            <svg viewBox="0 0 900 260" role="img" aria-label="Empty chart frame. The calculator shell shows axis and layout only; no values are plotted in this prototype." style="width:100%;height:auto">
+              <line x1="60" y1="220" x2="900" y2="220" stroke="#C3CBD6"/>
+              <line x1="60" y1="10" x2="60" y2="220" stroke="#C3CBD6"/>
+              <g stroke="#EEF1F5"><line x1="60" y1="168" x2="900" y2="168"/><line x1="60" y1="116" x2="900" y2="116"/><line x1="60" y1="64" x2="900" y2="64"/></g>
+              <g font-family="IBM Plex Mono" font-size="11" fill="#C3CBD6">
+                <text x="0" y="224">$&mdash;</text><text x="0" y="172">$&mdash;</text><text x="0" y="120">$&mdash;</text><text x="0" y="68">$&mdash;</text>
+                <text x="60" y="244">M1</text><text x="330" y="244">M8</text><text x="600" y="244">M16</text><text x="860" y="244">M24</text>
+              </g>
+              <text x="480" y="120" font-family="IBM Plex Mono" font-size="12" letter-spacing="1.4" fill="#C3CBD6" text-anchor="middle">CHART RENDERS FROM THE APPROVED MODEL</text>
+              <text x="480" y="142" font-family="IBM Plex Mono" font-size="12" letter-spacing="1.4" fill="#C3CBD6" text-anchor="middle">NO VALUES PLOTTED IN THIS PROTOTYPE</text>
+            </svg>
+            <p style="margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)">
+              <b class="meta" style="display:block;color:var(--rap-ember-700);margin-bottom:4px">Layout reference</b>
+              Series, axis formatting, and direct labelling follow the shared chart rules. Model
+              output, assumptions, and formulas are implemented in a later phase and are deliberately
+              absent here.
+            </p>
+          </div>
+
+          <div class="chartbox">
+            <p class="eyebrow" style="margin-bottom:var(--s-4)">Scenario</p>
+            <div class="scenario">
+              <p class="body" style="font-size:15px;margin:0;max-width:52ch">
+                Save this scenario to your account, or send it to your RAP representative to review
+                together. Scenarios are private to your dealership.
+              </p>
+              <div style="display:flex;gap:var(--s-3);flex-wrap:wrap">
+                <button class="btn btn--ghost" type="button">Save scenario</button>
+                <button class="btn btn--ghost" type="button">Send to my RAP rep</button>
+                <button class="btn btn--ghost" type="button">Export PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="watermark">
+            <p class="meta">
+              Confidential to Placeholder Home Furnishings &middot; Risk Assurance Partners &middot;
+              not for redistribution &middot; access reviewable and revocable &middot; page excluded from indexing
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--rap-ink);color:rgba(255,255,255,.6);padding:var(--s-7) 0">
+  <div class="wrap-wide">
+    <p class="meta">Risk Assurance Partners &middot; Phase 2 design prototype &middot; FurnitureRx is a product of Risk Assurance Partners</p>
+  </div>
+</footer>
+
+</body>
+</html>
