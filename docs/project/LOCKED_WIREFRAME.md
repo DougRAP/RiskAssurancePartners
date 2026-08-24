@@ -2,7 +2,13 @@
 
 ## Status
 
-**Version 1 — Working Locked Wireframe**
+**Version 1.1 — Working Locked Wireframe**
+
+Amendments 2026-08-24 (owner-approved, DECISIONS 024–025):
+- **Contact** added to the site map under Company (footer + utility bar; target of "Talk to RAP"). Not in primary navigation.
+- Hero (Section 02) carries an eyebrow identifying RAP and its audience, and an orientation strip below the CTAs: what RAP does, who it serves, the three programs at parity with jump links.
+- Mobile retains a slim utility strip (File a Claim + Dealer Login); remaining utility links move to the top of the mobile drawer. Sticky header retains Dealer Login.
+- Audience descriptor per Decision 025 (furniture & mattress retail dealers; custom interior designer programs; all home furnishings categories).
 
 This is a project specification, not a suggestion.
 
@@ -34,6 +40,7 @@ Risk Assurance Partners
 ├── Research
 │   └── Individual Research / Report Pages
 ├── Why RAP
+├── Contact          (utility bar + footer only — not primary nav)
 └── See My Economics
     └── RAP Dealer Economics Calculator
 ```
@@ -362,7 +369,7 @@ Suggested groups:
 
 **Company**
 - Why RAP
-- Contact
+- Contact (site-map page per Decision 024/R6)
 
 **Customer**
 - File a Claim

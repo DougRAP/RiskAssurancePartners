@@ -372,6 +372,33 @@ RAP's Google rating is **4.5 stars**. The 4.7 figure appearing in the research d
 
 Customer/dealer utility functions (File a Claim, Manage My Plan, Customer Support, Dealer Login) link to the existing kiosk site (kiosk.furniturerx.net) URLs. Exact route inventory happens in Phase 12.
 
+## Decision 024 — Homepage Orientation & Clarity Fixes (R1–R6)
+
+**Status:** Approved (Owner, 2026-08-24)
+
+The owner approved the CLARITY_PROPOSALS.md minimum change set R1–R6:
+- R1: hero eyebrow identifies who RAP is and who it serves;
+- R2: orientation strip inside the hero section (what we do / who for / three programs at parity with jump links);
+- R3: mobile retains a slim utility strip (File a Claim + Dealer Login); utility links top of drawer; customer cluster labeled "CUSTOMERS";
+- R4: sticky header retains Dealer Login;
+- R5: Programs nav and all three path "Learn more" links get real destinations;
+- R6: Contact added to the site map — surfaced in utility bar and footer, target of "Talk to RAP"; NOT added to primary navigation.
+
+## Decision 025 — Audience & Program Descriptor Copy
+
+**Status:** Approved (Owner, 2026-08-24)
+
+The owner rejected "Protection programs for furniture retail dealers" as too narrow. Approved descriptor (owner-supplied; spelling normalized):
+
+> Protection programs for furniture & mattress retail dealers, as well as custom interior designer programs. Reinsurance, Subscription, Multi-Year & Standard programs — all home furnishings categories.
+
+Owner-established facts now usable:
+- audience includes furniture retailers, mattress retailers, and custom interior designer programs;
+- coverage spans all home furnishings categories;
+- program types may be described as Reinsurance, Subscription, Multi-Year & Standard programs.
+
+**Open sub-question:** whether "Standard programs" is a distinct fourth offering or falls under Multi-Year for the purposes of the locked three-path homepage section. Descriptor copy may be used verbatim; the three-path section structure is unchanged pending owner clarification.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
