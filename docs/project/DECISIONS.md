@@ -418,6 +418,21 @@ Implications:
 - Email: **sales@raptns.com**
 - Hours: **8:00 AM – 6:00 PM, Monday–Friday, EST**
 
+## Decision 028 — Reinsurance vs. Standard Programs (supersedes 026)
+
+**Status:** Approved (Owner, 2026-08-24)
+
+Corrects Decision 026. Owner's definition:
+
+- **Reinsurance programs** are a product unto themselves. They let a retailer take a share of the **underwriting profits** and save for retirement or build wealth.
+- **Standard programs**: the vendor keeps those underwriting profits.
+
+Implications:
+- Reinsurance is not merely a "structure" variant of other programs — it is its own product (consistent with its position as one of the three economic paths);
+- the retirement / wealth-building framing is owner-approved copy territory for Reinsurance (fits the existing rule that Reinsurance is not "immediate profit" — its value accrues over time);
+- "Standard" describes non-participating programs where the vendor retains underwriting profits;
+- the locked three-path homepage section is unchanged.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
