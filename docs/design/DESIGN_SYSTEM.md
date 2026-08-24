@@ -1,8 +1,16 @@
-# Risk Assurance Partners — PROPOSED DESIGN SYSTEM
+# Risk Assurance Partners — DESIGN SYSTEM
 
-**Phase 2 / UI-UX deliverable 2 of 5. Status: PROPOSED — requires owner approval.**
-Nothing here is locked. This document proposes the visual language only; it does not
-change the site map, homepage sequence, brand hierarchy, or any business fact.
+**Phase 2 / UI-UX deliverable 2 of 5.**
+**Revision 2 — 2026-08-24.**
+
+**Palette, typography, spacing and layout are owner-approved as-is and are frozen.** Revision 2
+changes no token, no typeface, no scale value, and no grid value. It adds two components and
+revises navigation behavior for the R1–R6 clarity set (DECISIONS 024–028,
+LOCKED_WIREFRAME v1.1). It does not change the site map, the homepage sequence, the brand
+hierarchy, or any business fact.
+
+Revision 2 additions: §4.2 navigation (utility bar contrast + `CUSTOMERS` label + Contact +
+mobile persistence + condensed-header utility), §4.2b orientation strip, §4.2c contact block.
 
 Reference implementation: `prototype-ui/home.html`, `prototype-ui/economics-gate.html`.
 
@@ -211,21 +219,98 @@ removed. Active: `translateY(1px)`. Minimum target 44×44 on touch.
 
 ### 4.2 Navigation
 
-**Utility bar** (`--rap-ink`, 38px): Plex Mono 12px `.08em` uppercase, `rgba(255,255,255,.72)`.
-Left cluster: File a Claim · Manage My Plan · Customer Support. Right: `Dealer Login →` in
-`--rap-brass`. Present but quiet — customer functions stay findable and visually secondary.
+**Utility bar** (`--rap-ink`, 38px): Plex Mono **13px** `.08em` uppercase at
+`rgba(255,255,255,.88)` — one contrast step above revision 1, which was legible but
+under-weighted for the two highest-intent actions on the site.
+
+- Left cluster is prefixed with a `CUSTOMERS` label in `--rap-slate-500` at 11px `.12em`, with
+  a 1px `--rap-ink-700` right divider: File a Claim · Manage My Plan · Customer Support.
+  Deliberately **not** "FurnitureRx customers" — Multi-Year customers file claims through the
+  same functions, so that label would be factually wrong.
+- Right cluster: `Contact`, then `Dealer Login →` in `--rap-brass` inside a 1px
+  `rgba(193,149,65,.55)` hairline box so it reads as an action rather than a link. Fills brass
+  with ink text on hover.
+- Still visually secondary to the dealer narrative at 38px of ink — findable, not loud.
+- **Mobile (≤680px):** the bar does **not** disappear. It slims to 32px and carries
+  `FILE A CLAIM` + `DEALER LOGIN →` only; the label and the three secondary links hide and
+  reappear at the top of the drawer.
 
 **Primary header** (white, 84px, sticky): RAP wordmark left (mark + "RISK ASSURANCE
 PARTNERS" in Playfair 500 with "VALUE THROUGH INNOVATION" in Plex Mono 9px `.18em` beneath —
 the existing corporate lockup, not redesigned). Nav right in Inter 500 15px `--rap-ink`,
 32px gaps, 2px `--rap-ember` underline on hover/active. Primary CTA button at the far right.
-On scroll: collapses to 64px, gains bottom hairline. Programs opens a 3-item dropdown panel
-(1px border, 4px radius, each item = name + one-line descriptor).
 
-**Mobile nav** (≤1024px): hamburger opens a full-height `--rap-ink` drawer. Nav items in
-Playfair 30px, Programs expanded inline as an indented list (no nested accordion —
-three items do not justify a second tap). Utility links sit at the bottom of the drawer in
-Plex Mono. Primary CTA pinned as a full-width bar at the drawer foot.
+**Condensed state** (`.is-condensed`, scrollY > 40): height 84px → 64px, the
+"VALUE THROUGH INNOVATION" line drops — freeing exactly the space required — a bottom hairline
+and soft shadow appear, and the header **gains `Dealer Login →`** in a 1px `--rap-slate-300`
+box plus `File a Claim` at ≥1280px only. Without this the utility functions exist for one
+screen out of roughly eleven. Transition 160ms; `prefers-reduced-motion` removes the
+transition, never the behavior.
+
+`Programs` is an **anchor with a real destination** (`#paths`, or `/programs` once program
+pages exist), not a button that does nothing on click. It opens a 3-item dropdown panel on
+hover and focus-within (1px border, 4px radius, each item = name + one-line descriptor), and
+each item points at a **distinct** destination.
+
+**Mobile nav** (≤1024px): hamburger opens a full-height `--rap-ink` drawer, closing on `Esc`.
+Order inside the drawer is deliberate:
+
+1. **Utility links first**, at the top — `CUSTOMERS` label, the four customer/dealer functions,
+   and Contact, in Plex Mono 13px. Previously these sat at `margin-top:auto`, which on a 667px
+   screen put them below the drawer's own fold, behind a scroll past seven Playfair-30px items.
+2. Primary nav in Playfair 30px, Programs expanded inline as an indented list (no nested
+   accordion — three items do not justify a second tap).
+3. Primary CTA pinned as a full-width bar at the drawer foot.
+
+### 4.2b Orientation strip (hero foot)
+
+A **directory object**, not a pitch. It exists to answer "what is this company, who is it for,
+what do they sell" inside the first viewport, and its styling is what keeps it from pre-empting
+the Section 05 argument.
+
+```
+▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔  ← 2px --rap-ink top rule
+Owner descriptor, Inter 400 17px, --rap-slate-700, max 92ch
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ← 1px --rap-slate-200
+SUBSCRIPTION      │ MULTI-YEAR        │ REINSURANCE     ← Plex Mono 10px .10em
+FurnitureRx       │ Multi-Year Prot.  │ Reinsurance     ← Inter 600 15px
+one line of desc  │ one line of desc  │ one line of desc ← Inter 400 14px
+View →            │ View →            │ View →          ← quiet link 13px
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+Footnotes, Plex Mono 11px .06em, --rap-slate-500
+```
+
+Rules:
+- **No fill, no card, no shadow, no button.** Hairline column dividers only. Headline weight is
+  never used here — the section H1 above it must stay dominant.
+- **Strict parity across the three items:** identical column width, label treatment, name
+  weight, description length band, and link. **No ember rule on the FurnitureRx item** — the
+  ember rule marks FurnitureRx-owned objects (§3.3) and would break parity in a row where the
+  three paths must read as peers.
+- **Carries no economics.** No price, no commission, no coverage terms, no claims language.
+  That is what preserves Sections 07 and 08.
+- Descriptor copy is owner-approved and used **verbatim** (DECISION 025). It is not a slot for
+  UI-agent wordsmithing.
+- Closing footnote line states the FurnitureRx → RAP relationship. Keep the footer instance too.
+- Responsive: 3 columns → 3 hairline-separated rows below 860px.
+
+### 4.2c Contact block
+
+Lives inside the footer region (Section 13) with `id="contact"`, so no fifteenth homepage
+section is created. It is the single Contact destination for the utility bar, the drawer, the
+footer Company group, and `Talk to RAP`.
+
+- **Three routing choices** as bordered rows on `--rap-ink`: *I'm a dealer* → the economics
+  gate; *I have a protection plan* → kiosk claim/manage; *Media or other* → email. Each is
+  title + one-line descriptor + a brass `→`. Border lifts to `--rap-brass` on hover.
+- **Details column**: phone, email, hours as a definition list, each on a 1px
+  `--rap-ink-700` top rule, label in Plex Mono 11px `--rap-brass`, value in Inter 20px.
+  Phone is `tel:`, email is `mailto:`.
+- Contact details are owner-approved (DECISION 027) and must not be altered or supplemented.
+- A `.pending-owner` chip (dashed border, Plex Mono 11px, `--rap-slate-500`) is available for
+  any contact field the owner has **not** supplied. Never invent a value to fill the slot.
+- Contact is **not** in primary navigation — MASTER_SPEC warns against reverting to
+  *About → Features → Products → Contact*, and the seven-item nav order is locked.
 
 ### 4.3 Stat tile (Market Pulse / Market Intelligence)
 
@@ -377,7 +462,16 @@ looking at from a cropped screenshot.
   type sizes, and identical CTA treatment to FurnitureRx in Section 05. Visual parity is how
   the "three paths, not one product plus two footnotes" requirement is enforced. FurnitureRx
   gets the ember rule only where it is the subject of the section (07), never in the
-  three-path row.
+  three-path row **and never in the §4.2b orientation strip**.
+- **All three programs must be reachable everywhere they appear.** Each has a stable anchor
+  (`#program-subscription`, `#program-multiyear`, `#program-reinsurance`) targeted by the header
+  dropdown, the orientation strip, the drawer, and the footer. A program rendered at parity but
+  left unclickable is a quiet form of the demotion the three-path rule exists to prevent.
+- **Reinsurance framing** (DECISION 028): Reinsurance is its own product, described as taking a
+  share of the underwriting profits and building wealth over time — always paired with the
+  unchanged caveat that its timing differs from commission income and it is not immediate
+  profit. "Standard" describes a non-participating program where the vendor keeps the
+  underwriting profits; it is **not** a fourth path and gets no card.
 
 ---
 
@@ -385,7 +479,9 @@ looking at from a cropped screenshot.
 
 Purposeful only. Three permitted behaviors:
 
-1. Sticky-header condense: 160ms height/shadow transition.
+1. Sticky-header condense: 160ms height/shadow transition, driven by a scroll listener that
+   toggles `.is-condensed` past 40px. The utility links it reveals (§4.2) appear without
+   transition — a wayfinding element must not fade in.
 2. Hover/focus state changes: 120ms color, 1px underline grow.
 3. Newswire LIVE dot: 2s opacity pulse.
 

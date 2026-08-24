@@ -54,6 +54,16 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .btns{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-7)}
 .qlink{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 
+/* ---- 00 utility bar — shared pattern (R3/R6) ---- */
+.utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
+.utility__inner{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:var(--s-5)}
+.utility a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88);text-decoration:none}
+.utility a:hover{color:#fff}
+.utility__left,.utility__right{display:flex;gap:var(--s-5);align-items:center;flex-wrap:wrap}
+.utility__label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500);border-right:1px solid var(--rap-ink-700);padding-right:var(--s-5)}
+.utility__login{color:var(--rap-brass)!important;border:1px solid rgba(193,149,65,.55);border-radius:var(--radius-sm);padding:5px 10px}
+.utility__login:hover{background:var(--rap-brass);color:var(--rap-ink)!important}
+
 /* ---- prototype chrome ---- */
 .proto{background:#FFF6E8;border-bottom:1px solid #E8D5AE;color:#5A4413;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px var(--margin);text-align:center}
 .proto b{color:#8E3B0C}
@@ -179,11 +189,31 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   .gate__grid,.outrow{grid-template-columns:1fr}
   .btns .btn{width:100%}
   .flow__step{flex:1 1 100%}
+  /* R3(a) — slim utility strip survives on mobile */
+  .utility__inner{min-height:32px}
+  .utility a{font-size:12px}
+  .utility__label,.utility__secondary{display:none}
+  .utility__login{padding:4px 8px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+
+<div class="utility">
+  <div class="wrap-wide utility__inner">
+    <div class="utility__left">
+      <span class="utility__label">Customers</span>
+      <a href="https://kiosk.furniturerx.net/">File a Claim</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Customer Support</a>
+    </div>
+    <div class="utility__right">
+      <a class="utility__secondary" href="home.html#contact">Contact</a>
+      <a href="https://kiosk.furniturerx.net/" class="utility__login">Dealer Login &rarr;</a>
+    </div>
+  </div>
+</div>
 
 <div class="proto">
   Phase 2 UI/UX prototype &mdash; access-flow design only.
@@ -589,6 +619,12 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
 <footer style="background:var(--rap-ink);color:rgba(255,255,255,.6);padding:var(--s-7) 0">
   <div class="wrap-wide">
+    <p class="meta" style="margin-bottom:var(--s-4)">
+      <a href="home.html#contact" style="color:var(--rap-brass);text-decoration:none">Contact</a>
+      &middot; 1.800.732.5856
+      &middot; <a href="mailto:sales@raptns.com" style="color:rgba(255,255,255,.6);text-decoration:none">sales@raptns.com</a>
+      &middot; 8:00 AM &ndash; 6:00 PM, Monday&ndash;Friday, EST
+    </p>
     <p class="meta">Risk Assurance Partners &middot; Phase 2 design prototype &middot; FurnitureRx is a product of Risk Assurance Partners</p>
   </div>
 </footer>

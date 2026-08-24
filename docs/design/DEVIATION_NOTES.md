@@ -1,6 +1,26 @@
 # Risk Assurance Partners — DEVIATION NOTES & OPEN QUESTIONS
 
 **Phase 2 / UI-UX deliverable 5 of 5.**
+**Revision 2 — 2026-08-24.** Several items below were resolved by owner decision. Superseded
+entries are retained per the decision-log convention rather than deleted.
+
+## Revision 2 — resolved items
+
+| Item | Resolution |
+|---|---|
+| **D1** — mobile utility bar merged into the drawer | **Superseded by DECISION 024 / R3.** A slim 32px utility strip now persists on mobile with File a Claim + Dealer Login, and all utility links moved to the **top** of the drawer. This moves back toward LOCKED_WIREFRAME §4, which lists Utility as item 1 of the mobile sequence. |
+| **Q6** — where does "Talk to RAP" go? | **Resolved by DECISION 024 / R6.** Contact is added to the site map (utility bar + footer, not primary nav); `Talk to RAP` targets the `#contact` block inside the footer region. |
+| **Contact details** (phone / email / hours) | **Resolved by DECISION 027.** 1.800.732.5856 · sales@raptns.com · 8:00 AM – 6:00 PM, Monday–Friday, EST. Previously flagged as un-inventable. |
+| **§05 program links dead** (`href="#"` on Multi-Year and Reinsurance) | **Resolved by DECISION 024 / R5.** All three programs now have stable anchors and are reachable from the header dropdown, the orientation strip, the drawer, and the footer. |
+| Audience described as "furniture retail dealers" | **Superseded by DECISION 025.** The owner rejected that as too narrow. Approved descriptor now covers furniture **& mattress** retail dealers, custom interior designer programs, and all home furnishings categories, and is used verbatim in the hero orientation strip. |
+| Reinsurance card copy | **Updated per DECISION 028.** Reinsurance is its own product — a share of the underwriting profits, building wealth over time — retaining the not-immediate-profit caveat. "Standard" (vendor keeps the underwriting profits) is a program descriptor only; **no fourth path card was added and Section 05 is unchanged.** |
+| Owner review of palette / typography / spacing | **Approved as-is.** These are now frozen; revision 2 changed no token, typeface, scale, or grid value. |
+
+## Revision 2 — new open question
+
+| # | Question | Blocks |
+|---|---|---|
+| **Q14** | DECISION 025 lists "Standard" alongside Reinsurance, Subscription and Multi-Year in owner-approved descriptor copy, and DECISION 028 defines it as a non-participating structure rather than a fourth path. The homepage therefore names four program words but shows three cards. Confirm this is intended, or supply the wording that resolves it for a reader who counts. | Section 02 strip, Section 05, program pages |
 
 Everything in this file is **PROPOSED — requires owner approval.** Nothing here has been
 implemented as a change to `docs/project/`. The prototype implements the locked wireframe as

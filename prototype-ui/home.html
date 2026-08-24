@@ -122,20 +122,46 @@ button{font:inherit;cursor:pointer}
 }
 .proto b{color:#8E3B0C}
 
-/* ---------- 00 utility bar ---------- */
-.utility{background:var(--rap-ink);color:rgba(255,255,255,.72)}
+/* ---------- 00 utility bar (R3: +1 contrast step, CUSTOMERS label, Contact) ---------- */
+.utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
 .utility__inner{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:var(--s-5)}
 .utility a{
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(255,255,255,.72);text-decoration:none;
+  font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);text-decoration:none;
 }
 .utility a:hover{color:#fff}
-.utility__left{display:flex;gap:var(--s-5);flex-wrap:wrap}
-.utility__login{color:var(--rap-brass)!important}
+.utility__left,.utility__right{display:flex;gap:var(--s-5);align-items:center;flex-wrap:wrap}
+.utility__label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--rap-slate-500);border-right:1px solid var(--rap-ink-700);padding-right:var(--s-5);
+}
+.utility__login{
+  color:var(--rap-brass)!important;border:1px solid rgba(193,149,65,.55);
+  border-radius:var(--radius-sm);padding:5px 10px;
+}
+.utility__login:hover{background:var(--rap-brass);color:var(--rap-ink)!important}
 
 /* ---------- 01 header ---------- */
-.hdr{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--rap-slate-200)}
-.hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);min-height:84px}
+.hdr{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--rap-slate-200);transition:box-shadow .16s}
+.hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);min-height:84px;transition:min-height .16s}
+/* R4 — condensed sticky header: tagline drops, utility returns */
+.hdr.is-condensed .hdr__inner{min-height:64px}
+.hdr.is-condensed .lockup__tag{display:none}
+.hdr.is-condensed{box-shadow:0 1px 0 var(--rap-slate-200),0 8px 24px rgba(12,23,42,.08)}
+.hdr__util{display:none;align-items:center;gap:var(--s-4);flex-shrink:0}
+.hdr.is-condensed .hdr__util{display:flex}
+.hdr__util a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;color:var(--rap-slate-700);white-space:nowrap;
+}
+.hdr__util a:hover{color:var(--rap-ink)}
+.hdr__util .hdr__login{
+  color:var(--rap-ember-700);border:1px solid var(--rap-slate-300);
+  border-radius:var(--radius-sm);padding:6px 10px;
+}
+.hdr__util .hdr__login:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
+.hdr__claim{display:none}
+@media (min-width:1280px){.hdr.is-condensed .hdr__claim{display:inline}}
 .lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
 .lockup__mark{
   width:34px;height:34px;flex:0 0 34px;border-radius:var(--radius-sm);
@@ -151,11 +177,11 @@ button{font:inherit;cursor:pointer}
 }
 .nav a:hover{border-bottom-color:var(--rap-ember)}
 .nav__drop{position:relative}
-.nav__drop>button{
+.nav__drop>.nav__progs{
   background:none;border:0;padding:8px 0;font-size:15px;font-weight:500;color:var(--rap-ink);
-  display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid transparent;
+  display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid transparent;text-decoration:none;
 }
-.nav__drop:hover>button,.nav__drop:focus-within>button{border-bottom-color:var(--rap-ember)}
+.nav__drop:hover>.nav__progs,.nav__drop:focus-within>.nav__progs{border-bottom-color:var(--rap-ember)}
 .nav__panel{
   position:absolute;top:calc(100% + 10px);left:-20px;min-width:330px;background:#fff;
   border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:8px;
@@ -182,9 +208,11 @@ button{font:inherit;cursor:pointer}
 .drawer__nav a{display:block;font-family:var(--serif);font-size:30px;font-weight:500;padding:10px 0}
 .drawer__sub{padding-left:var(--s-5);border-left:1px solid var(--rap-ink-700);margin:var(--s-2) 0 var(--s-4)}
 .drawer__sub a{font-family:var(--sans);font-size:16px;font-weight:500;padding:8px 0;color:rgba(255,255,255,.8)}
-.drawer__util{margin-top:auto;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);display:grid;gap:var(--s-3)}
-.drawer__util a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
-.drawer__cta{margin-top:var(--s-5)}
+/* R3(b) — utility links sit at the TOP of the drawer, above primary nav */
+.drawer__util{padding-bottom:var(--s-5);margin-bottom:var(--s-5);border-bottom:1px solid var(--rap-ink-700);display:grid;gap:var(--s-3)}
+.drawer__util a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500)}
+.drawer__cta{margin-top:auto;padding-top:var(--s-6)}
 .drawer__cta .btn{width:100%;justify-content:center}
 #navtoggle:checked ~ .drawer{display:flex}
 
@@ -193,6 +221,29 @@ button{font:inherit;cursor:pointer}
 .hero__fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-md);padding:var(--s-6)}
 .figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
 .figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
+
+/* ---------- 02b orientation strip (R2) — a directory object, not a pitch ---------- */
+.orient{margin-top:var(--s-9);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
+.orient__desc{font-size:17px;line-height:1.55;color:var(--rap-slate-700);max-width:92ch}
+.orient__progs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  margin-top:var(--s-5);border-top:1px solid var(--rap-slate-200);
+}
+.orient__prog{
+  padding:var(--s-4) var(--s-5) var(--s-4) 0;border-right:1px solid var(--rap-slate-200);
+  display:flex;flex-direction:column;gap:6px;
+}
+.orient__prog:first-child{padding-left:0}
+.orient__prog:not(:first-child){padding-left:var(--s-5)}
+.orient__prog:last-child{border-right:0}
+.orient__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
+.orient__n{font-weight:600;font-size:15px;line-height:1.3}
+.orient__d{font-size:14px;color:var(--rap-slate-700);flex:1}
+.orient__prog .qlink{font-size:13px;align-self:flex-start}
+.orient__note{
+  margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
+}
 
 /* ---------- 03 market pulse / stat tiles ---------- */
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-7)}
@@ -332,6 +383,29 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- 12/13 ---------- */
 .final .btns{justify-content:center}
+
+/* ---------- contact block, inside the footer region (R6) ---------- */
+.contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
+.contact__grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-8);align-items:start;margin-top:var(--s-5)}
+.contact__routes{display:grid;gap:var(--s-3)}
+.contact__route{
+  display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
+  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);padding:14px 16px;
+  text-decoration:none;color:#fff;transition:border-color .12s,background .12s;
+}
+.contact__route:hover{border-color:var(--rap-brass);background:rgba(193,149,65,.08)}
+.contact__route b{display:block;font-size:15px;font-weight:600}
+.contact__route span{display:block;font-size:13px;color:rgba(255,255,255,.6);margin-top:2px}
+.contact__route i{font-style:normal;color:var(--rap-brass)}
+.contact__det{display:grid;gap:var(--s-4)}
+.contact__det div{border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3)}
+.contact__det dt{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass)}
+.contact__det dd{font-size:20px;margin-top:6px}
+.contact__det dd a{text-decoration:none}
+.pending-owner{
+  display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rap-slate-500);border:1px dashed var(--rap-ink-700);border-radius:var(--radius-sm);padding:4px 8px;
+}
 .foot__brand{margin-bottom:var(--s-8)}
 .foot__cols{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-6)}
 .foot__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass);margin-bottom:var(--s-4)}
@@ -376,10 +450,17 @@ button{font:inherit;cursor:pointer}
   .pub{grid-template-columns:1fr;gap:var(--s-5)}
   .pub__k{max-width:none}
   .figs{grid-template-columns:1fr}
+  .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
+  .orient__progs{grid-template-columns:1fr}
+  .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
+  .orient__prog:last-child{border-bottom:0}
 }
 @media (max-width:680px){
-  .utility__inner{min-height:0;padding:0}
-  .utility{display:none}
+  /* R3(a) — slim utility strip survives on mobile: File a Claim + Dealer Login only */
+  .utility__inner{min-height:32px}
+  .utility a{font-size:12px}
+  .utility__label,.utility__secondary{display:none}
+  .utility__login{padding:4px 8px}
   .tiles{grid-template-columns:1fr;gap:var(--s-6)}
   .tile__label{min-height:0}
   .path{flex-direction:column;gap:0}
@@ -421,11 +502,15 @@ button{font:inherit;cursor:pointer}
 <div class="utility">
   <div class="wrap utility__inner">
     <div class="utility__left">
-      <a href="#">File a Claim</a>
-      <a href="#">Manage My Plan</a>
-      <a href="#">Customer Support</a>
+      <span class="utility__label">Customers</span>
+      <a href="https://kiosk.furniturerx.net/">File a Claim</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Customer Support</a>
     </div>
-    <a href="#" class="utility__login">Dealer Login &rarr;</a>
+    <div class="utility__right">
+      <a class="utility__secondary" href="#contact">Contact</a>
+      <a href="https://kiosk.furniturerx.net/" class="utility__login">Dealer Login &rarr;</a>
+    </div>
   </div>
 </div>
 
@@ -448,11 +533,11 @@ button{font:inherit;cursor:pointer}
     <nav class="nav" aria-label="Primary">
       <a href="#economics">Dealer Economics</a>
       <div class="nav__drop">
-        <button aria-expanded="false">Programs <span aria-hidden="true">▾</span></button>
+        <a href="#paths" class="nav__progs">Programs <span aria-hidden="true">▾</span></a>
         <div class="nav__panel">
-          <a href="#furniturerx"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
-          <a href="#paths"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
-          <a href="#paths"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
+          <a href="#program-subscription"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
+          <a href="#program-multiyear"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
+          <a href="#program-reinsurance"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
         </div>
       </div>
       <a href="#newswire">Newswire</a>
@@ -460,6 +545,11 @@ button{font:inherit;cursor:pointer}
       <a href="#research">Research</a>
       <a href="#why">Why RAP</a>
     </nav>
+
+    <div class="hdr__util">
+      <a class="hdr__claim" href="https://kiosk.furniturerx.net/">File a Claim</a>
+      <a class="hdr__login" href="https://kiosk.furniturerx.net/">Dealer Login &rarr;</a>
+    </div>
 
     <a class="btn btn--primary hdr__cta" href="economics-gate.html">See My Economics &rarr;</a>
     <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Open menu"><span></span></label>
@@ -472,25 +562,27 @@ button{font:inherit;cursor:pointer}
     <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
     <label class="drawer__close" for="navtoggle" role="button" tabindex="0" aria-label="Close menu">&times;</label>
   </div>
+  <div class="drawer__util">
+    <p class="drawer__utillabel">Customers</p>
+    <a href="https://kiosk.furniturerx.net/">File a Claim</a>
+    <a href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+    <a href="https://kiosk.furniturerx.net/">Customer Support</a>
+    <a href="#contact">Contact</a>
+    <a href="https://kiosk.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
+  </div>
   <nav class="drawer__nav" aria-label="Mobile">
     <a href="#economics">Dealer Economics</a>
     <a href="#paths">Programs</a>
     <div class="drawer__sub">
-      <a href="#furniturerx">FurnitureRx Subscription</a>
-      <a href="#paths">Multi-Year Protection</a>
-      <a href="#paths">Reinsurance</a>
+      <a href="#program-subscription">FurnitureRx Subscription</a>
+      <a href="#program-multiyear">Multi-Year Protection</a>
+      <a href="#program-reinsurance">Reinsurance</a>
     </div>
     <a href="#newswire">Newswire</a>
     <a href="#pulse">Market Intelligence</a>
     <a href="#research">Research</a>
     <a href="#why">Why RAP</a>
   </nav>
-  <div class="drawer__util">
-    <a href="#">File a Claim</a>
-    <a href="#">Manage My Plan</a>
-    <a href="#">Customer Support</a>
-    <a href="#" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
-  </div>
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">See My Economics &rarr;</a></div>
 </div>
 
@@ -498,9 +590,10 @@ button{font:inherit;cursor:pointer}
 
 <!-- ============ 02 HERO ============ -->
 <section class="sec sec--first sec--mist" aria-labelledby="hero-h">
-  <div class="wrap hero">
+  <div class="wrap">
+   <div class="hero">
     <div>
-      <p class="eyebrow">The economics of furniture retail</p>
+      <p class="eyebrow">Risk Assurance Partners &middot; Protection programs for furniture &amp; mattress retailers</p>
       <h1 class="d1" id="hero-h">
         Your expenses recur every month.<br>
         <span class="acc">Your furniture sale doesn&rsquo;t.</span>
@@ -558,6 +651,47 @@ button{font:inherit;cursor:pointer}
         Shapes are illustrative and carry no data claim.
       </figcaption>
     </figure>
+   </div>
+
+   <!-- R2 — orientation strip. Inside Section 02, so the 14-section sequence is unchanged.
+        Descriptor copy is owner-approved verbatim (DECISION 025). Carries no economics. -->
+   <div class="orient" aria-labelledby="orient-h">
+     <h2 id="orient-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">What Risk Assurance Partners does</h2>
+     <p class="orient__desc">
+       Protection programs for furniture &amp; mattress retail dealers, as well as custom interior
+       designer programs. Reinsurance, Subscription, Multi-Year &amp; Standard programs &mdash; all
+       home furnishings categories.
+     </p>
+
+     <div class="orient__progs">
+       <div class="orient__prog">
+         <p class="orient__k">Subscription</p>
+         <p class="orient__n">FurnitureRx</p>
+         <p class="orient__d">Recurring protection income, monthly for the customer.</p>
+         <a class="qlink" href="#program-subscription">View &rarr;</a>
+       </div>
+       <div class="orient__prog">
+         <p class="orient__k">Multi-Year</p>
+         <p class="orient__n">Multi-Year Protection</p>
+         <p class="orient__d">Protection income at the original sale.</p>
+         <a class="qlink" href="#program-multiyear">View &rarr;</a>
+       </div>
+       <div class="orient__prog">
+         <p class="orient__k">Reinsurance</p>
+         <p class="orient__n">Reinsurance</p>
+         <p class="orient__d">A share of the underwriting profits, over time.</p>
+         <a class="qlink" href="#program-reinsurance">View &rarr;</a>
+       </div>
+     </div>
+
+     <p class="orient__note">
+       Reinsurance programs let a retailer take a share of the underwriting profits. In standard
+       programs, the vendor keeps those underwriting profits.
+     </p>
+     <p class="orient__note" style="border-top:0;padding-top:0;margin-top:var(--s-2)">
+       FurnitureRx is a product of Risk Assurance Partners.
+     </p>
+   </div>
   </div>
 </section>
 
@@ -599,7 +733,7 @@ button{font:inherit;cursor:pointer}
         Placeholder values. Live figures, sources, and update cadence are defined in the
         Market Intelligence phase; every tile ships with a source and a last-updated stamp.
       </p>
-      <a class="qlink" href="#">Market Intelligence &rarr;</a>
+      <a class="qlink" href="#stub" title="Stub — Market Intelligence page, later phase">Market Intelligence &rarr;</a>
     </div>
   </div>
 </section>
@@ -662,7 +796,7 @@ button{font:inherit;cursor:pointer}
     </div>
 
     <div class="paths">
-      <article class="path">
+      <article class="path" id="program-subscription">
         <div class="path__meta">
           <p class="path__num">01</p>
           <p class="path__name">Subscription</p>
@@ -687,7 +821,7 @@ button{font:inherit;cursor:pointer}
         </div>
       </article>
 
-      <article class="path">
+      <article class="path" id="program-multiyear">
         <div class="path__meta">
           <p class="path__num">02</p>
           <p class="path__name">Multi-Year</p>
@@ -704,11 +838,11 @@ button{font:inherit;cursor:pointer}
           <p>Protection income generated at the original sale. It remains the right choice for
           customers who prefer to make one complete upfront decision, and it stays the dealer&rsquo;s
           first ask.</p>
-          <p class="path__cta"><a class="qlink" href="#">Learn more &rarr;</a></p>
+          <p class="path__cta"><a class="qlink" href="#contact">Learn more &rarr;</a></p>
         </div>
       </article>
 
-      <article class="path">
+      <article class="path" id="program-reinsurance">
         <div class="path__meta">
           <p class="path__num">03</p>
           <p class="path__name">Reinsurance</p>
@@ -722,10 +856,10 @@ button{font:inherit;cursor:pointer}
         </div>
         <div class="path__body">
           <h3 class="path__title">Reinsurance</h3>
-          <p>Underwriting and investment economics for dealers with an appropriate structure.
-          The timing of this value differs from current commission income and it is not
-          immediate profit.</p>
-          <p class="path__cta"><a class="qlink" href="#">Learn more &rarr;</a></p>
+          <p>Take a share of the underwriting profits rather than leaving them with the vendor,
+          and build wealth over time. The timing of this value differs from current commission
+          income and it is not immediate profit.</p>
+          <p class="path__cta"><a class="qlink" href="#contact">Learn more &rarr;</a></p>
         </div>
       </article>
     </div>
@@ -806,8 +940,8 @@ button{font:inherit;cursor:pointer}
       </p>
 
       <div class="btns">
-        <a class="btn btn--primary" href="#">FurnitureRx for Dealers &rarr;</a>
-        <a class="btn btn--secondary" href="#">See the customer experience</a>
+        <a class="btn btn--primary" href="#stub" title="Stub — FurnitureRx dealer page, later phase">FurnitureRx for Dealers &rarr;</a>
+        <a class="btn btn--secondary" href="#stub" title="Stub — customer experience page, later phase">See the customer experience</a>
       </div>
     </div>
 
@@ -926,7 +1060,7 @@ button{font:inherit;cursor:pointer}
         <h3 class="wire__head">Existing-home sales hold near their multi-year floor in the latest monthly print</h3>
         <p class="wire__syn">Placeholder synopsis. Two lines maximum, roughly 180 characters, written from the original report and never republished in full.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
     </article>
 
     <article class="wire__row">
@@ -936,7 +1070,7 @@ button{font:inherit;cursor:pointer}
         <h3 class="wire__head">Regional furniture retailer announces store openings across three markets</h3>
         <p class="wire__syn">Placeholder synopsis. Automated discovery, relevance filtering, deduplication, and categorization are defined in the Newswire automation phase.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
     </article>
 
     <article class="wire__row">
@@ -946,7 +1080,7 @@ button{font:inherit;cursor:pointer}
         <h3 class="wire__head">Tariff schedule for upholstered wooden products updated in the Federal Register</h3>
         <p class="wire__syn">Placeholder synopsis. Every item carries publication attribution and an outbound link to the original source.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
     </article>
 
     <article class="wire__row">
@@ -956,7 +1090,7 @@ button{font:inherit;cursor:pointer}
         <h3 class="wire__head">Revolving credit balances tick higher in the latest consumer credit release</h3>
         <p class="wire__syn">Placeholder synopsis. Category taxonomy follows the approved Newswire category list.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
     </article>
 
     <article class="wire__row">
@@ -966,10 +1100,10 @@ button{font:inherit;cursor:pointer}
         <h3 class="wire__head">Case goods manufacturer reports quarterly order growth against flat shipments</h3>
         <p class="wire__syn">Placeholder synopsis. Suppressed sources and duplicate stories are handled before publication, not after.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
     </article>
 
-    <p class="wire__foot"><a class="qlink" href="#">View all news &rarr;</a></p>
+    <p class="wire__foot"><a class="qlink" href="#stub" title="Stub — Newswire index, later phase">View all news &rarr;</a></p>
   </div>
 </section>
 
@@ -1019,8 +1153,8 @@ button{font:inherit;cursor:pointer}
         </div>
 
         <div class="btns">
-          <a class="btn btn--primary" href="#">Read research &rarr;</a>
-          <a class="btn btn--secondary" href="#">Download report</a>
+          <a class="btn btn--primary" href="#stub" title="Stub — research report page, later phase">Read research &rarr;</a>
+          <a class="btn btn--secondary" href="#stub" title="Stub — report PDF, later phase">Download report</a>
         </div>
       </div>
     </div>
@@ -1062,7 +1196,7 @@ button{font:inherit;cursor:pointer}
     </h2>
     <div class="btns">
       <a class="btn btn--primary" href="economics-gate.html">See My Economics &rarr;</a>
-      <a class="btn btn--secondary" href="#">Talk to RAP</a>
+      <a class="btn btn--secondary" href="#contact">Talk to RAP</a>
     </div>
     <p class="meta" style="margin-top:var(--s-7);color:rgba(255,255,255,.55)">
       Access to the RAP Dealer Economics Calculator is reviewed by RAP Sales
@@ -1075,6 +1209,46 @@ button{font:inherit;cursor:pointer}
 <!-- ============ 13 FOOTER ============ -->
 <footer class="sec sec--ink" style="padding:var(--s-9) 0 var(--s-7)">
   <div class="wrap">
+
+    <!-- R6 — Contact. Lives inside the footer region (Section 13), so no fifteenth section
+         is introduced. Details are owner-approved (DECISION 027). -->
+    <div class="contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2 class="d3">Talk to Risk Assurance Partners.</h2>
+
+      <div class="contact__grid">
+        <div class="contact__routes">
+          <a class="contact__route" href="economics-gate.html">
+            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="https://kiosk.furniturerx.net/">
+            <span><b>I have a protection plan</b><span>File a claim, manage or cancel your plan</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="mailto:sales@raptns.com">
+            <span><b>Media or other</b><span>Everything else</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+        </div>
+
+        <dl class="contact__det">
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+18007325856">1.800.732.5856</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:sales@raptns.com">sales@raptns.com</a></dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>8:00 AM &ndash; 6:00 PM, Monday&ndash;Friday, EST</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
     <a class="lockup foot__brand" href="#top">
       <span class="lockup__mark" style="background:#fff" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1091,7 +1265,7 @@ button{font:inherit;cursor:pointer}
     <div class="foot__cols">
       <div>
         <p class="foot__h">Programs</p>
-        <a href="#furniturerx">FurnitureRx</a><a href="#">Multi-Year Protection</a><a href="#">Reinsurance</a>
+        <a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a>
       </div>
       <div>
         <p class="foot__h">Intelligence</p>
@@ -1099,33 +1273,63 @@ button{font:inherit;cursor:pointer}
       </div>
       <div>
         <p class="foot__h">Company</p>
-        <a href="#why">Why RAP</a><a href="#">Contact</a>
+        <a href="#why">Why RAP</a><a href="#contact">Contact</a>
       </div>
       <div>
         <p class="foot__h">Customer</p>
-        <a href="#">File a Claim</a><a href="#">Customer Support</a><a href="#">Manage My Plan</a>
+        <a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a>
       </div>
       <div>
         <p class="foot__h">Dealer</p>
-        <a href="#">Dealer Login</a><a href="#economics">Dealer Economics</a>
+        <a href="https://kiosk.furniturerx.net/">Dealer Login</a><a href="#economics">Dealer Economics</a>
       </div>
     </div>
 
     <div class="foot__acc">
-      <details><summary>Programs</summary><a href="#furniturerx">FurnitureRx</a><a href="#">Multi-Year Protection</a><a href="#">Reinsurance</a></details>
+      <details><summary>Programs</summary><a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a></details>
       <details><summary>Intelligence</summary><a href="#newswire">Newswire</a><a href="#pulse">Market Intelligence</a><a href="#research">Research</a></details>
-      <details><summary>Company</summary><a href="#why">Why RAP</a><a href="#">Contact</a></details>
-      <details><summary>Customer</summary><a href="#">File a Claim</a><a href="#">Customer Support</a><a href="#">Manage My Plan</a></details>
-      <details><summary>Dealer</summary><a href="#">Dealer Login</a><a href="#economics">Dealer Economics</a></details>
+      <details><summary>Company</summary><a href="#why">Why RAP</a><a href="#contact">Contact</a></details>
+      <details><summary>Customer</summary><a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a></details>
+      <details><summary>Dealer</summary><a href="https://kiosk.furniturerx.net/">Dealer Login</a><a href="#economics">Dealer Economics</a></details>
     </div>
 
     <div class="foot__legal">
       <span>&copy; 2026 Risk Assurance Partners</span>
-      <span><a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+      <span><a href="#stub" title="Stub — legal page, later phase">Privacy</a> &middot; <a href="#stub" title="Stub — legal page, later phase">Terms</a></span>
     </div>
     <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
+    <p class="foot__note" id="stub">
+      Prototype note &middot; links marked &ldquo;stub&rdquo; target pages built in a later phase, or
+      outbound publication URLs that cannot be invented at design time.
+    </p>
   </div>
 </footer>
+
+<script>
+/* R4 — sticky header condenses past 40px: the tagline drops and the utility
+   functions (Dealer Login, plus File a Claim at >=1280px) return to the bar,
+   so they are reachable for the whole page rather than one screen. */
+(function () {
+  var hdr = document.querySelector('.hdr');
+  var ticking = false;
+  function apply() {
+    hdr.classList.toggle('is-condensed', window.scrollY > 40);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+  }, { passive: true });
+  apply();
+})();
+
+/* Drawer: close on Esc, per DESIGN_SYSTEM 8. */
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    var t = document.getElementById('navtoggle');
+    if (t && t.checked) { t.checked = false; }
+  }
+});
+</script>
 
 </body>
 </html>

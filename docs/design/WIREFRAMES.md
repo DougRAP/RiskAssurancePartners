@@ -1,10 +1,25 @@
 # Risk Assurance Partners — HOMEPAGE WIREFRAMES (Desktop + Mobile)
 
-**Phase 2 / UI-UX deliverable 1 of 5. Status: PROPOSED — requires owner approval.**
+**Phase 2 / UI-UX deliverable 1 of 5.**
+**Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
+(DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
 
 These wireframes implement the locked 14-section homepage sequence in
-`docs/project/LOCKED_WIREFRAME.md` exactly. Section numbering below uses the
+`docs/project/LOCKED_WIREFRAME.md` v1.1 exactly. Section numbering below uses the
 LOCKED_WIREFRAME numbering (00–13). No section is added, removed, merged, or reordered.
+The R2 orientation strip is built **inside** Section 02 and the R6 Contact block **inside**
+Section 13, specifically so the fourteen-section sequence stays untouched.
+
+## Revision 2 change log
+
+| Ref | Section | Change |
+|---|---|---|
+| R1 | 02 | Hero eyebrow now names company, category, and audience |
+| R2 | 02 | Orientation strip added below the hero CTAs — owner descriptor, three programs at parity, FurnitureRx attribution |
+| R3 | 00 / 01 | Utility bar survives on mobile as a slim strip; utility links move to the **top** of the drawer; +1 contrast step; `CUSTOMERS` label |
+| R4 | 01 | Sticky header retains `Dealer Login →` (and `File a Claim` ≥1280px) when condensed |
+| R5 | 01 / 05 | Programs nav and all three path `Learn more` links now resolve |
+| R6 | 00 / 12 / 13 | Contact added to utility bar and footer; Contact block inside the footer region; `Talk to RAP` targets it |
 
 Layout notation: `│` column edge · `┄` hairline `1px --rap-slate-200` · `▓` ink ground ·
 `░` mist ground · `▒` cream ground · blank = paper ground.
@@ -19,18 +34,27 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 
 ```
 ▓─────────────────────────────────────────────────────────────────────────────▓
-▓ FILE A CLAIM · MANAGE MY PLAN · CUSTOMER SUPPORT           DEALER LOGIN → ▓
+▓ CUSTOMERS │ FILE A CLAIM · MANAGE MY PLAN · CUSTOMER SUPPORT               ▓
+▓                                        CONTACT   [ DEALER LOGIN → ]        ▓
 ▓─────────────────────────────────────────────────────────────────────────────▓
 ```
 
 **Annotations**
-- Plex Mono 12px `.08em` uppercase, `rgba(255,255,255,.72)`; `DEALER LOGIN →` in `--rap-brass`.
-- Customer servicing is present on every page and above the fold, but at 38px of ink it is
-  unambiguously secondary to the dealer narrative (MASTER_SPEC "easy to find, visually
-  secondary").
-- All four links resolve to kiosk.furniturerx.net routes (DECISION 023); route inventory is
-  Phase 12, so the prototype uses `#` placeholders and labels them.
-- Not sticky. Scrolls away; the sticky header retains only `Dealer Login`.
+- **R3(c/d) applied.** Plex Mono **13px** `.08em` uppercase at `rgba(255,255,255,.88)` — one
+  contrast step up from the first revision, which was legible but under-weighted for the two
+  highest-intent actions on the site.
+- **R3(d)** — the left cluster is prefixed with a `CUSTOMERS` label in `--rap-slate-500`, with a
+  1px `--rap-ink-700` divider, so a consumer knows the row is addressed to them. Deliberately
+  **not** "FurnitureRx customers": Multi-Year customers file claims through the same functions.
+- `DEALER LOGIN →` is boxed in a 1px `rgba(193,149,65,.55)` brass hairline so it reads as an
+  action rather than a link. Fills brass on hover.
+- **R6** — `CONTACT` sits beside `DEALER LOGIN →` in the right cluster. Present on every page at
+  0px scroll, desktop and mobile. Contact is **not** added to primary navigation.
+- Customer servicing stays visually secondary to the dealer narrative at 38px of ink
+  (MASTER_SPEC "easy to find, visually secondary").
+- The four utility links resolve to kiosk.furniturerx.net (DECISION 023); the prototype points
+  them at the kiosk root, with exact route inventory deferred to Phase 12.
+- Not sticky. Scrolls away — but per **R4** the condensed header takes over the function.
 
 ## 01 — Primary Header — white, 84px, sticky
 
@@ -42,6 +66,15 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 │        Dealer Economics  Programs ▾  Newswire  Market Intelligence          │
 │        Research  Why RAP                        [ See My Economics → ]      │
 └─────────────────────────────────────────────────────────────────────────────┘
+
+  CONDENSED (scrollY > 40) — 64px, tagline dropped, utility returns:
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ ┌──┐ RISK ASSURANCE PARTNERS   Dealer Economics  Programs ▾  Newswire       │
+│ │▞▚│                           Market Intelligence  Research  Why RAP       │
+│ └──┘        FILE A CLAIM*  [ DEALER LOGIN → ]    [ See My Economics → ]     │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                              * ≥1280px only
+
         └ Programs ▾ opens:
           ┌────────────────────────────────────────────┐
           │ FurnitureRx Subscription                   │
@@ -59,10 +92,18 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
   supplied logo asset.
 - Nav order is locked and matches DECISION 009 exactly. Programs is the only dropdown.
 - One primary CTA in the header: **See My Economics**. No secondary button competes with it.
-- Sticky behavior: at scrollY > 40 the bar condenses to 64px, the tagline line hides, and a
-  1px `--rap-slate-200` bottom rule appears.
+- **R4 applied.** Sticky behavior at scrollY > 40: the bar condenses 84px → 64px, the
+  "VALUE THROUGH INNOVATION" line drops — freeing exactly the space needed — and the header
+  gains `Dealer Login →` in a hairline box, plus `File a Claim` at ≥1280px only. Without this
+  the utility functions existed for one screen out of roughly eleven. Implemented with a small
+  scroll listener; `prefers-reduced-motion` removes the transition, not the behavior.
+- **R5 applied.** `Programs` is now an anchor with a real destination (`#paths`; `/programs`
+  once program pages exist), not a `<button>` that did nothing on click. The dropdown remains
+  on hover and focus-within.
 - Dropdown items carry a one-line descriptor so the three paths read as peers, not as a
-  product family under FurnitureRx.
+  product family under FurnitureRx, and now point at three **distinct** destinations
+  (`#program-subscription`, `#program-multiyear`, `#program-reinsurance`) rather than two of
+  them sharing `#paths`.
 
 ## 02 — Hero ░ `--rap-mist`, ~640px
 
@@ -70,7 +111,8 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ░─────────────────────────────────────────────────────────────────────────────░
 ░                                                                             ░
 ░ ◄─────────── 6 cols ───────────►    ◄─────────── 6 cols ───────────►        ░
-░ THE ECONOMICS OF FURNITURE RETAIL                                           ░
+░ RISK ASSURANCE PARTNERS · PROTECTION PROGRAMS FOR                           ░
+░ FURNITURE & MATTRESS RETAILERS                        ← R1 eyebrow          ░
 ░                                     ┌───────────────────────────────────┐   ░
 ░ Your expenses recur                 │ MONTHLY OPERATING COST vs         │   ░
 ░ every month.                        │ FURNITURE TRANSACTION             │   ░
@@ -87,13 +129,69 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ░ [ See My Economics → ] [ How RAP    └───────────────────────────────────┘   ░
 ░                          Helps ]                                            ░
 ░                                                                             ░
+░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ink rule ░
+░ R2 ORIENTATION STRIP — spans both columns, closes Section 02               ░
+░                                                                             ░
+░ Protection programs for furniture & mattress retail dealers, as well as     ░
+░ custom interior designer programs. Reinsurance, Subscription, Multi-Year    ░
+░ & Standard programs — all home furnishings categories.                      ░
+░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ░
+░ SUBSCRIPTION       │ MULTI-YEAR           │ REINSURANCE                     ░
+░ FurnitureRx        │ Multi-Year Protection│ Reinsurance                     ░
+░ Recurring          │ Protection income at │ A share of the underwriting     ░
+░ protection income, │ the original sale.   │ profits, over time.             ░
+░ monthly for the    │                      │                                 ░
+░ customer.          │                      │                                 ░
+░ View →             │ View →               │ View →                          ░
+░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ░
+░ REINSURANCE PROGRAMS LET A RETAILER TAKE A SHARE OF THE UNDERWRITING        ░
+░ PROFITS. IN STANDARD PROGRAMS, THE VENDOR KEEPS THOSE UNDERWRITING PROFITS. ░
+░ FURNITURERX IS A PRODUCT OF RISK ASSURANCE PARTNERS.                        ░
 ░─────────────────────────────────────────────────────────────────────────────░
 ```
 
 **Annotations**
 - Opens with the dealer's economic problem. No FurnitureRx, no coverage, no `$19.99`, no
-  RAP history, no furniture photography above the fold (DECISION 011).
+  RAP history, no furniture photography above the fold (DECISION 011). **The H1, the lead,
+  the CTAs, and the figure are untouched by revision 2.**
 - H1 = Playfair 500 76px, two sentences, second sentence italic `--rap-ember`.
+
+### R1 — eyebrow
+
+- Reads `RISK ASSURANCE PARTNERS · PROTECTION PROGRAMS FOR FURNITURE & MATTRESS RETAILERS`.
+  Short form; the full owner descriptor lives in the strip below so the 12px line stays legible.
+- This is the cheapest unused line on the page. The previous eyebrow ("The economics of
+  furniture retail") named the topic the H1 then named again; this one names company, category,
+  and audience in the first 100px of content at zero added vertical cost.
+- At 375px it wraps to two lines, costing ~18px.
+
+### R2 — orientation strip (DECISION 025)
+
+- **Built inside Section 02**, below the CTAs, spanning both columns. Building it as a band
+  between §02 and §03 would have been a sequence change; this is not, and the fourteen-section
+  sequence is preserved.
+- **Descriptor copy is owner-approved verbatim** and must not be paraphrased:
+  > Protection programs for furniture & mattress retail dealers, as well as custom interior
+  > designer programs. Reinsurance, Subscription, Multi-Year & Standard programs — all home
+  > furnishings categories.
+- Drawn as a **directory object**, not a pitch: 2px ink top rule, mono labels, hairline column
+  dividers, no fill, no headline weight, no button. It reads as wayfinding, which is what keeps
+  it from pre-empting Section 05.
+- **Carries no economics.** No `$19.99`, no `$8`, no coverage terms, no claims language — so
+  Sections 07 and 08 lose nothing.
+- **Strict parity across the three items** (DESIGN_SYSTEM §6): identical column width, label
+  treatment, name weight, description length band, and `View →` link. No ember rule on the
+  FurnitureRx item.
+- **"Standard programs" appears only inside the descriptor sentence and the footnote.** There is
+  no fourth path card and Section 05 is unchanged. Per DECISION 028, Reinsurance is its own
+  product; "standard" describes a non-participating program where the vendor keeps the
+  underwriting profits.
+- Footnote lines, Plex Mono 11px: the Reinsurance/Standard distinction (DECISION 028), then
+  **"FurnitureRx is a product of Risk Assurance Partners."** Moving that sentence out of the last
+  line of the footer and into viewport 1 is the whole of the "am I at the right site?" fix for
+  visitors arriving from FurnitureRx marketing. The footer instance is kept as well.
+- Cost: ~150px desktop, ~300px mobile stacked. Acceptable — on mobile the hero figure was never
+  first-viewport content.
 - The figure is the preferred visual from the locked wireframe made literal: twelve monthly
   expense bars along a continuous baseline versus a single transaction spike, then a third
   register showing recurring value accumulating after the sale. It is a diagram, not
@@ -208,8 +306,15 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 - Card 02 copy is affirmative — "for customers who prefer one complete upfront decision."
   Multi-Year is never described as legacy, declining, or replaced.
 - Card 03 explicitly states the timing caveat, satisfying "do not describe reinsurance as
-  universally immediate profit."
+  universally immediate profit." Per **DECISION 028** it now leads with the owner's framing —
+  taking a share of the underwriting profits rather than leaving them with the vendor, building
+  wealth over time — followed by the unchanged not-immediate-profit caveat.
 - Eyebrow is `RISK ASSURANCE PARTNERS` — the section is attributed to the master brand.
+- **R5 applied.** Each card carries a real `id` (`#program-subscription`, `#program-multiyear`,
+  `#program-reinsurance`) and is the destination for the header dropdown, the R2 strip, the
+  drawer, and the footer. All three `Learn more →` links resolve — previously two of the three
+  programs were unclickable everywhere they appeared, which is a quiet form of the demotion the
+  three-path rule exists to prevent.
 
 ## 06 — The Changed Customer — paper, ~760px
 
@@ -459,11 +564,29 @@ participate.
   behind `See My Economics` so the gate flow has one entry point across the whole site.
 - Primary CTA is the same label and same styling as the header CTA. The site has exactly one
   primary conversion verb.
+- **R6 applied.** `Talk to RAP` now targets `#contact` instead of a dead link. This matters
+  beyond link hygiene: previously the only route to a human was `See My Economics`, which is a
+  gated calculator request reviewed by Sales — a qualification funnel, not a contact path. A
+  dealer with a question and a consumer holding a plan were both funnelled into a six-field
+  lead form or nothing.
 
 ## 13 — Footer ▓ `--rap-ink`
 
 ```
 ▓─────────────────────────────────────────────────────────────────────────────▓
+▓ CONTACT                                          ← R6 block, id="contact"   ▓
+▓ Talk to Risk Assurance Partners.                                            ▓
+▓                                                                             ▓
+▓ ◄──── 5 cols ────►          ◄──────── 7 cols ────────►                      ▓
+▓ ┌───────────────────────┐   PHONE                                           ▓
+▓ │ I'm a dealer       →  │   1.800.732.5856                                  ▓
+▓ ├───────────────────────┤   ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄                    ▓
+▓ │ I have a plan      →  │   EMAIL                                           ▓
+▓ ├───────────────────────┤   sales@raptns.com                                ▓
+▓ │ Media or other     →  │   ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄                    ▓
+▓ └───────────────────────┘   HOURS                                           ▓
+▓                             8:00 AM – 6:00 PM, Mon–Fri, EST                 ▓
+▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ▓
 ▓ ┌──┐ RISK ASSURANCE PARTNERS                                                ▓
 ▓ │▞▚│ VALUE THROUGH INNOVATION                                               ▓
 ▓ └──┘                                                                        ▓
@@ -484,6 +607,24 @@ participate.
   possible insurance against brand confusion.
 - Footer is ink, matching the utility bar, so the page opens and closes on the corporate mark.
 
+### R6 — Contact block
+
+- **Placed inside the footer region (Section 13), not as a fifteenth section.** Decision 024
+  adds Contact to the site map; it does not add a homepage section. `#contact` is a real
+  in-page destination for the utility bar, the drawer, the footer Company group, `Talk to RAP`,
+  and the two non-FurnitureRx `Learn more` links until program pages exist.
+- **Three routing choices** — *I'm a dealer* → the economics gate; *I have a protection plan* →
+  kiosk claim/manage; *Media or other* → email. A consumer who landed here by mistake gets a
+  one-click exit to File a Claim rather than a dealer lead form.
+- **Contact details are owner-approved (DECISION 027) and must not be altered:**
+  phone **1.800.732.5856**, email **sales@raptns.com**,
+  hours **8:00 AM – 6:00 PM, Monday–Friday, EST**. Phone is `tel:`, email is `mailto:`.
+- Contact also appears in the footer Company group, which the locked wireframe already listed
+  but which previously had no destination.
+- Contact is **not** in primary navigation — MASTER_SPEC warns against reverting to
+  *About → Features → Products → Contact*, and the seven-item nav order is locked. The utility
+  bar carries it without weakening dealer-first nav.
+
 ---
 
 # PART 2 — MOBILE (375px viewport, 24px margins)
@@ -491,119 +632,208 @@ participate.
 Sequence is identical: 00→13. No section is reordered, collapsed into another, or dropped.
 
 ```
-┌─────────────────────────┐   ┌─────────────────────────┐   ┌─────────────────────────┐
-│▓ RAP        ☰          ▓│   │ 05  RISK ASSURANCE      │   │ 09 NEWSWIRE      ● LIVE │
-│  ↑ 00+01 merge into one │   │     PARTNERS            │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│    sticky 56px bar.     │   │ Three ways to create    │   │ 12:38 PM  [HOUSING]     │
-│    Utility links move   │   │ more value from ╱the    │   │ Headline over two lines │
-│    into the drawer.     │   │ same customer.╱         │   │ Synopsis one line       │
-├─────────────────────────┤   │                         │   │ SOURCE →                │
-│░ 02 HERO                │   │ ┌─────────────────────┐ │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│░ THE ECONOMICS OF       │   │ │ 01 SUBSCRIPTION     │ │   │ 11:17 AM  [RETAIL]      │
-│░ FURNITURE RETAIL       │   │ │ ▌ ▌ ▌ recurring     │ │   │ …3 rows on mobile       │
-│░                        │   │ │ FurnitureRx …       │ │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│░ Your expenses recur    │   │ │ Learn more →        │ │   │ [ View all news → ]     │
-│░ every month.           │   │ └─────────────────────┘ │   ├─────────────────────────┤
-│░ ╱Your furniture sale   │   │ ┌─────────────────────┐ │   │▒ 10 RAP RESEARCH        │
-│░  doesn't.╱             │   │ │ 02 MULTI-YEAR       │ │   │▒ ┌───────────────────┐  │
-│░                        │   │ │ …                   │ │   │▒ │  REPORT COVER     │  │
-│░ Create more economic   │   │ └─────────────────────┘ │   │▒ │  (full width,     │  │
-│░ value from customers   │   │ ┌─────────────────────┐ │   │▒ │   3:4, capped     │  │
-│░ you already paid to    │   │ │ 03 REINSURANCE      │ │   │▒ │   at 260px)       │  │
-│░ acquire.               │   │ │ …                   │ │   │▒ └───────────────────┘  │
-│░                        │   │ └─────────────────────┘ │   │▒                        │
-│░ [ See My Economics → ] │   │   ↑ stacked, order      │   │▒ Furniture retail has   │
-│░ [ How RAP Helps      ] │   │     preserved 01→02→03  │   │▒ changed. ╱Protection   │
-│░ ┌─────────────────────┐│   ├─────────────────────────┤   │▒ has to change with it.╱│
-│░ │ Fig 1. expense bars ││   │ 06 WHAT CHANGED         │   │▒                        │
-│░ │ vs one transaction  ││   │ The customer may not be │   │▒ [ Read research → ]    │
-│░ │ (SVG scales to      ││   │ saying "no to           │   │▒ [ Download report ]    │
-│░ │  320px, labels      ││   │ protection." …          │   ├─────────────────────────┤
-│░ │  stay legible)      ││   │                         │   │ 11 WHY RAP              │
-│░ └─────────────────────┘│   │ ┌─────────────────────┐ │   │ Built around ╱furniture │
-├─────────────────────────┤   │ │ FURNITURE           │ │   │ retail.╱                │
-│░ 03 MARKET PULSE        │   │ │   ↓                 │ │   │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
-│░ THE MARKET MOVING      │   │ │ TAX                 │ │   │ FURNITURE FOCUS         │
-│░ FURNITURE RETAIL       │   │ │   ↓                 │ │   │ Programs built for …    │
-│░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │   │ │ DELIVERY            │ │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│░ FURNITURE RETAIL SALES │   │ │   ↓                 │ │   │ CLAIMS ADMINISTRATION   │
-│░ $11.20B                │   │ │ FINANCING           │ │   │ …8 items, 1 per row     │
-│░ ▼ 4.5% vs '22          │   │ │   ↓                 │ │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│░ CENSUS/FRED · UPD AUG 8│   │ │ PROTECTION DECISION │ │   │ 4.5 ★ RAP Google rating │
-│░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │   │ └──────────┬──────────┘ │   ├─────────────────────────┤
-│░ EXISTING-HOME SALES    │   │    ┌───────┴───────┐    │   │▓ 12 FINAL CTA           │
-│░ 4.06M   ▶ 0.0% y/y     │   │    ▼               ▼    │   │▓ You already have the   │
-│░ …4 tiles, 1 per row    │   │ ┌───────┐    ┌────────┐ │   │▓ customer.              │
-│░                        │   │ │MULTI- │    │FURNITU-│ │   │▓ ╱Let's improve the    │
-│░ [ Market Intelligence →]│   │ │YEAR   │    │RERX    │ │   │▓ economics.╱            │
-├─────────────────────────┤   │ └───────┘    └────────┘ │   │▓                        │
-│▓ 04 THE UNDERLYING MATH │   │   ↑ branch stays        │   │▓ [ See My Economics → ] │
-│▓ You already paid to    │   │     side-by-side —      │   │▓ [ Talk to RAP ]        │
-│▓ acquire ╱the customer.╱│   │     stacking it would   │   ├─────────────────────────┤
-│▓                        │   │     imply a preference  │   │▓ 13 FOOTER              │
-│▓ ┌─────────────────────┐│   │                         │   │▓ RISK ASSURANCE PARTNERS│
-│▓ │ ADVERTISING         ││   │ Keep the sale that      │   │▓ VALUE THROUGH INNOV.   │
-│▓ │ INVENTORY           ││   │ works. Add another way  │   │▓                        │
-│▓ │ PAYROLL             ││   │ to say yes.             │   │▓ ▸ PROGRAMS             │
-│▓ │ RENT                ││   ├─────────────────────────┤   │▓ ▸ INTELLIGENCE         │
-│▓ │ FREIGHT             ││   │ 07 FURNITURERX          │   │▓ ▸ COMPANY              │
-│▓ │ WAREHOUSING         ││   │ FurnitureRx             │   │▓ ▸ CUSTOMER             │
-│▓ │  6 stacked rows,    ││   │ A PRODUCT OF RISK       │   │▓ ▸ DEALER               │
-│▓ │  each with a rule   ││   │ ASSURANCE PARTNERS      │   │▓  ↑ 5 accordions        │
-│▓ │  converging into ↓  ││   │                         │   │▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│▓ └──────────┬──────────┘│   │ Turn some protection    │   │▓ © 2026 RAP             │
-│▓            ▼           │   │ declines into           │   │▓ Privacy · Terms        │
-│▓ ┌─────────────────────┐│   │ ╱recurring customer     │   │▓ FurnitureRx is a       │
-│▓ │ CUSTOMER PURCHASE   ││   │ relationships.╱         │   │▓ product of RAP.        │
-│▓ └──────────┬──────────┘│   │                         │   └─────────────────────────┘
-│▓            ▼           │   │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
-│▓ How much economic      │   │ CUSTOMER   $19.99/month │
-│▓ value does that        │   │ PAYMENT                 │
-│▓ transaction create?    │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   │ DEALER     $0           │
-│▓ Every cost above       │   │ REMIT                   │
-│▓ recurs. The            │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│▓ transaction does not.  │   │ DEALER     $8 / payment │
-└─────────────────────────┘   │ COMMISSION              │
-                              │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
-   ┌──────────────────────┐   │ [FurnitureRx for        │
-   │▓ DRAWER (☰ open)     │   │  Dealers → ]            │
-   │▓                     │   │ [See the customer exp.] │
-   │▓ Dealer Economics    │   │                         │
-   │▓ Programs            │   │ ┌─────────────────────┐ │
-   │▓   FurnitureRx       │   │ │ ACTUAL KIOSK UI     │ │
-   │▓   Multi-Year        │   │ │ FurnitureRx  [🛒]   │ │
-   │▓   Reinsurance       │   │ │ Stain + Structure   │ │
-   │▓ Newswire            │   │ │ $19.99 /month       │ │
-   │▓ Market Intelligence │   │ │ ✓ … ✓ … ✓ …        │ │
-   │▓ Research            │   │ │ [Save to cart →]    │ │
-   │▓ Why RAP             │   │ └─────────────────────┘ │
-   │▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   │ ↑ moves BELOW copy on   │
-   │▓ FILE A CLAIM        │   │   mobile: the argument   │
-   │▓ MANAGE MY PLAN      │   │   precedes the proof     │
-   │▓ CUSTOMER SUPPORT    │   ├─────────────────────────┤
-   │▓ DEALER LOGIN →      │   │░ 08 DEALER ECONOMICS    │
-   │▓                     │   │░ What could this mean   │
-   │▓ ┌─────────────────┐ │   │░ for ╱your dealership?╱ │
-   │▓ │See My Economics→│ │   │░ $19.99 / $0 / $8       │
-   │▓ └─────────────────┘ │   │░   ↑ 3 rows, not 3 cols │
-   │▓  ↑ pinned to foot   │   │░ ┌─────────────────────┐│
-   └──────────────────────┘   │░ │ illustrative chart  ││
-                              │░ └─────────────────────┘│
-                              │░ ┌─────────────────────┐│
-                              │░ │ 🔒 GATED (blurred)  ││
-                              │░ └─────────────────────┘│
-                              │░ [Calculate My          │
-                              │░  Opportunity → ]       │
-                              └─────────────────────────┘
+COLUMN 1 — sections 00 to 04             COLUMN 2 — sections 05 to 08
+┌─────────────────────────┐              ┌─────────────────────────┐
+│▓ FILE A CLAIM  LOGIN → ▓│ ← 00 R3(a):  │ 05 RISK ASSURANCE       │
+├─────────────────────────┤   slim 32px  │    PARTNERS             │
+│  RAP               ☰   │   strip      │ Three ways to create    │
+├─────────────────────────┤   STAYS      │ more value from ╱the    │
+│░ 02 HERO                │ ← 01 header  │ same customer.╱         │
+│░ RISK ASSURANCE         │   64px       │                         │
+│░ PARTNERS · PROTECTION  │              │ ┌─────────────────────┐ │
+│░ PROGRAMS FOR FURNITURE │ ← R1 eyebrow │ │ 01 SUBSCRIPTION     │ │
+│░ & MATTRESS RETAILERS   │   wraps to   │ │ ▌ ▌ ▌ recurring     │ │
+│░                        │   two lines  │ │ FurnitureRx …       │ │
+│░ Your expenses recur    │              │ │ Learn more →        │ │
+│░ every month.           │              │ └─────────────────────┘ │
+│░ ╱Your furniture sale   │              │ ┌─────────────────────┐ │
+│░  doesn't.╱             │              │ │ 02 MULTI-YEAR       │ │
+│░                        │              │ │ ▌ one decision      │ │
+│░ Create more economic   │              │ │ Learn more →        │ │
+│░ value from customers   │              │ └─────────────────────┘ │
+│░ you already paid to    │              │ ┌─────────────────────┐ │
+│░ acquire.               │              │ │ 03 REINSURANCE      │ │
+│░                        │              │ │ ╱╲ accrues          │ │
+│░ [ See My Economics → ] │              │ │ Learn more →        │ │
+│░ [ How RAP Helps      ] │              │ └─────────────────────┘ │
+│░                        │              │   ↑ stacked 01→02→03,   │
+│░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │ ← R2 strip   │     equal treatment     │
+│░ Protection programs    │   stacks,    ├─────────────────────────┤
+│░ for furniture &        │   ~300px     │ 06 WHAT CHANGED         │
+│░ mattress retail        │              │ The customer may not be │
+│░ dealers, as well as    │              │ saying "no to           │
+│░ custom interior        │              │ protection." …          │
+│░ designer programs.     │              │                         │
+│░ Reinsurance,           │              │ ┌─────────────────────┐ │
+│░ Subscription,          │              │ │ FURNITURE           │ │
+│░ Multi-Year & Standard  │              │ │   ↓  TAX            │ │
+│░ programs — all home    │              │ │   ↓  DELIVERY       │ │
+│░ furnishings categories.│              │ │   ↓  FINANCING      │ │
+│░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │ │   ↓                 │ │
+│░ SUBSCRIPTION           │              │ │ PROTECTION DECISION │ │
+│░ FurnitureRx            │              │ └──────────┬──────────┘ │
+│░ Recurring protection   │              │    ┌───────┴───────┐    │
+│░ income, monthly.       │              │    ▼               ▼    │
+│░ View →                 │              │ ┌───────┐    ┌────────┐ │
+│░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │ │MULTI- │    │FURNITU-│ │
+│░ MULTI-YEAR             │              │ │YEAR   │    │RERX    │ │
+│░ Multi-Year Protection  │              │ └───────┘    └────────┘ │
+│░ Protection income at   │              │   ↑ branches stay       │
+│░ the original sale.     │              │     SIDE-BY-SIDE —      │
+│░ View →                 │              │     stacking would      │
+│░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │     rank one above      │
+│░ REINSURANCE            │              │     the other           │
+│░ Reinsurance            │              │                         │
+│░ A share of the         │              │ Keep the sale that      │
+│░ underwriting profits,  │              │ works. Add another way  │
+│░ over time.             │              │ to say yes.             │
+│░ View →                 │              ├─────────────────────────┤
+│░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │ 07 FURNITURERX          │
+│░ REINSURANCE PROGRAMS   │              │ FurnitureRx             │
+│░ LET A RETAILER TAKE A  │              │ A PRODUCT OF RISK       │
+│░ SHARE OF THE           │              │ ASSURANCE PARTNERS      │
+│░ UNDERWRITING PROFITS.  │              │                         │
+│░ IN STANDARD PROGRAMS,  │              │ Turn some protection    │
+│░ THE VENDOR KEEPS       │              │ declines into           │
+│░ THOSE PROFITS.         │              │ ╱recurring customer     │
+│░ FURNITURERX IS A       │              │ relationships.╱         │
+│░ PRODUCT OF RISK        │              │                         │
+│░ ASSURANCE PARTNERS.    │              │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
+│░                        │              │ CUSTOMER   $19.99/month │
+│░ ┌─────────────────────┐│              │ PAYMENT                 │
+│░ │ Fig 1. expense bars ││              │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│░ │ vs one transaction  ││              │ DEALER     $0           │
+│░ └─────────────────────┘│              │ REMIT                   │
+├─────────────────────────┤              │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│░ 03 MARKET PULSE        │              │ DEALER     $8 / payment │
+│░ THE MARKET MOVING      │              │ COMMISSION              │
+│░ FURNITURE RETAIL       │              │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
+│░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │              │ [FurnitureRx for        │
+│░ FURNITURE RETAIL SALES │              │  Dealers → ]            │
+│░ $11.20B                │              │ [See the customer exp.] │
+│░ ▼ 4.5% vs '22          │              │                         │
+│░ CENSUS/FRED · UPD AUG 8│              │ ┌─────────────────────┐ │
+│░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │              │ │ ACTUAL KIOSK UI     │ │
+│░ EXISTING-HOME SALES    │              │ │ FurnitureRx         │ │
+│░ 4.06M   ▶ 0.0% y/y     │              │ │ Stain + Structure   │ │
+│░ …4 tiles, 1 per row    │              │ │ $19.99 /month       │ │
+│░                        │              │ │ [Save to cart →]    │ │
+│░ [Market Intelligence →]│              │ └─────────────────────┘ │
+├─────────────────────────┤              │ ↑ moves BELOW copy:     │
+│▓ 04 THE UNDERLYING MATH │              │   argument precedes     │
+│▓ You already paid to    │              │   the proof             │
+│▓ acquire ╱the customer.╱│              ├─────────────────────────┤
+│▓                        │              │░ 08 DEALER ECONOMICS    │
+│▓ ┌─────────────────────┐│              │░ What could this mean   │
+│▓ │ ADVERTISING         ││              │░ for ╱your dealership?╱ │
+│▓ │ INVENTORY           ││              │░ $19.99 / $0 / $8       │
+│▓ │ PAYROLL             ││              │░   ↑ 3 rows, not 3 cols │
+│▓ │ RENT                ││              │░ ┌─────────────────────┐│
+│▓ │ FREIGHT             ││              │░ │ illustrative chart  ││
+│▓ │ WAREHOUSING         ││              │░ └─────────────────────┘│
+│▓ │  6 rows converging  ││              │░ ┌─────────────────────┐│
+│▓ │  into one arrow ↓   ││              │░ │ 🔒 GATED (blurred)  ││
+│▓ └──────────┬──────────┘│              │░ └─────────────────────┘│
+│▓            ▼           │              │░ [Calculate My          │
+│▓ ┌─────────────────────┐│              │░  Opportunity → ]       │
+│▓ │ CUSTOMER PURCHASE   ││              └─────────────────────────┘
+│▓ └──────────┬──────────┘│
+│▓            ▼           │              DRAWER (☰ open) — R3(b)
+│▓ How much economic      │              ┌─────────────────────────┐
+│▓ value does that        │              │▓ RAP                 ×  │
+│▓ transaction create?    │              │▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  │
+│▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │▓ CUSTOMERS              │
+│▓ Every cost above       │              │▓ FILE A CLAIM           │
+│▓ recurs. The            │              │▓ MANAGE MY PLAN         │
+│▓ transaction does not.  │              │▓ CUSTOMER SUPPORT       │
+└─────────────────────────┘              │▓ CONTACT                │
+                                         │▓ DEALER LOGIN →         │
+COLUMN 3 — sections 09 to 13             │▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  │
+┌─────────────────────────┐              │▓  ↑ utility now at the  │
+│ 09 NEWSWIRE      ● LIVE │              │▓    TOP, above the nav  │
+│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │▓                        │
+│ 12:38 PM  [HOUSING]     │              │▓ Dealer Economics       │
+│ Headline over two lines │              │▓ Programs               │
+│ Synopsis one line       │              │▓   FurnitureRx          │
+│ SOURCE →                │              │▓   Multi-Year           │
+│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │▓   Reinsurance          │
+│ 11:17 AM  [RETAIL]      │              │▓ Newswire               │
+│ …3 rows on mobile       │              │▓ Market Intelligence    │
+│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │              │▓ Research               │
+│ [ View all news → ]     │              │▓ Why RAP                │
+├─────────────────────────┤              │▓                        │
+│▒ 10 RAP RESEARCH        │              │▓ ┌─────────────────┐    │
+│▒ ┌───────────────────┐  │              │▓ │See My Economics→│    │
+│▒ │  REPORT COVER     │  │              │▓ └─────────────────┘    │
+│▒ │  3:4, capped      │  │              │▓  ↑ pinned to foot      │
+│▒ │  at 260px         │  │              └─────────────────────────┘
+│▒ └───────────────────┘  │
+│▒ Furniture retail has   │
+│▒ changed. ╱Protection   │
+│▒ has to change with it.╱│
+│▒ [ Read research → ]    │
+│▒ [ Download report ]    │
+├─────────────────────────┤
+│ 11 WHY RAP              │
+│ Built around ╱furniture │
+│ retail.╱                │
+│ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
+│ FURNITURE FOCUS         │
+│ Programs built for …    │
+│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│ …8 items, 1 per row     │
+│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│ 4.5 ★ RAP Google rating │
+├─────────────────────────┤
+│▓ 12 FINAL CTA           │
+│▓ You already have the   │
+│▓ customer.              │
+│▓ ╱Let's improve the     │
+│▓ economics.╱            │
+│▓ [ See My Economics → ] │
+│▓ [ Talk to RAP ] → #contact
+├─────────────────────────┤
+│▓ 13 FOOTER              │
+│▓ CONTACT          ← R6  │
+│▓ Talk to Risk Assurance │
+│▓ Partners.              │
+│▓ ┌─────────────────────┐│
+│▓ │ I'm a dealer      →││
+│▓ ├─────────────────────┤│
+│▓ │ I have a plan     →││
+│▓ ├─────────────────────┤│
+│▓ │ Media or other    →││
+│▓ └─────────────────────┘│
+│▓ PHONE                  │
+│▓ 1.800.732.5856         │
+│▓ EMAIL                  │
+│▓ sales@raptns.com       │
+│▓ HOURS                  │
+│▓ 8:00 AM – 6:00 PM,     │
+│▓ Monday–Friday, EST     │
+│▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│▓ RISK ASSURANCE PARTNERS│
+│▓ ▸ PROGRAMS             │
+│▓ ▸ INTELLIGENCE         │
+│▓ ▸ COMPANY              │
+│▓ ▸ CUSTOMER             │
+│▓ ▸ DEALER               │
+│▓  ↑ 5 accordions        │
+│▓ © 2026 RAP             │
+│▓ FurnitureRx is a       │
+│▓ product of RAP.        │
+└─────────────────────────┘
 ```
 
 ## Mobile-specific rules
 
 | # | Desktop | Mobile | Why |
 |---|---|---|---|
-| 00+01 | separate bars | one 56px sticky bar; utility links relocate to the drawer foot | 38px + 84px of chrome on a 667px screen is unacceptable; the links remain one tap away and stay visually secondary |
-| 02 | 6/6 split | copy first, figure below | the sentence is the message; the figure supports it |
+| 00 | 38px bar, 5 links + `CUSTOMERS` label | **R3(a): slim 32px strip survives**, carrying `FILE A CLAIM` + `DEALER LOGIN →` only | revision 1 hid the bar entirely, which put the two highest-intent actions on the site two taps deep behind a drawer scroll. 32px is ~5% of a 667px viewport and the correct trade. `LOCKED_WIREFRAME` §4 lists Utility as item 1 of the mobile sequence, so this moves back toward the lock |
+| 00→drawer | — | `CUSTOMERS` label, Manage My Plan, Customer Support, Contact + the two strip links repeat at the **top** of the drawer | **R3(b)** — previously at `margin-top:auto`, i.e. below the drawer's own fold on a 667px screen, past seven Playfair-30px nav items |
+| 01 | 84px, condenses to 64px with `Dealer Login →` | 64px, hamburger; primary CTA lives in the drawer foot | **R4** applies at ≥1024px. Below that the utility strip (R3a) carries the same two functions persistently |
+| 02 | 6/6 split | copy first, R2 strip, figure below | the sentence is the message; the figure supports it |
+| 02 R2 strip | 3 columns, hairline dividers | 3 rows, hairline-separated, ~300px | parity is preserved by identical row treatment. If the mobile cost is later judged too high, the fallback is a single horizontally-scrolling row of chips (~90px) |
 | 03 | 4 tiles across | 4 tiles stacked, full width | tiles keep the 2px ink rule so the row still reads as one data object |
 | 04 | converging fan | vertical stack of six cost rows converging into one arrow | a six-way fan is illegible under 400px; the "many → one" reading is preserved |
 | 05 | 3 across | stacked 01 → 02 → 03 | order preserved; all three keep identical height treatment so none reads as primary |
@@ -614,6 +844,7 @@ Sequence is identical: 00→13. No section is reordered, collapsed into another,
 | 10 | cover left / copy right | cover above copy, capped 260px wide | cover is an identity object, not a hero image |
 | 11 | 4×2 | 1×8 with hairlines | |
 | 12 | buttons inline | buttons full-width stacked, primary first | |
+| 13 contact | routes 5 cols / details 7 cols | routes stacked full-width, then phone / email / hours stacked | **R6** — the three routing choices stay above the details so a consumer self-selects before reading a dealer phone number |
 | 13 | 5 columns | 5 accordions, collapsed by default | |
 
 ## Responsive breakpoint behavior
