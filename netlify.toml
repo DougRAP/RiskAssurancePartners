@@ -1,0 +1,10 @@
+# Phase 2 review configuration — serves the design prototypes only.
+# Replaced when the production app scaffold lands (Phase 5).
+[build]
+  publish = "prototype-ui"
+
+# Prototypes are design review material — keep them out of search indexes.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
