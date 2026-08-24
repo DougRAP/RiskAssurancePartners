@@ -397,7 +397,26 @@ Owner-established facts now usable:
 - coverage spans all home furnishings categories;
 - program types may be described as Reinsurance, Subscription, Multi-Year & Standard programs.
 
-**Open sub-question:** whether "Standard programs" is a distinct fourth offering or falls under Multi-Year for the purposes of the locked three-path homepage section. Descriptor copy may be used verbatim; the three-path section structure is unchanged pending owner clarification.
+**Sub-question resolved by Decision 026.**
+
+## Decision 026 — "Standard Program" Definition
+
+**Status:** Approved (Owner, 2026-08-24)
+
+A **Standard Program** is one where the retail dealer does **not** receive underwriting profits through reinsurance participation.
+
+Implications:
+- "Standard" is a program *structure* (non-participating), not a fourth economic path;
+- the locked three-path homepage section is unchanged;
+- program pages may distinguish standard vs. reinsurance-participating structures where relevant.
+
+## Decision 027 — Public Contact Details
+
+**Status:** Approved (Owner, 2026-08-24)
+
+- Phone: **1.800.732.5856** (confirmed)
+- Email: **sales@raptns.com**
+- Hours: **8:00 AM – 6:00 PM, Monday–Friday, EST**
 
 ## Open / Not Yet Decided
 
