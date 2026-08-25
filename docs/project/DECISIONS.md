@@ -497,6 +497,17 @@ The primary CTA label changes from "See My Economics" to **"Profit Calculator"**
 
 Resolves open question Q4 (tagline half; vector logo asset still outstanding).
 
+## Decision 034 — RAP Research Launch Content
+
+**Status:** Approved (Owner, 2026-08-25)
+
+RAP Research launches with **two** papers, both available on the Research index:
+
+1. **"Furniture Retail Has Changed. Protection Has to Change With It."** (flagship; `docs/source/furniture-retail-research.docx`)
+2. **"Compute, Credit & Couches — AI Data-Center Debt, the 10-Year Treasury, Housing Turnover, and the Outlook for U.S. Furniture Sales"** (research briefing, August 2026; `docs/source/compute-credit-couches-furniture-outlook.docx`)
+
+The homepage Research section may continue to feature the flagship; the index lists both.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
