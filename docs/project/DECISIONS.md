@@ -508,6 +508,18 @@ RAP Research launches with **two** papers, both available on the Research index:
 
 The homepage Research section may continue to feature the flagship; the index lists both.
 
+## Decision 035 — R10 Homepage Adopted (amends 010, 011, 033)
+
+**Status:** Approved (Owner, 2026-08-25)
+
+The owner-directed R10.2 homepage refactor is the new baseline. Key points:
+
+- **Hero balance (amends 011):** the hero *sells RAP first and adds the dealer pain point in support* — headline "We turn one furniture sale into recurring dealer income.", expenses-recur line in the lead beneath it. The point is to sell RAP with dealer pain as support, not pain-first with RAP demoted. Two-line eyebrow: "Risk Assurance Partners / Protection Programs for Home Furnishings Retail"; header lockup carries no tagline (nav-width fix); footer keeps the tagline.
+- **Trust strip (new section 02b):** 4.5★ Google rating · 15+ years · **A Rated underwriting** (do NOT name the underwriting partner publicly) · in-house claims · categories served.
+- **Market Pulse relocated (amends 010):** moved from position 3 to sit with Newswire / Market Intelligence content. Original position was "over the top" on the problem-first direction.
+- Two-axis matrix collapsed into a fold within the three-paths section; section rhythm tightened; backgrounds alternate.
+- **Process note:** the design-flexibility clause in MASTER_SPEC is to be applied liberally — locked items protect the business narrative and facts, not design execution. Owner iterations supersede prior design lockups.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

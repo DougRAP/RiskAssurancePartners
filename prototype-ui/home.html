@@ -10,7 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RISK ASSURANCE PARTNERS — Phase 2 UI/UX prototype
+   RISK ASSURANCE PARTNERS — Phase 2 UI/UX prototype · R10.2 revision
+   R10.2: narrative voice is first-person plural ("we"); the company name
+   anchors the eyebrow, labels, and claims. R10.1: RAP named and made the
+   grammatical actor in the hero, orientation
+   claim made visible, ink section closes with RAP as the answer.
+   R10: hero rebuilt (clarity-first), trust strip added, section rhythm
+   tightened (96/128px), axes matrix moved to #paths, Market Pulse moved
+   adjacent to Newswire, backgrounds alternated so no two match.
    DESIGN ONLY. Not production code. No framework, no build.
    Palette pixel-sampled from the RAP corporate site (#204374)
    and the live FurnitureRx kiosk (#0C172A #C8581B #C19541
@@ -63,12 +70,17 @@ button{font:inherit;cursor:pointer}
 /* ---------- layout primitives ---------- */
 .wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
 .wrap-wide{max-width:var(--wide);margin:0 auto;padding:0 var(--margin)}
-.sec{padding:var(--s-10) 0;border-top:1px solid var(--rap-slate-200)}
+.sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
 .sec--first{border-top:0}
+.sec--tight{padding:var(--s-8) 0}
 .sec--mist{background:var(--rap-mist);border-top-color:var(--rap-slate-200)}
 .sec--cream{background:var(--rap-cream)}
+/* R10 — same-background adjacency: kill the border and halve the top padding
+   so identical backgrounds never show a stranded hairline in dead space.
+   The section order alternates backgrounds, so this is a safety net. */
+.sec--mist + .sec--mist{border-top:0;padding-top:var(--s-7)}
 .sec--ink{
-  background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-11) 0;
+  background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
   background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
 }
 .sec--ink a{color:#fff}
@@ -77,6 +89,7 @@ button{font:inherit;cursor:pointer}
 .eyebrow{
   font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.10em;
   text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4);
+  line-height:1.7;
 }
 .sec--ink .eyebrow{color:var(--rap-brass)}
 .d1{font-family:var(--serif);font-weight:500;font-size:var(--fs-d1);line-height:.99;letter-spacing:-.02em}
@@ -223,7 +236,8 @@ button{font:inherit;cursor:pointer}
 .figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
 
 /* ---------- 02b orientation strip (R2) — a directory object, not a pitch ---------- */
-.orient{margin-top:var(--s-9);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
+.orient{margin-top:var(--s-7);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
+.orient__claim{font-family:var(--serif);font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--s-3)}
 .orient__desc{font-size:17px;line-height:1.55;color:var(--rap-slate-700);max-width:92ch}
 .orient__progs{
   display:grid;grid-template-columns:repeat(3,1fr);gap:0;
@@ -250,6 +264,27 @@ button{font:inherit;cursor:pointer}
 .axes__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
 .axes__v{font-size:14px;color:var(--rap-slate-700);margin-top:8px}
 .axes__v b{color:var(--rap-ink);font-weight:600}
+
+/* ---------- 02b trust strip (R10) ---------- */
+.trust{background:var(--rap-paper);border-top:1px solid var(--rap-slate-200);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0}
+.trust__row{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-5)}
+.trust__i{border-left:1px solid var(--rap-slate-200);padding-left:var(--s-5)}
+.trust__i:first-child{border-left:0;padding-left:0}
+.trust__v{font-family:var(--serif);font-size:24px;font-weight:500;line-height:1;white-space:nowrap}
+.trust__stars{font-size:.55em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:2px}
+.trust__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
+
+/* axes matrix relocated under Three Paths as optional depth (R10) */
+.axes-fold{margin-top:var(--s-7);border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:var(--rap-mist)}
+.axes-fold summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
+  padding:var(--s-4) var(--s-5);font-weight:600;font-size:14px;color:var(--rap-ink);
+}
+.axes-fold summary::-webkit-details-marker{display:none}
+.axes-fold summary::after{content:"+";font-family:var(--mono);font-size:16px;color:var(--rap-slate-500)}
+.axes-fold[open] summary::after{content:"\2212"}
+.axes-fold .axes{margin:0;padding:0 var(--s-5) var(--s-5);border-top:1px solid var(--rap-slate-200);padding-top:var(--s-4)}
+.axes-fold .orient__note{border-top:0;margin:0;padding:0 var(--s-5) var(--s-5)}
 
 /* ---------- 03 market pulse / stat tiles ---------- */
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-7)}
@@ -456,6 +491,8 @@ button{font:inherit;cursor:pointer}
   .hdr.is-condensed .hdr__util{display:none}
   .tiles{grid-template-columns:1fr 1fr}
   .why{grid-template-columns:1fr 1fr}
+  .trust__row{grid-template-columns:repeat(3,1fr);row-gap:var(--s-5)}
+  .trust__i:nth-child(4){border-left:0;padding-left:0}
   .paths{grid-template-columns:1fr}
   .path{flex-direction:row;gap:var(--s-6);align-items:flex-start}
   .path__meta{flex:0 0 190px}
@@ -498,6 +535,9 @@ button{font:inherit;cursor:pointer}
   .burger{width:42px;height:42px;flex:0 0 42px}
   .tiles{grid-template-columns:1fr;gap:var(--s-6)}
   .tile__label{min-height:0}
+  .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
+  .trust__i{border-left:0;padding-left:0}
+  .trust__v{font-size:20px}
   .path{flex-direction:column;gap:0}
   .path__meta{flex:none}
   .path__diag{border-top:1px solid var(--rap-slate-100);border-bottom:1px solid var(--rap-slate-100);padding:var(--s-4) 0;margin:var(--s-5) 0}
@@ -562,7 +602,6 @@ button{font:inherit;cursor:pointer}
       </span>
       <span>
         <span class="lockup__name">Risk Assurance Partners</span>
-        <span class="lockup__tag">Protection Programs for Home Furnishings Retail</span>
       </span>
     </a>
 
@@ -629,14 +668,15 @@ button{font:inherit;cursor:pointer}
   <div class="wrap">
    <div class="hero">
     <div>
-      <p class="eyebrow">Reinsurance, Standard, Subscription &amp; Multi-Year Plans</p>
+      <p class="eyebrow">Risk Assurance Partners<br>Protection Programs for Home Furnishings Retail</p>
       <h1 class="d1" id="hero-h">
-        Your expenses recur every month.<br>
-        <span class="acc">Your furniture sale doesn&rsquo;t.</span>
+        We turn one furniture sale into <span class="acc">recurring dealer income.</span>
       </h1>
       <p class="lead" style="margin-top:var(--s-6)">
-        Create more economic value from customers you already paid to acquire &mdash; without
-        adding inventory, advertising, floor space, or material operating burden.
+        Your expenses recur every month. Your furniture sale doesn&rsquo;t. We build the
+        protection programs &mdash; Subscription, Multi-Year, and Reinsurance &mdash; that
+        create more economic value from customers you already paid to acquire. No added
+        inventory, advertising, or floor space.
       </p>
       <div class="btns">
         <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
@@ -645,46 +685,29 @@ button{font:inherit;cursor:pointer}
     </div>
 
     <figure class="hero__fig" style="margin:0">
-      <svg viewBox="0 0 520 340" role="img" aria-label="Diagram: twelve recurring monthly operating costs against a single episodic furniture transaction, and recurring value accumulating after the sale." style="width:100%;height:auto">
-        <text x="0" y="12" font-family="IBM Plex Mono" font-size="10" letter-spacing="1.2" fill="#64748B">MONTHLY OPERATING COST</text>
-        <!-- 12 expense bars -->
-        <g fill="#204374">
-          <rect x="0"   y="34" width="26" height="72"/><rect x="42"  y="30" width="26" height="76"/>
-          <rect x="84"  y="38" width="26" height="68"/><rect x="126" y="28" width="26" height="78"/>
-          <rect x="168" y="36" width="26" height="70"/><rect x="210" y="32" width="26" height="74"/>
-          <rect x="252" y="30" width="26" height="76"/><rect x="294" y="40" width="26" height="66"/>
-          <rect x="336" y="34" width="26" height="72"/><rect x="378" y="28" width="26" height="78"/>
-          <rect x="420" y="36" width="26" height="70"/><rect x="462" y="32" width="26" height="74"/>
-        </g>
-        <line x1="0" y1="106" x2="520" y2="106" stroke="#C3CBD6" stroke-width="1"/>
-        <text x="0" y="124" font-family="IBM Plex Mono" font-size="9" fill="#64748B">M1</text>
-        <text x="462" y="124" font-family="IBM Plex Mono" font-size="9" fill="#64748B">M12</text>
+      <!-- R10 — one register, one idea. The expense/transaction story is told in
+           Section 04 (the ink section); the hero shows only the upside. -->
+      <svg viewBox="0 0 520 260" role="img" aria-label="Diagram: recurring program income growing month over month after the original furniture sale." style="width:100%;height:auto">
+        <text x="0" y="14" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#64748B">RECURRING PROGRAM INCOME AFTER THE SALE</text>
 
-        <!-- single transaction -->
-        <text x="0" y="164" font-family="IBM Plex Mono" font-size="10" letter-spacing="1.2" fill="#64748B">FURNITURE TRANSACTION</text>
-        <line x1="0" y1="216" x2="520" y2="216" stroke="#C3CBD6" stroke-width="1"/>
-        <rect x="126" y="176" width="26" height="40" fill="#C8581B"/>
-        <line x1="139" y1="176" x2="139" y2="172" stroke="#C8581B" stroke-width="1"/>
-        <text x="160" y="192" font-family="Inter" font-size="12" font-weight="600" fill="#0C172A">One purchase.</text>
-        <text x="160" y="208" font-family="Inter" font-size="12" fill="#3D4A5C">Then nothing for years.</text>
+        <!-- the sale -->
+        <rect x="0" y="182" width="30" height="48" fill="#C8581B"/>
+        <text x="0" y="252" font-family="IBM Plex Mono" font-size="10" fill="#64748B">THE SALE</text>
 
-        <!-- recurring value -->
-        <text x="0" y="256" font-family="IBM Plex Mono" font-size="10" letter-spacing="1.2" fill="#64748B">RECURRING VALUE AFTER THE SALE</text>
-        <line x1="0" y1="316" x2="520" y2="316" stroke="#C3CBD6" stroke-width="1"/>
+        <!-- recurring income, growing -->
         <g fill="#C19541">
-          <rect x="126" y="308" width="26" height="8"/><rect x="168" y="302" width="26" height="14"/>
-          <rect x="210" y="296" width="26" height="20"/><rect x="252" y="290" width="26" height="26"/>
-          <rect x="294" y="284" width="26" height="32"/><rect x="336" y="278" width="26" height="38"/>
-          <rect x="378" y="272" width="26" height="44"/><rect x="420" y="266" width="26" height="50"/>
-          <rect x="462" y="260" width="26" height="56"/>
+          <rect x="52"  y="218" width="30" height="12"/><rect x="104" y="210" width="30" height="20"/>
+          <rect x="156" y="202" width="30" height="28"/><rect x="208" y="194" width="30" height="36"/>
+          <rect x="260" y="186" width="30" height="44"/><rect x="312" y="178" width="30" height="52"/>
+          <rect x="364" y="170" width="30" height="60"/><rect x="416" y="162" width="30" height="68"/>
+          <rect x="468" y="154" width="30" height="76"/>
         </g>
-        <path d="M126 306 L488 258" stroke="#C8581B" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+        <line x1="0" y1="230" x2="520" y2="230" stroke="#C3CBD6" stroke-width="1"/>
+        <path d="M52 214 L498 142" stroke="#C8581B" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+        <text x="452" y="252" font-family="IBM Plex Mono" font-size="10" fill="#64748B">MONTH 24</text>
       </svg>
       <figcaption class="figcap">
-        <b>Figure 1 &middot; Illustrative</b>
-        Operating costs arrive every month. The furniture transaction does not.
-        The third register shows what a recurring relationship adds after delivery.
-        Shapes are illustrative and carry no data claim.
+        <b>Illustrative</b> &mdash; recurring program income after delivery.
       </figcaption>
     </figure>
    </div>
@@ -692,7 +715,8 @@ button{font:inherit;cursor:pointer}
    <!-- R2 — orientation strip. Inside Section 02, so the 14-section sequence is unchanged.
         Descriptor copy is owner-approved verbatim (DECISION 025). Carries no economics. -->
    <div class="orient" aria-labelledby="orient-h">
-     <h2 id="orient-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">What Risk Assurance Partners does</h2>
+     <!-- R10.1 — the positioning claim is now visible, not screen-reader-only. -->
+     <h2 id="orient-h" class="orient__claim">The protection program administrator built for furniture retail.</h2>
      <p class="orient__desc">
        Protection programs for furniture &amp; mattress retail dealers, as well as custom interior
        designer programs. Reinsurance, Subscription, Multi-Year &amp; Standard programs &mdash; all
@@ -720,72 +744,38 @@ button{font:inherit;cursor:pointer}
        </div>
      </div>
 
-     <div class="axes">
-       <div class="axes__col">
-         <p class="axes__k">Protection plan types &mdash; how the customer buys</p>
-         <p class="axes__v">
-           <b>Subscription</b> &mdash; $19.99 a month, cancel at any time.
-           <b>Multi-Year</b> &mdash; on average $300 one time, with a prorated share returned
-           on cancellation.
-         </p>
-       </div>
-       <div class="axes__col">
-         <p class="axes__k">Underwriting types &mdash; who keeps the underwriting profits</p>
-         <p class="axes__v">
-           <b>Reinsurance</b> &mdash; the dealer shares in the underwriting profits and gets tax
-           benefits. <b>Standard</b> &mdash; RAP keeps them.
-         </p>
-       </div>
-     </div>
-
-     <p class="orient__note">
-       These are two dimensions, not four products &mdash; a plan type and an underwriting type
-       combine. FurnitureRx is a product of Risk Assurance Partners.
-     </p>
    </div>
   </div>
 </section>
 
-<!-- ============ 03 MARKET PULSE ============ -->
-<section class="sec sec--mist" id="pulse" aria-labelledby="pulse-h">
+<!-- ============ 02b TRUST STRIP (R10 — new) ============ -->
+<!-- Proof before the pitch. Full substance stays in Section 11 (Why RAP);
+     this strip is the teaser. Underwriter naming: confirm approved dealer-facing
+     language with owner before production. -->
+<section class="trust" aria-label="Credentials">
   <div class="wrap">
-    <p class="eyebrow">Market Intelligence</p>
-    <h2 class="d3" id="pulse-h">The market moving furniture retail.</h2>
-
-    <div class="tiles">
-      <div class="tile">
-        <p class="tile__label">Furniture &amp; home furnishings store sales</p>
-        <p class="tile__val">$11.20B</p>
-        <p class="tile__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
-        <p class="tile__src meta">Census / FRED &middot; UPD 08 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Existing-home sales (SAAR)</p>
-        <p class="tile__val">4.06M</p>
-        <p class="tile__delta flat">&#9654; 0.0% <span>year over year</span></p>
-        <p class="tile__src meta">NAR / FRED &middot; UPD 21 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Housing starts</p>
-        <p class="tile__val">1.31M</p>
-        <p class="tile__delta up">&#9650; 2.1% <span>year over year</span></p>
-        <p class="tile__src meta">Census &middot; UPD 19 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Furniture CPI</p>
-        <p class="tile__val">&minus;1.2%</p>
-        <p class="tile__delta down">&#9660; 0.4% <span>year over year</span></p>
-        <p class="tile__src meta">BLS &middot; UPD 13 Aug</p>
-      </div>
-    </div>
-
-    <div class="pulse__foot">
-      <p class="meta" style="max-width:56ch;text-transform:none;letter-spacing:0;font-size:12px">
-        Placeholder values. Live figures, sources, and update cadence are defined in the
-        Market Intelligence phase; every tile ships with a source and a last-updated stamp.
-      </p>
-      <a class="qlink" href="#stub" title="Stub — Market Intelligence page, later phase">Market Intelligence &rarr;</a>
-    </div>
+    <ul class="trust__row">
+      <li class="trust__i">
+        <p class="trust__v">4.5 <span class="trust__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9734;</span></p>
+        <p class="trust__k">RAP Google rating</p>
+      </li>
+      <li class="trust__i">
+        <p class="trust__v">15+ years</p>
+        <p class="trust__k">Furniture protection programs</p>
+      </li>
+      <li class="trust__i">
+        <p class="trust__v">A Rated</p>
+        <p class="trust__k">Underwriting</p>
+      </li>
+      <li class="trust__i">
+        <p class="trust__v">In-house</p>
+        <p class="trust__k">Claims administered by RAP</p>
+      </li>
+      <li class="trust__i">
+        <p class="trust__v">All categories</p>
+        <p class="trust__k">Furniture &middot; Mattress &middot; Designer</p>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -797,7 +787,7 @@ button{font:inherit;cursor:pointer}
       You already paid to acquire <span class="acc">the customer.</span>
     </h2>
 
-    <svg viewBox="0 0 900 300" role="img" aria-label="Diagram: advertising, inventory, payroll, rent, freight and warehousing all converge into a single customer purchase, which raises the question of how much economic value that transaction creates." style="width:100%;height:auto;margin-top:var(--s-9)">
+    <svg viewBox="0 0 900 300" role="img" aria-label="Diagram: advertising, inventory, payroll, rent, freight and warehousing all converge into a single customer purchase, which raises the question of how much economic value that transaction creates." style="width:100%;height:auto;margin-top:var(--s-7)">
       <g font-family="Inter" font-size="11" font-weight="600" letter-spacing="1" fill="#ffffff" text-anchor="middle">
         <text x="75"  y="26">ADVERTISING</text>
         <text x="225" y="26">INVENTORY</text>
@@ -826,8 +816,9 @@ button{font:inherit;cursor:pointer}
       <text x="450" y="284" font-family="Playfair Display" font-size="27" fill="#ffffff" text-anchor="middle">that transaction create?</text>
     </svg>
 
-    <p class="lead" style="margin:var(--s-9) auto 0;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);max-width:60ch">
+    <p class="lead" style="margin:var(--s-7) auto 0;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);max-width:60ch">
       Every cost above recurs. The transaction does not.
+      <strong style="color:#fff;font-weight:600">We build the programs that change that math.</strong>
     </p>
   </div>
 </section>
@@ -914,11 +905,39 @@ button{font:inherit;cursor:pointer}
         </div>
       </article>
     </div>
+
+    <!-- R10 — plan-type x underwriting-type matrix, moved here from the hero.
+         Descriptor copy is owner-approved verbatim (DECISION 025). Collapsed by
+         default: depth for the reader who wants it, invisible to the one who doesn't. -->
+    <details class="axes-fold">
+      <summary>How plan types and underwriting types combine</summary>
+      <div class="axes">
+        <div class="axes__col">
+          <p class="axes__k">Protection plan types &mdash; how the customer buys</p>
+          <p class="axes__v">
+            <b>Subscription</b> &mdash; $19.99 a month, cancel at any time.
+            <b>Multi-Year</b> &mdash; on average $300 one time, with a prorated share returned
+            on cancellation.
+          </p>
+        </div>
+        <div class="axes__col">
+          <p class="axes__k">Underwriting types &mdash; who keeps the underwriting profits</p>
+          <p class="axes__v">
+            <b>Reinsurance</b> &mdash; the dealer shares in the underwriting profits and gets tax
+            benefits. <b>Standard</b> &mdash; RAP keeps them.
+          </p>
+        </div>
+      </div>
+      <p class="orient__note">
+        These are two dimensions, not four products &mdash; a plan type and an underwriting type
+        combine. FurnitureRx is a product of Risk Assurance Partners.
+      </p>
+    </details>
   </div>
 </section>
 
 <!-- ============ 06 CHANGED CUSTOMER ============ -->
-<section class="sec" aria-labelledby="cust-h">
+<section class="sec sec--mist" aria-labelledby="cust-h">
   <div class="wrap center">
     <p class="eyebrow">What changed</p>
     <h2 class="d2" id="cust-h" style="max-width:24ch;margin:0 auto">
@@ -1120,7 +1139,7 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <!-- ============ 09 NEWSWIRE ============ -->
-<section class="sec" id="newswire" aria-labelledby="wire-h">
+<section class="sec sec--tight" id="newswire" aria-labelledby="wire-h">
   <div class="wrap">
     <div class="wire__hdr">
       <div>
@@ -1181,6 +1200,49 @@ button{font:inherit;cursor:pointer}
     </article>
 
     <p class="wire__foot"><a class="qlink" href="#stub" title="Stub — Newswire index, later phase">View all news &rarr;</a></p>
+  </div>
+</section>
+
+<!-- ============ 09b MARKET PULSE (R10 — moved from position 03 to sit with Newswire) ============ -->
+<section class="sec sec--tight sec--mist" id="pulse" aria-labelledby="pulse-h">
+  <div class="wrap">
+    <p class="eyebrow">Market Intelligence</p>
+    <h2 class="d3" id="pulse-h">The market moving furniture retail.</h2>
+
+    <div class="tiles">
+      <div class="tile">
+        <p class="tile__label">Furniture &amp; home furnishings store sales</p>
+        <p class="tile__val">$11.20B</p>
+        <p class="tile__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
+        <p class="tile__src meta">Census / FRED &middot; UPD 08 Aug</p>
+      </div>
+      <div class="tile">
+        <p class="tile__label">Existing-home sales (SAAR)</p>
+        <p class="tile__val">4.06M</p>
+        <p class="tile__delta flat">&#9654; 0.0% <span>year over year</span></p>
+        <p class="tile__src meta">NAR / FRED &middot; UPD 21 Aug</p>
+      </div>
+      <div class="tile">
+        <p class="tile__label">Housing starts</p>
+        <p class="tile__val">1.31M</p>
+        <p class="tile__delta up">&#9650; 2.1% <span>year over year</span></p>
+        <p class="tile__src meta">Census &middot; UPD 19 Aug</p>
+      </div>
+      <div class="tile">
+        <p class="tile__label">Furniture CPI</p>
+        <p class="tile__val">&minus;1.2%</p>
+        <p class="tile__delta down">&#9660; 0.4% <span>year over year</span></p>
+        <p class="tile__src meta">BLS &middot; UPD 13 Aug</p>
+      </div>
+    </div>
+
+    <div class="pulse__foot">
+      <p class="meta" style="max-width:56ch;text-transform:none;letter-spacing:0;font-size:12px">
+        Placeholder values. Live figures, sources, and update cadence are defined in the
+        Market Intelligence phase; every tile ships with a source and a last-updated stamp.
+      </p>
+      <a class="qlink" href="#stub" title="Stub — Market Intelligence page, later phase">Market Intelligence &rarr;</a>
+    </div>
   </div>
 </section>
 
@@ -1290,7 +1352,7 @@ button{font:inherit;cursor:pointer}
 </main>
 
 <!-- ============ 13 FOOTER ============ -->
-<footer class="sec sec--ink" style="padding:var(--s-9) 0 var(--s-7)">
+<footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
   <div class="wrap">
 
     <!-- R6 — Contact. Lives inside the footer region (Section 13), so no fifteenth section
