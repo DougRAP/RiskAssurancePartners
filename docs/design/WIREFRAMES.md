@@ -6,6 +6,12 @@
 **Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
 (DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
 
+## Revision 6 change log (2026-08-25)
+
+| Decision | Section | Change |
+|---|---|---|
+| 039 | 05, 07, 08, 09, 09b | **Homepage de-duplicated against the new Programs and Newswire pages.** Sections now preview and link out rather than carrying destination-page depth: §05 cards reduced to name + timing diagram + one-line tease (two-axis fold removed — it lives on the Programs page); §09 Newswire cut from 5 full feed rows to a 3-item time + headline preview (category chips, synopses and feed states belong to `newswire.html`); §07 keeps the kiosk proof, the five approved points and the economics table but drops the positioning paragraph and stub CTAs in favour of one `See the full program →`; §08 loses the $19.99/$0/$8 strip that triplicated §07 and the Programs page, and its gated-panel horizon and chart axis move to the 60-month term. Section sequence, background alternation and R10 rhythm unchanged — every section survives, slimmer. Page −7.3%. |
+
 ## Revision 5 change log (2026-08-25)
 
 | Decision | Section | Change |

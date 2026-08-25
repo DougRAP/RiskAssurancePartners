@@ -254,16 +254,8 @@ button{font:inherit;cursor:pointer}
 .orient__n{font-weight:600;font-size:15px;line-height:1.3}
 .orient__d{font-size:14px;color:var(--rap-slate-700);flex:1}
 .orient__prog .qlink{font-size:13px;align-self:flex-start}
-.orient__note{
-  margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
-}
-/* Two-axis model (DECISION 029) — plan type and underwriting type are separate dimensions */
-.axes{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-5);
-  padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
-.axes__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.axes__v{font-size:14px;color:var(--rap-slate-700);margin-top:8px}
-.axes__v b{color:var(--rap-ink);font-weight:600}
+/* .orient__note and the two-axis matrix styles were removed with the axes fold —
+   that content now lives on programs.html. */
 
 /* ---------- 02b trust strip (R10) ---------- */
 .trust{background:var(--rap-paper);border-top:1px solid var(--rap-slate-200);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0}
@@ -273,18 +265,6 @@ button{font:inherit;cursor:pointer}
 .trust__v{font-family:var(--serif);font-size:24px;font-weight:500;line-height:1;white-space:nowrap}
 .trust__stars{font-size:.55em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:2px}
 .trust__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
-
-/* axes matrix relocated under Three Paths as optional depth (R10) */
-.axes-fold{margin-top:var(--s-7);border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:var(--rap-mist)}
-.axes-fold summary{
-  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
-  padding:var(--s-4) var(--s-5);font-weight:600;font-size:14px;color:var(--rap-ink);
-}
-.axes-fold summary::-webkit-details-marker{display:none}
-.axes-fold summary::after{content:"+";font-family:var(--mono);font-size:16px;color:var(--rap-slate-500)}
-.axes-fold[open] summary::after{content:"\2212"}
-.axes-fold .axes{margin:0;padding:0 var(--s-5) var(--s-5);border-top:1px solid var(--rap-slate-200);padding-top:var(--s-4)}
-.axes-fold .orient__note{border-top:0;margin:0;padding:0 var(--s-5) var(--s-5)}
 
 /* ---------- 03 market pulse / stat tiles ---------- */
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-7)}
@@ -371,9 +351,7 @@ button{font:inherit;cursor:pointer}
 .kiosk__cap{margin-top:var(--s-3)}
 
 /* ---------- 08 economics teaser ---------- */
-.pub{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);border-top:2px solid var(--rap-ink);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0;margin-top:var(--s-7)}
-.pub__v{font-family:var(--serif);font-size:var(--fs-stat);font-weight:500;line-height:1}
-.pub__k{font-size:14px;color:var(--rap-slate-700);margin-top:var(--s-2);max-width:26ch}
+/* .pub (the $19.99/$0/$8 strip) removed — Section 07 already carries those figures. */
 .teaser{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7);align-items:stretch}
 .panel{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
 .gate{position:relative;overflow:hidden}
@@ -398,13 +376,9 @@ button{font:inherit;cursor:pointer}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 .wire__row{display:grid;grid-template-columns:88px 1fr auto;gap:var(--s-5);padding:20px 0;border-bottom:1px solid var(--rap-slate-200);align-items:start}
 .wire__time{font-family:var(--mono);font-size:13px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums;padding-top:2px}
-.wire__cat{
-  display:inline-block;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
-  padding:3px 7px;font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-ink);margin-bottom:8px;
-}
+/* .wire__cat and .wire__syn removed — category chips and synopses belong to
+   the full feed on newswire.html; the homepage preview is time + headline. */
 .wire__head{font-weight:600;font-size:var(--fs-h3);line-height:1.3;letter-spacing:-.01em}
-.wire__syn{font-size:15px;color:var(--rap-slate-700);margin-top:6px;max-width:78ch}
 .wire__src{white-space:nowrap;padding-top:2px}
 .wire__foot{margin-top:var(--s-7);text-align:right}
 
@@ -511,14 +485,11 @@ button{font:inherit;cursor:pointer}
   .branch{grid-template-columns:1fr 1fr;gap:var(--s-3)}
   .branch__card{padding:var(--s-4)}
   .branch__name{font-size:20px}
-  .pub{grid-template-columns:1fr;gap:var(--s-5)}
-  .pub__k{max-width:none}
   .figs{grid-template-columns:1fr}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
   .orient__progs{grid-template-columns:1fr}
   .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
   .orient__prog:last-child{border-bottom:0}
-  .axes{grid-template-columns:1fr;gap:var(--s-4)}
 }
 @media (max-width:680px){
   /* R3(a) — slim utility strip survives on mobile: File a Claim + Dealer Login only */
@@ -866,8 +837,7 @@ button{font:inherit;cursor:pointer}
         </div>
         <div class="path__body">
           <h3 class="path__title">FurnitureRx Subscription</h3>
-          <p>Recurring dealer income from customers who prefer a monthly commitment to a large
-          upfront one. The dealer pays nothing to participate.</p>
+          <p>Another way for the customer to say yes.</p>
           <p class="path__cta"><a class="qlink" href="programs.html#subscription">Learn more &rarr;</a></p>
         </div>
       </article>
@@ -886,9 +856,7 @@ button{font:inherit;cursor:pointer}
         </div>
         <div class="path__body">
           <h3 class="path__title">Multi-Year Protection</h3>
-          <p>Protection income generated at the original sale. It remains the right choice for
-          customers who prefer to make one complete upfront decision, and it stays the dealer&rsquo;s
-          first ask.</p>
+          <p>One decision, made once.</p>
           <p class="path__cta"><a class="qlink" href="programs.html#multi-year">Learn more &rarr;</a></p>
         </div>
       </article>
@@ -907,9 +875,7 @@ button{font:inherit;cursor:pointer}
         </div>
         <div class="path__body">
           <h3 class="path__title">Reinsurance</h3>
-          <p>Take a share of the underwriting profits rather than leaving them with the vendor,
-          and build wealth over time. The timing of this value differs from current commission
-          income and it is not immediate profit.</p>
+          <p>Keep the underwriting profit.</p>
           <p class="path__cta"><a class="qlink" href="programs.html#reinsurance">Learn more &rarr;</a></p>
         </div>
       </article>
@@ -934,42 +900,18 @@ button{font:inherit;cursor:pointer}
         </div>
         <div class="path__body">
           <h3 class="path__title">Standard Programs</h3>
-          <p>Protection income at the original sale, with RAP retaining the underwriting. The
-          dealer earns protection income without taking on reinsurance participation &mdash; the
-          simplest structure to run.</p>
+          <p>The simplest way to run a protection program.</p>
           <p class="path__cta"><a class="qlink" href="programs.html#standard">Learn more &rarr;</a></p>
         </div>
       </article>
     </div>
 
-    <!-- R10 — plan-type x underwriting-type matrix, moved here from the hero.
-         Descriptor copy is owner-approved verbatim (DECISION 025). Collapsed by
-         default: depth for the reader who wants it, invisible to the one who doesn't. -->
-    <details class="axes-fold">
-      <summary>How plan types and underwriting types combine</summary>
-      <div class="axes">
-        <div class="axes__col">
-          <p class="axes__k">Protection plan types &mdash; how the customer buys</p>
-          <p class="axes__v">
-            <b>Subscription</b> &mdash; $19.99 a month, cancel at any time.
-            <b>Multi-Year</b> &mdash; on average $300 one time, with a prorated share returned
-            on cancellation.
-          </p>
-        </div>
-        <div class="axes__col">
-          <p class="axes__k">Underwriting types &mdash; who keeps the underwriting profits</p>
-          <p class="axes__v">
-            <b>Reinsurance</b> &mdash; the dealer shares in the underwriting profits and gets tax
-            benefits. <b>Standard</b> &mdash; RAP keeps them.
-          </p>
-        </div>
-      </div>
-      <p class="orient__note">
-        A plan type and an underwriting type combine &mdash; Subscription or Multi-Year describes
-        how the customer buys, Reinsurance or Standard describes who keeps the underwriting
-        profits. FurnitureRx is a product of Risk Assurance Partners.
-      </p>
-    </details>
+    <!-- The two-axis matrix (plan type x underwriting type) now lives on the
+         Programs page. Removed here to stop the homepage carrying program-page
+         depth — the cards tease, programs.html explains. -->
+    <p class="center" style="margin-top:var(--s-7)">
+      <a class="qlink" href="programs.html">Compare all four programs &rarr;</a>
+    </p>
   </div>
 </section>
 
@@ -1066,15 +1008,10 @@ button{font:inherit;cursor:pointer}
         </div>
       </dl>
 
-      <p class="body" style="font-size:15px">
-        FurnitureRx is designed to complement Multi-Year Protection, not replace it. The dealer
-        keeps the upfront program for customers it fits, and adds a monthly path for customers
-        it doesn&rsquo;t.
-      </p>
-
+      <!-- Positioning, coverage detail and the subscription mini calculator all
+           live on the Programs page; the homepage keeps proof + the five points. -->
       <div class="btns">
-        <a class="btn btn--primary" href="#stub" title="Stub — FurnitureRx dealer page, later phase">FurnitureRx for Dealers &rarr;</a>
-        <a class="btn btn--secondary" href="#stub" title="Stub — customer experience page, later phase">See the customer experience</a>
+        <a class="btn btn--primary" href="programs.html#subscription">See the full program &rarr;</a>
       </div>
     </div>
 
@@ -1124,22 +1061,19 @@ button{font:inherit;cursor:pointer}
       </h2>
     </div>
 
-    <div class="pub">
-      <div><p class="pub__v">$19.99</p><p class="pub__k">the customer pays, monthly</p></div>
-      <div><p class="pub__v">$0</p><p class="pub__k">the dealer remits to participate</p></div>
-      <div><p class="pub__v">$8</p><p class="pub__k">dealer commission per successful monthly payment</p></div>
-    </div>
-
+    <!-- The $19.99 / $0 / $8 strip was removed here: Section 07 already states
+         those three figures, and the Programs page states them again. This
+         section's job is the gate, not the numbers. -->
     <div class="teaser">
       <div class="panel">
         <p class="eyebrow" style="margin-bottom:var(--s-5)">Illustrative recurring contribution</p>
-        <svg viewBox="0 0 460 220" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating across months 1 to 36. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
+        <svg viewBox="0 0 460 220" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating across a 60-month term. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
           <line x1="0" y1="180" x2="460" y2="180" stroke="#C3CBD6"/>
           <g stroke="#EEF1F5"><line x1="0" y1="140" x2="460" y2="140"/><line x1="0" y1="100" x2="460" y2="100"/><line x1="0" y1="60" x2="460" y2="60"/></g>
           <path d="M0 180 L0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42 L456 180 Z" fill="#E8EEF6"/>
           <path d="M0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42" fill="none" stroke="#204374" stroke-width="2"/>
           <g font-family="IBM Plex Mono" font-size="10" fill="#64748B">
-            <text x="0" y="198">M1</text><text x="140" y="198">M12</text><text x="290" y="198">M24</text><text x="424" y="198">M36</text>
+            <text x="0" y="198">M1</text><text x="140" y="198">M12</text><text x="290" y="198">M36</text><text x="424" y="198">M60</text>
           </g>
           <text x="0" y="16" font-family="IBM Plex Mono" font-size="10" fill="#64748B">SHAPE ONLY &mdash; NO SCALE SHOWN</text>
         </svg>
@@ -1154,7 +1088,7 @@ button{font:inherit;cursor:pointer}
           <div class="gate__grid">
             <div class="gate__field"><b>Active subscribers</b><span>0,000</span></div>
             <div class="gate__field"><b>Locations</b><span>00</span></div>
-            <div class="gate__field"><b>Horizon</b><span>12 / 24 / 36 mo</span></div>
+            <div class="gate__field"><b>Horizon</b><span>12 / 36 / 60 mo</span></div>
             <div class="gate__field"><b>Cancellation assumption</b><span>0.0%</span></div>
             <div class="gate__field"><b>Cumulative commission</b><span>$000,000</span></div>
             <div class="gate__field"><b>Multi-Year comparison</b><span>$000,000</span></div>
@@ -1186,54 +1120,30 @@ button{font:inherit;cursor:pointer}
       <span class="live"><span class="live__dot" aria-hidden="true"></span> Live &middot; updated continuously</span>
     </div>
 
+    <!-- Compact 3-item preview. Category chips, synopses beyond one line,
+         additional items and all feed states live on newswire.html. -->
     <article class="wire__row">
       <p class="wire__time">12:38 PM</p>
       <div>
-        <span class="wire__cat">Housing</span>
         <h3 class="wire__head">Existing-home sales hold near their multi-year floor in the latest monthly print</h3>
-        <p class="wire__syn">Placeholder synopsis. Two lines maximum, roughly 180 characters, written from the original report and never republished in full.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
     </article>
 
     <article class="wire__row">
       <p class="wire__time">11:17 AM</p>
       <div>
-        <span class="wire__cat">Furniture Retail</span>
         <h3 class="wire__head">Regional furniture retailer announces store openings across three markets</h3>
-        <p class="wire__syn">Placeholder synopsis. Automated discovery, relevance filtering, deduplication, and categorization are defined in the Newswire automation phase.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
     </article>
 
     <article class="wire__row">
       <p class="wire__time">10:04 AM</p>
       <div>
-        <span class="wire__cat">Trade / Tariffs</span>
         <h3 class="wire__head">Tariff schedule for upholstered wooden products updated in the Federal Register</h3>
-        <p class="wire__syn">Placeholder synopsis. Every item carries publication attribution and an outbound link to the original source.</p>
       </div>
-      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
-    </article>
-
-    <article class="wire__row">
-      <p class="wire__time">09:22 AM</p>
-      <div>
-        <span class="wire__cat">Consumer Credit</span>
-        <h3 class="wire__head">Revolving credit balances tick higher in the latest consumer credit release</h3>
-        <p class="wire__syn">Placeholder synopsis. Category taxonomy follows the approved Newswire category list.</p>
-      </div>
-      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
-    </article>
-
-    <article class="wire__row">
-      <p class="wire__time">08:45 AM</p>
-      <div>
-        <span class="wire__cat">Manufacturers</span>
-        <h3 class="wire__head">Case goods manufacturer reports quarterly order growth against flat shipments</h3>
-        <p class="wire__syn">Placeholder synopsis. Suppressed sources and duplicate stories are handled before publication, not after.</p>
-      </div>
-      <p class="wire__src"><a class="qlink" href="#stub" title="Stub — resolves to the original publication in production">Source &rarr;</a></p>
+      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
     </article>
 
     <p class="wire__foot"><a class="qlink" href="newswire.html">View all news &rarr;</a></p>
@@ -1274,10 +1184,7 @@ button{font:inherit;cursor:pointer}
     </div>
 
     <div class="pulse__foot">
-      <p class="meta" style="max-width:56ch;text-transform:none;letter-spacing:0;font-size:12px">
-        Placeholder values. Live figures, sources, and update cadence are defined in the
-        Market Intelligence phase; every tile ships with a source and a last-updated stamp.
-      </p>
+      <p class="meta">Placeholder values &middot; every tile ships with a source and a last-updated stamp</p>
       <a class="qlink" href="#stub" title="Stub — Market Intelligence page, later phase">Market Intelligence &rarr;</a>
     </div>
   </div>
