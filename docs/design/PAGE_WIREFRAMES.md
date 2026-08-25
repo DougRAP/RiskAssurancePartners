@@ -1,487 +1,338 @@
 # Risk Assurance Partners — INTERIOR PAGE WIREFRAMES
 
 **Phase 2 / UI-UX. Status: PROPOSED — owner approves layout before any shell coding.**
-**Created 2026-08-25.** Authority: DECISIONS.md through **037**, LOCKED_WIREFRAME v1.1,
-MASTER_SPEC, AGENT_RULES. Design system: `docs/design/DESIGN_SYSTEM.md` (rev 4).
+**Revision 2 — 2026-08-25.** Rewritten for **DECISION 038**.
+Authority: DECISIONS.md through **038**, LOCKED_WIREFRAME v1.1, MASTER_SPEC, AGENT_RULES.
+Design system: `docs/design/DESIGN_SYSTEM.md` (rev 4).
 
-Covers three deliverables:
+## Revision 2 change log
 
-1. **Program page template** — one shared template serving all four program pages, with a
-   per-program variation note.
-2. **Programs index** (`/programs`) — the destination the Programs nav item has never had.
-3. **Newswire page** — the full wire.
+| Ref | Change |
+|---|---|
+| 038 | **The four-page program template and the `/programs` index are both scrapped.** Replaced by **one Programs page** with four sections. |
+| 038 | Homepage "Learn more" links and the Programs dropdown now jump to sections on that single page. |
+| 038 | Each section gets a **coverage grid illustration** — coverage types as text, then a Basic \| Premium checkmark chart with an owner-supplied coverage list. |
+| 038 | **Mini calculator** in the Subscription and Multi-Year sections; **"good fit for" bullets** in Reinsurance and Standard instead. |
+| 038 | **No FAQ. No terms & conditions section.** Both removed everywhere. |
+| 038 | Formal non-disparagement phrasing rules dropped — each program stands on its own. |
+| 038 | Homepage paths grid: four in a row on desktop, stacked below ~900px. No 2×2 stage. |
+| — | Newswire page wireframe carried forward unchanged (§2). |
 
-Notation matches `WIREFRAMES.md`: `│` column edge · `┄` hairline `1px --rap-slate-200` ·
-`▓` ink ground · `░` mist ground · `▒` cream ground · blank = paper ground.
+**Structure was deliberately flattened.** The owner's direction — *"don't further organize, it
+is unneeded and unhelpful"* — governs. Revision 1's breadcrumbs, per-page hero panels, jump
+rails on every page, cross-link rows, FAQ accordions and terms tables are gone. What remains is
+one page, four sections, one illustration pattern, and one of two content blocks per section.
+
+Notation: `│` column edge · `┄` hairline `1px --rap-slate-200` · `▓` ink ground ·
+`░` mist ground · `▒` cream ground · blank = paper ground.
 Grid: 12 columns, 1240px content, 48px margin. Mobile: single column, 24px margin.
 
-**`[NEEDS OWNER]`** marks any slot that would require a business fact not yet in DECISIONS.md.
-Nothing in this document invents coverage terms, limits, eligibility, or economics.
+**`[OWNER TO SUPPLY]`** marks content the owner provides. Sample copy is acceptable in the
+interim (DECISION 038) and is shown in *italics* where used.
 
 ---
 
-# 0. Global chrome — identical on every page
+# 0. Global chrome
 
-Owner requirement: easy navigation everywhere. Every page below inherits, unchanged from
-`home.html`:
+Every page inherits, unchanged from `home.html`:
 
 ```
-▓ CUSTOMERS │ FILE A CLAIM · MANAGE MY PLAN · CUSTOMER SUPPORT              ▓
-▓                                            CONTACT   [ DEALER LOGIN → ]   ▓  ← 00 utility, 38px ink
-├──────────────────────────────────────────────────────────────────────────┤
-│ ┌──┐ RISK ASSURANCE PARTNERS                                             │
-│ │▞▚│   Dealer Economics  Programs ▾  Newswire  Market Intelligence       │
-│ └──┘   Research  Why RAP                    [ Profit Calculator → ]      │  ← 01 header, 84px sticky
-└──────────────────────────────────────────────────────────────────────────┘
+▓ CUSTOMERS │ FILE A CLAIM · MANAGE MY PLAN · CUSTOMER SUPPORT             ▓
+▓                                          CONTACT   [ DEALER LOGIN → ]    ▓  ← utility, 38px ink
+├─────────────────────────────────────────────────────────────────────────┤
+│ ┌──┐ RISK ASSURANCE PARTNERS                                            │
+│ │▞▚│   Dealer Economics  Programs ▾  Newswire  Market Intelligence      │
+│ └──┘   Research  Why RAP                    [ Profit Calculator → ]     │  ← header, 84px sticky
+└─────────────────────────────────────────────────────────────────────────┘
    condensed (scrollY>40): 64px · gains FILE A CLAIM* + [ DEALER LOGIN → ]
-   Programs ▾ now lists FOUR: FurnitureRx Subscription · Multi-Year Protection
-                              · Reinsurance · Standard Programs
+
+   Programs ▾ — all four items now point at sections of ONE page:
+     FurnitureRx Subscription  → /programs#subscription
+     Multi-Year Protection     → /programs#multi-year
+     Reinsurance               → /programs#reinsurance
+     Standard Programs         → /programs#standard
 ```
 
-- Header is sticky and condenses at 40px; the primary CTA never disappears responsively.
-- Footer is the five-group ink footer plus the `#contact` block (phone **1.800.732.5856**,
-  **sales@raptns.com**, **8:00 AM – 6:00 PM, Monday–Friday, EST** — DECISION 027) and the
-  "FurnitureRx is a product of Risk Assurance Partners" line.
-- **Interior pages add two aids the homepage does not need:**
-  - a **breadcrumb** directly under the header (`Home › Programs › Reinsurance`), Plex Mono
-    12px `--rap-slate-500`, current page in `--rap-ink`;
-  - a **section-jump rail** on pages taller than ~4 screens (program pages and Newswire),
-    described in §1.3.
+- Sticky header condenses at 40px; the primary CTA never disappears responsively.
+- Footer is the five-group ink footer plus the `#contact` block (**1.800.732.5856**,
+  **sales@raptns.com**, **8:00 AM – 6:00 PM, Monday–Friday, EST** — DECISION 027).
+- Homepage path cards' `Learn more →` and the footer Programs group point at the same four
+  section anchors. One destination per program, everywhere.
 
 ---
 
-# 1. PROGRAM PAGE TEMPLATE
+# 1. PROGRAMS PAGE — `/programs`
 
-One template, four pages. The template is fixed; only the content of §P4–§P7 and the
-variation notes in §1.5 differ. **Structural parity between the four program pages is the
-mechanism that keeps the four paths peers** — the same rule that governs the homepage cards.
+One page. Four sections. `#subscription` · `#multi-year` · `#reinsurance` · `#standard`.
 
-## 1.1 Desktop
+## 1.1 Page structure
 
 ```
-[ 00 utility bar ]
-[ 01 sticky header ]
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- Home › Programs › {Program Name}                          ← P0 breadcrumb
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+[ utility bar ]
+[ sticky header ]
 
-░ P1 — PROGRAM HERO ░ mist ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░ ◄────────── 7 cols ──────────►       ◄────────── 5 cols ──────────►      ░
-░ {PLAN TYPE} · {UNDERWRITING TYPE}    ┌───────────────────────────────┐   ░
-░                                      │ AT A GLANCE                   │   ░
-░ {Program Name}                       │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │   ░
-░ ╱{one-line value phrase}╱  ← ember   │ Customer pays    {value}      │   ░
-░                                      │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   ░
-░ Two sentences of dealer-facing       │ Dealer remits    {value}      │   ░
-░ positioning. No coverage terms,      │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   ░
-░ no claims language.                  │ Dealer earns     {value}      │   ░
-░                                      │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   ░
-░ [ Profit Calculator → ]              │ Income arrives   {timing}     │   ░
-░ [ Talk to RAP ]                      └───────────────────────────────┘   ░
-░                                       2px ink top rule — data object     ░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-┌ P2 — SECTION JUMP RAIL (sticky under header once P1 scrolls past) ───────┐
-│ WHO IT'S FOR · HOW IT WORKS · ECONOMICS · IN PRACTICE · TERMS · FAQ      │
-└──────────────────────────────────────────────────────────────────────────┘
-
- P3 — WHO IT'S FOR
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- The customer this fits.                    The dealer this fits.
- ┌────────────────────────────────┐         ┌────────────────────────────────┐
- │ 2–3 short statements about the │         │ 2–3 short statements about the │
- │ buying behaviour this program  │         │ dealership profile this suits. │
- │ serves. Affirmative only.      │         │ Affirmative only.              │
- └────────────────────────────────┘         └────────────────────────────────┘
- ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- This program is one of four. It is not the right answer for every customer.
-                                              ← coexistence line, every page
-
- P4 — HOW IT WORKS
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ┌────────┐    ┌────────┐    ┌────────┐    ┌────────┐
- │  01    │ →  │  02    │ →  │  03    │ →  │  04    │
- │ {step} │    │ {step} │    │ {step} │    │ {step} │
- └────────┘    └────────┘    └────────┘    └────────┘
- 1px rule connectors, Inter 600 13px uppercase labels, one line each.
- No icons. Steps are the dealer's and customer's actual sequence.
-
-░ P5 — THE ECONOMICS ░ mist ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ink rule ░
-░ {headline number}    {headline number}    {headline number}              ░
-░ {label}              {label}              {label}                        ░
+░ PAGE INTRO ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░ RISK ASSURANCE PARTNERS PROGRAMS                                         ░
+░ Four ways to create more value from ╱the same customer.╱                 ░
 ░                                                                          ░
-░ ┌──────────────────────────────────────────────────────────────────────┐ ░
-░ │ Illustrative chart — shape and timing of dealer income               │ ░
-░ │ Figure n · Illustrative. Not a forecast.                             │ ░
-░ └──────────────────────────────────────────────────────────────────────┘ ░
-░                                                                          ░
-░ ┌── GATED (blurred, inert) ────────────────────────────────────────────┐ ░
-░ │ 🔒 Model your own numbers — REQUIRES APPROVED ACCESS                 │ ░
-░ └──────────────────────────────────────────────────────────────────────┘ ░
-░                   [ Profit Calculator → ]                                ░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░ Protection programs for furniture & mattress retail dealers, as well as  ░
+░ custom interior designer programs — all home furnishings categories.     ░
+░                                    ← DECISION 025 descriptor, verbatim   ░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
- P6 — IN PRACTICE (product proof — treatment varies, see §1.5)
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ◄────── 5 cols: what the dealer/customer ──────►  ◄──── 7 cols: proof ────►
-        actually experiences                       kiosk UI, flow diagram,
-                                                   or structure diagram
+┌ SECTION JUMP (sticky under header) ─────────────────────────────────────┐
+│  SUBSCRIPTION · MULTI-YEAR · REINSURANCE · STANDARD                     │
+└─────────────────────────────────────────────────────────────────────────┘
+   Slim, one line, 44px. The page runs long; this is the only nav aid.
 
- P7 — WHAT'S INCLUDED / TERMS SUMMARY          [NEEDS OWNER on all four pages]
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- A short, plain-language summary table. Coverage terms, limits, eligibility,
- and term lengths are NOT in DECISIONS.md and must be supplied per program.
- Closes with: "Full terms and conditions apply." + link.
+ §1  SUBSCRIPTION   #subscription    intro → coverage grid → mini calculator
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ §2  MULTI-YEAR     #multi-year      intro → coverage grid → mini calculator
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ §3  REINSURANCE    #reinsurance     intro → coverage grid → good fit for
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ §4  STANDARD       #standard        intro → coverage grid → good fit for
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
 
- P8 — HOW IT FITS WITH THE OTHER THREE
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ┌──────────────┐ ┌──────────────┐ ┌──────────────┐   ← the OTHER three, at
- │ {Program}    │ │ {Program}    │ │ {Program}    │     strict parity with
- │ one line     │ │ one line     │ │ one line     │     each other
- │ View →       │ │ View →       │ │ View →       │
- └──────────────┘ └──────────────┘ └──────────────┘
-                                    [ Compare all four → ] /programs
+▓ CONVERSION ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓        Run your numbers, or ╱just ask.╱                                 ▓
+▓        [ Profit Calculator → ]      [ Talk to RAP ]                     ▓
+▓        1.800.732.5856 · sales@raptns.com · Mon–Fri 8:00–6:00 EST        ▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
- P9 — FAQ
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ▸ Question one                                              [NEEDS OWNER]
- ▸ Question two                                              for the answer
- ▸ Question three                                            content
- Accordion, hairline rows, one open at a time not enforced.
-
-▓ P10 — CONVERSION ▓ ink ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓            See what {Program} could mean for ╱your dealership.╱          ▓
-▓                                                                          ▓
-▓            [ Profit Calculator → ]      [ Talk to RAP ]                  ▓
-▓                                                                          ▓
-▓  Or call 1.800.732.5856 · sales@raptns.com · Mon–Fri 8:00–6:00 EST       ▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-
-[ 13 footer — five groups + #contact block ]
+[ footer — five groups + contact block ]
 ```
 
-## 1.2 Mobile (375px)
+Sections alternate paper / mist ground so the four read as distinct blocks without any
+per-section chrome. One conversion block for the whole page, at the foot.
+
+## 1.2 Section anatomy — desktop
+
+Two patterns. Sections 1–2 use pattern A, sections 3–4 use pattern B. Everything above the
+final block is identical.
+
+### Pattern A — Subscription and Multi-Year
+
+```
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ SUBSCRIPTION                                             ← eyebrow, mono
+ FurnitureRx Subscription                                 ← Playfair 40px
+ ╱{one-line value phrase}╱                                ← ember italic
+
+ ◄──────────── 7 cols ────────────►   ◄──────── 5 cols ────────►
+ Two or three sentences of program     ┌──────────────────────┐
+ intro. Owner supplies final copy;     │ Customer pays        │
+ sample copy acceptable meanwhile.     │ $19.99 / month       │
+                                       │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+ [OWNER TO SUPPLY — final copy]        │ Dealer remits   $0   │
+                                       │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+                                       │ Dealer earns    $8   │
+                                       │ per successful       │
+                                       │ monthly payment      │
+                                       └──────────────────────┘
+                                        2px ink top rule
+
+ ── COVERAGE GRID ──────────────────────────────────────────────────────────
+ WHAT'S COVERED
+ Furniture · Adjustable beds · Mattress · Rugs · Outdoor
+
+ ┌───────────────────────────────────────────┬─────────┬─────────┐
+ │                                           │  BASIC  │ PREMIUM │
+ ├───────────────────────────────────────────┼─────────┼─────────┤
+ │ [OWNER TO SUPPLY — coverage item]         │    ✓    │    ✓    │
+ │ [OWNER TO SUPPLY — coverage item]         │    ✓    │    ✓    │
+ │ [OWNER TO SUPPLY — coverage item]         │    —    │    ✓    │
+ │ [OWNER TO SUPPLY — coverage item]         │    —    │    ✓    │
+ └───────────────────────────────────────────┴─────────┴─────────┘
+
+ ── MINI CALCULATOR ────────────────────────────────────────────────────────
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │ ESTIMATE THE OPPORTUNITY                                              │
+ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+ │  {input label}          {input label}                                 │
+ │  ┌─────────────┐        ┌─────────────┐                               │
+ │  │  [ ─────○─] │        │  [ ──○────] │      ← controls TBD           │
+ │  └─────────────┘        └─────────────┘                               │
+ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+ │  {RESULT LABEL}                                                       │
+ │  $ 0 0 , 0 0 0            ← Playfair, tabular, single headline figure │
+ │                                                                       │
+ │  Illustrative only. Not a forecast.                                   │
+ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+ │  Want the full model?  [ Profit Calculator → ]                        │
+ │  The RAP Dealer Economics Calculator requires approved access.        │
+ └───────────────────────────────────────────────────────────────────────┘
+```
+
+### Pattern B — Reinsurance and Standard
+
+Identical down to the coverage grid, then:
+
+```
+ ── GOOD FIT FOR ───────────────────────────────────────────────────────────
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │ THIS IS A GOOD FIT FOR                                                │
+ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+ │ ▌ [OWNER TO SUPPLY — fit point]                                       │
+ │ ▌ [OWNER TO SUPPLY — fit point]                                       │
+ │ ▌ [OWNER TO SUPPLY — fit point]                                       │
+ │ ▌ [OWNER TO SUPPLY — fit point]                                       │
+ └───────────────────────────────────────────────────────────────────────┘
+   2px --rap-ember left rule per bullet, Inter 17px. Same visual weight as
+   the mini calculator block it replaces, so all four sections balance.
+```
+
+## 1.3 Mobile (375px)
 
 ```
 ┌─────────────────────────┐   ┌─────────────────────────┐
-│▓ FILE A CLAIM  LOGIN → ▓│   │ P5 THE ECONOMICS ░      │
-├─────────────────────────┤   │░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │
-│  RAP    [ Profit C. ] ☰ │   │░ {number}               │
-├─────────────────────────┤   │░ {label}                │
-│ Home › Programs ›       │   │░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│ {Program}               │   │░ {number}               │
-├─────────────────────────┤   │░ …3 stacked             │
-│░ P1 HERO                │   │░ ┌─────────────────────┐│
-│░ {PLAN} · {UNDERWRITING}│   │░ │ illustrative chart  ││
-│░                        │   │░ └─────────────────────┘│
-│░ {Program Name}         │   │░ ┌─────────────────────┐│
-│░ ╱{value phrase}╱       │   │░ │ 🔒 GATED            ││
-│░                        │   │░ └─────────────────────┘│
-│░ Two sentences of       │   │░ [ Profit Calculator → ]│
-│░ positioning.           │   ├─────────────────────────┤
-│░                        │   │ P6 IN PRACTICE          │
-│░ [ Profit Calculator → ]│   │ copy first,             │
-│░ [ Talk to RAP ]        │   │ proof panel below       │
-│░                        │   │ (kiosk UI / diagram)    │
-│░ ┌─────────────────────┐│   ├─────────────────────────┤
-│░ │ AT A GLANCE         ││   │ P7 WHAT'S INCLUDED      │
-│░ │ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ ││   │ stacked rows, not a     │
-│░ │ Customer  {value}   ││   │ side-scrolling table    │
-│░ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ││   ├─────────────────────────┤
-│░ │ Remit     {value}   ││   │ P8 THE OTHER THREE      │
-│░ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ││   │ ┌─────────────────────┐ │
-│░ │ Earns     {value}   ││   │ │ {Program}  View →   │ │
-│░ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ││   │ ├─────────────────────┤ │
-│░ │ Timing    {value}   ││   │ │ {Program}  View →   │ │
-│░ └─────────────────────┘│   │ ├─────────────────────┤ │
-├─────────────────────────┤   │ │ {Program}  View →   │ │
-│ P2 JUMP RAIL            │   │ └─────────────────────┘ │
-│ ◄ WHO · HOW · ECON ·  ► │   │ [ Compare all four → ]  │
-│   horizontally scrolls, │   ├─────────────────────────┤
-│   sticky under header   │   │ P9 FAQ                  │
-├─────────────────────────┤   │ ▸ Question one          │
-│ P3 WHO IT'S FOR         │   │ ▸ Question two          │
-│ ┌─────────────────────┐ │   ├─────────────────────────┤
-│ │ The customer…       │ │   │▓ P10 CONVERSION         │
-│ ├─────────────────────┤ │   │▓ See what {Program}     │
-│ │ The dealer…         │ │   │▓ could mean for ╱your   │
-│ └─────────────────────┘ │   │▓ dealership.╱           │
-│ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │   │▓ [ Profit Calculator → ]│
-│ One of four. Not right  │   │▓ [ Talk to RAP ]        │
-│ for every customer.     │   │▓ 1.800.732.5856         │
-├─────────────────────────┤   ├─────────────────────────┤
-│ P4 HOW IT WORKS         │   │▓ FOOTER (5 accordions   │
-│ 01 {step}               │   │▓  + contact block)      │
-│  ↓                      │   └─────────────────────────┘
-│ 02 {step}               │
-│  ↓  …4 steps vertical   │
-└─────────────────────────┘
+│▓ FILE A CLAIM  LOGIN → ▓│   │ COVERAGE GRID           │
+├─────────────────────────┤   │ WHAT'S COVERED          │
+│  RAP    [ Profit C. ] ☰ │   │ Furniture ·             │
+├─────────────────────────┤   │ Adjustable beds ·       │
+│░ RAP PROGRAMS           │   │ Mattress · Rugs ·       │
+│░ Four ways to create    │   │ Outdoor                 │
+│░ more value from ╱the   │   │                         │
+│░ same customer.╱        │   │ ┌─────────────────────┐ │
+│░ {descriptor}           │   │ │        BASIC PREMIUM│ │
+├─────────────────────────┤   │ │ [item]   ✓     ✓   │ │
+│ ◄ SUBSCRIPTION ·        │   │ │ [item]   ✓     ✓   │ │
+│   MULTI-YEAR ·  ►       │   │ │ [item]   —     ✓   │ │
+│   scrolls sideways,     │   │ └─────────────────────┘ │
+│   sticky under header   │   │  ↑ 3 columns hold at    │
+├─────────────────────────┤   │    375px — the coverage │
+│ SUBSCRIPTION            │   │    label column wraps,  │
+│ FurnitureRx             │   │    the two check cols   │
+│ Subscription            │   │    stay fixed at 56px   │
+│ ╱{value phrase}╱        │   ├─────────────────────────┤
+│                         │   │ MINI CALCULATOR         │
+│ Two or three sentences  │   │ ┌─────────────────────┐ │
+│ of intro copy.          │   │ │ ESTIMATE THE        │ │
+│                         │   │ │ OPPORTUNITY         │ │
+│ ┌─────────────────────┐ │   │ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │
+│ │ Customer pays       │ │   │ │ {label}             │ │
+│ │ $19.99 / month      │ │   │ │ [ ─────○─ ]         │ │
+│ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │   │ │ {label}             │ │
+│ │ Dealer remits  $0   │ │   │ │ [ ──○──── ]         │ │
+│ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │   │ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │
+│ │ Dealer earns   $8   │ │   │ │ {RESULT LABEL}      │ │
+│ └─────────────────────┘ │   │ │ $00,000             │ │
+│  ↑ stat panel moves     │   │ │ Illustrative only.  │ │
+│    BELOW the intro      │   │ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │
+│    copy on mobile       │   │ │ [ Profit Calc. → ]  │ │
+└─────────────────────────┘   │ └─────────────────────┘ │
+                              ├─────────────────────────┤
+   Sections 3 & 4 identical   │ (next section…)         │
+   but with GOOD FIT FOR      └─────────────────────────┘
+   bullets in place of the
+   calculator block.          Final: ink conversion block
+                              + footer.
 ```
 
-## 1.3 Annotations
+## 1.4 Coverage grid — component notes
 
-- **P0 breadcrumb.** Every interior page. It is also the only place the word "Programs" appears
-  as a *parent*, which reinforces that the four are siblings.
-- **P2 jump rail.** Sticky under the condensed header once the hero scrolls past. Plex Mono
-  12px `.08em`, active section in `--rap-ink` with a 2px `--rap-ember` underline. On mobile it
-  scrolls horizontally. This is the owner's "easy navigation" requirement applied to a page
-  that will run 6–8 screens.
-- **P1 "At a glance" panel** is the stat-tile grammar from DESIGN_SYSTEM §4.3 — 2px ink top
-  rule, mono labels, Playfair values. Four rows: customer pays / dealer remits / dealer earns /
-  income timing. Where a value is not an approved fact, the row is omitted rather than filled
-  with a placeholder.
-- **P3 coexistence line** appears on all four pages, verbatim. It is the cheapest structural
-  guard against a program page reading as *the* answer, and it directly serves the
-  "Multi-Year is never disparaged / FurnitureRx does not replace it" rules.
-- **P5 economics** reuses the homepage teaser pattern: public numbers at full contrast, an
-  illustrative chart with no vertical scale, and the gated model visible-but-inert behind the
-  lock chip. **No program page exposes model logic, assumptions, or cancellation rates.**
-- **P8** shows the *other three* at parity with each other, never ranked, always three cards
-  wide, always linking to `/programs` as well. A visitor can reach any program from any program
-  in one click.
-- **P10** is the only conversion block. Same primary label as everywhere else —
-  `Profit Calculator →` (DECISION 032) — plus the human contact path (DECISION 027), because a
-  dealer who wants to ask a question should not be forced through the gate.
-- Backgrounds follow the surface semantics in DESIGN_SYSTEM §1.3: mist for the two
-  quantitative bands (P1, P5), paper for narrative, ink for conversion. No decorative striping.
+- **Coverage types run as one text line**, not as icons or cards: *Furniture · Adjustable beds ·
+  Mattress · Rugs · Outdoor*, Inter 17px with `--rap-slate-300` middots. Owner-specified list.
+- **The checkmark chart is a real `<table>`** with `<th scope>` headers, not a styled div grid —
+  it is tabular data and needs to read correctly to screen readers and in print.
+- Column headers `BASIC` / `PREMIUM` in Plex Mono 11px `.10em` on a 2px `--rap-ink` top rule.
+  Check columns fixed at 56px; the coverage-item column takes the remainder.
+- **Marks:** `✓` in `--rap-ember-700` for included, `—` in `--rap-slate-300` for not included.
+  Both carry an `aria-label` ("included" / "not included") — a bare glyph is not accessible.
+  Never leave a cell empty; an empty cell reads as missing data rather than exclusion.
+- Row separators 1px `--rap-slate-200`. No zebra striping, no fills.
+- **The left-column coverage list is `[OWNER TO SUPPLY]` on all four sections.** The wireframe
+  shows four sample rows; the real count is whatever the owner provides.
+- Below 420px the table keeps all three columns — the label column wraps to two lines rather
+  than the table scrolling sideways. If the owner's coverage items run long, the fallback is an
+  `overflow-x:auto` container on the table only, never on the page body.
+- **Open:** whether Basic/Premium applies to all four programs or only the two plan types —
+  see §3, Q-2.
 
-## 1.4 What the template deliberately excludes
+## 1.5 Mini calculator — component notes
 
-| Excluded | Why |
-|---|---|
-| Pricing tables comparing the four programs | That is the Programs index's job (§2). A program page argues its own fit. |
-| Any "vs" framing against another RAP program | AGENT_RULES: the four coexist. Comparison happens on the index, neutrally. |
-| Testimonials / logos | No approved customer-reference material exists. |
-| Coverage detail in the hero | DECISION 031's lesson: coverage detail is point-of-sale, not top-of-page. |
-| A second CTA style | One primary verb sitewide. |
+Sections 1 and 2 only (DECISION 038). This is a **public teaser**, not the model.
 
-## 1.5 Per-program variation notes
+- **Inputs and formulas are TBD.** The wireframe fixes the *shape* only: two controls, one
+  headline result, one disclaimer, one route to the gated tool. Control type (slider, stepper,
+  select) is deliberately unspecified until the inputs are known.
+- **Gating discipline (DECISION 013 / AGENT_RULES §7).** The mini calculator may use only the
+  public facts already on the site. It must not expose cancellation assumptions, retention
+  curves, forecast formulas, reinsurance economics, or any proprietary model logic. If a
+  proposed input would reveal a model assumption, it belongs behind the gate instead.
+- **One headline result**, Playfair with tabular figures, no secondary metrics, no chart. A
+  second number invites comparison and starts rebuilding the gated model in public.
+- `Illustrative only. Not a forecast.` is required, directly under the result, not in a
+  footnote.
+- The block always ends with `[ Profit Calculator → ]` and the line *"The RAP Dealer Economics
+  Calculator requires approved access."* The teaser's job is to make the gate worth passing.
+- Result recalculates live on input change, no submit button; `aria-live="polite"` on the
+  result so the value is announced.
 
-### FurnitureRx Subscription — `/programs/furniturerx-subscription`
+## 1.6 Per-section content notes
 
-| Slot | Content |
-|---|---|
-| P1 eyebrow | `SUBSCRIPTION PLAN · AVAILABLE STANDARD OR REINSURANCE` **[NEEDS OWNER]** — confirm the subscription can be written under both underwriting types before stating it |
-| P1 at-a-glance | Customer pays **$19.99/month** · Dealer remits **$0** · Dealer earns **$8 per successful monthly payment** · Income **recurring, monthly** |
-| P1 value phrase | "Another way for the customer to say yes." |
-| P3 | Customer: wants protection, not another large purchase today; wants to stay in control. Dealer: wants income from the ~**70%** who decline Multi-Year (DECISION 020, attributed *RAP program experience*) |
-| P4 steps | Offered at the sale → customer enrols → monthly payment succeeds → dealer commission paid |
-| P5 | The **$8 × 60 payments = $480 GM** illustration (DECISION 036), labelled illustrative |
-| **P6 — unique** | **The actual kiosk interface**, as on the homepage: real UI panel, not a screenshot. Plus the customer-control story — cancel, pause, restart anytime. This is the only program with a live consumer product to show. |
-| P7 | Coverage summary **[NEEDS OWNER]**. Care Kits and Repair Safety Net appear **here**, ranked clearly below the subscription (DECISION 019) — never on the homepage |
-| Watch | Lead with $19.99 only. No "from $9.99/mo" anywhere. |
+Copy is owner-supplied (DECISION 038). Sample copy is acceptable meanwhile. Approved facts
+available to each section:
 
-### Multi-Year Protection — `/programs/multi-year-protection`
+### §1 Subscription — `#subscription`
 
-| Slot | Content |
-|---|---|
-| P1 eyebrow | `MULTI-YEAR PLAN · AVAILABLE STANDARD OR REINSURANCE` **[NEEDS OWNER]** — same confirmation |
-| P1 at-a-glance | Customer pays **~$300 one time (average)** · Income **at the original sale** · Cancellation: **prorated share returned** (DECISION 029). Dealer-earn figure **[NEEDS OWNER]** — the $180 GM illustration is built on a $250 retail example, not a stated commission |
-| P1 value phrase | "One decision, made once." |
-| P3 | Customer: prefers to settle protection completely at the point of sale. Dealer: **this stays the first ask** |
-| P5 | The **$250 retail × 72% = $180 GM** illustration (DECISION 036, round-number arithmetic resolved) |
-| **P6 — unique** | The sales-floor moment: where the upfront plan fits naturally in the transaction. A flow diagram, not a product screenshot — there is no consumer UI for this program |
-| **Tone rule** | Affirmative throughout. Never "legacy", "traditional but declining", "still has a place", or any construction that implies obsolescence. The homepage already states it stays the dealer's first ask; this page must not contradict that. |
+- Stat panel: customer pays **$19.99/month** · dealer remits **$0** · dealer earns **$8 per
+  successful monthly payment**.
+- Available intro material: cancel/start/restart anytime, customer in control; same coverage as
+  multi-year programs; ~**70%** of customers decline Multi-Year (DECISION 020, attribute as
+  *RAP program experience*).
+- Mini calculator: the **$8 × 60 payments = $480** illustration (DECISION 036) is the natural
+  basis, but the input set is TBD.
+- Care Kits and Repair Safety Net may appear here, ranked clearly below the subscription
+  (DECISION 019) — never on the homepage. **Optional; owner's call.**
 
-### Reinsurance — `/programs/reinsurance`
+### §2 Multi-Year — `#multi-year`
 
-| Slot | Content |
-|---|---|
-| P1 eyebrow | `UNDERWRITING TYPE · PAIRS WITH SUBSCRIPTION OR MULTI-YEAR` |
-| P1 at-a-glance | Dealer **shares in the underwriting profits** · **Tax benefits** · Income **accrues over time** · Customer-facing price: unchanged, it is an underwriting structure not a plan type |
-| P1 value phrase | "Keep the underwriting profit you're currently giving away." |
-| P3 | Dealer: appropriate structure and scale **[NEEDS OWNER]** — no eligibility threshold is approved. Do **not** state a minimum volume |
-| P5 | Accrual-over-time chart, **no scale**. **Must carry the not-immediate-profit caveat inline**, not in a footnote |
-| **P6 — unique** | A **structure diagram**: premium → reserve → claims → underwriting profit, showing where the dealer's share arises and that it is deferred. This is the most conceptually difficult program and the diagram is doing the real work |
-| **Required qualifier** | The tax-benefits mention needs a standing disclaimer — proposed: *"Tax treatment depends on your circumstances. Consult your own tax advisor."* **[NEEDS OWNER]** — flagged for legal/owner sign-off before publication; RAP should not appear to give tax advice |
-| Watch | Never "guaranteed", never "profit" without the timing caveat, never a projected return. |
+- Stat panel: customer pays **~$300 one time (average)** · cancellation returns a **prorated
+  share** (DECISION 029) · income arrives **at the original sale**.
+- Mini calculator: the **$250 retail × 72% = $180 GM** illustration (DECISION 036) is the
+  natural basis.
+- **Dealer remit and dealer commission for Multi-Year are not approved facts** — those stat
+  rows are omitted rather than guessed. See §3, Q-1.
 
-### Standard Programs — `/programs/standard-programs`
+### §3 Reinsurance — `#reinsurance`
 
-| Slot | Content |
-|---|---|
-| P1 eyebrow | `UNDERWRITING TYPE · PAIRS WITH SUBSCRIPTION OR MULTI-YEAR` |
-| P1 at-a-glance | Dealer earns **protection income** · **RAP retains the underwriting** · Income **at the sale** · Structure: **simplest to run** |
-| P1 value phrase | "The simplest way to run a protection program." |
-| P3 | Dealer: wants protection income without taking on reinsurance participation |
-| P5 | Income-at-the-sale shape, matching the homepage card's diagram (single bar + dashed retained-underwriting line) |
-| **P6 — unique** | A **contrast-free structure diagram** — the same premium→reserve→claims frame as Reinsurance, but showing the underwriting profit remaining with RAP. Shown as a *fact of the structure*, never as a lesser outcome |
-| **Tone rule** | DECISION 037: do not disparage relative to Reinsurance, and equally **do not disparage Reinsurance here**. No "without the complexity of…" phrasing — that demotes the sibling. State what Standard is; let the index do the comparing. |
-| Watch | Shortest of the four pages. Do not pad it to match the others — parity is in treatment, not word count. |
+- Stat panel: dealer **shares in the underwriting profits** · **tax benefits** · income
+  **accrues over time**.
+- Good-fit bullets: `[OWNER TO SUPPLY]`. No eligibility threshold, minimum volume, or dealer
+  size may be stated — none is approved.
+- The tax-benefits mention still needs a qualifier decision (§3, Q-3).
+- Reinsurance is an underwriting type, so its coverage grid may be identical to the plan-type
+  grids or may not apply — see §3, Q-2.
+
+### §4 Standard — `#standard`
+
+- Stat panel: dealer earns **protection income** · **RAP retains the underwriting** · income
+  **at the sale**.
+- Good-fit bullets: `[OWNER TO SUPPLY]`.
+- Shortest section of the four. Not padded to match — parity is in treatment, not word count.
 
 ---
 
-# 2. PROGRAMS INDEX — `/programs`
+# 2. NEWSWIRE PAGE — `/newswire`
 
-Gives the Programs nav item a real destination for the first time, and is the one place
-where the four are compared side by side.
+**Unchanged from revision 1.** Built to hold 20–30+ items per view and to keep working when the
+feed is stale or broken. The homepage section remains the 3–5 item preview that links here.
 
 ## 2.1 Desktop
 
 ```
-[ 00 utility ] [ 01 header ]
-┄ Home › Programs ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+[ utility ] [ header ]
 
-░ I1 — INDEX HERO ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░ RISK ASSURANCE PARTNERS PROGRAMS                                          ░
-░ Four ways to create more value from ╱the same customer.╱                  ░
-░                                                                           ░
-░ Protection programs for furniture & mattress retail dealers, as well as   ░
-░ custom interior designer programs — all home furnishings categories.      ░
-░                                     ← DECISION 025 descriptor, verbatim   ░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
- I2 — THE TWO AXES  (DECISION 029 — promoted from a fold to a real section)
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- A plan type and an underwriting type combine.
-
-                    │  STANDARD              │  REINSURANCE
-                    │  RAP retains the       │  The dealer shares in the
-                    │  underwriting profits  │  underwriting profits,
-                    │                        │  plus tax benefits*
- ───────────────────┼────────────────────────┼───────────────────────────────
-  SUBSCRIPTION      │  Subscription,         │  Subscription,
-  $19.99/month,     │  standard              │  reinsurance
-  cancel anytime    │  [ View → ]            │  [ View → ]
- ───────────────────┼────────────────────────┼───────────────────────────────
-  MULTI-YEAR        │  Multi-Year,           │  Multi-Year,
-  ~$300 one time,   │  standard              │  reinsurance
-  prorated refund   │  [ View → ]            │  [ View → ]
- ───────────────────┴────────────────────────┴───────────────────────────────
- * Tax treatment depends on your circumstances. Consult your own tax advisor.
-                                                            [NEEDS OWNER]
- ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ⚠ MATRIX CELLS ARE [NEEDS OWNER]. The 2×2 asserts that either plan type can
-   be written under either underwriting type. That is implied by Decision 029
-   but never stated. If any combination is not offered, this becomes a list
-   of the four programs instead of a matrix — see §2.3 fallback.
-
- I3 — THE FOUR PROGRAMS
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- ┌───────────────┐ ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
- │ 01            │ │ 02            │ │ 03            │ │ 04            │
- │ SUBSCRIPTION  │ │ MULTI-YEAR    │ │ REINSURANCE   │ │ STANDARD      │
- │ ▌▌▌▌ monthly  │ │ ▌ at the sale │ │ ╱╲ over time  │ │ ▌┄ at sale    │
- │               │ │               │ │               │ │               │
- │ FurnitureRx   │ │ Multi-Year    │ │ Reinsurance   │ │ Standard      │
- │ Subscription  │ │ Protection    │ │               │ │ Programs      │
- │ {one para}    │ │ {one para}    │ │ {one para}    │ │ {one para}    │
- │ Learn more →  │ │ Learn more →  │ │ Learn more →  │ │ Learn more →  │
- └───────────────┘ └───────────────┘ └───────────────┘ └───────────────┘
-   Identical to the homepage cards — same component, same parity rules.
-
- I4 — COMPARISON TABLE
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
-                    │ SUBSCRIPTION │ MULTI-YEAR   │ REINSURANCE │ STANDARD
- ───────────────────┼──────────────┼──────────────┼─────────────┼───────────
- What it is         │ Plan type    │ Plan type    │ Underwriting│ Underwriting
- Customer pays      │ $19.99/mo    │ ~$300 once   │ n/a         │ n/a
- Cancellation       │ Anytime      │ Prorated     │ n/a         │ n/a
- Dealer remit       │ $0           │ [NEEDS OWNER]│ n/a         │ n/a
- Dealer income      │ $8 / payment │ [NEEDS OWNER]│ Profit share│ Protection
-                    │              │              │ over time   │ income
- When income arrives│ Monthly,     │ At the       │ Accrues     │ At the
-                    │ recurring    │ original sale│ over time   │ sale
- Underwriting profit│ per structure│ per structure│ Shared with │ Retained
-                    │              │              │ the dealer  │ by RAP
- ───────────────────┴──────────────┴──────────────┴─────────────┴───────────
- Horizontal scroll inside its own container below 900px. Row labels stick.
- Every cell is an approved fact or [NEEDS OWNER]. No cell is a judgement.
-
-▓ I5 — CONVERSION ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓         Not sure which fits? ╱Run your numbers, or just ask.╱            ▓
-▓         [ Profit Calculator → ]      [ Talk to RAP ]                     ▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-
-[ 13 footer ]
-```
-
-## 2.2 Mobile
-
-```
-┌─────────────────────────┐  ┌─────────────────────────┐
-│▓ FILE A CLAIM  LOGIN → ▓│  │ I3 THE FOUR PROGRAMS    │
-├─────────────────────────┤  │ ┌─────────────────────┐ │
-│  RAP    [ Profit C. ] ☰ │  │ │ 01 SUBSCRIPTION     │ │
-├─────────────────────────┤  │ │ ▌▌▌▌ monthly        │ │
-│ Home › Programs         │  │ │ FurnitureRx …       │ │
-├─────────────────────────┤  │ │ Learn more →        │ │
-│░ I1 HERO                │  │ └─────────────────────┘ │
-│░ RAP PROGRAMS           │  │ …4 stacked, order       │
-│░ Four ways to create    │  │   01→02→03→04           │
-│░ more value from ╱the   │  ├─────────────────────────┤
-│░ same customer.╱        │  │ I4 COMPARISON           │
-│░ {descriptor}           │  │ ┌─────────────────────┐ │
-├─────────────────────────┤  │ │ ◄ scrolls sideways ►│ │
-│ I2 THE TWO AXES         │  │ │ row labels stick    │ │
-│ A plan type and an      │  │ └─────────────────────┘ │
-│ underwriting type       │  │ Body never scrolls      │
-│ combine.                │  │ horizontally — only     │
-│ ┌─────────────────────┐ │  │ the table does.         │
-│ │ SUBSCRIPTION        │ │  ├─────────────────────────┤
-│ │ $19.99/mo, cancel   │ │  │▓ I5 CONVERSION          │
-│ │ anytime             │ │  │▓ Not sure which fits?   │
-│ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │  │▓ ╱Run your numbers,    │
-│ │ + Standard  View →  │ │  │▓ or just ask.╱          │
-│ │ + Reinsurance View →│ │  │▓ [ Profit Calculator → ]│
-│ ├─────────────────────┤ │  │▓ [ Talk to RAP ]        │
-│ │ MULTI-YEAR          │ │  ├─────────────────────────┤
-│ │ ~$300 once,         │ │  │▓ FOOTER                 │
-│ │ prorated refund     │ │  └─────────────────────────┘
-│ │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │ │
-│ │ + Standard  View →  │ │   ← the 2×2 becomes two
-│ │ + Reinsurance View →│ │     plan-type cards, each
-│ └─────────────────────┘ │     listing its two
-│ * Consult your own tax  │     underwriting options.
-│   advisor. [NEEDS OWNER]│     A 2×2 grid is unreadable
-└─────────────────────────┘     at 375px.
-```
-
-## 2.3 Annotations
-
-- **The index is the only page that compares.** Program pages argue their own fit; the index
-  lays the four side by side in neutral language. That division is what stops any single
-  program page from becoming a sales pitch against its siblings.
-- **I2 promotes the two-axis explainer** from the collapsed fold it occupies on the homepage to
-  a full section, because this is the page where a visitor has actually come to understand the
-  structure. The homepage fold stays as it is.
-- **I2 matrix carries a real risk, flagged above.** A 2×2 asserts four combinations exist.
-  Decision 029 defines the two axes but never confirms every pairing is offered. **Fallback if
-  the owner says some combinations are not available:** drop the matrix and render I2 as two
-  labelled lists — "Plan types: how the customer buys" and "Underwriting types: who keeps the
-  underwriting profits" — which teaches the same distinction without asserting availability.
-- **I3 reuses the homepage card component verbatim.** Same markup, same parity rules, same
-  timing diagrams. A visitor who saw the homepage recognises them instantly, and there is one
-  component to maintain rather than two.
-- **I4 comparison table** — every cell is either an approved fact or `[NEEDS OWNER]`. Two cells
-  are marked `n/a` rather than empty, because Reinsurance and Standard are underwriting types
-  and have no customer price of their own; leaving them blank would read as missing data.
-- Table scrolls inside its own `overflow-x:auto` container. The page body never scrolls
-  sideways.
-
----
-
-# 3. NEWSWIRE PAGE — `/newswire`
-
-Built to hold 20–30+ items per view and to keep working when the feed is stale or broken.
-The homepage section remains the 3–5 item preview that links here.
-
-## 3.1 Desktop
-
-```
-[ 00 utility ] [ 01 header ]
-┄ Home › Newswire ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
-
- N1 — MASTHEAD
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ MASTHEAD
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
  FURNITURE RETAIL NEWSWIRE                                        ● LIVE
  What happened.                                  LAST UPDATED 09:14 AM ET
  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ink rule ▔▔▔
 
  ◄─── 3 cols ───►  ◄──────────────── 9 cols ────────────────►
 
- N2 FILTER RAIL     N3 FEED
+ FILTER RAIL       FEED
  (sticky)
  ┌──────────────┐   ── TUE 25 AUG 2026 ─────────────────────────────────────
  │ ALL      (34)│   12:38 PM  [HOUSING]
@@ -508,49 +359,49 @@ The homepage section remains the 3–5 item preview that links here.
  │ Protection / │              [ Load 25 more ]      Showing 30 of 214
  │  Warranty (1)│   ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
  │ Retail       │
- │  Technology  │   N4 — CROSS-LINKS (foot of feed, not a sidebar)
+ │  Technology  │   CROSS-LINKS (foot of feed, not a sidebar)
  │           (1)│   ┌──────────────────────┐ ┌──────────────────────┐
  │ ┄┄┄┄┄┄┄┄┄┄┄┄ │   │ MARKET INTELLIGENCE  │ │ RAP RESEARCH         │
  │ ARCHIVE      │   │ What is changing?    │ │ What does it mean?   │
  │  [date pick] │   │ View the data →      │ │ Read the research →  │
  └──────────────┘   └──────────────────────┘ └──────────────────────┘
 
-[ 13 footer ]
+[ footer ]
 ```
 
-## 3.2 Filter and state behaviour
+## 2.2 Filter and state behaviour
 
 ```
 ACTIVE FILTER — chip appears above the feed, feed heading updates
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
  Filtered: [ HOUSING ×]                              5 items · Clear all
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
 
 EMPTY CATEGORY
-┌──────────────────────────────────────────────────────────────────────────┐
-│ No items in Bankruptcies in the last 30 days.                            │
-│ [ Clear filter ]   [ View all news ]                                     │
-└──────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│ No items in Bankruptcies in the last 30 days.                           │
+│ [ Clear filter ]   [ View all news ]                                    │
+└─────────────────────────────────────────────────────────────────────────┘
  Categories with (0) stay visible and clickable — a category that vanishes
  reads as a site bug, and an empty wire category is information.
 
 STALE FEED (no successful ingest within the expected cadence)
-┌──────────────────────────────────────────────────────────────────────────┐
-│ ⚠ LAST UPDATED 25 AUG 09:14 ET · UPDATES DELAYED                        │
-│ Items below are the most recent we have.                                 │
-└──────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ⚠ LAST UPDATED 25 AUG 09:14 ET · UPDATES DELAYED                       │
+│ Items below are the most recent we have.                                │
+└─────────────────────────────────────────────────────────────────────────┘
  · LIVE dot switches from --rap-live to --rap-slate-300 and stops pulsing.
  · Feed still renders. Cached items are never hidden because of a bad ingest.
 
 FEED UNAVAILABLE (no cached items at all — should be near-impossible)
-┌──────────────────────────────────────────────────────────────────────────┐
-│ The newswire is temporarily unavailable.                                 │
-│ [ Market Intelligence → ]  [ RAP Research → ]  [ Contact RAP → ]         │
-└──────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│ The newswire is temporarily unavailable.                                │
+│ [ Market Intelligence → ]  [ RAP Research → ]  [ Contact RAP → ]        │
+└─────────────────────────────────────────────────────────────────────────┘
  Never a blank page. Always an exit.
 ```
 
-## 3.3 Mobile
+## 2.3 Mobile
 
 ```
 ┌─────────────────────────┐   ┌─────────────────────────┐
@@ -558,15 +409,13 @@ FEED UNAVAILABLE (no cached items at all — should be near-impossible)
 ├─────────────────────────┤   │ 12:38 PM                │
 │  RAP    [ Profit C. ] ☰ │   │ [HOUSING]               │
 ├─────────────────────────┤   │ Headline over two or    │
-│ Home › Newswire         │   │ three lines             │
-├─────────────────────────┤   │ Synopsis, two lines     │
-│ FURNITURE RETAIL        │   │ PUBLICATION · SOURCE →  │
-│ NEWSWIRE       ● LIVE   │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
-│ What happened.          │   │ 11:17 AM                │
-│ UPDATED 09:14 AM ET     │   │ [FURNITURE RETAIL]      │
-│ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │   │ …                       │
-├─────────────────────────┤   │                         │
-│ ┌─────────────────────┐ │   │ …items continue         │
+│ FURNITURE RETAIL        │   │ three lines             │
+│ NEWSWIRE       ● LIVE   │   │ Synopsis, two lines     │
+│ What happened.          │   │ PUBLICATION · SOURCE →  │
+│ UPDATED 09:14 AM ET     │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
+│ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │   │ 11:17 AM                │
+├─────────────────────────┤   │ [FURNITURE RETAIL]      │
+│ ┌─────────────────────┐ │   │ …                       │
 │ │ ▼ FILTER      ALL   │ │   │                         │
 │ └─────────────────────┘ │   │ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ │
 │  ↑ collapsed by default;│   │ [ Load 25 more ]        │
@@ -585,14 +434,14 @@ FEED UNAVAILABLE (no cached items at all — should be near-impossible)
  a quarter of a 375px line. Category chip sits under the timestamp.
 ```
 
-## 3.4 Annotations
+## 2.4 Annotations
 
 - **Wire-service character throughout** (DESIGN_SYSTEM §5.1): Plex Mono timestamps, outlined
   category chips, **Inter** headlines — deliberately not the editorial serif, so aggregated
   third-party news can never be mistaken for RAP's own voice. Hairline rows, no cards, no
   images, no thumbnails.
-- **Date dividers** (`── TUE 25 AUG 2026 ──`) group the feed. At 20–30+ items this is what
-  keeps chronology legible; the homepage preview has too few items to need them.
+- **Date dividers** group the feed. At 20–30+ items this is what keeps chronology legible; the
+  homepage preview has too few items to need them.
 - **All 14 MASTER_SPEC categories** appear in the rail with live counts: Furniture Retail,
   Manufacturers, Bedding, Housing, Economy, Consumer, Consumer Credit, Trade / Tariffs,
   Freight, M&A, Bankruptcies, Store Openings / Closings, Protection / Warranty,
@@ -603,35 +452,36 @@ FEED UNAVAILABLE (no cached items at all — should be near-impossible)
 - **Load-more over pagination.** A wire is read by scanning recency, and page 2 of a wire is
   where reading stops. `Load 25 more` with a `Showing 30 of 214` counter keeps position and
   scale visible. Infinite scroll is rejected — it breaks the footer, which carries the contact
-  path. **Owner may prefer pagination; flagged in §4.**
+  path. Owner may prefer pagination; flagged in §3.
 - **The stale state is a first-class design, not an error page.** Cached items keep rendering;
-  only the freshness indicator changes. This directly serves AGENT_RULES §16's "no dependency
-  on external APIs responding during every visitor page load".
-- **N4 cross-links preserve the three-product separation** while helping navigation: Newswire
+  only the freshness indicator changes. This serves AGENT_RULES §16's "no dependency on
+  external APIs responding during every visitor page load".
+- **Cross-links preserve the three-product separation** while helping navigation: Newswire
   answers *what happened*, and points to the two neighbours that answer *what is changing* and
-  *what does it mean*. They are links out, not merged content, and they sit at the foot of the
-  feed rather than in a sidebar that would compete with the filter rail.
-- Filter rail is sticky on desktop, a collapsed sheet on mobile.
+  *what does it mean*. Links out, not merged content, at the foot of the feed rather than in a
+  sidebar competing with the filter rail.
 
 ---
 
-# 4. OPEN QUESTIONS
+# 3. OPEN QUESTIONS
 
-Ordered by what blocks the most work.
+Revision 2 closed several of revision 1's questions by deletion — no terms section means no
+coverage-terms gap, and no FAQ means no FAQ content gap. What remains:
 
 | # | Question | Blocks |
 |---|---|---|
-| **P-1** | **Coverage terms, limits, eligibility and term lengths for all four programs.** Section P7 exists on every page and cannot be written from DECISIONS.md. This is the single largest content gap in the set. | All four program pages |
-| **P-2** | **Can both plan types be written under both underwriting types?** Decision 029 defines two axes but never confirms all four pairings are offered. If not, the Programs index I2 matrix must become two lists (fallback in §2.3), and the program-page eyebrows change. | Index I2, all four P1 eyebrows |
-| **P-3** | **Reinsurance tax-benefits qualifier.** Proposed standing line: *"Tax treatment depends on your circumstances. Consult your own tax advisor."* Needs owner/legal sign-off — RAP must not appear to give tax advice. | Reinsurance page, index I2 |
-| **P-4** | **Multi-Year dealer economics.** Decision 036 gives a $250 retail × 72% = $180 GM *illustration*, but no stated dealer commission or remit. The at-a-glance panel and comparison table both have a hole here. | Multi-Year page, index I4 |
-| **P-5** | **Reinsurance eligibility.** MASTER_SPEC says "for appropriate dealers" — is there a stated volume, structure, or size threshold that can be published? Currently no minimum may be stated. | Reinsurance page P3 |
-| **P-6** | **FAQ content for four pages.** Owner-supplied questions and answers, or approval for RAP Sales to draft them. | All four P9 blocks |
-| **N-1** | **Load-more vs pagination**, and how many items per load. Recommendation is load-more at 25. | Newswire N3 |
-| **N-2** | **Archive depth and retention.** The rail proposes a date picker; how far back does the wire go, and is older content indexable? | Newswire N2 |
-| **N-3** | **Expected update cadence**, which is what defines "stale". Without it the freshness indicator has no threshold. | Newswire N1/N3 states |
-| **N-4** | **Item volume per day**, to confirm 25–30 per view is the right density rather than a page that is always half-empty. | Newswire N3 |
-| **G-1** | Do program pages get their own `/programs/{slug}` URLs as assumed here? Decision 037 says Standard "gets its own program page under Programs", implying yes for all four. Confirm slugs. | Routing, Phase 4 |
-| **G-2** | Vector RAP logo asset — still outstanding from Q4, now needed on four more page templates. | Global chrome |
+| **Q-1** | **The Basic \| Premium coverage list** for each section — the left column of every checkmark chart. This is now the single largest content dependency in the set. | All four coverage grids |
+| **Q-2** | **Does the coverage grid apply to all four sections?** Subscription and Multi-Year are plan types and clearly have coverage. Reinsurance and Standard are *underwriting* types (DECISION 029) and may carry the same coverage as the plan they are written under. If so, their grids either repeat the plan-type grid or are omitted. | §3 and §4 coverage grids |
+| **Q-3** | **Mini calculator inputs and result.** What two things does a dealer enter, and what single number comes out? Must stay within public facts (DECISION 013) — anything revealing a model assumption belongs behind the gate. | §1 and §2 calculators |
+| **Q-4** | **Reinsurance tax-benefits qualifier.** Proposed standing line: *"Tax treatment depends on your circumstances. Consult your own tax advisor."* Needs owner/legal sign-off — RAP must not appear to give tax advice. | §3 intro |
+| **Q-5** | **Multi-Year dealer economics.** DECISION 036 gives a $250 × 72% = $180 GM illustration but no stated dealer remit or commission, so two stat rows are omitted in §2. | §2 stat panel + calculator |
+| **Q-6** | **"Good fit for" bullet content** for Reinsurance and Standard. No eligibility threshold or dealer-size minimum is currently approved and none may be invented. | §3 and §4 |
+| **Q-7** | Do Care Kits and Repair Safety Net belong in the Subscription section, ranked below the subscription (DECISION 019)? Owner's call — currently proposed as optional. | §1 |
+| **N-1** | Load-more vs pagination, and items per load. Recommendation: load-more at 25. | Newswire feed |
+| **N-2** | Archive depth and retention; is older content indexable? | Newswire rail |
+| **N-3** | Expected update cadence — without it "stale" has no threshold. | Newswire states |
+| **N-4** | Items per day, to confirm 25–30 per view is the right density. | Newswire feed |
+| **G-1** | Confirm the single Programs page lives at `/programs` with the four section anchors as named. | Routing, Phase 4 |
+| **G-2** | Vector RAP logo asset — still outstanding. | Global chrome |
 
 **STOP — wireframes only. No HTML written for these pages. Awaiting owner approval of layout.**

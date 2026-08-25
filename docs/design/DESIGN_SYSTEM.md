@@ -1,10 +1,12 @@
 # Risk Assurance Partners — DESIGN SYSTEM
 
 **Phase 2 / UI-UX deliverable 2 of 5.**
-**Revision 4 — 2026-08-25.** DECISION 037: the economic-paths row carries **four** cards, not
-three. `.paths` is `repeat(4,1fr)` desktop → `1fr 1fr` at ≤1100px → `1fr` at ≤680px; cards keep
-their vertical form at every width so the parity rule below still holds, and the former
-horizontal-card treatment at ≤1024px is retired. Standard Programs is added to the orientation
+**Revision 4 — 2026-08-25.** DECISIONS 037–038: the economic-paths row carries **four** cards,
+not three. `.paths` is `repeat(4,1fr)` desktop → `1fr` at ≤900px. **Four in a row on desktop,
+stacked below — there is no 2×2 stage** (DECISION 038); 4-across holds to ~900px, and below
+that the serif titles break down so the row goes straight to stacked. Cards keep their vertical
+form at every width so the parity rule below still holds, and the former horizontal-card
+treatment at ≤1024px is retired. Standard Programs is added to the orientation
 strip, Programs dropdown, drawer, and footer at full label. Parity rule extended to four:
 identical border, padding, title size, and CTA across all four; **no ember rule on any card in
 this row.** No token, typeface, scale, or grid-gutter value changed.

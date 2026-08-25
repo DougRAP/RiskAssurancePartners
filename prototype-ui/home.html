@@ -479,9 +479,6 @@ button{font:inherit;cursor:pointer}
   .hero,.frx,.research{gap:var(--s-7)}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
-  /* DECISION 037 — four paths go 2x2 rather than squeezing four serif titles
-     into ~230px columns. Cards keep their vertical form, so parity holds. */
-  .paths{grid-template-columns:1fr 1fr}
 }
 @media (max-width:1024px){
   .nav{display:none}
@@ -497,6 +494,12 @@ button{font:inherit;cursor:pointer}
   .trust__row{grid-template-columns:repeat(3,1fr);row-gap:var(--s-5)}
   .trust__i:nth-child(4){border-left:0;padding-left:0}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
+}
+/* DECISION 038 — four cards in a row on desktop, stacked below. No 2x2 stage.
+   4-across holds to ~900px (~190px per card); below that the serif titles
+   break down, so the row goes straight to stacked. */
+@media (max-width:900px){
+  .paths{grid-template-columns:1fr}
 }
 @media (max-width:860px){
   :root{--margin:24px}
@@ -537,7 +540,6 @@ button{font:inherit;cursor:pointer}
   .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
   .trust__i{border-left:0;padding-left:0}
   .trust__v{font-size:20px}
-  .paths{grid-template-columns:1fr}
   .why{grid-template-columns:1fr}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .wire__row{grid-template-columns:1fr;gap:var(--s-2)}

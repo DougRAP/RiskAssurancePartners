@@ -11,7 +11,7 @@
 | Decision | Section | Change |
 |---|---|---|
 | 037 | 05 | **Standard Programs added as a fourth path card** at strict parity (`#program-standard`, num 04, mono label `AT THE SALE · SIMPLEST STRUCTURE`). Timing diagram is Multi-Year's single bar plus a dashed slate line for the underwriting RAP retains — same family, visually distinct. Copy limited to Decisions 028/029 facts; no comparison against Reinsurance. |
-| 037 | 05 | Paths grid 3 → **4 columns** desktop, **2×2** at ≤1100px (cards stay vertical so parity holds), stacked at ≤680px. The old ≤1024px horizontal-card treatment is retired — it was built for three full-width cards. |
+| 037 / 038 | 05 | Paths grid 3 → **4 columns** desktop, **stacked at ≤900px**. Four in a row on desktop and stacked on mobile per DECISION 038 — no 2×2 stage. The old ≤1024px horizontal-card treatment is retired; it was built for three full-width cards. |
 | 037 | 05 | Headline "Three ways…" → **"Four ways to create more value from the same customer."**; lead "Three RAP strategies" → "Four". |
 | 037 | 05 fold | Two-axis fold note no longer says "not four products" (now false). Rewritten to state that a plan type and an underwriting type combine. |
 | 037 | 02 strip, 01 nav, 13 footer | Standard Programs added to the orientation strip (4th entry at parity), Programs dropdown, mobile drawer, and both footer Programs variants. Full label used everywhere — no abbreviation was needed. |
