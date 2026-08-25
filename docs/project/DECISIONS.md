@@ -544,6 +544,17 @@ Copy constraints per Decisions 028/029: Standard = RAP retains the underwriting;
 
 Site map: Standard Programs gets its own program page under Programs (built Phase 6).
 
+## Decision 038 — Single Programs Page; Coverage Grids; Mini Calculators (supersedes parts of 037 wireframes)
+
+**Status:** Approved (Owner, 2026-08-25)
+
+- **One Programs page**, not four separate pages and not an index. Each program (FurnitureRx Subscription, Multi-Year, Reinsurance, Standard) is its own section on that page; homepage "Learn more" links jump to the matching section. Content per section may later grow (calculator, sample coverage, program options).
+- **Homepage paths grid:** four cards in a row on desktop, stacked on mobile. Use owner-provided content; do not further organize.
+- **No terms & conditions on the page.** Instead each program gets a coverage-grid illustration: coverage types as text (furniture, adjustable beds, mattress, rugs, outdoor), then a two-column checkmark chart — **Basic | Premium** — with an owner-provided coverage list in the left column.
+- **Mini calculator** in the Subscription and Multi-Year sections. **Reinsurance and Standard** instead get bullet points on what each is a good fit for.
+- **No FAQ.**
+- Drop the formal non-disparagement phrasing rules — each program stands on its own. Owner will provide final copy; sample copy is acceptable in the interim.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

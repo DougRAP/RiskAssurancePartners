@@ -37,11 +37,11 @@ Risk Assurance Partners
 │
 ├── Home
 ├── Dealer Economics
-├── Programs
-│   ├── FurnitureRx Subscription
-│   ├── Multi-Year Protection
-│   ├── Reinsurance
-│   └── Standard Programs          (added per Decision 037)
+├── Programs                       (ONE page — Decision 038; nav dropdown items
+│   ├── #subscription               jump to in-page sections)
+│   ├── #multi-year
+│   ├── #reinsurance
+│   └── #standard
 ├── Newswire
 ├── Market Intelligence
 ├── Research
