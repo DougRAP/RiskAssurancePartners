@@ -532,7 +532,7 @@ The owner-directed R10.2 homepage refactor is the new baseline. Key points:
 
 New owner-supplied claims now in play: "2X net income"; 60-payment subscription illustration horizon; $250 average multi-year retail; 75% multi-year margin rate.
 
-**Arithmetic flag (open):** $250 × 75% = $187.50, not $180. Owner to confirm corrected pairing (e.g., 72% → $180, or 75% → $187.50).
+**Arithmetic resolved (Owner, 2026-08-25):** use round-number $180 math — **$250 retail × 72% = $180 GM**.
 
 ## Open / Not Yet Decided
 
