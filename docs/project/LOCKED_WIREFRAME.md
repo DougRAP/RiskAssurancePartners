@@ -40,7 +40,8 @@ Risk Assurance Partners
 ├── Programs
 │   ├── FurnitureRx Subscription
 │   ├── Multi-Year Protection
-│   └── Reinsurance
+│   ├── Reinsurance
+│   └── Standard Programs          (added per Decision 037)
 ├── Newswire
 ├── Market Intelligence
 ├── Research

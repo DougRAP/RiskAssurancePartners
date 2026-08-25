@@ -534,6 +534,16 @@ New owner-supplied claims now in play: "2X net income"; 60-payment subscription 
 
 **Arithmetic resolved (Owner, 2026-08-25):** use round-number $180 math — **$250 retail × 72% = $180 GM**.
 
+## Decision 037 — Standard Programs Added as Fourth Path (amends 004/009)
+
+**Status:** Approved (Owner, 2026-08-25)
+
+Standard Programs joins the homepage economic-paths section and the Programs navigation (abbreviation allowed where space requires). The paths section now presents four: FurnitureRx Subscription, Multi-Year Protection, Reinsurance, Standard Programs.
+
+Copy constraints per Decisions 028/029: Standard = RAP retains the underwriting; dealer income without reinsurance participation. Do not disparage it relative to Reinsurance.
+
+Site map: Standard Programs gets its own program page under Programs (built Phase 6).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
