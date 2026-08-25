@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Furniture Retail Newswire — Risk Assurance Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RISK ASSURANCE PARTNERS — NEWSWIRE PAGE (placeholder build)
+   Per PAGE_WIREFRAMES rev 2 §2 and DECISION 039.
+   DESIGN ONLY. Not production code. No framework, no build.
+
+   ALL FEED CONTENT BELOW IS FABRICATED PLACEHOLDER MATERIAL.
+   Headlines, synopses, publication names and timestamps are
+   invented for layout purposes only. No item corresponds to a
+   real story and no outbound link resolves to a real article.
+   Real items arrive via the Newswire automation phase.
+   ============================================================ */
+
+:root{
+  --rap-ink:#0C172A; --rap-ink-800:#16243C; --rap-ink-700:#22334F;
+  --rap-paper:#FFFFFF; --rap-mist:#F3F5F8; --rap-cream:#FCF8F5;
+  --rap-blue:#204374; --rap-blue-600:#2E5A96; --rap-blue-050:#E8EEF6;
+  --rap-ember:#C8581B; --rap-ember-700:#A3450F; --rap-ember-050:#FBEFE8;
+  --rap-brass:#C19541; --rap-brass-050:#F7F0E2;
+  --rap-slate-700:#3D4A5C; --rap-slate-500:#64748B; --rap-slate-300:#C3CBD6;
+  --rap-slate-200:#DFE4EB; --rap-slate-100:#EEF1F5;
+  --rap-up:#1E6F50; --rap-down:#A8331F; --rap-flat:#64748B;
+
+  --serif:"Playfair Display","Iowan Old Style",Georgia,serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;
+  --s-7:48px;--s-8:64px;--s-9:96px;--s-10:128px;--s-11:160px;
+
+  --radius-sm:2px; --radius-md:4px;
+  --content:1240px; --wide:1440px; --margin:48px;
+  --hdr-h:84px;
+
+  --fs-d2:clamp(30px,4.2vw,56px);
+  --fs-d3:clamp(25px,2.9vw,40px);
+  --fs-h3:clamp(19px,1.6vw,22px);
+  --fs-lead:clamp(17px,1.4vw,20px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--rap-paper);color:var(--rap-ink);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  font-feature-settings:"cv05","ss01";-webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul{padding:0;list-style:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px;border-radius:1px}
+
+/* ---------- layout primitives ---------- */
+.wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
+.sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
+.sec--first{border-top:0;padding-top:var(--s-7)}
+.sec--ink{
+  background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
+  background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
+}
+.sec--ink a{color:#fff}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4);line-height:1.7;
+}
+.sec--ink .eyebrow{color:var(--rap-brass)}
+.d2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d2);line-height:1.04;letter-spacing:-.02em}
+.d3{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.1;letter-spacing:-.01em}
+.acc{font-style:italic;color:var(--rap-ember)}
+.sec--ink .acc{font-style:italic;color:var(--rap-brass)}
+.lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:46ch}
+.sec--ink .lead{color:rgba(255,255,255,.78)}
+.body{color:var(--rap-slate-700);max-width:68ch}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.center{text-align:center}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 28px;
+  font-weight:600;font-size:15px;line-height:1;text-decoration:none;
+  border-radius:var(--radius-sm);border:1px solid transparent;transition:background .12s,color .12s,border-color .12s;
+  min-height:46px;
+}
+.btn--primary{background:var(--rap-ember-700);color:#fff}
+.btn--primary:hover{background:#8E3B0C}
+.btn--secondary{border-color:var(--rap-ink);color:var(--rap-ink);background:transparent}
+.btn--secondary:hover{background:var(--rap-ink);color:#fff}
+.sec--ink .btn--secondary{border-color:rgba(255,255,255,.45);color:#fff}
+.sec--ink .btn--secondary:hover{background:#fff;color:var(--rap-ink)}
+.btn:active{transform:translateY(1px)}
+.btns{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-7)}
+.qlink{
+  display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;
+  color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;
+}
+.qlink:hover{color:#8E3B0C}
+
+/* ---------- prototype banner ---------- */
+.proto{
+  background:#FFF6E8;border-bottom:1px solid #E8D5AE;color:#5A4413;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px var(--margin);text-align:center;
+}
+.proto b{color:#8E3B0C}
+
+/* ---------- 00 utility bar ---------- */
+.utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
+.utility__inner{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:var(--s-5)}
+.utility a{
+  font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);text-decoration:none;
+}
+.utility a:hover{color:#fff}
+.utility__left,.utility__right{display:flex;gap:var(--s-5);align-items:center;flex-wrap:wrap}
+.utility__login{
+  color:var(--rap-brass)!important;border:1px solid rgba(193,149,65,.55);
+  border-radius:var(--radius-sm);padding:5px 10px;
+}
+.utility__login:hover{background:var(--rap-brass);color:var(--rap-ink)!important}
+
+/* ---------- 01 header ---------- */
+.hdr{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--rap-slate-200);transition:box-shadow .16s}
+.hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);min-height:84px;transition:min-height .16s}
+.hdr.is-condensed .hdr__inner{min-height:64px}
+.hdr.is-condensed .lockup__tag{display:none}
+.hdr.is-condensed{box-shadow:0 1px 0 var(--rap-slate-200),0 8px 24px rgba(12,23,42,.08)}
+.hdr__util{display:none;align-items:center;gap:var(--s-4);flex-shrink:0}
+.hdr.is-condensed .hdr__util{display:flex}
+.hdr__util a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;color:var(--rap-slate-700);white-space:nowrap;
+}
+.hdr__util a:hover{color:var(--rap-ink)}
+.hdr__util .hdr__login{
+  color:var(--rap-ember-700);border:1px solid var(--rap-slate-300);
+  border-radius:var(--radius-sm);padding:6px 10px;
+}
+.hdr__util .hdr__login:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
+.hdr__claim{display:none}
+@media (min-width:1280px){.hdr.is-condensed .hdr__claim{display:inline}}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.lockup__mark{
+  width:34px;height:34px;flex:0 0 34px;border-radius:var(--radius-sm);
+  background:var(--rap-blue);display:grid;place-items:center;
+}
+.lockup__mark svg{display:block}
+.lockup__name{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.1;color:var(--rap-ink);white-space:nowrap}
+.lockup__tag{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:2px}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{
+  text-decoration:none;font-size:15px;font-weight:500;color:var(--rap-ink);
+  padding:8px 0;border-bottom:2px solid transparent;white-space:nowrap;
+}
+.nav a:hover{border-bottom-color:var(--rap-ember)}
+.nav a[aria-current=page]{border-bottom-color:var(--rap-ember)}
+.nav__drop{position:relative}
+.nav__drop>.nav__progs{
+  background:none;border:0;padding:8px 0;font-size:15px;font-weight:500;color:var(--rap-ink);
+  display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid transparent;text-decoration:none;
+}
+.nav__drop:hover>.nav__progs,.nav__drop:focus-within>.nav__progs{border-bottom-color:var(--rap-ember)}
+.nav__panel{
+  position:absolute;top:calc(100% + 10px);left:-20px;min-width:330px;background:#fff;
+  border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:8px;
+  box-shadow:0 8px 24px rgba(12,23,42,.08);opacity:0;visibility:hidden;transition:opacity .12s;
+}
+.nav__drop:hover .nav__panel,.nav__drop:focus-within .nav__panel{opacity:1;visibility:visible}
+.nav__panel a{display:block;padding:12px 14px;border-bottom:0;border-radius:var(--radius-sm)}
+.nav__panel a:hover{background:var(--rap-mist)}
+.nav__panel b{display:block;font-weight:600;font-size:15px}
+.nav__panel span{display:block;font-size:13px;color:var(--rap-slate-500);margin-top:2px}
+.hdr__cta{flex-shrink:0}
+.burger{display:none;background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:46px;height:46px;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--rap-ink);box-shadow:0 -6px 0 var(--rap-ink),0 6px 0 var(--rap-ink)}
+#navtoggle{position:absolute;opacity:0;pointer-events:none}
+
+/* mobile drawer */
+.drawer{
+  position:fixed;inset:0;z-index:80;background:var(--rap-ink);color:#fff;
+  padding:var(--s-6) var(--s-5) var(--s-5);display:none;flex-direction:column;overflow-y:auto;
+}
+.drawer a{text-decoration:none;color:#fff}
+.drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s-7)}
+.drawer__close{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;width:46px;height:46px;border-radius:var(--radius-sm);font-size:20px;line-height:1}
+.drawer__nav a{display:block;font-family:var(--serif);font-size:30px;font-weight:500;padding:10px 0}
+.drawer__sub{padding-left:var(--s-5);border-left:1px solid var(--rap-ink-700);margin:var(--s-2) 0 var(--s-4)}
+.drawer__sub a{font-family:var(--sans);font-size:16px;font-weight:500;padding:8px 0;color:rgba(255,255,255,.8)}
+.drawer__util{padding-bottom:var(--s-5);margin-bottom:var(--s-5);border-bottom:1px solid var(--rap-ink-700);display:grid;gap:var(--s-3)}
+.drawer__util a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500)}
+.drawer__cta{margin-top:auto;padding-top:var(--s-6)}
+.drawer__cta .btn{width:100%;justify-content:center}
+#navtoggle:checked ~ .drawer{display:flex}
+
+/* ============================================================
+   NEWSWIRE — page-specific
+   ============================================================ */
+
+/* masthead */
+.mast{border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4);display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-5);flex-wrap:wrap}
+.mast__t{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+.mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
+.mast__r{text-align:right}
+.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-ember-700)}
+.live__dot{width:7px;height:7px;border-radius:50%;background:var(--rap-ember);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.is-stale .live{color:var(--rap-slate-500)}
+.is-stale .live__dot{background:var(--rap-slate-300);animation:none}
+.mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
+
+/* layout */
+.wire{display:grid;grid-template-columns:3fr 9fr;gap:var(--s-8);margin-top:var(--s-7);align-items:start}
+
+/* filter rail */
+.rail{position:sticky;top:calc(var(--hdr-h) + 16px);transition:top .16s}
+.rail__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);padding-bottom:var(--s-3);border-bottom:2px solid var(--rap-ink)}
+.rail__b{background:none;border:0;width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);padding:9px 0;border-bottom:1px solid var(--rap-slate-200);text-align:left;color:var(--rap-slate-700);font-size:14px}
+.rail__b:hover{color:var(--rap-ink)}
+.rail__b span{font-family:var(--mono);font-size:12px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums}
+.rail__b[aria-pressed=true]{color:var(--rap-ink);font-weight:600}
+.rail__b[aria-pressed=true] span{color:var(--rap-ember-700)}
+.rail__b.is-zero{color:var(--rap-slate-300)}
+.rail__b.is-zero span{color:var(--rap-slate-300)}
+.rail__arch{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
+.rail__arch label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:8px}
+.rail__arch input{width:100%;height:42px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 10px;font-family:var(--mono);font-size:13px;color:var(--rap-ink);background:#fff}
+
+/* mobile filter trigger */
+.filterbtn{display:none;width:100%;align-items:center;justify-content:space-between;gap:var(--s-3);border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);background:#fff;padding:13px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ink);margin-bottom:var(--s-5)}
+
+/* active filter chip */
+.active-filter{display:none;justify-content:space-between;align-items:center;gap:var(--s-4);flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--rap-slate-200);margin-bottom:var(--s-2)}
+.active-filter.is-on{display:flex}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rap-ink);border-radius:var(--radius-sm);padding:5px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase}
+.chip button{background:none;border:0;color:var(--rap-ember-700);font-size:14px;line-height:1;padding:0}
+
+/* feed */
+.daybar{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-slate-500);padding:var(--s-6) 0 var(--s-3);border-bottom:1px solid var(--rap-slate-300);display:flex;align-items:center;gap:var(--s-4)}
+.daybar::after{content:"";flex:1;height:1px;background:var(--rap-slate-200)}
+.item{display:grid;grid-template-columns:88px 1fr auto;gap:var(--s-5);padding:20px 0;border-bottom:1px solid var(--rap-slate-200);align-items:start}
+.item__t{font-family:var(--mono);font-size:13px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums;padding-top:2px}
+.item__c{
+  display:inline-block;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
+  padding:3px 7px;font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-ink);margin-bottom:8px;
+}
+.item__h{font-weight:600;font-size:var(--fs-h3);line-height:1.3;letter-spacing:-.01em}
+.item__s{font-size:15px;color:var(--rap-slate-700);margin-top:6px;max-width:78ch}
+.item__p{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
+.item__src{white-space:nowrap;padding-top:2px}
+.item[hidden]{display:none}
+
+/* feed foot */
+.feedfoot{display:flex;justify-content:space-between;align-items:center;gap:var(--s-5);flex-wrap:wrap;padding-top:var(--s-6)}
+.counter{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);font-variant-numeric:tabular-nums}
+
+/* states */
+.state{border:1px solid var(--rap-slate-300);border-radius:var(--radius-md);padding:var(--s-6);background:var(--rap-mist);margin-top:var(--s-6)}
+.state h3{font-weight:600;font-size:17px}
+.state p{font-size:15px;color:var(--rap-slate-700);margin-top:8px}
+.state .btns{margin-top:var(--s-5)}
+.state--empty{display:none}
+.state--empty.is-on{display:block}
+.stale{display:flex;gap:var(--s-3);align-items:flex-start;border:1px solid var(--rap-slate-300);border-left:3px solid var(--rap-slate-500);border-radius:var(--radius-sm);background:var(--rap-mist);padding:14px 16px;margin-top:var(--s-5)}
+.stale b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block}
+.stale p{font-size:14px;color:var(--rap-slate-700);margin-top:4px}
+
+/* demo state switcher (prototype only) */
+.demo{background:var(--rap-ink);color:#fff;padding:10px var(--margin);display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap}
+.demo p{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-right:auto}
+.demo button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);padding:7px 12px}
+.demo button:hover{background:#fff;color:var(--rap-ink)}
+
+/* cross links */
+.xlinks{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-8);padding-top:var(--s-6);border-top:2px solid var(--rap-ink)}
+.xlink{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-5);text-decoration:none;display:block;transition:border-color .12s}
+.xlink:hover{border-color:var(--rap-ink)}
+.xlink b{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);display:block}
+.xlink span{font-family:var(--serif);font-size:24px;font-weight:500;display:block;margin-top:8px;color:var(--rap-ink)}
+.xlink i{font-style:normal;color:var(--rap-ember-700);font-weight:600;font-size:14px;display:block;margin-top:var(--s-3)}
+
+/* contact block in footer */
+.contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
+.contact__grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-8);align-items:start;margin-top:var(--s-5)}
+.contact__routes{display:grid;gap:var(--s-3)}
+.contact__route{
+  display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
+  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);padding:14px 16px;
+  text-decoration:none;color:#fff;transition:border-color .12s,background .12s;
+}
+.contact__route:hover{border-color:var(--rap-brass);background:rgba(193,149,65,.08)}
+.contact__route b{display:block;font-size:15px;font-weight:600}
+.contact__route span{display:block;font-size:13px;color:rgba(255,255,255,.6);margin-top:2px}
+.contact__route i{font-style:normal;color:var(--rap-brass)}
+.contact__det{display:grid;gap:var(--s-4)}
+.contact__det div{border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3)}
+.contact__det dt{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass)}
+.contact__det dd{font-size:20px;margin-top:6px}
+.contact__det dd a{text-decoration:none}
+.foot__brand{margin-bottom:var(--s-8)}
+.foot__cols{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-6)}
+.foot__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass);margin-bottom:var(--s-4)}
+.foot__cols a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:6px 0}
+.foot__cols a:hover{color:#fff}
+.foot__legal{margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);display:flex;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap}
+.foot__legal,.foot__legal a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none}
+.foot__note{margin-top:var(--s-3);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.foot__acc{display:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1100px){
+  :root{--margin:32px}
+  .nav{gap:20px}
+  .nav a,.nav__drop>.nav__progs{font-size:14px}
+  .wire{gap:var(--s-6)}
+}
+@media (max-width:1024px){
+  .nav{display:none}
+  .burger{display:grid}
+  .hdr__inner{min-height:64px;gap:var(--s-4)}
+  .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
+  .hdr.is-condensed .hdr__util{display:none}
+  .foot__cols{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width:860px){
+  :root{--margin:24px}
+  .sec{padding:var(--s-8) 0}
+  .sec--ink{padding:var(--s-9) 0}
+  .wire{grid-template-columns:1fr}
+  .rail{position:static}
+  .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
+  .xlinks{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .utility__inner{min-height:32px}
+  .utility a{font-size:12px}
+  .utility__secondary{display:none}
+  .utility__login{padding:4px 8px}
+  .hdr__inner{gap:10px}
+  .lockup{min-width:0}
+  .lockup__mark{width:30px;height:30px;flex:0 0 30px}
+  .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
+  .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
+  .burger{width:42px;height:42px;flex:0 0 42px}
+  /* filter rail collapses behind a trigger; feed takes the full width */
+  .filterbtn{display:flex}
+  .rail{display:none}
+  .rail.is-open{display:block;margin-bottom:var(--s-6)}
+  .item{grid-template-columns:1fr;gap:var(--s-2)}
+  .item__src{padding-top:var(--s-2)}
+  .btns .btn{width:100%;justify-content:center}
+  .foot__cols{display:none}
+  .foot__acc{display:block}
+  .foot__acc details{border-bottom:1px solid var(--rap-ink-700)}
+  .foot__acc summary{
+    font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
+    color:var(--rap-brass);padding:16px 0;cursor:pointer;
+  }
+  .foot__acc a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:8px 0 8px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+@media print{.proto,.demo,.hdr,.drawer,.rail,.filterbtn{display:none}}
+</style>
+</head>
+<body>
+
+<div class="proto">
+  Phase 2 UI/UX prototype &mdash; Newswire page, placeholder build.
+  <b>Every item below is fabricated for layout only</b> &mdash; no real story, publication, or link.
+</div>
+
+<input type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
+
+<!-- ============ 00 UTILITY BAR ============ -->
+<div class="utility">
+  <div class="wrap utility__inner">
+    <div class="utility__left">
+      <a href="https://kiosk.furniturerx.net/">File a Claim</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Customer Support</a>
+    </div>
+    <div class="utility__right">
+      <a class="utility__secondary" href="#contact">Contact</a>
+      <a href="https://kiosk.furniturerx.net/" class="utility__login">Dealer Login &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 01 PRIMARY HEADER ============ -->
+<header class="hdr">
+  <div class="wrap hdr__inner">
+    <a class="lockup" href="home.html">
+      <span class="lockup__mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
+        </svg>
+      </span>
+      <span><span class="lockup__name">Risk Assurance Partners</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="home.html#economics">Dealer Economics</a>
+      <div class="nav__drop">
+        <a href="programs.html" class="nav__progs">Programs <span aria-hidden="true">▾</span></a>
+        <div class="nav__panel">
+          <a href="programs.html#subscription"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
+          <a href="programs.html#multi-year"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
+          <a href="programs.html#reinsurance"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
+          <a href="programs.html#standard"><b>Standard Programs</b><span>Protection income with RAP retaining the underwriting</span></a>
+        </div>
+      </div>
+      <a href="newswire.html" aria-current="page">Newswire</a>
+      <a href="home.html#pulse">Market Intelligence</a>
+      <a href="home.html#research">Research</a>
+      <a href="home.html#why">Why RAP</a>
+    </nav>
+
+    <div class="hdr__util">
+      <a class="hdr__claim" href="https://kiosk.furniturerx.net/">File a Claim</a>
+      <a class="hdr__login" href="https://kiosk.furniturerx.net/">Dealer Login &rarr;</a>
+    </div>
+
+    <a class="btn btn--primary hdr__cta" href="economics-gate.html">Profit Calculator &rarr;</a>
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Open menu"><span></span></label>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" role="dialog" aria-label="Site menu">
+  <div class="drawer__top">
+    <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
+    <label class="drawer__close" for="navtoggle" role="button" tabindex="0" aria-label="Close menu">&times;</label>
+  </div>
+  <div class="drawer__util">
+    <p class="drawer__utillabel">Customers</p>
+    <a href="https://kiosk.furniturerx.net/">File a Claim</a>
+    <a href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+    <a href="https://kiosk.furniturerx.net/">Customer Support</a>
+    <a href="#contact">Contact</a>
+    <a href="https://kiosk.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
+  </div>
+  <nav class="drawer__nav" aria-label="Mobile">
+    <a href="home.html#economics">Dealer Economics</a>
+    <a href="programs.html">Programs</a>
+    <div class="drawer__sub">
+      <a href="programs.html#subscription">FurnitureRx Subscription</a>
+      <a href="programs.html#multi-year">Multi-Year Protection</a>
+      <a href="programs.html#reinsurance">Reinsurance</a>
+      <a href="programs.html#standard">Standard Programs</a>
+    </div>
+    <a href="newswire.html">Newswire</a>
+    <a href="home.html#pulse">Market Intelligence</a>
+    <a href="home.html#research">Research</a>
+    <a href="home.html#why">Why RAP</a>
+  </nav>
+  <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
+</div>
+
+<!-- prototype-only state switcher, so the owner can see the stale/empty designs -->
+<div class="demo">
+  <p>Prototype &mdash; feed states</p>
+  <button type="button" data-state="live">Live</button>
+  <button type="button" data-state="stale">Stale</button>
+  <button type="button" data-state="down">Unavailable</button>
+</div>
+
+<main id="top">
+<section class="sec sec--first" aria-labelledby="wire-h">
+  <div class="wrap">
+
+    <!-- masthead -->
+    <div class="mast" id="mast">
+      <div>
+        <h1 class="mast__t" id="wire-h">Furniture Retail Newswire</h1>
+        <p class="mast__s">What happened.</p>
+      </div>
+      <div class="mast__r">
+        <span class="live"><span class="live__dot" aria-hidden="true"></span> <span id="live-label">Live</span></span>
+        <p class="mast__upd" id="upd">Last updated 09:14 AM ET &middot; 25 Aug 2026</p>
+      </div>
+    </div>
+
+    <!-- stale banner (shown only in the stale state) -->
+    <div class="stale" id="stale-banner" hidden>
+      <span aria-hidden="true">&#9888;</span>
+      <div>
+        <b>Updates delayed</b>
+        <p>Last successful update 09:14 AM ET, 25 Aug 2026. The items below are the most recent we have.</p>
+      </div>
+    </div>
+
+    <!-- feed unavailable state -->
+    <div class="state" id="down-state" hidden>
+      <h3>The newswire is temporarily unavailable.</h3>
+      <p>We could not load any items. The rest of the site is unaffected.</p>
+      <div class="btns">
+        <a class="btn btn--secondary" href="home.html#pulse">Market Intelligence &rarr;</a>
+        <a class="btn btn--secondary" href="home.html#research">RAP Research &rarr;</a>
+        <a class="btn btn--secondary" href="#contact">Contact RAP &rarr;</a>
+      </div>
+    </div>
+
+    <div class="wire" id="wire-body">
+
+      <!-- filter rail -->
+      <div>
+        <button class="filterbtn" type="button" id="filterbtn" aria-expanded="false">
+          <span>Filter</span><span id="filterbtn-label">All</span>
+        </button>
+        <div class="rail" id="rail">
+          <p class="rail__h">Categories</p>
+          <div id="railcats"></div>
+          <div class="rail__arch">
+            <label for="arch">Archive</label>
+            <input id="arch" type="date" value="2026-08-25" aria-label="Jump to date">
+          </div>
+        </div>
+      </div>
+
+      <!-- feed -->
+      <div>
+        <div class="active-filter" id="active-filter">
+          <span class="chip">
+            <span id="chip-label">Housing</span>
+            <button type="button" id="chip-clear" aria-label="Clear filter">&times;</button>
+          </span>
+          <span class="counter"><span id="filter-count">0</span> items &middot;
+            <a class="qlink" href="#top" id="clear-all" style="font-size:12px">Clear all</a>
+          </span>
+        </div>
+
+        <div id="feed"></div>
+
+        <!-- empty category state -->
+        <div class="state state--empty" id="empty-state">
+          <h3>No items in <span id="empty-cat">this category</span> in the last 30 days.</h3>
+          <p>Zero-count categories stay listed — an empty wire category is information, not a bug.</p>
+          <div class="btns">
+            <button class="btn btn--secondary" type="button" id="empty-clear">Clear filter</button>
+          </div>
+        </div>
+
+        <div class="feedfoot" id="feedfoot">
+          <button class="btn btn--secondary" type="button" id="loadmore">Load 25 more</button>
+          <span class="counter">Showing <span id="shown">0</span> of <span id="total">0</span></span>
+        </div>
+
+        <!-- cross-links: separation preserved, navigation helped -->
+        <div class="xlinks">
+          <a class="xlink" href="home.html#pulse">
+            <b>Market Intelligence</b>
+            <span>What is changing?</span>
+            <i>View the data &rarr;</i>
+          </a>
+          <a class="xlink" href="home.html#research">
+            <b>RAP Research</b>
+            <span>What does it mean?</span>
+            <i>Read the research &rarr;</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
+  <div class="wrap">
+
+    <div class="contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2 class="d3">Talk to Risk Assurance Partners.</h2>
+      <div class="contact__grid">
+        <div class="contact__routes">
+          <a class="contact__route" href="economics-gate.html">
+            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="https://kiosk.furniturerx.net/">
+            <span><b>I have a protection plan</b><span>File a claim, manage or cancel your plan</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="mailto:sales@raptns.com">
+            <span><b>Media or other</b><span>Everything else</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+        </div>
+        <dl class="contact__det">
+          <div><dt>Phone</dt><dd><a href="tel:+18007325856">1.800.732.5856</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:sales@raptns.com">sales@raptns.com</a></dd></div>
+          <div><dt>Hours</dt><dd>8:00 AM &ndash; 6:00 PM, Monday&ndash;Friday, EST</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <a class="lockup foot__brand" href="home.html">
+      <span class="lockup__mark" style="background:#fff" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#204374" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
+        </svg>
+      </span>
+      <span>
+        <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
+        <span class="lockup__tag" style="color:rgba(255,255,255,.55)">Protection Programs for Home Furnishings Retailers &amp; Designers</span>
+      </span>
+    </a>
+
+    <div class="foot__cols">
+      <div>
+        <p class="foot__h">Programs</p>
+        <a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a>
+      </div>
+      <div>
+        <p class="foot__h">Intelligence</p>
+        <a href="newswire.html">Newswire</a><a href="home.html#pulse">Market Intelligence</a><a href="home.html#research">Research</a>
+      </div>
+      <div>
+        <p class="foot__h">Company</p>
+        <a href="home.html#why">Why RAP</a><a href="#contact">Contact</a>
+      </div>
+      <div>
+        <p class="foot__h">Customer</p>
+        <a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a>
+      </div>
+      <div>
+        <p class="foot__h">Dealer</p>
+        <a href="https://kiosk.furniturerx.net/">Dealer Login</a><a href="home.html#economics">Dealer Economics</a>
+      </div>
+    </div>
+
+    <div class="foot__acc">
+      <details><summary>Programs</summary><a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a></details>
+      <details><summary>Intelligence</summary><a href="newswire.html">Newswire</a><a href="home.html#pulse">Market Intelligence</a><a href="home.html#research">Research</a></details>
+      <details><summary>Company</summary><a href="home.html#why">Why RAP</a><a href="#contact">Contact</a></details>
+      <details><summary>Customer</summary><a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a></details>
+      <details><summary>Dealer</summary><a href="https://kiosk.furniturerx.net/">Dealer Login</a><a href="home.html#economics">Dealer Economics</a></details>
+    </div>
+
+    <div class="foot__legal">
+      <span>&copy; 2026 Risk Assurance Partners</span>
+      <span><a href="#stub" title="Stub — legal page, later phase">Privacy</a> &middot; <a href="#stub" title="Stub — legal page, later phase">Terms</a></span>
+    </div>
+    <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
+    <p class="foot__note" id="stub">
+      Prototype note &middot; every Newswire item on this page is fabricated placeholder content.
+      Source links do not resolve; real items and attribution arrive with Newswire automation.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   NEWSWIRE PROTOTYPE SCRIPT
+   The DATA array below is ENTIRELY FABRICATED. Headlines,
+   synopses, publication names and times are invented to exercise
+   the layout. Nothing here is a real story and no link resolves.
+   ============================================================ */
+
+var CATS = [
+  'Furniture Retail','Manufacturers','Bedding','Housing','Economy','Consumer',
+  'Consumer Credit','Trade / Tariffs','Freight','M&A','Bankruptcies',
+  'Store Openings / Closings','Protection / Warranty','Retail Technology'
+];
+
+/* Fabricated placeholder feed — 25 items across three days. */
+var DATA = [
+  ['Tue 25 Aug 2026','12:38 PM','Housing','Existing-home sales hold near their multi-year floor in the latest monthly print','Placeholder synopsis for layout only. Two lines maximum, written from the original report and never republished in full.','Placeholder Wire'],
+  ['Tue 25 Aug 2026','11:52 AM','Furniture Retail','Regional furniture retailer confirms three new store locations for spring','Placeholder synopsis for layout only. Automated discovery, relevance filtering and deduplication are defined in the Newswire automation phase.','Placeholder Daily'],
+  ['Tue 25 Aug 2026','11:17 AM','Trade / Tariffs','Tariff schedule for upholstered wooden products updated in the register','Placeholder synopsis for layout only. Every item carries publication attribution and an outbound link to the original source.','Placeholder Trade Journal'],
+  ['Tue 25 Aug 2026','10:41 AM','Consumer Credit','Revolving balances tick higher in the latest consumer credit release','Placeholder synopsis for layout only. Category assignment follows the approved Newswire taxonomy.','Placeholder Financial Review'],
+  ['Tue 25 Aug 2026','10:04 AM','Manufacturers','Case goods manufacturer reports quarterly order growth against flat shipments','Placeholder synopsis for layout only. Suppressed sources and duplicate stories are handled before publication.','Placeholder Industry Report'],
+  ['Tue 25 Aug 2026','09:36 AM','Economy','Consumer sentiment reading comes in slightly ahead of expectations','Placeholder synopsis for layout only. No real figure is stated anywhere in this prototype.','Placeholder Economics Desk'],
+  ['Tue 25 Aug 2026','09:14 AM','Retail Technology','Point-of-sale vendor adds protection-plan attach reporting for dealers','Placeholder synopsis for layout only. Retail technology items cover systems dealers actually run.','Placeholder Tech Weekly'],
+  ['Tue 25 Aug 2026','08:47 AM','Bedding','Mattress specialist reports shifting mix toward adjustable bases','Placeholder synopsis for layout only.','Placeholder Bedding News'],
+  ['Tue 25 Aug 2026','08:20 AM','Freight','Container rates on transpacific lanes ease for a third consecutive week','Placeholder synopsis for layout only.','Placeholder Logistics Wire'],
+
+  ['Mon 24 Aug 2026','04:51 PM','M&A','Two regional furniture chains confirm merger discussions','Placeholder synopsis for layout only. M&A items are filtered for relevance to furniture retail specifically.','Placeholder Deal Report'],
+  ['Mon 24 Aug 2026','03:38 PM','Store Openings / Closings','Department store group to close four home furnishings departments','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
+  ['Mon 24 Aug 2026','02:55 PM','Protection / Warranty','Protection-plan provider expands subscription option to additional categories','Placeholder synopsis for layout only. Protection and warranty items are tracked as their own category.','Placeholder Coverage Journal'],
+  ['Mon 24 Aug 2026','01:22 PM','Housing','Building permits edge up in the latest release','Placeholder synopsis for layout only.','Placeholder Housing Wire'],
+  ['Mon 24 Aug 2026','12:40 PM','Consumer','Survey finds shoppers delaying large home purchases into the autumn','Placeholder synopsis for layout only.','Placeholder Consumer Insights'],
+  ['Mon 24 Aug 2026','11:58 AM','Furniture Retail','Independent retailer group reports mixed August floor traffic','Placeholder synopsis for layout only.','Placeholder Daily'],
+  ['Mon 24 Aug 2026','10:33 AM','Economy','Rate expectations shift after the latest inflation reading','Placeholder synopsis for layout only.','Placeholder Economics Desk'],
+  ['Mon 24 Aug 2026','09:47 AM','Manufacturers','Upholstery manufacturer announces capacity expansion','Placeholder synopsis for layout only.','Placeholder Industry Report'],
+  ['Mon 24 Aug 2026','09:05 AM','Retail Technology','Delivery-scheduling platform adds furniture-specific routing','Placeholder synopsis for layout only.','Placeholder Tech Weekly'],
+
+  ['Fri 21 Aug 2026','05:12 PM','Furniture Retail','Retailer reports quarterly results with protection attach rate commentary','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
+  ['Fri 21 Aug 2026','03:44 PM','Freight','Domestic trucking capacity tightens ahead of the autumn peak','Placeholder synopsis for layout only.','Placeholder Logistics Wire'],
+  ['Fri 21 Aug 2026','02:19 PM','Consumer Credit','Promotional financing offers broaden across home furnishings','Placeholder synopsis for layout only.','Placeholder Financial Review'],
+  ['Fri 21 Aug 2026','01:03 PM','Bedding','Sleep retailer trials a subscription mattress-care offer','Placeholder synopsis for layout only.','Placeholder Bedding News'],
+  ['Fri 21 Aug 2026','11:36 AM','Trade / Tariffs','Importers weigh sourcing shifts as duties are reviewed','Placeholder synopsis for layout only.','Placeholder Trade Journal'],
+  ['Fri 21 Aug 2026','10:12 AM','Store Openings / Closings','Furniture retailer opens flagship showroom in a converted warehouse','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
+  ['Fri 21 Aug 2026','09:28 AM','Housing','Mortgage application volume rises week over week','Placeholder synopsis for layout only.','Placeholder Housing Wire']
+];
+
+/* Items per load. Production target is 25 (open question N-1); the prototype
+   uses 15 so the load-more affordance and the counter are actually visible
+   against a 25-item placeholder feed. */
+var PAGE = 15;
+var shown = PAGE;
+var filter = null;
+
+var feedEl = document.getElementById('feed');
+var railEl = document.getElementById('railcats');
+
+function counts() {
+  var c = {};
+  CATS.forEach(function (k) { c[k] = 0; });
+  DATA.forEach(function (r) { if (c[r[2]] !== undefined) { c[r[2]]++; } });
+  return c;
+}
+
+function buildRail() {
+  var c = counts();
+  var html = '<button class="rail__b" type="button" data-cat="" aria-pressed="true">' +
+             'All <span>' + DATA.length + '</span></button>';
+  CATS.forEach(function (k) {
+    var n = c[k];
+    html += '<button class="rail__b' + (n === 0 ? ' is-zero' : '') + '" type="button" data-cat="' +
+            k.replace(/"/g, '&quot;') + '" aria-pressed="false">' +
+            k + ' <span>' + n + '</span></button>';
+  });
+  railEl.innerHTML = html;
+  railEl.querySelectorAll('.rail__b').forEach(function (b) {
+    b.addEventListener('click', function () {
+      setFilter(b.getAttribute('data-cat') || null);
+    });
+  });
+}
+
+function matching() {
+  return filter ? DATA.filter(function (r) { return r[2] === filter; }) : DATA;
+}
+
+function render() {
+  var rows = matching();
+  var slice = rows.slice(0, shown);
+  var html = '';
+  var day = '';
+
+  slice.forEach(function (r) {
+    if (r[0] !== day) {
+      day = r[0];
+      html += '<p class="daybar">' + day + '</p>';
+    }
+    html += '<article class="item">' +
+      '<p class="item__t">' + r[1] + '</p>' +
+      '<div>' +
+        '<span class="item__c">' + r[2] + '</span>' +
+        '<h2 class="item__h">' + r[3] + '</h2>' +
+        '<p class="item__s">' + r[4] + '</p>' +
+        '<p class="item__p">' + r[5] + ' &middot; placeholder source</p>' +
+      '</div>' +
+      '<p class="item__src"><a class="qlink" href="#stub" title="Placeholder — resolves to the original publication in production">Source &rarr;</a></p>' +
+    '</article>';
+  });
+
+  feedEl.innerHTML = html;
+
+  /* counters + empty state */
+  document.getElementById('shown').textContent = slice.length;
+  document.getElementById('total').textContent = rows.length;
+  var more = rows.length - slice.length;
+  var lm = document.getElementById('loadmore');
+  lm.style.display = more > 0 ? '' : 'none';
+  lm.textContent = 'Load ' + Math.min(PAGE, more) + ' more';
+  document.getElementById('feedfoot').style.display = rows.length ? '' : 'none';
+
+  var empty = document.getElementById('empty-state');
+  empty.classList.toggle('is-on', rows.length === 0);
+  if (rows.length === 0 && filter) {
+    document.getElementById('empty-cat').textContent = filter;
+  }
+
+  /* active filter chip */
+  var af = document.getElementById('active-filter');
+  af.classList.toggle('is-on', !!filter);
+  if (filter) {
+    document.getElementById('chip-label').textContent = filter;
+    document.getElementById('filter-count').textContent = rows.length;
+  }
+  document.getElementById('filterbtn-label').textContent = filter || 'All';
+
+  railEl.querySelectorAll('.rail__b').forEach(function (b) {
+    b.setAttribute('aria-pressed', String((b.getAttribute('data-cat') || null) === filter));
+  });
+}
+
+function setFilter(cat) {
+  filter = cat;
+  shown = PAGE;
+  render();
+}
+
+document.getElementById('loadmore').addEventListener('click', function () {
+  shown += PAGE;
+  render();
+});
+document.getElementById('chip-clear').addEventListener('click', function () { setFilter(null); });
+document.getElementById('clear-all').addEventListener('click', function (e) { e.preventDefault(); setFilter(null); });
+document.getElementById('empty-clear').addEventListener('click', function () { setFilter(null); });
+
+/* mobile filter sheet */
+var fb = document.getElementById('filterbtn');
+fb.addEventListener('click', function () {
+  var rail = document.getElementById('rail');
+  var open = rail.classList.toggle('is-open');
+  fb.setAttribute('aria-expanded', String(open));
+});
+
+/* feed state switcher (prototype only) */
+document.querySelectorAll('.demo button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var s = b.getAttribute('data-state');
+    var mast = document.getElementById('mast');
+    document.body.classList.toggle('is-stale', s === 'stale');
+    document.getElementById('stale-banner').hidden = s !== 'stale';
+    document.getElementById('down-state').hidden = s !== 'down';
+    document.getElementById('wire-body').hidden = s === 'down';
+    document.getElementById('live-label').textContent = s === 'stale' ? 'Delayed' : 'Live';
+    mast.classList.toggle('is-stale', s === 'stale');
+  });
+});
+
+buildRail();
+render();
+
+/* Sticky header condense, matching home.html; publishes --hdr-h so the
+   filter rail sticks directly beneath the header at both heights. */
+(function () {
+  var hdr = document.querySelector('.hdr');
+  var root = document.documentElement;
+  var ticking = false;
+  function apply() {
+    var condensed = window.scrollY > 40;
+    hdr.classList.toggle('is-condensed', condensed);
+    root.style.setProperty('--hdr-h', (condensed ? 64 : 84) + 'px');
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+  }, { passive: true });
+  apply();
+})();
+
+/* Drawer: close on Esc. */
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    var t = document.getElementById('navtoggle');
+    if (t && t.checked) { t.checked = false; }
+  }
+});
+</script>
+
+</body>
+</html>

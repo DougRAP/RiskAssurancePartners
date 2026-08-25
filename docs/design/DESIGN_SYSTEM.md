@@ -1,6 +1,17 @@
 # Risk Assurance Partners — DESIGN SYSTEM
 
 **Phase 2 / UI-UX deliverable 2 of 5.**
+**Revision 5 — 2026-08-25.** DECISION 039: the system now spans four prototype pages
+(`home` · `programs` · `newswire` · `economics-gate`). Shared chrome — utility bar, sticky
+condensing header, drawer, contact block, footer — is identical on every page; the condense
+script publishes the live header height as `--hdr-h` so page-level sticky elements (the
+Programs section-jump strip, the Newswire filter rail) dock directly beneath it at both 84px
+and 64px. Three components added, all built from existing tokens: **coverage grid** (real
+`<table>`, `BASIC | PREMIUM` columns, `✓` in `--rap-ember-700` / `—` in `--rap-slate-300`, both
+`aria-label`led), **mini calculator** (two editable inputs, Playfair tabular results,
+`aria-live` region, mandatory illustrative caption, gated-tool CTA), and **placeholder wrap**
+(dashed `--rap-ember` border + ribbon marking any block awaiting owner content). No token,
+typeface, scale, or grid value changed.
 **Revision 4 — 2026-08-25.** DECISIONS 037–038: the economic-paths row carries **four** cards,
 not three. `.paths` is `repeat(4,1fr)` desktop → `1fr` at ≤900px. **Four in a row on desktop,
 stacked below — there is no 2×2 stage** (DECISION 038); 4-across holds to ~900px, and below

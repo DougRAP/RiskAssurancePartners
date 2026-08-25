@@ -1,6 +1,10 @@
 # Risk Assurance Partners — INTERIOR PAGE WIREFRAMES
 
-**Phase 2 / UI-UX. Status: PROPOSED — owner approves layout before any shell coding.**
+**Phase 2 / UI-UX. Status: LAYOUTS APPROVED — BUILT AS PLACEHOLDER PAGES (DECISION 039).**
+Both pages now exist as prototypes: `prototype-ui/programs.html` and
+`prototype-ui/newswire.html`. Navigation across all four prototype pages is wired to them.
+Content in both is placeholder pending owner-supplied copy, coverage lists and Newswire feed.
+
 **Revision 2 — 2026-08-25.** Rewritten for **DECISION 038**.
 Authority: DECISIONS.md through **038**, LOCKED_WIREFRAME v1.1, MASTER_SPEC, AGENT_RULES.
 Design system: `docs/design/DESIGN_SYSTEM.md` (rev 4).
@@ -63,7 +67,27 @@ Every page inherits, unchanged from `home.html`:
 
 # 1. PROGRAMS PAGE — `/programs`
 
+**Built: `prototype-ui/programs.html`.**
+
 One page. Four sections. `#subscription` · `#multi-year` · `#reinsurance` · `#standard`.
+
+**Mini-calculator model as built (DECISION 039, subscription model corrected by owner
+2026-08-25).** Subscription revenue is *cumulative recurring* — subscribers stack month over
+month. With `m` = annual units ÷ 12 average new subscribers per month, and no churn shown:
+
+| Output | Formula | At 1,200 units / $8 |
+|---|---|---|
+| Month n income | `m × n × rate` | — |
+| Year 1 income | `rate × m × 78` (Σ1..12) | $62,400 |
+| 5-year cumulative | `rate × m × 1830` (Σ1..60) | $1,464,000 |
+| Active subscribers at month 60 | `60 × m` | 6,000 |
+| Monthly run-rate at month 60 | `60 × m × rate` | $48,000 / month |
+
+Multi-Year does not stack — income lands at the sale: `annual = units × margin`,
+`5-year = annual × 5`. Both calculators carry
+*"Illustrative only — assumes continued sales and active subscriptions. Not a forecast."*
+and route to the gated Profit Calculator. No churn, retention or cancellation assumption is
+exposed (DECISION 013).
 
 ## 1.1 Page structure
 
@@ -315,6 +339,11 @@ available to each section:
 ---
 
 # 2. NEWSWIRE PAGE — `/newswire`
+
+**Built: `prototype-ui/newswire.html`.** Layout unchanged from revision 1. The build adds a
+prototype-only feed-state switcher (Live / Stale / Unavailable) so the owner can see all three
+states without waiting for a real failure. All 25 feed items are fabricated placeholders,
+marked as such in the page banner, the code comments and the footer note.
 
 **Unchanged from revision 1.** Built to hold 20–30+ items per view and to keep working when the
 feed is stale or broken. The homepage section remains the 3–5 item preview that links here.

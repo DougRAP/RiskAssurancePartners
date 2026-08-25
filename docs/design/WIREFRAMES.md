@@ -6,6 +6,12 @@
 **Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
 (DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
 
+## Revision 5 change log (2026-08-25)
+
+| Decision | Section | Change |
+|---|---|---|
+| 039 | 01, 02, 05, 09, 13 | Navigation now leaves the homepage. Programs dropdown, drawer, path-card `Learn more`, orientation-strip `View`, and footer Programs group all target `programs.html#{section}`; the Newswire nav item, homepage `View all news`, and footer Intelligence group target `newswire.html`. Market Intelligence, Research and Why RAP remain homepage anchors. No `href="#"` remains on any page. |
+
 ## Revision 4 change log (2026-08-25)
 
 | Decision | Section | Change |
