@@ -520,6 +520,20 @@ The owner-directed R10.2 homepage refactor is the new baseline. Key points:
 - Two-axis matrix collapsed into a fold within the three-paths section; section rhythm tightened; backgrounds alternate.
 - **Process note:** the design-flexibility clause in MASTER_SPEC is to be applied liberally — locked items protect the business narrative and facts, not design execution. Owner iterations supersede prior design lockups.
 
+## Decision 036 — Hero Polish Copy & GM Comparison Illustration
+
+**Status:** Approved (Owner, 2026-08-25)
+
+- Eyebrow line 2 / tagline: **"Protection Programs for Home Furnishings Retailers & Designers"**
+- H1: **"2X net income or earn recurring subscription profits."**
+- Lead: **"You pay fixed costs every month even when furniture sales slow. Our protection programs — Subscription, Multi-Year, and Reinsurance — generate more net cash from every customer without added inventory, advertising, or sales expense."**
+- Hero illustration: side-by-side gross-margin comparison with divider bar —
+  **Subscription: $8 × 60 payments = $480 GM** · **Multi-Year: $250 retail × 75% = $180 GM**
+
+New owner-supplied claims now in play: "2X net income"; 60-payment subscription illustration horizon; $250 average multi-year retail; 75% multi-year margin rate.
+
+**Arithmetic flag (open):** $250 × 75% = $187.50, not $180. Owner to confirm corrected pairing (e.g., 72% → $180, or 75% → $187.50).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
