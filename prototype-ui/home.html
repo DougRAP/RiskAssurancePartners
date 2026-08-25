@@ -266,16 +266,6 @@ button{font:inherit;cursor:pointer}
 .trust__stars{font-size:.55em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:2px}
 .trust__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 
-/* ---------- 03 market pulse / stat tiles ---------- */
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-7)}
-.tile{border-top:2px solid var(--rap-ink);padding-top:var(--s-4);background:transparent}
-.tile__label{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);min-height:2.6em}
-.tile__val{font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;margin:var(--s-3) 0 var(--s-2);font-variant-numeric:tabular-nums}
-.tile__delta{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
-.up{color:var(--rap-up)}.down{color:var(--rap-down)}.flat{color:var(--rap-flat)}
-.tile__delta span{color:var(--rap-slate-500)}
-.tile__src{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200)}
-.pulse__foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s-5);margin-top:var(--s-7);flex-wrap:wrap}
 
 /* ---------- 05 three paths ---------- */
 .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-8)}
@@ -309,46 +299,6 @@ button{font:inherit;cursor:pointer}
   font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);font-weight:500;line-height:1.25;text-align:center;
 }
 
-/* ---------- 07 furniturerx ---------- */
-.frx{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-9);align-items:start}
-.frx__lockup{border-top:2px solid var(--rap-ember);padding-top:var(--s-4);margin-bottom:var(--s-6)}
-.frx__name{font-family:var(--serif);font-size:32px;font-weight:600;line-height:1}
-.frx__of{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
-.frx__pts{margin-top:var(--s-3);display:grid;gap:var(--s-3)}
-.frx__pts li{padding-left:var(--s-5);border-left:2px solid var(--rap-ember);}
-.frx__pts b{display:block;font-weight:600;font-size:17px;line-height:1.3}
-.frx__pts span{display:block;font-size:14px;color:var(--rap-slate-700);margin-top:3px}
-.econ{border-top:2px solid var(--rap-ember);border-bottom:2px solid var(--rap-ember);margin:var(--s-7) 0 var(--s-4)}
-.econ__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-5);padding:var(--s-4) 0;border-bottom:1px solid var(--rap-slate-200)}
-.econ__row:last-child{border-bottom:0}
-.econ__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.econ__v{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1;text-align:right;white-space:nowrap}
-.econ__v small{display:block;font-family:var(--sans);font-size:12px;font-weight:500;color:var(--rap-slate-500);margin-top:6px;white-space:normal}
-
-/* kiosk reproduction */
-.kiosk{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);overflow:hidden;background:#fff}
-.kiosk__bar{background:var(--rap-ink);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;text-align:center}
-.kiosk__hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--rap-slate-200)}
-.kiosk__brand{font-family:var(--serif);font-size:20px;font-weight:600}
-.kiosk__brand span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-slate-500);margin-left:8px;vertical-align:middle}
-.kiosk__cart{width:32px;height:32px;border:1px solid var(--rap-slate-300);border-radius:50%;display:grid;place-items:center;font-size:14px}
-.kiosk__body{background:var(--rap-mist);padding:var(--s-6) var(--s-5)}
-.kiosk__card{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-5)}
-.kiosk__eyebrow{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.kiosk__plan{font-family:var(--serif);font-size:22px;font-weight:500;margin:6px 0 2px}
-.kiosk__price{font-family:var(--serif);font-size:38px;font-weight:500;line-height:1}
-.kiosk__price small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--rap-slate-500)}
-.kiosk__maya{border:1px solid var(--rap-ember);background:var(--rap-ember-050);border-radius:var(--radius-sm);padding:10px 12px;margin:var(--s-4) 0;font-size:12px}
-.kiosk__maya b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:2px}
-.kiosk__list li{display:flex;gap:8px;font-size:13px;color:var(--rap-slate-700);padding:5px 0;border-bottom:1px solid var(--rap-slate-100)}
-.kiosk__list li:last-child{border-bottom:0}
-.kiosk__check{color:var(--rap-ember-700);font-weight:700}
-.kiosk__terms{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:10px}
-.kiosk__btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:var(--s-4)}
-.kiosk__btn{padding:11px;text-align:center;font-size:13px;font-weight:600;border-radius:var(--radius-sm)}
-.kiosk__btn--p{background:var(--rap-ember-700);color:#fff}
-.kiosk__btn--s{border:1px solid var(--rap-ink)}
-.kiosk__cap{margin-top:var(--s-3)}
 
 /* ---------- 08 economics teaser ---------- */
 /* .pub (the $19.99/$0/$8 strip) removed — Section 07 already carries those figures. */
@@ -370,17 +320,6 @@ button{font:inherit;cursor:pointer}
 .teaser__cta .meta{margin-top:var(--s-4)}
 
 /* ---------- 09 newswire ---------- */
-.wire__hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-5);flex-wrap:wrap;border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4)}
-.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-ember-700)}
-.live__dot{width:7px;height:7px;border-radius:50%;background:var(--rap-ember);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-.wire__row{display:grid;grid-template-columns:88px 1fr auto;gap:var(--s-5);padding:20px 0;border-bottom:1px solid var(--rap-slate-200);align-items:start}
-.wire__time{font-family:var(--mono);font-size:13px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums;padding-top:2px}
-/* .wire__cat and .wire__syn removed — category chips and synopses belong to
-   the full feed on newswire.html; the homepage preview is time + headline. */
-.wire__head{font-weight:600;font-size:var(--fs-h3);line-height:1.3;letter-spacing:-.01em}
-.wire__src{white-space:nowrap;padding-top:2px}
-.wire__foot{margin-top:var(--s-7);text-align:right}
 
 /* ---------- 10 research ---------- */
 .research{display:grid;grid-template-columns:4fr 8fr;gap:var(--s-9);align-items:start;margin-top:var(--s-8)}
@@ -450,7 +389,7 @@ button{font:inherit;cursor:pointer}
    ============================================================ */
 @media (max-width:1100px){
   :root{--margin:32px}
-  .hero,.frx,.research{gap:var(--s-7)}
+  .hero,.research{gap:var(--s-7)}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
 }
@@ -463,7 +402,6 @@ button{font:inherit;cursor:pointer}
      strip (R3a) already carries File a Claim + Dealer Login persistently. */
   .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
   .hdr.is-condensed .hdr__util{display:none}
-  .tiles{grid-template-columns:1fr 1fr}
   .why{grid-template-columns:1fr 1fr}
   .trust__row{grid-template-columns:repeat(3,1fr);row-gap:var(--s-5)}
   .trust__i:nth-child(4){border-left:0;padding-left:0}
@@ -479,8 +417,8 @@ button{font:inherit;cursor:pointer}
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .hero,.frx,.research,.teaser{grid-template-columns:1fr}
-  .hero__fig,.kiosk{order:2}
+  .hero,.research,.teaser{grid-template-columns:1fr}
+  .hero__fig{order:2}
   .research .cover{max-width:260px}
   .branch{grid-template-columns:1fr 1fr;gap:var(--s-3)}
   .branch__card{padding:var(--s-4)}
@@ -506,15 +444,11 @@ button{font:inherit;cursor:pointer}
   .lockup__tag{display:none}
   .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
   .burger{width:42px;height:42px;flex:0 0 42px}
-  .tiles{grid-template-columns:1fr;gap:var(--s-6)}
-  .tile__label{min-height:0}
   .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
   .trust__i{border-left:0;padding-left:0}
   .trust__v{font-size:20px}
   .why{grid-template-columns:1fr}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
-  .wire__row{grid-template-columns:1fr;gap:var(--s-2)}
-  .wire__src{padding-top:var(--s-2)}
   .chain{flex-direction:column;gap:var(--s-2)}
   .chain__arrow{transform:rotate(90deg)}
   .chain__node{width:100%;text-align:center}
@@ -954,103 +888,6 @@ button{font:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- ============ 07 FURNITURERX ============ -->
-<section class="sec" id="furniturerx" aria-labelledby="frx-h">
-  <div class="wrap frx">
-    <div>
-      <div class="frx__lockup">
-        <p class="frx__name">FurnitureRx</p>
-        <p class="frx__of">A product of Risk Assurance Partners</p>
-      </div>
-
-      <h2 class="d3" id="frx-h">
-        Turn some protection declines into <span class="acc">recurring customer relationships.</span>
-      </h2>
-
-      <!-- DECISION 031 — the five approved points. Kiosk coverage detail is deliberately
-           not mirrored here; the panel opposite carries product proof instead. -->
-      <p class="eyebrow" style="margin-top:var(--s-7)">For the customer</p>
-      <ul class="frx__pts">
-        <li>
-          <b>Just $19.99 a month</b>
-          <span>The same coverage as multi-year programs, paid monthly instead of upfront.</span>
-        </li>
-        <li>
-          <b>Cancel, start, restart at any time</b>
-          <span>The customer stays in control of the relationship.</span>
-        </li>
-      </ul>
-
-      <p class="eyebrow" style="margin-top:var(--s-6)">For the dealer</p>
-      <ul class="frx__pts">
-        <li>
-          <b>Zero remit</b>
-          <span>The dealer pays RAP nothing to participate.</span>
-        </li>
-        <li>
-          <b>Recurring commission revenue</b>
-          <span>$8 for every successful monthly payment, for as long as the customer stays.</span>
-        </li>
-      </ul>
-
-      <dl class="econ">
-        <div class="econ__row">
-          <dt class="econ__k">Customer pays</dt>
-          <dd class="econ__v">$19.99<small>per month</small></dd>
-        </div>
-        <div class="econ__row">
-          <dt class="econ__k">Dealer remits</dt>
-          <dd class="econ__v">$0<small>nothing to participate</small></dd>
-        </div>
-        <div class="econ__row">
-          <dt class="econ__k">Dealer earns</dt>
-          <dd class="econ__v">$8<small>per successful monthly payment</small></dd>
-        </div>
-      </dl>
-
-      <!-- Positioning, coverage detail and the subscription mini calculator all
-           live on the Programs page; the homepage keeps proof + the five points. -->
-      <div class="btns">
-        <a class="btn btn--primary" href="programs.html#subscription">See the full program &rarr;</a>
-      </div>
-    </div>
-
-    <div>
-      <!-- Reproduction of the live FurnitureRx kiosk interface as product proof -->
-      <div class="kiosk">
-        <div class="kiosk__bar">Furniture protection &middot; cancel anytime</div>
-        <div class="kiosk__hdr">
-          <p class="kiosk__brand">FurnitureRx <span>Powered by RAP</span></p>
-          <span class="kiosk__cart" aria-hidden="true">&#128722;</span>
-        </div>
-        <div class="kiosk__body">
-          <div class="kiosk__card">
-            <p class="kiosk__eyebrow">Monthly plan</p>
-            <p class="kiosk__plan">Stain + Structure</p>
-            <p class="kiosk__price">$19.99<small> /month</small></p>
-            <div class="kiosk__maya">
-              <b>Maya &middot; your sales assistant</b>
-              Tell me about your purchase &rarr;
-            </div>
-            <!-- DECISION 031 — kiosk coverage detail is NOT mirrored on the homepage.
-                 The panel shows the buying decision the customer actually faces. -->
-            <ul class="kiosk__list">
-              <li><span class="kiosk__check">&#10003;</span> Same coverage as a multi-year plan</li>
-              <li><span class="kiosk__check">&#10003;</span> Cancel, pause or restart anytime</li>
-            </ul>
-            <p class="kiosk__terms">Full coverage terms shown at checkout</p>
-            <div class="kiosk__btns">
-              <span class="kiosk__btn kiosk__btn--p">Save to cart &rarr;</span>
-              <span class="kiosk__btn kiosk__btn--s">Checkout</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="meta kiosk__cap">Actual FurnitureRx customer interface &middot; kiosk.furniturerx.net</p>
-    </div>
-  </div>
-</section>
-
 <!-- ============ 08 DEALER ECONOMICS TEASER ============ -->
 <section class="sec sec--mist" id="economics" aria-labelledby="econ-h">
   <div class="wrap">
@@ -1105,87 +942,6 @@ button{font:inherit;cursor:pointer}
     <div class="teaser__cta">
       <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
       <p class="meta">Access is reviewed by RAP Sales &middot; Six fields &middot; No password to create</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 09 NEWSWIRE ============ -->
-<section class="sec sec--tight" id="newswire" aria-labelledby="wire-h">
-  <div class="wrap">
-    <div class="wire__hdr">
-      <div>
-        <h2 class="d3" id="wire-h">Furniture Retail Newswire</h2>
-        <p class="meta" style="margin-top:8px">What happened</p>
-      </div>
-      <span class="live"><span class="live__dot" aria-hidden="true"></span> Live &middot; updated continuously</span>
-    </div>
-
-    <!-- Compact 3-item preview. Category chips, synopses beyond one line,
-         additional items and all feed states live on newswire.html. -->
-    <article class="wire__row">
-      <p class="wire__time">12:38 PM</p>
-      <div>
-        <h3 class="wire__head">Existing-home sales hold near their multi-year floor in the latest monthly print</h3>
-      </div>
-      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
-    </article>
-
-    <article class="wire__row">
-      <p class="wire__time">11:17 AM</p>
-      <div>
-        <h3 class="wire__head">Regional furniture retailer announces store openings across three markets</h3>
-      </div>
-      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
-    </article>
-
-    <article class="wire__row">
-      <p class="wire__time">10:04 AM</p>
-      <div>
-        <h3 class="wire__head">Tariff schedule for upholstered wooden products updated in the Federal Register</h3>
-      </div>
-      <p class="wire__src"><a class="qlink" href="newswire.html">Read &rarr;</a></p>
-    </article>
-
-    <p class="wire__foot"><a class="qlink" href="newswire.html">View all news &rarr;</a></p>
-  </div>
-</section>
-
-<!-- ============ 09b MARKET PULSE (R10 — moved from position 03 to sit with Newswire) ============ -->
-<section class="sec sec--tight sec--mist" id="pulse" aria-labelledby="pulse-h">
-  <div class="wrap">
-    <p class="eyebrow">Market Intelligence</p>
-    <h2 class="d3" id="pulse-h">The market moving furniture retail.</h2>
-
-    <div class="tiles">
-      <div class="tile">
-        <p class="tile__label">Furniture &amp; home furnishings store sales</p>
-        <p class="tile__val">$11.20B</p>
-        <p class="tile__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
-        <p class="tile__src meta">Census / FRED &middot; UPD 08 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Existing-home sales (SAAR)</p>
-        <p class="tile__val">4.06M</p>
-        <p class="tile__delta flat">&#9654; 0.0% <span>year over year</span></p>
-        <p class="tile__src meta">NAR / FRED &middot; UPD 21 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Housing starts</p>
-        <p class="tile__val">1.31M</p>
-        <p class="tile__delta up">&#9650; 2.1% <span>year over year</span></p>
-        <p class="tile__src meta">Census &middot; UPD 19 Aug</p>
-      </div>
-      <div class="tile">
-        <p class="tile__label">Furniture CPI</p>
-        <p class="tile__val">&minus;1.2%</p>
-        <p class="tile__delta down">&#9660; 0.4% <span>year over year</span></p>
-        <p class="tile__src meta">BLS &middot; UPD 13 Aug</p>
-      </div>
-    </div>
-
-    <div class="pulse__foot">
-      <p class="meta">Placeholder values &middot; every tile ships with a source and a last-updated stamp</p>
-      <a class="qlink" href="#stub" title="Stub — Market Intelligence page, later phase">Market Intelligence &rarr;</a>
     </div>
   </div>
 </section>
