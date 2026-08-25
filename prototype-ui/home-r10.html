@@ -10,7 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RISK ASSURANCE PARTNERS — Phase 2 UI/UX prototype · R10 revision
+   RISK ASSURANCE PARTNERS — Phase 2 UI/UX prototype · R10.2 revision
+   R10.2: narrative voice is first-person plural ("we"); the company name
+   anchors the eyebrow, labels, and claims. R10.1: RAP named and made the
+   grammatical actor in the hero, orientation
+   claim made visible, ink section closes with RAP as the answer.
    R10: hero rebuilt (clarity-first), trust strip added, section rhythm
    tightened (96/128px), axes matrix moved to #paths, Market Pulse moved
    adjacent to Newswire, backgrounds alternated so no two match.
@@ -85,6 +89,7 @@ button{font:inherit;cursor:pointer}
 .eyebrow{
   font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.10em;
   text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4);
+  line-height:1.7;
 }
 .sec--ink .eyebrow{color:var(--rap-brass)}
 .d1{font-family:var(--serif);font-weight:500;font-size:var(--fs-d1);line-height:.99;letter-spacing:-.02em}
@@ -232,6 +237,7 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- 02b orientation strip (R2) — a directory object, not a pitch ---------- */
 .orient{margin-top:var(--s-7);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
+.orient__claim{font-family:var(--serif);font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--s-3)}
 .orient__desc{font-size:17px;line-height:1.55;color:var(--rap-slate-700);max-width:92ch}
 .orient__progs{
   display:grid;grid-template-columns:repeat(3,1fr);gap:0;
@@ -596,7 +602,6 @@ button{font:inherit;cursor:pointer}
       </span>
       <span>
         <span class="lockup__name">Risk Assurance Partners</span>
-        <span class="lockup__tag">Protection Programs for Home Furnishings Retail</span>
       </span>
     </a>
 
@@ -663,15 +668,15 @@ button{font:inherit;cursor:pointer}
   <div class="wrap">
    <div class="hero">
     <div>
-      <p class="eyebrow">For furniture &amp; mattress retailers</p>
+      <p class="eyebrow">Risk Assurance Partners<br>Protection Programs for Home Furnishings Retail</p>
       <h1 class="d1" id="hero-h">
-        Turn one furniture sale into <span class="acc">recurring dealer income.</span>
+        We turn one furniture sale into <span class="acc">recurring dealer income.</span>
       </h1>
       <p class="lead" style="margin-top:var(--s-6)">
-        Your expenses recur every month. Your furniture sale doesn&rsquo;t. RAP protection
-        programs &mdash; Subscription, Multi-Year, and Reinsurance &mdash; create more economic
-        value from customers you already paid to acquire, with no added inventory,
-        advertising, or floor space.
+        Your expenses recur every month. Your furniture sale doesn&rsquo;t. We build the
+        protection programs &mdash; Subscription, Multi-Year, and Reinsurance &mdash; that
+        create more economic value from customers you already paid to acquire. No added
+        inventory, advertising, or floor space.
       </p>
       <div class="btns">
         <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
@@ -710,7 +715,8 @@ button{font:inherit;cursor:pointer}
    <!-- R2 — orientation strip. Inside Section 02, so the 14-section sequence is unchanged.
         Descriptor copy is owner-approved verbatim (DECISION 025). Carries no economics. -->
    <div class="orient" aria-labelledby="orient-h">
-     <h2 id="orient-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">What Risk Assurance Partners does</h2>
+     <!-- R10.1 — the positioning claim is now visible, not screen-reader-only. -->
+     <h2 id="orient-h" class="orient__claim">The protection program administrator built for furniture retail.</h2>
      <p class="orient__desc">
        Protection programs for furniture &amp; mattress retail dealers, as well as custom interior
        designer programs. Reinsurance, Subscription, Multi-Year &amp; Standard programs &mdash; all
@@ -812,6 +818,7 @@ button{font:inherit;cursor:pointer}
 
     <p class="lead" style="margin:var(--s-7) auto 0;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);max-width:60ch">
       Every cost above recurs. The transaction does not.
+      <strong style="color:#fff;font-weight:600">We build the programs that change that math.</strong>
     </p>
   </div>
 </section>
