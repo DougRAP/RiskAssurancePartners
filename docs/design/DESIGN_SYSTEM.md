@@ -1,6 +1,13 @@
 # Risk Assurance Partners — DESIGN SYSTEM
 
 **Phase 2 / UI-UX deliverable 2 of 5.**
+**Revision 4 — 2026-08-25.** DECISION 037: the economic-paths row carries **four** cards, not
+three. `.paths` is `repeat(4,1fr)` desktop → `1fr 1fr` at ≤1100px → `1fr` at ≤680px; cards keep
+their vertical form at every width so the parity rule below still holds, and the former
+horizontal-card treatment at ≤1024px is retired. Standard Programs is added to the orientation
+strip, Programs dropdown, drawer, and footer at full label. Parity rule extended to four:
+identical border, padding, title size, and CTA across all four; **no ember rule on any card in
+this row.** No token, typeface, scale, or grid-gutter value changed.
 **Revision 3 — 2026-08-25.** DECISIONS 029–032: primary CTA relabelled **"Profit Calculator"**
 and made persistent on mobile (§4.1, §4.2); two-axis program block added to the orientation
 strip (§4.2b); rating block added (§4.3b); FurnitureRx point list added (§6). No token,
@@ -544,10 +551,11 @@ looking at from a cropped screenshot.
   the "three paths, not one product plus two footnotes" requirement is enforced. FurnitureRx
   gets the ember rule only where it is the subject of the section (07), never in the
   three-path row **and never in the §4.2b orientation strip**.
-- **All three programs must be reachable everywhere they appear.** Each has a stable anchor
-  (`#program-subscription`, `#program-multiyear`, `#program-reinsurance`) targeted by the header
-  dropdown, the orientation strip, the drawer, and the footer. A program rendered at parity but
-  left unclickable is a quiet form of the demotion the three-path rule exists to prevent.
+- **All four programs must be reachable everywhere they appear.** Each has a stable anchor
+  (`#program-subscription`, `#program-multiyear`, `#program-reinsurance`, `#program-standard`)
+  targeted by the header dropdown, the orientation strip, the drawer, and the footer. A program
+  rendered at parity but left unclickable is a quiet form of the demotion the parity rule exists
+  to prevent.
 - **Reinsurance framing** (DECISION 028): Reinsurance is its own product, described as taking a
   share of the underwriting profits and building wealth over time — always paired with the
   unchanged caveat that its timing differs from commission income and it is not immediate

@@ -240,7 +240,7 @@ button{font:inherit;cursor:pointer}
 .orient__claim{font-family:var(--serif);font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--s-3)}
 .orient__desc{font-size:17px;line-height:1.55;color:var(--rap-slate-700);max-width:92ch}
 .orient__progs{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
   margin-top:var(--s-5);border-top:1px solid var(--rap-slate-200);
 }
 .orient__prog{
@@ -298,7 +298,7 @@ button{font:inherit;cursor:pointer}
 .pulse__foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s-5);margin-top:var(--s-7);flex-wrap:wrap}
 
 /* ---------- 05 three paths ---------- */
-.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);margin-top:var(--s-8)}
+.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-8)}
 .path{
   border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);
   padding:var(--s-6);display:flex;flex-direction:column;background:#fff;
@@ -479,6 +479,9 @@ button{font:inherit;cursor:pointer}
   .hero,.frx,.research{gap:var(--s-7)}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
+  /* DECISION 037 — four paths go 2x2 rather than squeezing four serif titles
+     into ~230px columns. Cards keep their vertical form, so parity holds. */
+  .paths{grid-template-columns:1fr 1fr}
 }
 @media (max-width:1024px){
   .nav{display:none}
@@ -493,10 +496,6 @@ button{font:inherit;cursor:pointer}
   .why{grid-template-columns:1fr 1fr}
   .trust__row{grid-template-columns:repeat(3,1fr);row-gap:var(--s-5)}
   .trust__i:nth-child(4){border-left:0;padding-left:0}
-  .paths{grid-template-columns:1fr}
-  .path{flex-direction:row;gap:var(--s-6);align-items:flex-start}
-  .path__meta{flex:0 0 190px}
-  .path__diag{border:0;padding:0;margin:var(--s-4) 0 0}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
 }
 @media (max-width:860px){
@@ -538,9 +537,7 @@ button{font:inherit;cursor:pointer}
   .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
   .trust__i{border-left:0;padding-left:0}
   .trust__v{font-size:20px}
-  .path{flex-direction:column;gap:0}
-  .path__meta{flex:none}
-  .path__diag{border-top:1px solid var(--rap-slate-100);border-bottom:1px solid var(--rap-slate-100);padding:var(--s-4) 0;margin:var(--s-5) 0}
+  .paths{grid-template-columns:1fr}
   .why{grid-template-columns:1fr}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .wire__row{grid-template-columns:1fr;gap:var(--s-2)}
@@ -607,6 +604,7 @@ button{font:inherit;cursor:pointer}
           <a href="#program-subscription"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
           <a href="#program-multiyear"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
           <a href="#program-reinsurance"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
+          <a href="#program-standard"><b>Standard Programs</b><span>Protection income with RAP retaining the underwriting</span></a>
         </div>
       </div>
       <a href="#newswire">Newswire</a>
@@ -646,6 +644,7 @@ button{font:inherit;cursor:pointer}
       <a href="#program-subscription">FurnitureRx Subscription</a>
       <a href="#program-multiyear">Multi-Year Protection</a>
       <a href="#program-reinsurance">Reinsurance</a>
+      <a href="#program-standard">Standard Programs</a>
     </div>
     <a href="#newswire">Newswire</a>
     <a href="#pulse">Market Intelligence</a>
@@ -744,6 +743,12 @@ button{font:inherit;cursor:pointer}
          <p class="orient__d">A share of the underwriting profits, over time.</p>
          <a class="qlink" href="#program-reinsurance">View &rarr;</a>
        </div>
+       <div class="orient__prog">
+         <p class="orient__k">Standard</p>
+         <p class="orient__n">Standard Programs</p>
+         <p class="orient__d">Protection income at the sale, with RAP retaining the underwriting.</p>
+         <a class="qlink" href="#program-standard">View &rarr;</a>
+       </div>
      </div>
 
    </div>
@@ -831,10 +836,10 @@ button{font:inherit;cursor:pointer}
     <div class="center">
       <p class="eyebrow">Risk Assurance Partners</p>
       <h2 class="d2" id="paths-h" style="max-width:22ch;margin:0 auto">
-        Three ways to create more value from <span class="acc">the same customer.</span>
+        Four ways to create more value from <span class="acc">the same customer.</span>
       </h2>
       <p class="lead" style="margin-top:var(--s-5);max-width:62ch">
-        Three RAP strategies. They are not alternatives to one another &mdash; most dealers will use
+        Four RAP strategies. They are not alternatives to one another &mdash; most dealers will use
         more than one, and the right mix depends on the dealership.
       </p>
     </div>
@@ -906,6 +911,33 @@ button{font:inherit;cursor:pointer}
           <p class="path__cta"><a class="qlink" href="#contact">Learn more &rarr;</a></p>
         </div>
       </article>
+
+      <!-- DECISION 037 — Standard Programs as a fourth path, at strict parity.
+           Copy is limited to the approved facts in Decisions 028/029: RAP retains
+           the underwriting, the dealer earns protection income without reinsurance
+           participation, and it is the simplest structure. No comparison against
+           Reinsurance, no invented economics. -->
+      <article class="path" id="program-standard">
+        <div class="path__meta">
+          <p class="path__num">04</p>
+          <p class="path__name">Standard</p>
+          <div class="path__diag">
+            <svg viewBox="0 0 160 34" role="img" aria-label="A single block of income at the original sale, with underwriting retained by RAP shown as a separate flat line" style="width:100%;height:auto">
+              <rect x="0" y="6" width="34" height="22" fill="#204374"/>
+              <line x1="44" y1="20" x2="160" y2="20" stroke="#C3CBD6" stroke-width="2" stroke-dasharray="3 4"/>
+              <line x1="0" y1="28" x2="160" y2="28" stroke="#C3CBD6"/>
+            </svg>
+            <p class="path__timing">At the sale &middot; simplest structure</p>
+          </div>
+        </div>
+        <div class="path__body">
+          <h3 class="path__title">Standard Programs</h3>
+          <p>Protection income at the original sale, with RAP retaining the underwriting. The
+          dealer earns protection income without taking on reinsurance participation &mdash; the
+          simplest structure to run.</p>
+          <p class="path__cta"><a class="qlink" href="#contact">Learn more &rarr;</a></p>
+        </div>
+      </article>
     </div>
 
     <!-- R10 — plan-type x underwriting-type matrix, moved here from the hero.
@@ -931,8 +963,9 @@ button{font:inherit;cursor:pointer}
         </div>
       </div>
       <p class="orient__note">
-        These are two dimensions, not four products &mdash; a plan type and an underwriting type
-        combine. FurnitureRx is a product of Risk Assurance Partners.
+        A plan type and an underwriting type combine &mdash; Subscription or Multi-Year describes
+        how the customer buys, Reinsurance or Standard describes who keeps the underwriting
+        profits. FurnitureRx is a product of Risk Assurance Partners.
       </p>
     </details>
   </div>
@@ -1412,7 +1445,7 @@ button{font:inherit;cursor:pointer}
     <div class="foot__cols">
       <div>
         <p class="foot__h">Programs</p>
-        <a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a>
+        <a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a><a href="#program-standard">Standard Programs</a>
       </div>
       <div>
         <p class="foot__h">Intelligence</p>
@@ -1433,7 +1466,7 @@ button{font:inherit;cursor:pointer}
     </div>
 
     <div class="foot__acc">
-      <details><summary>Programs</summary><a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a></details>
+      <details><summary>Programs</summary><a href="#program-subscription">FurnitureRx</a><a href="#program-multiyear">Multi-Year Protection</a><a href="#program-reinsurance">Reinsurance</a><a href="#program-standard">Standard Programs</a></details>
       <details><summary>Intelligence</summary><a href="#newswire">Newswire</a><a href="#pulse">Market Intelligence</a><a href="#research">Research</a></details>
       <details><summary>Company</summary><a href="#why">Why RAP</a><a href="#contact">Contact</a></details>
       <details><summary>Customer</summary><a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a></details>
