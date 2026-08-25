@@ -187,7 +187,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 
 ### R1 — eyebrow
 
-- Reads `REINSURANCE, STANDARD & SUBSCRIPTION PROGRAMS`.
+- Reads `REINSURANCE, STANDARD, SUBSCRIPTION & MULTI-YEAR PLANS`.
   Short form; the full owner descriptor lives in the strip below so the 12px line stays legible.
 - This is the cheapest unused line on the page. The previous eyebrow ("The economics of
   furniture retail") named the topic the H1 then named again; this one names company, category,

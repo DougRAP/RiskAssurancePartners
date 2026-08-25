@@ -492,8 +492,8 @@ The primary CTA label changes from "See My Economics" to **"Profit Calculator"**
 
 - Corporate tagline (under the logo, header/footer) changes from "Value Through Innovation" to:
   > **Protection Programs for Home Furnishings Retail**
-- Hero eyebrow changes to:
-  > **Reinsurance, Standard & Subscription Programs**
+- Hero eyebrow changes to (revised same day to include Multi-Year):
+  > **Reinsurance, Standard, Subscription & Multi-Year Plans**
 
 Resolves open question Q4 (tagline half; vector logo asset still outstanding).
 
