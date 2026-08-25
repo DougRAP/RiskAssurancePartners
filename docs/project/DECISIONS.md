@@ -433,6 +433,59 @@ Implications:
 - "Standard" describes non-participating programs where the vendor retains underwriting profits;
 - the locked three-path homepage section is unchanged.
 
+## Decision 029 — Two-Axis Program Model (clarifies 025/028)
+
+**Status:** Approved (Owner, 2026-08-25)
+
+The four descriptor terms are **two axes**, not four products:
+
+**Protection plan types** (how the customer buys):
+- **Subscription** (new): customer pays $19.99/month, can cancel at any time;
+- **Multi-Year**: customer pays on average **$300 one time**; on cancellation receives only a prorated share back.
+
+**Underwriting types** (who keeps underwriting profits):
+- **Reinsurance** (well-known in the industry): the dealer shares in underwriting profits and gets **tax benefits**;
+- **Standard**: the vendor (RAP) keeps the underwriting profits.
+
+Implications:
+- the three-path homepage section remains valid (Subscription, Multi-Year, Reinsurance as economic paths);
+- explanatory copy/footnotes should present plan types and underwriting types as different dimensions;
+- new approved facts: Multi-Year average one-time price ~$300 with prorated refunds; Reinsurance carries tax benefits for the dealer.
+
+Owner noted this can be discussed further; treat as the current authoritative model.
+
+## Decision 030 — Why-RAP Claims Approved
+
+**Status:** Approved (Owner, 2026-08-25)
+
+All four capability claims are correct and usable:
+- claims administered by RAP in-house (not a third party);
+- underwriting partner relationships;
+- enrollment/billing/reporting technology built in-house;
+- US-based service with self-serve claims.
+
+Additionally:
+- **4.5-star Google rating — very important, give it prominence;**
+- **"15+ years" is accurate and approved** (resolves Q1/D4).
+
+## Decision 031 — FurnitureRx Homepage Message Focus
+
+**Status:** Approved (Owner, 2026-08-25)
+
+Do **not** mirror kiosk coverage copy ($5,000 total coverage, 24/7 claim filing, etc.) on the homepage — wrong emphasis (resolves Q13).
+
+The key FurnitureRx features to present:
+- customer pays just **$19.99/month** — same coverage as multi-year programs;
+- customer can **cancel, start, restart at any time — the customer is in control**;
+- dealer pays RAP **nothing — zero remit**;
+- dealer earns **recurring commission revenue**.
+
+## Decision 032 — Primary CTA Renamed "Profit Calculator" (supersedes part of 009)
+
+**Status:** Approved (Owner, 2026-08-25)
+
+The primary CTA label changes from "See My Economics" to **"Profit Calculator"** ("See My Economics" was strange wording). The gated tool itself remains branded **RAP Dealer Economics Calculator**.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

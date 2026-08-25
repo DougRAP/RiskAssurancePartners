@@ -10,6 +10,12 @@ Amendments 2026-08-24 (owner-approved, DECISIONS 024–025):
 - Mobile retains a slim utility strip (File a Claim + Dealer Login); remaining utility links move to the top of the mobile drawer. Sticky header retains Dealer Login.
 - Audience descriptor per Decision 025 (furniture & mattress retail dealers; custom interior designer programs; all home furnishings categories).
 
+Amendments 2026-08-25 (owner-approved, DECISIONS 029–032):
+- Primary CTA label is **"Profit Calculator"** — every `[ SEE MY ECONOMICS ]` in the sketches below reads as `[ PROFIT CALCULATOR ]`. The gated tool remains branded RAP Dealer Economics Calculator.
+- Program model is two-axis (plan types: Subscription / Multi-Year; underwriting types: Reinsurance / Standard) per Decision 029.
+- Section 07 (FurnitureRx) emphasizes: $19.99/month, same coverage as multi-year programs, cancel/start/restart anytime (customer in control), zero dealer remit, recurring commission revenue — not kiosk coverage details (Decision 031).
+- Section 11 (Why RAP): "15+ Years" approved; 4.5-star Google rating given prominence (Decision 030).
+
 This is a project specification, not a suggestion.
 
 The UI/UX agent may improve visual execution but may not independently change:

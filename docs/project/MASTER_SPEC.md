@@ -255,7 +255,7 @@ Initial focus may be FurnitureRx, with future room for Multi-Year and Reinsuranc
 - Why RAP
 
 ### Primary CTA
-- **See My Economics**
+- **Profit Calculator** (Decision 032; supersedes "See My Economics")
 
 ### Utility navigation
 - File a Claim
