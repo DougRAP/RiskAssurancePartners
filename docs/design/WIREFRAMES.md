@@ -1,8 +1,20 @@
 # Risk Assurance Partners — HOMEPAGE WIREFRAMES (Desktop + Mobile)
 
 **Phase 2 / UI-UX deliverable 1 of 5.**
+**Revision 3 — 2026-08-25.** Updated for DECISIONS 029–032 (LOCKED_WIREFRAME v1.1,
+2026-08-25 amendment block).
 **Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
 (DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
+
+## Revision 3 change log
+
+| Decision | Section | Change |
+|---|---|---|
+| 032 | 01, 02, 08, 12, drawer, gate | Primary CTA label is **"Profit Calculator"** everywhere. Tool stays branded *RAP Dealer Economics Calculator*. |
+| 032 / R9.2 | 01 | Primary CTA now stays visible in the mobile and condensed header. |
+| 029 | 02 | Orientation-strip footnote replaced by a **two-axis** block: protection plan types vs underwriting types. |
+| 030 | 11 | "15+ years" restored; the 4.5-star Google rating promoted to **lead proof position**. |
+| 031 | 07 | Copy refocused on the five approved points; mirrored kiosk coverage detail removed. |
 
 These wireframes implement the locked 14-section homepage sequence in
 `docs/project/LOCKED_WIREFRAME.md` v1.1 exactly. Section numbering below uses the
@@ -64,14 +76,14 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 │ │▞▚│ VALUE THROUGH INNOVATION                                               │
 │ └──┘                                                                        │
 │        Dealer Economics  Programs ▾  Newswire  Market Intelligence          │
-│        Research  Why RAP                        [ See My Economics → ]      │
+│        Research  Why RAP                        [ Profit Calculator → ]      │
 └─────────────────────────────────────────────────────────────────────────────┘
 
   CONDENSED (scrollY > 40) — 64px, tagline dropped, utility returns:
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ ┌──┐ RISK ASSURANCE PARTNERS   Dealer Economics  Programs ▾  Newswire       │
 │ │▞▚│                           Market Intelligence  Research  Why RAP       │
-│ └──┘        FILE A CLAIM*  [ DEALER LOGIN → ]    [ See My Economics → ]     │
+│ └──┘        FILE A CLAIM*  [ DEALER LOGIN → ]    [ Profit Calculator → ]     │
 └─────────────────────────────────────────────────────────────────────────────┘
                                               * ≥1280px only
 
@@ -91,7 +103,15 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
   Not redesigned. In the prototype the mark is a placeholder glyph; production uses the
   supplied logo asset.
 - Nav order is locked and matches DECISION 009 exactly. Programs is the only dropdown.
-- One primary CTA in the header: **See My Economics**. No secondary button competes with it.
+- One primary CTA in the header: **Profit Calculator** (DECISION 032; supersedes the
+  "See My Economics" label). No secondary button competes with it. It is the same label and
+  styling in the header, hero, teaser, final CTA and drawer — the site has exactly one primary
+  conversion verb. The gated tool it opens keeps its own brand, *RAP Dealer Economics Calculator*.
+- **R9.2 applied.** The CTA no longer disappears below 1024px. It stays in the header at a
+  compact size (13px/16px padding at ≤1024px, 12px/12px at ≤680px, min-height 44px preserved).
+  To make room without dropping the corporate wordmark, the mark shrinks to 30px, the tagline
+  hides, and the wordmark wraps to two lines. The condensed-header utility cluster stands down
+  below 1024px because the slim utility strip (R3a) already carries those functions.
 - **R4 applied.** Sticky behavior at scrollY > 40: the bar condenses 84px → 64px, the
   "VALUE THROUGH INNOVATION" line drops — freeing exactly the space needed — and the header
   gains `Dealer Login →` in a hairline box, plus `File a Claim` at ≥1280px only. Without this
@@ -126,7 +146,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ░ advertising, floor space, or        │     added after the sale          │   ░
 ░ material operating burden.          │                                   │   ░
 ░                                     │ Figure 1. Illustrative.           │   ░
-░ [ See My Economics → ] [ How RAP    └───────────────────────────────────┘   ░
+░ [ Profit Calculator → ] [ How RAP    └───────────────────────────────────┘   ░
 ░                          Helps ]                                            ░
 ░                                                                             ░
 ░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ink rule ░
@@ -144,9 +164,18 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ░ customer.          │                      │                                 ░
 ░ View →             │ View →               │ View →                          ░
 ░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ░
-░ REINSURANCE PROGRAMS LET A RETAILER TAKE A SHARE OF THE UNDERWRITING        ░
-░ PROFITS. IN STANDARD PROGRAMS, THE VENDOR KEEPS THOSE UNDERWRITING PROFITS. ░
-░ FURNITURERX IS A PRODUCT OF RISK ASSURANCE PARTNERS.                        ░
+░ TWO-AXIS BLOCK (Decision 029)                                               ░
+░ PROTECTION PLAN TYPES        │ UNDERWRITING TYPES                           ░
+░ — how the customer buys      │ — who keeps the underwriting profits         ░
+░ Subscription — $19.99 a      │ Reinsurance — the dealer shares in the       ░
+░ month, cancel at any time.   │ underwriting profits and gets tax benefits.  ░
+░ Multi-Year — on average $300 │ Standard — RAP keeps them.                   ░
+░ one time, prorated share     │                                              ░
+░ returned on cancellation.    │                                              ░
+░ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ░
+░ THESE ARE TWO DIMENSIONS, NOT FOUR PRODUCTS — A PLAN TYPE AND AN            ░
+░ UNDERWRITING TYPE COMBINE. FURNITURERX IS A PRODUCT OF RISK ASSURANCE       ░
+░ PARTNERS.                                                                   ░
 ░─────────────────────────────────────────────────────────────────────────────░
 ```
 
@@ -182,11 +211,20 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 - **Strict parity across the three items** (DESIGN_SYSTEM §6): identical column width, label
   treatment, name weight, description length band, and `View →` link. No ember rule on the
   FurnitureRx item.
-- **"Standard programs" appears only inside the descriptor sentence and the footnote.** There is
-  no fourth path card and Section 05 is unchanged. Per DECISION 028, Reinsurance is its own
-  product; "standard" describes a non-participating program where the vendor keeps the
-  underwriting profits.
-- Footnote lines, Plex Mono 11px: the Reinsurance/Standard distinction (DECISION 028), then
+- **Two-axis block (DECISION 029) — resolves the "four words, three cards" problem.** The
+  descriptor names four program words while Section 05 shows three cards. The strip now states
+  plainly that these are two *dimensions* rather than four products:
+  - **Protection plan types — how the customer buys.** Subscription: $19.99 a month, cancel at
+    any time. Multi-Year: on average $300 one time, with a prorated share returned on
+    cancellation.
+  - **Underwriting types — who keeps the underwriting profits.** Reinsurance: the dealer shares
+    in the underwriting profits and gets tax benefits. Standard: RAP keeps them.
+  - Two columns on desktop, stacked below 860px. Mono labels, Inter 14px values, program names
+    in Inter 600 `--rap-ink`. It reads as a key, not a pitch.
+- New approved facts introduced here and nowhere else on the homepage: **Multi-Year averages
+  ~$300 one time with prorated refunds**, and **Reinsurance carries tax benefits** (DECISION 029).
+- **Standard still gets no card.** Section 05 is unchanged and remains the three economic paths.
+- Closing footnote, Plex Mono 11px: the two-dimensions sentence plus
   **"FurnitureRx is a product of Risk Assurance Partners."** Moving that sentence out of the last
   line of the footer and into viewport 1 is the whole of the "am I at the right site?" fix for
   visitors arriving from FurnitureRx marketing. The footer instance is kept as well.
@@ -196,7 +234,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
   expense bars along a continuous baseline versus a single transaction spike, then a third
   register showing recurring value accumulating after the sale. It is a diagram, not
   decoration, and it is labelled **Illustrative** because it carries no data claim.
-- Two CTAs, unequal weight: primary `See My Economics →`, secondary `How RAP Helps`
+- Two CTAs, unequal weight: primary `Profit Calculator →`, secondary `How RAP Helps`
   (anchor to §05).
 - Mist ground because the hero's right half is quantitative. The hero and Market Pulse share
   the mist band, separated by a hairline rather than a color change.
@@ -362,24 +400,38 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 FurnitureRx                         │ ▔▔▔▔ 2px ember rule                 │
 A PRODUCT OF RISK ASSURANCE         │ FurnitureRx  POWERED BY RAP    [🛒] │
 PARTNERS                            │─────────────────────────────────────│
-                                    │ ONLY PAY FOR WHAT YOU NEED          │
+                                    │ MONTHLY PLAN                        │
 Turn some protection declines       │                                     │
 into ╱recurring customer            │ Stain + Structure                   │
 relationships.╱                     │ $19.99 /month                       │
                                     │                                     │
-▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ember  │ ✓ Rips, burns, mechanical failure   │
-CUSTOMER PAYMENT      $19.99/month  │ ✓ $5,000 total coverage             │
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄            │ ✓ Repair first. Replace if needed.  │
-DEALER REMIT          $0            │ ✓ 24/7 claim filing                 │
-┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄            │                                     │
-DEALER COMMISSION     $8 per        │ [ Save to cart → ] [ Checkout ]     │
-                      successful    └─────────────────────────────────────┘
-                      monthly       ACTUAL FURNITURERX CUSTOMER INTERFACE
-                      payment       kiosk.furniturerx.net
-▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
+FOR THE CUSTOMER                    │ [ Maya · your sales assistant ]     │
+▌ Just $19.99 a month               │                                     │
+  Same coverage as multi-year       │ ✓ Same coverage as a multi-year plan│
+  programs, paid monthly            │ ✓ Cancel, pause or restart anytime  │
+  instead of upfront.               │ FULL COVERAGE TERMS SHOWN AT CHECKOUT│
+▌ Cancel, start, restart anytime    │                                     │
+  The customer stays in control.    │ [ Save to cart → ] [ Checkout ]     │
+                                    └─────────────────────────────────────┘
+FOR THE DEALER                      ACTUAL FURNITURERX CUSTOMER INTERFACE
+▌ Zero remit                        kiosk.furniturerx.net
+  The dealer pays RAP nothing
+  to participate.
+▌ Recurring commission revenue
+  $8 for every successful monthly
+  payment, for as long as the
+  customer stays.
 
-The dealer pays nothing to
-participate.
+▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ember
+CUSTOMER PAYS         $19.99/month
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+DEALER REMITS         $0
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+DEALER EARNS          $8 per
+                      successful
+                      monthly
+                      payment
+▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 
 [ FurnitureRx for Dealers → ]
 [ See the customer experience ]
@@ -387,16 +439,37 @@ participate.
 ```
 
 **Annotations**
-- The right panel is the **live kiosk interface reproduced in markup** (not a screenshot,
-  not a device mockup) — MASTER_SPEC calls for "actual product interfaces". Because the RAP
-  design system is derived from the kiosk, it drops in natively.
+
+### The five approved points (DECISION 031)
+
+The copy column carries exactly these, split into who benefits, each as an ember-ruled item
+with a bold claim and one supporting line:
+
+| Audience | Point |
+|---|---|
+| Customer | **Just $19.99 a month** — the same coverage as multi-year programs, paid monthly instead of upfront |
+| Customer | **Cancel, start, restart at any time** — the customer stays in control |
+| Dealer | **Zero remit** — the dealer pays RAP nothing to participate |
+| Dealer | **Recurring commission revenue** — $8 for every successful monthly payment, for as long as the customer stays |
+
+- **Mirrored kiosk coverage copy is removed.** `$5,000 total coverage`, `24/7 claim filing`,
+  `rips, burns, mechanical & electrical failure`, `frames, springs, motors, switches, controls`
+  and `repair first / replace if repair isn't enough` no longer appear anywhere on the homepage.
+  DECISION 031 rules that emphasis wrong for a dealer-facing corporate page, and it also
+  retires open question Q13 (whether live product copy could be mirrored).
+- The kiosk panel **stays** as product proof — MASTER_SPEC calls for "actual product
+  interfaces" — but its list is reduced to the two lines that carry the buying decision
+  (*same coverage as a multi-year plan* · *cancel, pause or restart anytime*), closed by
+  `FULL COVERAGE TERMS SHOWN AT CHECKOUT` in Plex Mono. Coverage detail belongs at the point of
+  sale, not on the corporate homepage.
+- "Same coverage as multi-year programs" is the load-bearing claim of this section: it is what
+  stops a monthly price reading as a lesser product. Approved by DECISION 031.
 - Only the `$19.99` subscription appears. No `from $9.99/mo`, no Care Kits, no Repair Safety
   Net on the homepage (DECISION 019). Care Kits/Safety Net live on the FurnitureRx program
   page, ranked below the subscription.
-- The economics table is a 3-row definition list with hairlines, values right-aligned in
-  Playfair. `$8` is labelled **dealer commission** per DECISION 020, with the
-  "dealer pays nothing to participate" line stated separately so the two facts cannot be
-  conflated.
+- The economics table restates the same three numbers as a scannable summary, relabelled to
+  active voice (**Customer pays / Dealer remits / Dealer earns**) so it reinforces the points
+  above rather than repeating them flatly. `$8` remains a **dealer commission** per DECISION 020.
 - The FurnitureRx lockup is smaller than the RAP header wordmark and carries
   "A PRODUCT OF RISK ASSURANCE PARTNERS" directly beneath it.
 
@@ -430,7 +503,7 @@ participate.
 ░  │              └────────────────────────────────┘                      │   ░
 ░  └──────────────────────────────────────────────────────────────────────┘   ░
 ░                                                                             ░
-░               [ Calculate My Opportunity → ]                                ░
+░                    [ Profit Calculator → ]                                  ░
 ░   Access is reviewed by RAP Sales. Six fields. No password to create.       ░
 ░─────────────────────────────────────────────────────────────────────────────░
 ```
@@ -517,32 +590,58 @@ participate.
                               WHY RAP
                     Built around ╱furniture retail.╱
 
- ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
- FURNITURE FOCUS    CLAIMS            UNDERWRITING      TECHNOLOGY
- Programs built     ADMINISTRATION    RELATIONSHIPS     Enrollment,
- for furniture      Administered by   Programs are      billing, dealer
- dealers, not       RAP, not handed   backed by         reporting and
- adapted from       to a third party. underwriting      claims built
- another category.                    partners.         in-house.
- ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- CUSTOMER          DEALER SUPPORT     PROGRAM           MULTI-PROGRAM
- EXPERIENCE        Training and       EXPERTISE         CAPABILITY
- US-based service  materials for the  Subscription,     One partner for
- and self-serve    sales floor.       multi-year and    all three
- claim filing.                        reinsurance.      economic paths.
-
+ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ 2px ink rule ▔▔▔▔▔▔▔▔▔▔▔▔
+        ★★★★☆   RAP GOOGLE RATING
+ 4.5            Today's customer researches the provider before they
+                agree to the program — and the retailer that sold it
+                wears the result. This is what they find.
  ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- 4.5 ★  RAP Google rating
+
+ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔    ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
+ 15+ YEARS         FURNITURE FOCUS   CLAIMS            UNDERWRITING
+ Fifteen-plus      Programs built    ADMINISTRATION    RELATIONSHIPS
+ years building    for furniture     Administered by   Programs are
+ and administering dealers, not      RAP, not handed   backed by
+ protection        adapted from      to a third party. underwriting
+ programs for      another category.                   partners.
+ furniture retail.
+ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄    ┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+ TECHNOLOGY        CUSTOMER          DEALER SUPPORT    PROGRAM
+ Enrollment,       EXPERIENCE        Training and      EXPERTISE
+ billing, dealer   US-based service  materials for the Subscription,
+ reporting and     and self-serve    sales floor.      multi-year and
+ claims built      claim filing.                       reinsurance.
+ in-house.
 ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
 ```
 
 **Annotations**
+
+### Google rating in lead proof position (DECISION 030)
+
+- The owner rates this **very important**, so it opens the section rather than closing it.
+  In revision 2 it was a small footnote line beneath the grid; it is now the first thing in
+  Section 11, above the capability grid, on a 2px ink top rule.
+- Treatment: `4.5` in Playfair at `clamp(56px, 7vw, 86px)` — the largest numeral on the page
+  outside the hero — with a four-and-a-half star glyph row in `--rap-brass`, the label
+  `RAP GOOGLE RATING`, and one sentence of *why it matters to a dealer*: the customer
+  researches the provider, and the retailer that sold the program wears the result. Prominence
+  without a testimonial carousel or a new section.
+- Stacks to a left-aligned column below 680px; the numeral keeps its scale.
+- **4.5 only** (DECISION 021). The 4.7 figure in the research draft is wrong and appears nowhere.
+
+### Capability grid
+
 - **No icons.** Eight capability statements as a typographic 4×2 grid with 2px ink top rules.
   Each has a one-sentence substantiation rather than a bare noun — this is what stops it
   becoming the "decorative icon grid" the spec prohibits.
-- Only one quantified proof point: **4.5 stars** (DECISION 021). The `15+ Years` figure shown
-  in the locked wireframe sketch is **not** in DECISIONS.md and is therefore omitted pending
-  owner confirmation — see DEVIATION_NOTES §Q1.
+- **`15+ years` restored** (DECISION 030 — resolves D4/Q1). It was withheld in revisions 1–2
+  because it appeared only in the wireframe sketch and not in any approved facts document;
+  the owner has now confirmed it is accurate. It takes the first grid position, and the
+  "Multi-program capability" filler that stood in for it is removed.
+- All four previously-flagged capability claims are now **owner-approved facts** (DECISION 030):
+  claims administered in-house by RAP, underwriting partner relationships, technology built
+  in-house, and US-based service with self-serve claims. Open question Q3 is closed.
 - No superlatives, no market-share claims, no unsourced performance numbers.
 
 ## 12 — Final Conversion ▓ `--rap-ink`, ~480px
@@ -553,7 +652,7 @@ participate.
 ▓                      You already have the customer.                         ▓
 ▓            ╱Let's improve the economics of the transaction.╱                ▓
 ▓                                                                             ▓
-▓            [ See My Economics → ]      [ Talk to RAP ]                      ▓
+▓            [ Profit Calculator → ]      [ Talk to RAP ]                      ▓
 ▓                                                                             ▓
 ▓  Access to the RAP Dealer Economics Calculator is reviewed by RAP Sales.    ▓
 ▓─────────────────────────────────────────────────────────────────────────────▓
@@ -561,11 +660,11 @@ participate.
 
 **Annotations**
 - Third and final ink moment. Centered, single column, no form embedded — the form lives
-  behind `See My Economics` so the gate flow has one entry point across the whole site.
+  behind `Profit Calculator` so the gate flow has one entry point across the whole site.
 - Primary CTA is the same label and same styling as the header CTA. The site has exactly one
   primary conversion verb.
 - **R6 applied.** `Talk to RAP` now targets `#contact` instead of a dead link. This matters
-  beyond link hygiene: previously the only route to a human was `See My Economics`, which is a
+  beyond link hygiene: previously the only route to a human was the primary CTA, which is a
   gated calculator request reviewed by Sales — a qualification funnel, not a contact path. A
   dealer with a question and a consumer holding a plan were both funnelled into a six-field
   lead form or nothing.
@@ -654,7 +753,7 @@ COLUMN 1 — sections 00 to 04             COLUMN 2 — sections 05 to 08
 │░ you already paid to    │              │ ┌─────────────────────┐ │
 │░ acquire.               │              │ │ 03 REINSURANCE      │ │
 │░                        │              │ │ ╱╲ accrues          │ │
-│░ [ See My Economics → ] │              │ │ Learn more →        │ │
+│░ [ Profit Calculator → ] │              │ │ Learn more →        │ │
 │░ [ How RAP Helps      ] │              │ └─────────────────────┘ │
 │░                        │              │   ↑ stacked 01→02→03,   │
 │░ ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ │ ← R2 strip   │     equal treatment     │
@@ -763,7 +862,7 @@ COLUMN 3 — sections 09 to 13             │▓ ┄┄┄┄┄┄┄┄┄┄
 │ [ View all news → ]     │              │▓ Why RAP                │
 ├─────────────────────────┤              │▓                        │
 │▒ 10 RAP RESEARCH        │              │▓ ┌─────────────────┐    │
-│▒ ┌───────────────────┐  │              │▓ │See My Economics→│    │
+│▒ ┌───────────────────┐  │              │▓ │Profit Calculator│    │
 │▒ │  REPORT COVER     │  │              │▓ └─────────────────┘    │
 │▒ │  3:4, capped      │  │              │▓  ↑ pinned to foot      │
 │▒ │  at 260px         │  │              └─────────────────────────┘
@@ -790,7 +889,7 @@ COLUMN 3 — sections 09 to 13             │▓ ┄┄┄┄┄┄┄┄┄┄
 │▓ customer.              │
 │▓ ╱Let's improve the     │
 │▓ economics.╱            │
-│▓ [ See My Economics → ] │
+│▓ [ Profit Calculator → ] │
 │▓ [ Talk to RAP ] → #contact
 ├─────────────────────────┤
 │▓ 13 FOOTER              │

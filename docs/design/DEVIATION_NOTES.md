@@ -22,6 +22,40 @@ entries are retained per the decision-log convention rather than deleted.
 |---|---|---|
 | **Q14** | DECISION 025 lists "Standard" alongside Reinsurance, Subscription and Multi-Year in owner-approved descriptor copy, and DECISION 028 defines it as a non-participating structure rather than a fourth path. The homepage therefore names four program words but shows three cards. Confirm this is intended, or supply the wording that resolves it for a reader who counts. | Section 02 strip, Section 05, program pages |
 
+---
+
+## Revision 3 — 2026-08-25 — resolved by DECISIONS 029–032
+
+| Item | Resolution |
+|---|---|
+| **Q14** — four program words, three cards | **Resolved by DECISION 029.** The four terms are **two axes**: protection plan types (Subscription / Multi-Year — how the customer buys) and underwriting types (Reinsurance / Standard — who keeps the underwriting profits). The orientation strip now carries a two-column block stating this explicitly. Section 05 is unchanged and Standard still gets no card. |
+| **Q1 / D4** — is "15+ years" approved? | **Resolved by DECISION 030.** Accurate and approved. Restored to the first position in the Section 11 grid; the "Multi-program capability" filler that stood in for it is removed. |
+| **Q3** — which Why-RAP capability claims are approved? | **Resolved by DECISION 030.** All four are correct and usable: claims administered in-house by RAP, underwriting partner relationships, technology built in-house, US-based service with self-serve claims. This closes the largest unsupported-claim risk flagged in revision 1. |
+| **Q13** — may live kiosk coverage copy be mirrored? | **Resolved by DECISION 031 — no.** `$5,000 total coverage`, `24/7 claim filing`, component lists and repair/replace language are removed from the homepage entirely. Section 07 now carries the five approved points instead, and the kiosk panel keeps only the two lines that carry the buying decision. |
+| **4.5-star rating prominence** | **DECISION 030** designates it very important. Promoted from a footnote line beneath the Section 11 grid to a lead proof block above it, with the numeral at `clamp(56px,7vw,86px)` — the largest on the page outside the hero. No new section. |
+| **R9.2** — primary CTA vanished below 1024px | **Implemented under DECISION 032.** The CTA now stays in the header at every width, compacting rather than disappearing. |
+| **Primary CTA label** | **DECISION 032** — "See My Economics" replaced by **"Profit Calculator"** in all five positions. The gated tool keeps its brand, *RAP Dealer Economics Calculator*. |
+
+### New approved facts now on the page
+
+Introduced by DECISION 029 and used only in the Section 02 two-axis block: **Multi-Year averages
+~$300 one time with a prorated share returned on cancellation**, and **Reinsurance carries tax
+benefits for the dealer**. Both are owner-supplied; neither appears elsewhere on the homepage.
+
+### Remaining open
+
+| # | Question | Blocks |
+|---|---|---|
+| **Q2** | Market Pulse metric list and whether the research draft's figures may publish before Phase 9 wires live sources. Prototype still shows clearly-labelled placeholders. | Section 03, Phase 9 |
+| **Q4** | Vector RAP logo asset; and is "Value Through Innovation" still the current tagline? (It now hides on mobile to make room for the persistent CTA, which makes the question slightly more pressing.) | Header, footer |
+| **Q5** | The flagship research draft still cites **4.7 stars** in two places against DECISION 021's 4.5, and carries ~15 third-party statistics needing review before publishing under the RAP masthead. | Section 10, Phase 11 |
+| **Q7** | Destination for "See the customer experience" — a RAP-hosted product tour, or a deep link to kiosk.furniturerx.net? | Section 07 |
+| **Q8** | Should calculator access be time-limited? Prototype shows a plausible 90-day default. | Phase 7 |
+| **Q9** | Should the authorized calculator offer PDF export? Still the most likely route for gated dealer economics to leave the gate. | Phase 8 |
+| **Q10** | Homepage Newswire item count (prototype: 5 desktop / 3 mobile). | Section 09 |
+| **Q11** | How widely the ~70% figure should be repeated sitewide. | Sitewide |
+| **Q15** | DECISION 029 is marked "can be discussed further." If the two-axis model changes, the Section 02 block and the Multi-Year ~$300 fact change with it. | Section 02 |
+
 Everything in this file is **PROPOSED — requires owner approval.** Nothing here has been
 implemented as a change to `docs/project/`. The prototype implements the locked wireframe as
 written; where this document proposes an alternative, the prototype shows the *proposed*
@@ -39,7 +73,7 @@ responsive behavior, copy, one omitted claim, and one added typeface.
 |---|---|
 | RAP is master brand; FurnitureRx is a RAP product | Held. RAP wordmark is the only site identity; FurnitureRx appears with "A product of Risk Assurance Partners" beneath it, at smaller scale, and the footer restates the relationship. |
 | Primary nav (7 items, Programs dropdown) | Held, exact order. |
-| Primary CTA "See My Economics" | Held. Used in header, hero, final CTA. One primary verb sitewide. |
+| Primary CTA | Label changed to **"Profit Calculator"** by DECISION 032 (supersedes part of 009). Still one primary verb sitewide, used in header, hero, teaser, final CTA and drawer, and now persistent on mobile. |
 | Utility nav (4 items) | Held. |
 | Homepage sequence 00–13 | Held, exact, desktop and mobile. |
 | Three economic paths, equal standing | Held. Identical card treatment; see §D8. |

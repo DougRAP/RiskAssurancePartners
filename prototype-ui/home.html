@@ -244,6 +244,12 @@ button{font:inherit;cursor:pointer}
   margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
 }
+/* Two-axis model (DECISION 029) — plan type and underwriting type are separate dimensions */
+.axes{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-5);
+  padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
+.axes__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
+.axes__v{font-size:14px;color:var(--rap-slate-700);margin-top:8px}
+.axes__v b{color:var(--rap-ink);font-weight:600}
 
 /* ---------- 03 market pulse / stat tiles ---------- */
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-7)}
@@ -293,6 +299,10 @@ button{font:inherit;cursor:pointer}
 .frx__lockup{border-top:2px solid var(--rap-ember);padding-top:var(--s-4);margin-bottom:var(--s-6)}
 .frx__name{font-family:var(--serif);font-size:32px;font-weight:600;line-height:1}
 .frx__of{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
+.frx__pts{margin-top:var(--s-3);display:grid;gap:var(--s-3)}
+.frx__pts li{padding-left:var(--s-5);border-left:2px solid var(--rap-ember);}
+.frx__pts b{display:block;font-weight:600;font-size:17px;line-height:1.3}
+.frx__pts span{display:block;font-size:14px;color:var(--rap-slate-700);margin-top:3px}
 .econ{border-top:2px solid var(--rap-ember);border-bottom:2px solid var(--rap-ember);margin:var(--s-7) 0 var(--s-4)}
 .econ__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-5);padding:var(--s-4) 0;border-bottom:1px solid var(--rap-slate-200)}
 .econ__row:last-child{border-bottom:0}
@@ -318,6 +328,7 @@ button{font:inherit;cursor:pointer}
 .kiosk__list li{display:flex;gap:8px;font-size:13px;color:var(--rap-slate-700);padding:5px 0;border-bottom:1px solid var(--rap-slate-100)}
 .kiosk__list li:last-child{border-bottom:0}
 .kiosk__check{color:var(--rap-ember-700);font-weight:700}
+.kiosk__terms{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:10px}
 .kiosk__btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:var(--s-4)}
 .kiosk__btn{padding:11px;text-align:center;font-size:13px;font-weight:600;border-radius:var(--radius-sm)}
 .kiosk__btn--p{background:var(--rap-ember-700);color:#fff}
@@ -377,9 +388,18 @@ button{font:inherit;cursor:pointer}
 .why__i{border-top:2px solid var(--rap-ink);padding-top:var(--s-4)}
 .why__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase}
 .why__b{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-3)}
-.proof{display:flex;align-items:center;gap:var(--s-4);margin-top:var(--s-9);padding-top:var(--s-6);border-top:1px solid var(--rap-slate-200)}
-.proof__v{font-family:var(--serif);font-size:44px;font-weight:500;line-height:1}
-.proof__star{color:var(--rap-brass)}
+/* DECISION 030 — Google rating in lead proof position, not a footnote */
+.rating{
+  display:flex;align-items:center;gap:var(--s-7);margin-top:var(--s-8);
+  padding:var(--s-6) 0;border-top:2px solid var(--rap-ink);border-bottom:1px solid var(--rap-slate-200);
+}
+.rating__v{
+  font-family:var(--serif);font-size:clamp(56px,7vw,86px);font-weight:500;line-height:1;
+  display:flex;align-items:center;gap:var(--s-4);flex-shrink:0;
+}
+.rating__stars{font-size:.32em;letter-spacing:.08em;color:var(--rap-brass);font-family:var(--sans)}
+.rating__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
+.rating__b{font-size:16px;color:var(--rap-slate-700);margin-top:var(--s-2);max-width:56ch}
 
 /* ---------- 12/13 ---------- */
 .final .btns{justify-content:center}
@@ -423,12 +443,17 @@ button{font:inherit;cursor:pointer}
   :root{--margin:32px}
   .hero,.frx,.research{gap:var(--s-7)}
   .nav{gap:20px}
-  .nav a,.nav__drop>button{font-size:14px}
+  .nav a,.nav__drop>.nav__progs{font-size:14px}
 }
 @media (max-width:1024px){
-  .nav,.hdr__cta{display:none}
+  .nav{display:none}
   .burger{display:grid}
-  .hdr__inner{min-height:64px}
+  .hdr__inner{min-height:64px;gap:var(--s-4)}
+  /* R9.2 — the single primary conversion verb stays visible on tablet and phone.
+     The condensed-header utility cluster stands down here; the slim utility
+     strip (R3a) already carries File a Claim + Dealer Login persistently. */
+  .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
+  .hdr.is-condensed .hdr__util{display:none}
   .tiles{grid-template-columns:1fr 1fr}
   .why{grid-template-columns:1fr 1fr}
   .paths{grid-template-columns:1fr}
@@ -454,6 +479,7 @@ button{font:inherit;cursor:pointer}
   .orient__progs{grid-template-columns:1fr}
   .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
   .orient__prog:last-child{border-bottom:0}
+  .axes{grid-template-columns:1fr;gap:var(--s-4)}
 }
 @media (max-width:680px){
   /* R3(a) — slim utility strip survives on mobile: File a Claim + Dealer Login only */
@@ -461,12 +487,22 @@ button{font:inherit;cursor:pointer}
   .utility a{font-size:12px}
   .utility__label,.utility__secondary{display:none}
   .utility__login{padding:4px 8px}
+  /* R9.2 — make room for the CTA without dropping the corporate wordmark:
+     the mark shrinks, the tagline hides, and the name wraps to two lines. */
+  .hdr__inner{gap:10px}
+  .lockup{min-width:0}
+  .lockup__mark{width:30px;height:30px;flex:0 0 30px}
+  .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
+  .lockup__tag{display:none}
+  .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
+  .burger{width:42px;height:42px;flex:0 0 42px}
   .tiles{grid-template-columns:1fr;gap:var(--s-6)}
   .tile__label{min-height:0}
   .path{flex-direction:column;gap:0}
   .path__meta{flex:none}
   .path__diag{border-top:1px solid var(--rap-slate-100);border-bottom:1px solid var(--rap-slate-100);padding:var(--s-4) 0;margin:var(--s-5) 0}
   .why{grid-template-columns:1fr}
+  .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .wire__row{grid-template-columns:1fr;gap:var(--s-2)}
   .wire__src{padding-top:var(--s-2)}
   .chain{flex-direction:column;gap:var(--s-2)}
@@ -551,7 +587,7 @@ button{font:inherit;cursor:pointer}
       <a class="hdr__login" href="https://kiosk.furniturerx.net/">Dealer Login &rarr;</a>
     </div>
 
-    <a class="btn btn--primary hdr__cta" href="economics-gate.html">See My Economics &rarr;</a>
+    <a class="btn btn--primary hdr__cta" href="economics-gate.html">Profit Calculator &rarr;</a>
     <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Open menu"><span></span></label>
   </div>
 </header>
@@ -583,7 +619,7 @@ button{font:inherit;cursor:pointer}
     <a href="#research">Research</a>
     <a href="#why">Why RAP</a>
   </nav>
-  <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">See My Economics &rarr;</a></div>
+  <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
 </div>
 
 <main id="top">
@@ -603,7 +639,7 @@ button{font:inherit;cursor:pointer}
         adding inventory, advertising, floor space, or material operating burden.
       </p>
       <div class="btns">
-        <a class="btn btn--primary" href="economics-gate.html">See My Economics &rarr;</a>
+        <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
         <a class="btn btn--secondary" href="#paths">How RAP Helps</a>
       </div>
     </div>
@@ -684,12 +720,27 @@ button{font:inherit;cursor:pointer}
        </div>
      </div>
 
+     <div class="axes">
+       <div class="axes__col">
+         <p class="axes__k">Protection plan types &mdash; how the customer buys</p>
+         <p class="axes__v">
+           <b>Subscription</b> &mdash; $19.99 a month, cancel at any time.
+           <b>Multi-Year</b> &mdash; on average $300 one time, with a prorated share returned
+           on cancellation.
+         </p>
+       </div>
+       <div class="axes__col">
+         <p class="axes__k">Underwriting types &mdash; who keeps the underwriting profits</p>
+         <p class="axes__v">
+           <b>Reinsurance</b> &mdash; the dealer shares in the underwriting profits and gets tax
+           benefits. <b>Standard</b> &mdash; RAP keeps them.
+         </p>
+       </div>
+     </div>
+
      <p class="orient__note">
-       Reinsurance programs let a retailer take a share of the underwriting profits. In standard
-       programs, the vendor keeps those underwriting profits.
-     </p>
-     <p class="orient__note" style="border-top:0;padding-top:0;margin-top:var(--s-2)">
-       FurnitureRx is a product of Risk Assurance Partners.
+       These are two dimensions, not four products &mdash; a plan type and an underwriting type
+       combine. FurnitureRx is a product of Risk Assurance Partners.
      </p>
    </div>
   </div>
@@ -918,17 +969,43 @@ button{font:inherit;cursor:pointer}
         Turn some protection declines into <span class="acc">recurring customer relationships.</span>
       </h2>
 
+      <!-- DECISION 031 — the five approved points. Kiosk coverage detail is deliberately
+           not mirrored here; the panel opposite carries product proof instead. -->
+      <p class="eyebrow" style="margin-top:var(--s-7)">For the customer</p>
+      <ul class="frx__pts">
+        <li>
+          <b>Just $19.99 a month</b>
+          <span>The same coverage as multi-year programs, paid monthly instead of upfront.</span>
+        </li>
+        <li>
+          <b>Cancel, start, restart at any time</b>
+          <span>The customer stays in control of the relationship.</span>
+        </li>
+      </ul>
+
+      <p class="eyebrow" style="margin-top:var(--s-6)">For the dealer</p>
+      <ul class="frx__pts">
+        <li>
+          <b>Zero remit</b>
+          <span>The dealer pays RAP nothing to participate.</span>
+        </li>
+        <li>
+          <b>Recurring commission revenue</b>
+          <span>$8 for every successful monthly payment, for as long as the customer stays.</span>
+        </li>
+      </ul>
+
       <dl class="econ">
         <div class="econ__row">
-          <dt class="econ__k">Customer payment</dt>
+          <dt class="econ__k">Customer pays</dt>
           <dd class="econ__v">$19.99<small>per month</small></dd>
         </div>
         <div class="econ__row">
-          <dt class="econ__k">Dealer remit</dt>
-          <dd class="econ__v">$0<small>the dealer pays nothing to participate</small></dd>
+          <dt class="econ__k">Dealer remits</dt>
+          <dd class="econ__v">$0<small>nothing to participate</small></dd>
         </div>
         <div class="econ__row">
-          <dt class="econ__k">Dealer commission</dt>
+          <dt class="econ__k">Dealer earns</dt>
           <dd class="econ__v">$8<small>per successful monthly payment</small></dd>
         </div>
       </dl>
@@ -962,13 +1039,13 @@ button{font:inherit;cursor:pointer}
               <b>Maya &middot; your sales assistant</b>
               Tell me about your purchase &rarr;
             </div>
+            <!-- DECISION 031 — kiosk coverage detail is NOT mirrored on the homepage.
+                 The panel shows the buying decision the customer actually faces. -->
             <ul class="kiosk__list">
-              <li><span class="kiosk__check">&#10003;</span> Everything in Stain Protection</li>
-              <li><span class="kiosk__check">&#10003;</span> Rips, burns, mechanical &amp; electrical failure</li>
-              <li><span class="kiosk__check">&#10003;</span> Frames, springs, motors, switches, controls</li>
-              <li><span class="kiosk__check">&#10003;</span> Repair first. Replace if repair isn&rsquo;t enough.</li>
-              <li><span class="kiosk__check">&#10003;</span> 24/7 claim filing &mdash; same-day processing</li>
+              <li><span class="kiosk__check">&#10003;</span> Same coverage as a multi-year plan</li>
+              <li><span class="kiosk__check">&#10003;</span> Cancel, pause or restart anytime</li>
             </ul>
+            <p class="kiosk__terms">Full coverage terms shown at checkout</p>
             <div class="kiosk__btns">
               <span class="kiosk__btn kiosk__btn--p">Save to cart &rarr;</span>
               <span class="kiosk__btn kiosk__btn--s">Checkout</span>
@@ -1036,7 +1113,7 @@ button{font:inherit;cursor:pointer}
     </div>
 
     <div class="teaser__cta">
-      <a class="btn btn--primary" href="economics-gate.html">Calculate My Opportunity &rarr;</a>
+      <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
       <p class="meta">Access is reviewed by RAP Sales &middot; Six fields &middot; No password to create</p>
     </div>
   </div>
@@ -1169,7 +1246,18 @@ button{font:inherit;cursor:pointer}
       <h2 class="d2" id="why-h">Built around <span class="acc">furniture retail.</span></h2>
     </div>
 
+    <!-- DECISION 030 — the Google rating leads this section rather than closing it. -->
+    <div class="rating">
+      <p class="rating__v">4.5<span class="rating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9734;</span></p>
+      <div>
+        <p class="rating__k">RAP Google rating</p>
+        <p class="rating__b">Today&rsquo;s customer researches the provider before they agree to the
+        program &mdash; and the retailer that sold it wears the result. This is what they find.</p>
+      </div>
+    </div>
+
     <div class="why">
+      <div class="why__i"><p class="why__k">15+ years</p><p class="why__b">Fifteen-plus years building and administering protection programs for furniture retail.</p></div>
       <div class="why__i"><p class="why__k">Furniture focus</p><p class="why__b">Programs built for furniture dealers rather than adapted from another category.</p></div>
       <div class="why__i"><p class="why__k">Claims administration</p><p class="why__b">Claims are administered by RAP rather than handed to an unrelated third party.</p></div>
       <div class="why__i"><p class="why__k">Underwriting relationships</p><p class="why__b">Programs are backed by underwriting partners.</p></div>
@@ -1177,13 +1265,8 @@ button{font:inherit;cursor:pointer}
       <div class="why__i"><p class="why__k">Customer experience</p><p class="why__b">US-based service with self-serve claim filing through the FurnitureRx app.</p></div>
       <div class="why__i"><p class="why__k">Dealer support</p><p class="why__b">Training and sales-floor materials for the associates who present the program.</p></div>
       <div class="why__i"><p class="why__k">Program expertise</p><p class="why__b">Subscription, multi-year and reinsurance programs under one relationship.</p></div>
-      <div class="why__i"><p class="why__k">Multi-program capability</p><p class="why__b">One partner across all three economic paths, so the paths can be combined.</p></div>
     </div>
 
-    <div class="proof">
-      <p class="proof__v">4.5<span class="proof__star">&#9733;</span></p>
-      <p class="body" style="font-size:15px;margin:0">RAP Google rating.</p>
-    </div>
   </div>
 </section>
 
@@ -1195,7 +1278,7 @@ button{font:inherit;cursor:pointer}
       <span class="acc">Let&rsquo;s improve the economics of the transaction.</span>
     </h2>
     <div class="btns">
-      <a class="btn btn--primary" href="economics-gate.html">See My Economics &rarr;</a>
+      <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
       <a class="btn btn--secondary" href="#contact">Talk to RAP</a>
     </div>
     <p class="meta" style="margin-top:var(--s-7);color:rgba(255,255,255,.55)">

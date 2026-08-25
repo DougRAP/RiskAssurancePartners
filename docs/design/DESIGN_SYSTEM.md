@@ -1,6 +1,10 @@
 # Risk Assurance Partners — DESIGN SYSTEM
 
 **Phase 2 / UI-UX deliverable 2 of 5.**
+**Revision 3 — 2026-08-25.** DECISIONS 029–032: primary CTA relabelled **"Profit Calculator"**
+and made persistent on mobile (§4.1, §4.2); two-axis program block added to the orientation
+strip (§4.2b); rating block added (§4.3b); FurnitureRx point list added (§6). No token,
+typeface, scale, or grid value changed.
 **Revision 2 — 2026-08-24.**
 
 **Palette, typography, spacing and layout are owner-approved as-is and are frozen.** Revision 2
@@ -206,11 +210,19 @@ Ink sections get `--s-11` / `--s-9`. Heading→lead = `--s-4`; lead→content = 
 
 | Variant | Fill | Text | Border | Use |
 |---|---|---|---|---|
-| Primary | `--rap-ember-700` | `#FFF` | none | `See My Economics →`, `Calculate My Opportunity →`, form submit |
+| Primary | `--rap-ember-700` | `#FFF` | none | `Profit Calculator →` (DECISION 032 — the single primary label sitewide), form submit |
 | Secondary | transparent | `--rap-ink` | 1px `--rap-ink` | `How RAP Helps`, `Talk to RAP` |
 | Primary on ink | `--rap-ember-700` | `#FFF` | none | Final CTA |
 | Secondary on ink | transparent | `#FFF` | 1px `rgba(255,255,255,.45)` | Final CTA pair |
 | Quiet link | — | `--rap-ember-700` | 1px bottom | `Learn more →`, `Source →` |
+
+**Primary CTA label** is `Profit Calculator →` in every position — header, hero, Section 08
+teaser, final CTA, and mobile drawer. One primary conversion verb sitewide. The gated tool it
+opens keeps its own brand, **RAP Dealer Economics Calculator**; the button is the door, the
+brand is the room. Never merge the two labels.
+
+**The primary CTA never disappears responsively** (R9.2 / DECISION 032). It compacts instead:
+15px/28px at ≥1024px, 13px/16px at ≤1024px, 12px/12px at ≤680px, `min-height:44px` throughout.
 
 Metrics: 14px 28px padding, `--radius-sm`, Inter 600 at 15px, sentence case, trailing
 `→` on any forward action. Hover: ember-700 → `#8E3B0C`; secondary fills `--rap-ink` with
@@ -251,6 +263,12 @@ transition, never the behavior.
 pages exist), not a button that does nothing on click. It opens a 3-item dropdown panel on
 hover and focus-within (1px border, 4px radius, each item = name + one-line descriptor), and
 each item points at a **distinct** destination.
+
+**Mobile header** (≤1024px): the nav collapses to a hamburger but the **primary CTA stays in
+the bar** (R9.2). To make room without dropping the corporate wordmark at ≤680px: the mark
+shrinks 34px → 30px, the "VALUE THROUGH INNOVATION" line hides, and the wordmark is allowed to
+wrap to two lines at 14px. The condensed-header utility cluster stands down below 1024px, since
+the slim utility strip already carries File a Claim and Dealer Login persistently.
 
 **Mobile nav** (≤1024px): hamburger opens a full-height `--rap-ink` drawer, closing on `Esc`.
 Order inside the drawer is deliberate:
@@ -294,6 +312,27 @@ Rules:
 - Closing footnote line states the FurnitureRx → RAP relationship. Keep the footer instance too.
 - Responsive: 3 columns → 3 hairline-separated rows below 860px.
 
+**Two-axis block** (DECISION 029), appended below the three program items:
+
+```
+PROTECTION PLAN TYPES          │ UNDERWRITING TYPES
+— how the customer buys        │ — who keeps the underwriting profits
+Subscription — $19.99 a month, │ Reinsurance — the dealer shares in the
+cancel at any time.            │ underwriting profits and gets tax benefits.
+Multi-Year — on average $300   │ Standard — RAP keeps them.
+one time, prorated share back. │
+```
+
+- Two columns, `--rap-slate-200` top rule, mono 10px labels, Inter 14px values, program names
+  in Inter 600 `--rap-ink`. Stacks below 860px.
+- This exists to resolve a real comprehension trap: the descriptor names **four** program words
+  while Section 05 shows **three** cards. The block states that these are two dimensions that
+  combine, not four competing products. Without it a reader who counts is left confused.
+- **Standard gets no card in Section 05 and no entry in the three-item row above.** It is an
+  underwriting type, not an economic path.
+- Facts introduced here are owner-approved and appear nowhere else on the homepage: Multi-Year
+  averages ~$300 one time with a prorated refund; Reinsurance carries dealer tax benefits.
+
 ### 4.2c Contact block
 
 Lives inside the footer region (Section 13) with `id="contact"`, so no fifteenth homepage
@@ -330,6 +369,30 @@ Rules: value never wraps; delta is **always** glyph + sign + number (never color
 source and last-updated are mandatory on every tile — an unsourced number is a bug.
 Stale state: source line turns `--rap-slate-300` and appends `· STALE`. Error state: value
 renders as `—` with `DATA UNAVAILABLE` in the source line. Never render an empty tile.
+
+### 4.3b Rating block (lead proof)
+
+The Google rating is owner-designated as **very important** (DECISION 030), so it gets a
+component rather than a footnote, and it opens Section 11 rather than closing it.
+
+```
+▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔  ← 2px --rap-ink top rule
+       ★★★★☆    RAP GOOGLE RATING           ← brass glyphs; Inter 600 12px .10em
+4.5             One sentence on why it       ← Playfair clamp(56px,7vw,86px)
+                matters to a dealer.         ← Inter 16px, --rap-slate-700, 56ch
+┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+```
+
+Rules:
+- The numeral is the largest on the page outside the hero. That is the prominence.
+- Star glyphs are `--rap-brass` and decorative (`aria-hidden`); the value carries the meaning.
+- The supporting sentence must state **why the rating matters to a dealer** — the customer
+  researches the provider and the retailer wears the result — not merely that RAP is well rated.
+  A number without a stake is a vanity metric.
+- **4.5 only.** The 4.7 figure in the research draft is incorrect (DECISION 021).
+- No testimonial carousel, no review screenshots, no third-party trust badges, and no new
+  section — prominence comes from scale and position inside Section 11.
+- Stacks to a left-aligned column below 680px, numeral scale preserved.
 
 ### 4.4 Trend indicator
 
@@ -458,6 +521,24 @@ looking at from a cropped screenshot.
 - Product proof is the **actual kiosk interface**, rendered as a real UI panel on cream with
   the kiosk's own type and orange button — not a screenshot in a laptop mockup, not a
   stylized illustration. It is the same design system, which is why it fits.
+- **Do not mirror kiosk coverage copy onto the corporate site** (DECISION 031). `$5,000 total
+  coverage`, `24/7 claim filing`, component lists, and repair/replace language are point-of-sale
+  detail and the wrong emphasis for a dealer-facing page. The kiosk panel shows only the two
+  lines that carry the buying decision, closed by `FULL COVERAGE TERMS SHOWN AT CHECKOUT`.
+- **FurnitureRx point list** (`.frx__pts`) — the approved Section 07 message, grouped
+  `For the customer` / `For the dealer`, each item a 2px `--rap-ember` left rule with a bold
+  claim (Inter 600 17px) over one supporting line (Inter 14px `--rap-slate-700`):
+
+  | Audience | Claim | Support |
+  |---|---|---|
+  | Customer | Just $19.99 a month | Same coverage as multi-year programs, paid monthly instead of upfront |
+  | Customer | Cancel, start, restart at any time | The customer stays in control |
+  | Dealer | Zero remit | The dealer pays RAP nothing to participate |
+  | Dealer | Recurring commission revenue | $8 per successful monthly payment, for as long as the customer stays |
+
+  "Same coverage as multi-year programs" is load-bearing — it is what stops a monthly price
+  reading as a lesser product. The economics table beneath restates the same three numbers in
+  active voice (**Customer pays / Dealer remits / Dealer earns**) as a scannable summary.
 - Multi-Year Protection and Reinsurance are rendered with identical card weight, identical
   type sizes, and identical CTA treatment to FurnitureRx in Section 05. Visual parity is how
   the "three paths, not one product plus two footnotes" requirement is enforced. FurnitureRx
