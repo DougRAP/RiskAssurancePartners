@@ -290,10 +290,28 @@ button{font:inherit;cursor:pointer}
 .calc__out{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);padding:var(--s-5) 0;border-bottom:1px solid var(--rap-slate-200)}
 .calc__ok{font-weight:600;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
 .calc__ov{font-family:var(--serif);font-size:clamp(32px,3.4vw,44px);font-weight:500;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
-/* secondary outputs — the two figures that make the stacking visible */
+/* secondary outputs */
 .calc__out2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);padding:var(--s-5) 0;border-bottom:1px solid var(--rap-slate-200)}
 .calc__ov2{font-family:var(--serif);font-size:clamp(22px,2.2vw,28px);font-weight:500;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--rap-slate-700)}
 .calc__ov2 small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--rap-slate-500)}
+
+/* fixed illustrative assumptions — displayed, never editable (DECISION 013) */
+.calc__fixed{
+  display:flex;gap:var(--s-5);flex-wrap:wrap;padding:var(--s-4) 0;
+  border-bottom:1px solid var(--rap-slate-200);
+}
+.calc__fx{display:flex;align-items:baseline;gap:8px}
+.calc__fx b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);font-weight:500}
+.calc__fx span{font-weight:600;font-size:14px;color:var(--rap-ink)}
+
+/* 60-month cohort waterfall — milestone bars */
+.mile{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-3);padding:var(--s-6) 0 var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
+.mile__c{display:flex;flex-direction:column;gap:8px;min-width:0}
+.mile__bw{height:104px;display:flex;align-items:flex-end;border-bottom:1px solid var(--rap-slate-300)}
+.mile__b{width:100%;background:var(--rap-blue);border-radius:1px 1px 0 0;transition:height .18s;min-height:2px}
+.mile__c:last-child .mile__b{background:var(--rap-ember)}
+.mile__m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.mile__v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;color:var(--rap-ink);font-weight:500;line-height:1.2;word-break:break-word}
 .calc__note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
 .calc__cta{margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200);display:flex;align-items:center;gap:var(--s-5);flex-wrap:wrap}
 .calc__cta p{font-size:13px;color:var(--rap-slate-700);max-width:44ch}
@@ -378,6 +396,10 @@ button{font:inherit;cursor:pointer}
   .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
   .burger{width:42px;height:42px;flex:0 0 42px}
   .calc__inputs,.calc__out,.calc__out2{grid-template-columns:1fr;gap:var(--s-4)}
+  /* six milestones become 3x2 — six bars at 375px are unreadable */
+  .mile{grid-template-columns:repeat(3,1fr);gap:var(--s-4) var(--s-3)}
+  .mile__bw{height:72px}
+  .mile__v{font-size:12px}
   .btns .btn{width:100%;justify-content:center}
   .covtbl th[scope=col]:not(:first-child),.covtbl td:not(:first-child){width:60px}
   .covtbl th,.covtbl td{padding:10px 8px;font-size:14px}
@@ -590,44 +612,62 @@ button{font:inherit;cursor:pointer}
       <div class="calc" data-calc="sub">
         <div class="calc__inputs">
           <div class="calc__f">
-            <label for="sub-units">Annual units</label>
-            <div class="calc__in"><input id="sub-units" type="number" min="0" step="1" value="1200" inputmode="numeric"></div>
-            <small>Subscriptions sold per year</small>
+            <label for="sub-units">New subscription sales per month</label>
+            <div class="calc__in"><input id="sub-units" type="number" min="0" step="1" value="200" inputmode="numeric"></div>
+            <small>Subscriptions added each month</small>
           </div>
           <div class="calc__f">
-            <label for="sub-rate">Commission per payment</label>
+            <label for="sub-rate">Dealer share per payment</label>
             <div class="calc__in"><span>$</span><input id="sub-rate" type="number" min="0" step="0.01" value="8" inputmode="decimal"></div>
             <small>Default $8 &middot; editable</small>
           </div>
         </div>
 
+        <!-- Fixed illustrative assumptions. Displayed, never editable — cancellation
+             and retention modeling stay behind the gate (DECISION 013). -->
+        <div class="calc__fixed">
+          <span class="calc__fx"><b>Payments per subscriber</b><span>60 average</span></span>
+          <span class="calc__fx"><b>Term</b><span>60 months</span></span>
+          <span class="calc__fx"><b>New sales</b><span>Continue monthly</span></span>
+        </div>
+
         <div class="calc__out" aria-live="polite">
           <div>
-            <p class="calc__ok">Year 1 income</p>
-            <p class="calc__ov" id="sub-annual">$62,400</p>
+            <p class="calc__ok">Cumulative dealer income &mdash; 60 months</p>
+            <p class="calc__ov" id="sub-total">$2,928,000</p>
           </div>
           <div>
-            <p class="calc__ok">5-year cumulative</p>
-            <p class="calc__ov" id="sub-five">$1,464,000</p>
+            <p class="calc__ok">Net earned per subscriber</p>
+            <p class="calc__ov" id="sub-per">$480</p>
           </div>
         </div>
 
-        <div class="calc__out2" aria-live="polite">
-          <div>
-            <p class="calc__ok">Active subscribers at month 60</p>
-            <p class="calc__ov2" id="sub-actives">6,000</p>
+        <div class="mile" aria-live="polite">
+          <div class="mile__c">
+            <div class="mile__bw"><div class="mile__b" id="sub-b12"></div></div>
+            <p class="mile__m">12 mo</p><p class="mile__v" id="sub-m12">$124,800</p>
           </div>
-          <div>
-            <p class="calc__ok">Monthly run-rate at month 60</p>
-            <p class="calc__ov2" id="sub-run">$48,000 <small>/ month</small></p>
+          <div class="mile__c">
+            <div class="mile__bw"><div class="mile__b" id="sub-b24"></div></div>
+            <p class="mile__m">24 mo</p><p class="mile__v" id="sub-m24">$480,000</p>
+          </div>
+          <div class="mile__c">
+            <div class="mile__bw"><div class="mile__b" id="sub-b36"></div></div>
+            <p class="mile__m">36 mo</p><p class="mile__v" id="sub-m36">$1,065,600</p>
+          </div>
+          <div class="mile__c">
+            <div class="mile__bw"><div class="mile__b" id="sub-b48"></div></div>
+            <p class="mile__m">48 mo</p><p class="mile__v" id="sub-m48">$1,881,600</p>
+          </div>
+          <div class="mile__c">
+            <div class="mile__bw"><div class="mile__b" id="sub-b60"></div></div>
+            <p class="mile__m">60 mo</p><p class="mile__v" id="sub-m60">$2,928,000</p>
           </div>
         </div>
 
         <p class="calc__note">
-          Illustrative only &mdash; assumes continued sales and active subscriptions. Not a forecast.
-          Subscribers stack month over month: with m = annual units &divide; 12 average new
-          subscribers a month, month n pays m &times; n &times; rate.
-          Year 1 = rate &times; m &times; 78. 5-year cumulative = rate &times; m &times; 1830.
+          Illustrative &mdash; assumes continued monthly sales and an average 60 successful
+          payments per subscriber over a 60-month term. Not a forecast.
         </p>
 
         <div class="calc__cta">
@@ -745,6 +785,11 @@ button{font:inherit;cursor:pointer}
           </div>
         </div>
 
+        <div class="calc__fixed">
+          <span class="calc__fx"><b>Term</b><span>60 months</span></span>
+          <span class="calc__fx"><b>Payment</b><span>One upfront payment covers the term</span></span>
+        </div>
+
         <div class="calc__out" aria-live="polite">
           <div>
             <p class="calc__ok">Annual income</p>
@@ -758,7 +803,7 @@ button{font:inherit;cursor:pointer}
 
         <p class="calc__note">
           Illustrative only. Not a forecast. Annual = units &times; margin.
-          5-year = annual &times; 5.
+          5-year = annual &times; 5 &mdash; the same 60-month term as the subscription above.
         </p>
 
         <div class="calc__cta">
@@ -1132,55 +1177,81 @@ document.addEventListener('keydown', function (e) {
   apply();
 })();
 
-/* Mini calculators (DECISION 039, subscription model corrected by owner
-   2026-08-25).
+/* Mini calculators.
+   SUBSCRIPTION rebuilt 2026-08-25 to match the owner's proforma spreadsheet
+   (cohort waterfall), replacing the earlier annual-units version.
+   Horizon corrected the same day from 36 to 60 months: a typical standard
+   plan runs a 60-month term, so a subscription over the same term is 60
+   payments — which also matches the homepage $8 x 60 = $480 illustration.
 
-   SUBSCRIPTION — revenue is CUMULATIVE recurring; subscribers stack month
-   over month. With m = annual units / 12 average new subscribers per month
-   and no churn shown (illustrative):
-       month n income = m * n * rate
-       Year 1        = rate * m * SUM(1..12) = rate * m * 78
-       5-year cumul. = rate * m * SUM(1..60) = rate * m * 1830
-       actives at m60 = 60 * m
-       run-rate at m60 = 60 * m * rate
-   Check: 1,200 units (m=100) at $8 -> Y1 $62,400 ; 5yr $1,464,000 ;
-          6,000 actives ; $48,000/month run-rate.
+   MODEL — each month adds a cohort of m new subscribers. Every active
+   subscriber pays `rate` once a month, and each subscriber makes at most
+   TERM = 60 payments. Cumulative dealer income at month M is therefore
+
+       cum(M) = m * rate * SUM_{j=1..M} min(M - j + 1, 60)
+
+   The inner sum counts, for every cohort j, how many payments it has made by
+   month M, capped at 60. Substituting k = M - j + 1 gives SUM_{k=1..M} min(k,60),
+   which reduces to M(M+1)/2 while M <= 60, and to 1830 + 60*(M-60) beyond it.
+
+   Milestone multipliers (M <= 60): 12->78, 24->300, 36->666, 48->1176,
+   60->1830.
+   Check at defaults m=200, rate=$8 (m*rate = 1,600):
+       12 mo $124,800    24 mo $480,000    36 mo $1,065,600
+       48 mo $1,881,600  60 mo $2,928,000
+       net earned per subscriber = rate * 60 = $480
+   These reproduce the owner's spreadsheet exactly.
 
    MULTI-YEAR — income lands at the sale, so it does not stack:
        annual = units * margin ; 5-year = annual * 5
+   Both calculators now share the same 60-month horizon, so the two sections
+   are read off a common term.
 
-   Public-teaser level only (DECISION 013): no churn, retention, cancellation
-   or any other model assumption is exposed here. */
+   Public-teaser level only (DECISION 013): the 60-payment average is shown as
+   a fixed illustrative assumption. No cancellation, churn or retention curve
+   is exposed or editable here — that modeling stays behind the gate. */
 (function () {
+  var TERM = 60;
+  var MILES = [12, 24, 36, 48, 60];
+
   function money(n) {
     if (!isFinite(n) || n < 0) { n = 0; }
     return '$' + Math.round(n).toLocaleString('en-US');
-  }
-  function count(n) {
-    if (!isFinite(n) || n < 0) { n = 0; }
-    return Math.round(n).toLocaleString('en-US');
   }
   function read(el) {
     var v = parseFloat(el.value) || 0;
     return v < 0 ? 0 : v;
   }
+  /* SUM_{k=1..M} min(k, TERM) */
+  function factor(M) {
+    if (M <= TERM) { return M * (M + 1) / 2; }
+    return TERM * (TERM + 1) / 2 + TERM * (M - TERM);
+  }
 
-  /* Subscription — stacking model */
+  /* Subscription — 36-month cohort waterfall */
   (function () {
     var u = document.getElementById('sub-units');
     var r = document.getElementById('sub-rate');
-    var y1 = document.getElementById('sub-annual');
-    var f5 = document.getElementById('sub-five');
-    var ac = document.getElementById('sub-actives');
-    var rr = document.getElementById('sub-run');
+    var total = document.getElementById('sub-total');
+    var per = document.getElementById('sub-per');
+
     function calc() {
-      var m = read(u) / 12;
+      var m = read(u);
       var rate = read(r);
-      y1.textContent = money(rate * m * 78);
-      f5.textContent = money(rate * m * 1830);
-      ac.textContent = count(60 * m);
-      rr.innerHTML = money(60 * m * rate) + ' <small>/ month</small>';
+      var base = m * rate;
+      var peak = base * factor(TERM);
+
+      MILES.forEach(function (M) {
+        var v = base * factor(M);
+        document.getElementById('sub-m' + M).textContent = money(v);
+        document.getElementById('sub-b' + M).style.height =
+          (peak > 0 ? (v / peak) * 100 : 0) + '%';
+      });
+
+      total.textContent = money(peak);
+      per.textContent = money(rate * TERM);
     }
+
     u.addEventListener('input', calc);
     r.addEventListener('input', calc);
     calc();

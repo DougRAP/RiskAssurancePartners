@@ -71,23 +71,54 @@ Every page inherits, unchanged from `home.html`:
 
 One page. Four sections. `#subscription` · `#multi-year` · `#reinsurance` · `#standard`.
 
-**Mini-calculator model as built (DECISION 039, subscription model corrected by owner
-2026-08-25).** Subscription revenue is *cumulative recurring* — subscribers stack month over
-month. With `m` = annual units ÷ 12 average new subscribers per month, and no churn shown:
+**Mini-calculator model as built.** Rebuilt 2026-08-25 to match the owner's proforma
+spreadsheet — a **60-month cohort waterfall**, replacing the earlier annual-units version.
+The horizon was corrected the same day from 36 to **60 months**: a typical standard plan runs
+a 60-month term, so a subscription over the same term is 60 payments — which also reconciles
+with the homepage hero illustration, **$8 × 60 = $480**.
 
-| Output | Formula | At 1,200 units / $8 |
+**Inputs (two only):** new subscription sales per month (default **200**) · dealer share per
+payment (default **$8**, editable).
+
+**Fixed illustrative assumptions**, displayed as text and *not* editable: average **60 payments
+per subscriber**; **60-month term**; new sales continue monthly. Cancellation and retention
+modeling stay behind the gate (DECISION 013).
+
+**Model.** Each month adds a cohort of `m` new subscribers. Every active subscriber pays `rate`
+once a month, and each subscriber makes at most 60 payments:
+
+```
+cum(M) = m × rate × Σ_{j=1..M} min(M − j + 1, 60)
+```
+
+The inner sum counts, for each cohort `j`, how many payments it has made by month `M`, capped
+at 60. Substituting `k = M − j + 1` gives `Σ_{k=1..M} min(k, 60)`, which reduces to
+`M(M+1)/2` while `M ≤ 60` and to `1830 + 60(M − 60)` beyond it. The build implements the
+general form, so the cap behaves correctly if the horizon is ever extended past 60.
+
+| Milestone | Multiplier | At defaults (200 × $8 = $1,600) |
 |---|---|---|
-| Month n income | `m × n × rate` | — |
-| Year 1 income | `rate × m × 78` (Σ1..12) | $62,400 |
-| 5-year cumulative | `rate × m × 1830` (Σ1..60) | $1,464,000 |
-| Active subscribers at month 60 | `60 × m` | 6,000 |
-| Monthly run-rate at month 60 | `60 × m × rate` | $48,000 / month |
+| 12 months | 78 | **$124,800** |
+| 24 months | 300 | **$480,000** |
+| 36 months | 666 | **$1,065,600** |
+| 48 months | 1,176 | **$1,881,600** |
+| 60 months | 1,830 | **$2,928,000** |
 
-Multi-Year does not stack — income lands at the sale: `annual = units × margin`,
-`5-year = annual × 5`. Both calculators carry
-*"Illustrative only — assumes continued sales and active subscriptions. Not a forecast."*
-and route to the gated Profit Calculator. No churn, retention or cancellation assumption is
-exposed (DECISION 013).
+**Outputs.** Two hero figures — 60-month cumulative (large) and net earned per subscriber
+(`rate × 60`, **$480** at defaults, matching the hero) — over a five-bar milestone chart scaled
+to the 60-month peak, with the final bar in `--rap-ember`. All five figures above reproduce the
+owner's spreadsheet exactly (verified).
+
+**Caption (required):** *"Illustrative — assumes continued monthly sales and an average 60
+successful payments per subscriber over a 60-month term. Not a forecast."*
+
+**Multi-Year** does not stack — income lands at the sale: `annual = units × margin`,
+`5-year = annual × 5`. Its inputs are unchanged, and it now carries the same term as a
+displayed assumption: **60 months**, *one upfront payment covers the term* (approved fact).
+
+**The two calculators now share a 60-month horizon**, which resolves the different-bases
+concern raised when Subscription ran 36 months against Multi-Year's 5 years — the two sections
+are read off a common term. Both route to the gated Profit Calculator.
 
 ## 1.1 Page structure
 
