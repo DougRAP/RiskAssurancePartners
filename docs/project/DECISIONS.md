@@ -561,6 +561,7 @@ Site map: Standard Programs gets its own program page under Programs (built Phas
 
 - Build placeholder **Programs** and **Newswire** pages per the approved PAGE_WIREFRAMES layouts; wire navigation to them.
 - **Mini calculators** (Subscription & Multi-Year sections): user enters **annual units**; the per-unit rates (**$8** subscription, **$180** multi-year) are **editable**. Results shown as **annual** and **5-year**.
+- **Subscription model is cumulative recurring (owner clarification, 2026-08-25):** convert annual units to average monthly new subscribers (m = annual ÷ 12); subscribers stack — month n has n × m active payers (100 in month 1, 200 paying in month 2, etc.). Year-1 income = rate × m × 78; 5-year cumulative = rate × m × 1830; also show active subscribers and monthly run-rate at month 60. Illustrative, no churn shown. Multi-Year: annual = units × rate; 5-year = annual × 5.
 - Coverage-grid lists: placeholders until owner supplies.
 - **Care Kits** appear at the bottom of both the Subscription and Multi-Year sections. Approved facts: kits are **drop-shipped to the customer or the dealer can stock them**; on drop-ship, the dealer earns a **$20 commission per kit shipped to the dealer's trading-area zip codes** — the trading area **must be claimed by the dealer and cannot overlap a previously claimed dealer's territory**.
 
