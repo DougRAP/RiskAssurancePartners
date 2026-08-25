@@ -486,6 +486,17 @@ The key FurnitureRx features to present:
 
 The primary CTA label changes from "See My Economics" to **"Profit Calculator"** ("See My Economics" was strange wording). The gated tool itself remains branded **RAP Dealer Economics Calculator**.
 
+## Decision 033 — Corporate Tagline and Hero Eyebrow
+
+**Status:** Approved (Owner, 2026-08-25)
+
+- Corporate tagline (under the logo, header/footer) changes from "Value Through Innovation" to:
+  > **Protection Programs for Home Furnishings Retail**
+- Hero eyebrow changes to:
+  > **Reinsurance, Standard & Subscription Programs**
+
+Resolves open question Q4 (tagline half; vector logo asset still outstanding).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

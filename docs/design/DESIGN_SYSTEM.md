@@ -248,12 +248,12 @@ under-weighted for the two highest-intent actions on the site.
   reappear at the top of the drawer.
 
 **Primary header** (white, 84px, sticky): RAP wordmark left (mark + "RISK ASSURANCE
-PARTNERS" in Playfair 500 with "VALUE THROUGH INNOVATION" in Plex Mono 9px `.18em` beneath —
+PARTNERS" in Playfair 500 with "PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL" in Plex Mono 9px `.18em` beneath —
 the existing corporate lockup, not redesigned). Nav right in Inter 500 15px `--rap-ink`,
 32px gaps, 2px `--rap-ember` underline on hover/active. Primary CTA button at the far right.
 
 **Condensed state** (`.is-condensed`, scrollY > 40): height 84px → 64px, the
-"VALUE THROUGH INNOVATION" line drops — freeing exactly the space required — a bottom hairline
+"PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL" line drops — freeing exactly the space required — a bottom hairline
 and soft shadow appear, and the header **gains `Dealer Login →`** in a 1px `--rap-slate-300`
 box plus `File a Claim` at ≥1280px only. Without this the utility functions exist for one
 screen out of roughly eleven. Transition 160ms; `prefers-reduced-motion` removes the
@@ -266,7 +266,7 @@ each item points at a **distinct** destination.
 
 **Mobile header** (≤1024px): the nav collapses to a hamburger but the **primary CTA stays in
 the bar** (R9.2). To make room without dropping the corporate wordmark at ≤680px: the mark
-shrinks 34px → 30px, the "VALUE THROUGH INNOVATION" line hides, and the wordmark is allowed to
+shrinks 34px → 30px, the "PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL" line hides, and the wordmark is allowed to
 wrap to two lines at 14px. The condensed-header utility cluster stands down below 1024px, since
 the slim utility strip already carries File a Claim and Dealer Login persistently.
 

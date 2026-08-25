@@ -73,7 +73,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ ┌──┐ RISK ASSURANCE PARTNERS                                                │
-│ │▞▚│ VALUE THROUGH INNOVATION                                               │
+│ │▞▚│ PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL                                               │
 │ └──┘                                                                        │
 │        Dealer Economics  Programs ▾  Newswire  Market Intelligence          │
 │        Research  Why RAP                        [ Profit Calculator → ]      │
@@ -99,7 +99,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 ```
 
 **Annotations**
-- Wordmark is the existing RAP corporate lockup (mark + name + "VALUE THROUGH INNOVATION").
+- Wordmark is the existing RAP corporate lockup (mark + name + "PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL").
   Not redesigned. In the prototype the mark is a placeholder glyph; production uses the
   supplied logo asset.
 - Nav order is locked and matches DECISION 009 exactly. Programs is the only dropdown.
@@ -113,7 +113,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
   hides, and the wordmark wraps to two lines. The condensed-header utility cluster stands down
   below 1024px because the slim utility strip (R3a) already carries those functions.
 - **R4 applied.** Sticky behavior at scrollY > 40: the bar condenses 84px → 64px, the
-  "VALUE THROUGH INNOVATION" line drops — freeing exactly the space needed — and the header
+  "PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL" line drops — freeing exactly the space needed — and the header
   gains `Dealer Login →` in a hairline box, plus `File a Claim` at ≥1280px only. Without this
   the utility functions existed for one screen out of roughly eleven. Implemented with a small
   scroll listener; `prefers-reduced-motion` removes the transition, not the behavior.
@@ -187,7 +187,7 @@ Grid: 12 columns, 1240px content width, 48px page margin. Mobile: single column,
 
 ### R1 — eyebrow
 
-- Reads `RISK ASSURANCE PARTNERS · PROTECTION PROGRAMS FOR FURNITURE & MATTRESS RETAILERS`.
+- Reads `REINSURANCE, STANDARD & SUBSCRIPTION PROGRAMS`.
   Short form; the full owner descriptor lives in the strip below so the 12px line stays legible.
 - This is the cheapest unused line on the page. The previous eyebrow ("The economics of
   furniture retail") named the topic the H1 then named again; this one names company, category,
@@ -687,7 +687,7 @@ with a bold claim and one supporting line:
 ▓                             8:00 AM – 6:00 PM, Mon–Fri, EST                 ▓
 ▓ ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄  ▓
 ▓ ┌──┐ RISK ASSURANCE PARTNERS                                                ▓
-▓ │▞▚│ VALUE THROUGH INNOVATION                                               ▓
+▓ │▞▚│ PROTECTION PROGRAMS FOR HOME FURNISHINGS RETAIL                                               ▓
 ▓ └──┘                                                                        ▓
 ▓                                                                             ▓
 ▓ PROGRAMS       INTELLIGENCE      COMPANY      CUSTOMER        DEALER        ▓
