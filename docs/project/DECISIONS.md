@@ -555,6 +555,15 @@ Site map: Standard Programs gets its own program page under Programs (built Phas
 - **No FAQ.**
 - Drop the formal non-disparagement phrasing rules — each program stands on its own. Owner will provide final copy; sample copy is acceptable in the interim.
 
+## Decision 039 — Programs & Newswire Placeholder Pages; Mini-Calc Spec; Care Kits Facts
+
+**Status:** Approved (Owner, 2026-08-25)
+
+- Build placeholder **Programs** and **Newswire** pages per the approved PAGE_WIREFRAMES layouts; wire navigation to them.
+- **Mini calculators** (Subscription & Multi-Year sections): user enters **annual units**; the per-unit rates (**$8** subscription, **$180** multi-year) are **editable**. Results shown as **annual** and **5-year**.
+- Coverage-grid lists: placeholders until owner supplies.
+- **Care Kits** appear at the bottom of both the Subscription and Multi-Year sections. Approved facts: kits are **drop-shipped to the customer or the dealer can stock them**; on drop-ship, the dealer earns a **$20 commission per kit shipped to the dealer's trading-area zip codes** — the trading area **must be claimed by the dealer and cannot overlap a previously claimed dealer's territory**.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
