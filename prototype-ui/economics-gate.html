@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>RAP Dealer Economics Calculator — Access Flow Prototype</title>
+<title>Dealer Economics — Risk Assurance Partners</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -27,14 +27,18 @@
   --mono:"IBM Plex Mono",ui-monospace,monospace;
   --s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;
   --radius-sm:2px;--radius-md:4px;--margin:48px;
+  --content:1240px;--wide:1440px;
 }
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--rap-paper);color:var(--rap-ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,p,ul,dl,dd,figure{margin:0}ul{padding:0;list-style:none}
 a{color:inherit}button{font:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px}
-.wrap{max-width:1000px;margin:0 auto;padding:0 var(--margin)}
-.wrap-wide{max-width:1240px;margin:0 auto;padding:0 var(--margin)}
+/* Both containers are 1240px, matching home.html. .wrap was 1000px, which
+   inset the transplanted header and footer relative to the page content —
+   every content section here sits on .wrap-wide, so nothing else moves. */
+.wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
+.wrap-wide{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
 
 .eyebrow{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
 .d2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,52px);line-height:1.05;letter-spacing:-.02em}
@@ -179,21 +183,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 }
 .foot a{color:#fff}
 .foot .eyebrow{color:var(--rap-brass)}
-.foot .wrap{max-width:var(--wide)}
 
-/* ---------- prototype state strip ----------
-   A review control, not site chrome: sits below the global header, mono,
-   compact, and clearly labelled. The duplicated site links it used to carry
-   are gone — the real navigation above covers them. */
-.pstates{background:var(--rap-mist);border-bottom:1px solid var(--rap-slate-200);padding:8px 0}
-.pstates__in{display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap}
-.pstates p{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-right:var(--s-2)}
-.pstates a{
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--rap-slate-700);text-decoration:none;border:1px solid var(--rap-slate-300);
-  border-radius:var(--radius-sm);padding:5px 10px;background:#fff;
-}
-.pstates a:hover{border-color:var(--rap-ink);color:var(--rap-ink)}
 @media (max-width:1024px){
   .nav{display:none}
   .burger{display:grid}
@@ -226,9 +216,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .state--ink{background:var(--rap-ink);color:#fff;border-top:0}
 .state--ink .lead{color:rgba(255,255,255,.78)}
 .state--ink .eyebrow{color:var(--rap-brass)}
-.state__tag{display:inline-flex;align-items:center;gap:10px;background:var(--rap-ink);color:#fff;border-radius:var(--radius-sm);padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-6)}
-.state--ink .state__tag{background:rgba(255,255,255,.14)}
-.state__tag b{color:var(--rap-brass)}
+/* .state__tag removed — the dev annotation banners are gone; this reads as
+   the real Dealer Economics page. */
 
 /* ---- flow diagram ---- */
 .flow{display:flex;align-items:stretch;gap:var(--s-2);flex-wrap:wrap;margin-top:var(--s-7)}
@@ -417,7 +406,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   .sup__head{padding-top:var(--s-5)}
 }
 @media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.6}}
-@media print{.hdr,.drawer,.pstates,.sup,.chat{display:none}}
+@media print{.hdr,.drawer,.sup,.chat{display:none}}
 </style>
 </head>
 <body>
@@ -521,24 +510,11 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
 </div>
 
-<!-- Prototype review control — not part of the production page. -->
-<nav class="pstates" aria-label="Prototype states">
-  <div class="wrap-wide pstates__in">
-    <p>Prototype states:</p>
-    <a href="#state-a">A &middot; Public teaser</a>
-    <a href="#state-b">B &middot; Request access</a>
-    <a href="#state-c">C &middot; Pending approval</a>
-    <a href="#state-d">D &middot; Authorized calculator</a>
-  </div>
-</nav>
-
 <main>
 
 <!-- ==================== STATE A — PUBLIC TEASER ==================== -->
 <section class="state" id="state-a" aria-labelledby="a-h">
   <div class="wrap-wide">
-    <p class="state__tag"><b>State A</b> Public &middot; anonymous visitor &middot; /dealer-economics</p>
-
     <p class="eyebrow">Profit Calculator</p>
     <h1 class="d2" id="a-h" style="max-width:20ch">What could this mean for <span class="acc">your dealership?</span></h1>
     <p class="lead" style="margin-top:var(--s-5)">
@@ -613,7 +589,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     </div>
 
     <div class="btns">
-      <a class="btn btn--primary" href="#state-b">Get access to the RAP Dealer Economics Calculator &rarr;</a>
+      <a class="btn btn--primary" href="#state-b" id="get-access">Get access to the RAP Dealer Economics Calculator &rarr;</a>
     </div>
     <p class="meta" style="margin-top:var(--s-4)">Six fields &middot; reviewed by RAP Sales &middot; no password to create</p>
 
@@ -629,10 +605,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 </section>
 
 <!-- ==================== STATE B — REQUEST ACCESS ==================== -->
-<section class="state state--mist" id="state-b" aria-labelledby="b-h">
+<section class="state state--mist" id="state-b" aria-labelledby="b-h" hidden>
   <div class="wrap-wide">
-    <p class="state__tag"><b>State B</b> Request access &middot; six fields</p>
-
     <p class="eyebrow">Step 1 of 3</p>
     <h2 class="d3" id="b-h" style="max-width:24ch;margin-top:var(--s-3)">
       Get access to the <span class="acc">RAP Dealer Economics Calculator.</span>
@@ -643,7 +617,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     </p>
 
     <div class="form">
-      <form class="panel" onsubmit="return false" novalidate>
+      <form class="panel" id="accessform" novalidate>
         <div class="fields">
           <div class="field">
             <label for="fn">First name <i aria-hidden="true">&bull;</i></label>
@@ -657,10 +631,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
             <label for="co">Company / dealership <i aria-hidden="true">&bull;</i></label>
             <input id="co" name="co" type="text" autocomplete="organization" required>
           </div>
-          <div class="field field--full field--error">
+          <div class="field field--full">
             <label for="em">Business email <i aria-hidden="true">&bull;</i></label>
-            <input id="em" name="em" type="email" autocomplete="email" value="dwright@" aria-describedby="em-err" required>
-            <p class="err" id="em-err"><span aria-hidden="true">&#9888;</span> Enter a valid business email address. The access link is sent here.</p>
+            <input id="em" name="em" type="email" autocomplete="email" aria-describedby="em-hint" required>
+            <small id="em-hint">The access link is sent here.</small>
           </div>
           <div class="field">
             <label for="ph">Phone <i aria-hidden="true">&bull;</i></label>
@@ -679,6 +653,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
             </select>
           </div>
         </div>
+
+        <p class="err" id="form-err" hidden style="margin-top:var(--s-5)">
+          <span aria-hidden="true">&#9888;</span><span id="form-err-t"></span>
+        </p>
 
         <div class="btns" style="margin-top:var(--s-6)">
           <button class="btn btn--primary" type="submit">Request access &rarr;</button>
@@ -716,10 +694,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 </section>
 
 <!-- ==================== STATE C — PENDING APPROVAL ==================== -->
-<section class="state state--ink" id="state-c" aria-labelledby="c-h">
+<section class="state state--ink" id="state-c" aria-labelledby="c-h" hidden>
   <div class="wrap-wide">
-    <p class="state__tag"><b>State C</b> Pending &middot; submitted, awaiting RAP Sales review</p>
-
     <div class="pending">
       <p class="eyebrow">Step 2 of 3</p>
       <h2 class="d3" id="c-h" style="margin-top:var(--s-3)">
@@ -759,13 +735,13 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
       <div class="recap">
         <dl>
-          <dt>Name</dt><dd>Dana Wright</dd>
-          <dt>Dealership</dt><dd>Placeholder Home Furnishings</dd>
-          <dt>Email</dt><dd>dana@placeholder-furniture.com</dd>
-          <dt>Role</dt><dd>Owner / Principal</dd>
+          <dt>Name</dt><dd id="recap-name">&mdash;</dd>
+          <dt>Dealership</dt><dd id="recap-co">&mdash;</dd>
+          <dt>Email</dt><dd id="recap-email">&mdash;</dd>
+          <dt>Role</dt><dd id="recap-role">&mdash;</dd>
         </dl>
         <p style="margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700);font-size:13px;color:rgba(255,255,255,.6)">
-          Something wrong? <a class="qlink" style="color:var(--rap-brass)" href="#state-b">Edit your request &rarr;</a>
+          Something wrong? <button class="qlink" type="button" id="edit-request" style="color:var(--rap-brass);background:none;border:0;border-bottom:1px solid currentColor;padding:0 0 2px">Edit your request &rarr;</button>
         </p>
       </div>
 
@@ -780,7 +756,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 </section>
 
 <!-- ==================== STATE D — AUTHORIZED CALCULATOR ==================== -->
-<section id="state-d" aria-labelledby="d-h">
+<section id="state-d" aria-labelledby="d-h" hidden>
   <div class="calc__bar">
     <div class="wrap-wide">
       <p class="calc__who"><b>Authorized</b> &middot; Dana Wright &middot; Placeholder Home Furnishings &middot; access expires 23 Nov 2026</p>
@@ -790,7 +766,6 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
   <div class="state" style="border-top:0;padding-top:var(--s-7)">
     <div class="wrap-wide">
-      <p class="state__tag"><b>State D</b> Authorized &middot; calculator shell</p>
       <p class="sample">Shell only &mdash; controls are illustrative, outputs are not modelled, no RAP assumptions are present</p>
 
       <p class="eyebrow">Step 3 of 3</p>
@@ -1322,6 +1297,106 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   var s = qs.get('support');
   if (s === '1' || s === 'open' || s === 'offline') { openSup(); }
   else if (s === 'chat') { openSup(); showView('prechat'); }
+})();
+</script>
+
+<script>
+/* ============================================================
+   Dealer Economics access flow.
+
+   Reads as the real page: only the public teaser is visible on load.
+   Requesting access reveals the form in place; submitting it replaces
+   the form with the pending-approval confirmation.
+
+   The authorized calculator is NOT reachable from this flow — in
+   production it opens from a secure emailed link after RAP Sales
+   approves the request (DECISION 013). ?state=d renders it for
+   review only; nothing on the page links to it.
+
+   Demo only: no transport, nothing submitted or stored.
+   ============================================================ */
+(function () {
+  var A = document.getElementById('state-a');
+  var B = document.getElementById('state-b');
+  var C = document.getElementById('state-c');
+  var D = document.getElementById('state-d');
+  var form = document.getElementById('accessform');
+  if (!A || !B || !C || !D || !form) { return; }
+
+  function show(el, on) { el.hidden = !on; }
+
+  /* Reviewer-only view of the authorized calculator. */
+  if (new URLSearchParams(location.search).get('state') === 'd') {
+    show(A, false); show(B, false); show(C, false); show(D, true);
+    return;
+  }
+
+  /* Normal entry: public teaser only. */
+  show(A, true); show(B, false); show(C, false); show(D, false);
+
+  document.getElementById('get-access').addEventListener('click', function (e) {
+    e.preventDefault();
+    show(B, true);
+    B.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var first = document.getElementById('fn');
+    if (first) { setTimeout(function () { first.focus({ preventScroll: true }); }, 320); }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err  = document.getElementById('form-err');
+    var errT = document.getElementById('form-err-t');
+    var ids  = ['fn', 'ln', 'co', 'em', 'ph', 'rl'];
+    var bad  = null, msg = '';
+
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.closest('.field').classList.remove('field--error');
+    });
+
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      if (!el.value.trim()) { bad = el; msg = 'Complete all six fields — RAP Sales needs them to verify the dealership.'; break; }
+    }
+    if (!bad) {
+      var em = document.getElementById('em');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())) {
+        bad = em; msg = 'Enter a valid business email address. The access link is sent here.';
+      }
+    }
+
+    if (bad) {
+      bad.closest('.field').classList.add('field--error');
+      errT.textContent = msg;
+      err.hidden = false;
+      bad.focus();
+      return;
+    }
+
+    err.hidden = true;
+
+    /* Carry the submitted details into the confirmation. */
+    var name = document.getElementById('fn').value.trim() + ' ' + document.getElementById('ln').value.trim();
+    var set = function (id, v) { var n = document.getElementById(id); if (n) { n.textContent = v; } };
+    set('recap-name',  name);
+    set('recap-co',    document.getElementById('co').value.trim());
+    set('recap-email', document.getElementById('em').value.trim());
+    set('recap-role',  document.getElementById('rl').value);
+
+    show(B, false);
+    show(C, true);
+    C.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  /* Back to the form from the confirmation, with the entries still in place. */
+  var edit = document.getElementById('edit-request');
+  if (edit) {
+    edit.addEventListener('click', function () {
+      show(C, false);
+      show(B, true);
+      B.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 })();
 </script>
 
