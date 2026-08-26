@@ -623,13 +623,13 @@ a{color:inherit}button{font:inherit;cursor:pointer}
              one (WCAG 2.5.3) while still telling the two sliders apart. -->
         <div class="tick">
           <div>
-            <label class="tick__lab" for="gm-sub-rng">New sales / month &middot; <b id="gm-sub-n">1</b></label>
+            <label class="tick__lab" for="gm-sub-rng">New sales per month = <b id="gm-sub-n">1</b></label>
             <input class="rng" id="gm-sub-rng" type="range" min="1" max="500" step="1" value="1"
                    aria-label="Subscription &mdash; new sales / month"
                    aria-valuetext="1 new sale per month, $14,640 gross margin over 60 months">
           </div>
           <div>
-            <label class="tick__lab" for="gm-mul-rng">New sales / month &middot; <b id="gm-mul-n">1</b></label>
+            <label class="tick__lab" for="gm-mul-rng">New sales per month = <b id="gm-mul-n">1</b></label>
             <input class="rng" id="gm-mul-rng" type="range" min="1" max="500" step="1" value="1"
                    aria-label="Multi-Year &mdash; new sales / month"
                    aria-valuetext="1 new sale per month, $10,800 gross margin over 60 months">
@@ -638,12 +638,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
         <p class="vh" id="gm-live" role="status" aria-live="polite"></p>
 
         <figcaption class="figcap">
-          <b>Illustrative</b> &mdash; per ticket: $8 &#215; 60 payments = $480 on a subscription
-          &middot; $250 &#215; 72% = $180 on a multi-year plan. The bars show the 60-month gross-margin
-          total at the new-sales-per-month rate set below each side &mdash; subscription accrues
-          as a cohort waterfall (each month&rsquo;s new subscribers keep paying), multi-year is earned
-          at each sale. Totals are illustrative gross margin at the sales rates you choose; they
-          assume sales continue at that rate every month and that monthly payments succeed. Not a forecast.
+          <b>Illustrative</b> &mdash; each bar is total gross margin over 60 months at the
+          new-sales-per-month rate you set. Subscription stacks: each month&rsquo;s new subscribers
+          keep paying, $8 per payment. Multi-year earns $180 once, at each sale. Assumes steady
+          sales and successful payments. Not a forecast.
         </figcaption>
       </figure>
   </div>
