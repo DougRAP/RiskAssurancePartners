@@ -4,21 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Furniture Retail Newswire — Risk Assurance Partners</title>
+<title>Market Intelligence — Risk Assurance Partners</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RISK ASSURANCE PARTNERS — NEWSWIRE PAGE (placeholder build)
-   Per PAGE_WIREFRAMES rev 2 §2 and DECISION 039.
-   DESIGN ONLY. Not production code. No framework, no build.
+   RISK ASSURANCE PARTNERS — MARKET INTELLIGENCE (placeholder)
+   Created after the homepage Market Pulse section was removed;
+   the four stat tiles that lived there now live here.
 
-   ALL FEED CONTENT BELOW IS FABRICATED PLACEHOLDER MATERIAL.
-   Headlines, synopses, publication names and timestamps are
-   invented for layout purposes only. No item corresponds to a
-   real story and no outbound link resolves to a real article.
-   Real items arrive via the Newswire automation phase.
+   ALL VALUES, DELTAS AND UPDATE STAMPS ON THIS PAGE ARE
+   PLACEHOLDERS pending approved data sources (Phase 9). No figure
+   below is an approved fact. Historical charts render empty axes
+   only — the series arrive with the Market Intelligence
+   automation phase, which also supplies real source attribution,
+   update cadence and stale-data thresholds.
+
+   DESIGN ONLY. Not production code. No framework, no build.
+   Shared chrome copied verbatim from home.html.
    ============================================================ */
 
 :root{
@@ -44,6 +48,7 @@
 
   --fs-d2:clamp(30px,4.2vw,56px);
   --fs-d3:clamp(25px,2.9vw,40px);
+  --fs-stat:clamp(34px,3.9vw,52px);
   --fs-h3:clamp(19px,1.6vw,22px);
   --fs-lead:clamp(17px,1.4vw,20px);
 }
@@ -207,7 +212,7 @@ button{font:inherit;cursor:pointer}
 #navtoggle:checked ~ .drawer{display:flex}
 
 /* ============================================================
-   NEWSWIRE — page-specific
+   MARKET INTELLIGENCE — page-specific
    ============================================================ */
 
 /* masthead */
@@ -215,75 +220,38 @@ button{font:inherit;cursor:pointer}
 .mast__t{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
 .mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 .mast__r{text-align:right}
-.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-ember-700)}
-.live__dot{width:7px;height:7px;border-radius:50%;background:var(--rap-ember);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-.is-stale .live{color:var(--rap-slate-500)}
-.is-stale .live__dot{background:var(--rap-slate-300);animation:none}
 .mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
 
-/* layout */
-.wire{display:grid;grid-template-columns:3fr 9fr;gap:var(--s-8);margin-top:var(--s-7);align-items:start}
-
-/* filter rail */
-.rail{position:sticky;top:calc(var(--hdr-h) + 16px);transition:top .16s}
-.rail__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);padding-bottom:var(--s-3);border-bottom:2px solid var(--rap-ink)}
-.rail__b{background:none;border:0;width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);padding:9px 0;border-bottom:1px solid var(--rap-slate-200);text-align:left;color:var(--rap-slate-700);font-size:14px}
-.rail__b:hover{color:var(--rap-ink)}
-.rail__b span{font-family:var(--mono);font-size:12px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums}
-.rail__b[aria-pressed=true]{color:var(--rap-ink);font-weight:600}
-.rail__b[aria-pressed=true] span{color:var(--rap-ember-700)}
-.rail__b.is-zero{color:var(--rap-slate-300)}
-.rail__b.is-zero span{color:var(--rap-slate-300)}
-.rail__arch{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
-.rail__arch label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:8px}
-.rail__arch input{width:100%;height:42px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 10px;font-family:var(--mono);font-size:13px;color:var(--rap-ink);background:#fff}
-
-/* mobile filter trigger */
-.filterbtn{display:none;width:100%;align-items:center;justify-content:space-between;gap:var(--s-3);border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);background:#fff;padding:13px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ink);margin-bottom:var(--s-5)}
-
-/* active filter chip */
-.active-filter{display:none;justify-content:space-between;align-items:center;gap:var(--s-4);flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--rap-slate-200);margin-bottom:var(--s-2)}
-.active-filter.is-on{display:flex}
-.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rap-ink);border-radius:var(--radius-sm);padding:5px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase}
-.chip button{background:none;border:0;color:var(--rap-ember-700);font-size:14px;line-height:1;padding:0}
-
-/* feed */
-.daybar{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-slate-500);padding:var(--s-6) 0 var(--s-3);border-bottom:1px solid var(--rap-slate-300);display:flex;align-items:center;gap:var(--s-4)}
-.daybar::after{content:"";flex:1;height:1px;background:var(--rap-slate-200)}
-.item{display:grid;grid-template-columns:88px 1fr auto;gap:var(--s-5);padding:20px 0;border-bottom:1px solid var(--rap-slate-200);align-items:start}
-.item__t{font-family:var(--mono);font-size:13px;color:var(--rap-slate-500);font-variant-numeric:tabular-nums;padding-top:2px}
-.item__c{
-  display:inline-block;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
-  padding:3px 7px;font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-ink);margin-bottom:8px;
+/* stale-data note */
+.stale{
+  display:flex;gap:var(--s-3);align-items:flex-start;border:1px solid var(--rap-slate-300);
+  border-left:3px solid var(--rap-slate-500);border-radius:var(--radius-sm);
+  background:var(--rap-mist);padding:14px 16px;margin-top:var(--s-5);
 }
-.item__h{font-weight:600;font-size:var(--fs-h3);line-height:1.3;letter-spacing:-.01em}
-.item__s{font-size:15px;color:var(--rap-slate-700);margin-top:6px;max-width:78ch}
-.item__p{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
-.item__src{white-space:nowrap;padding-top:2px}
-.item[hidden]{display:none}
-
-/* feed foot */
-.feedfoot{display:flex;justify-content:space-between;align-items:center;gap:var(--s-5);flex-wrap:wrap;padding-top:var(--s-6)}
-.counter{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);font-variant-numeric:tabular-nums}
-
-/* states */
-.state{border:1px solid var(--rap-slate-300);border-radius:var(--radius-md);padding:var(--s-6);background:var(--rap-mist);margin-top:var(--s-6)}
-.state h3{font-weight:600;font-size:17px}
-.state p{font-size:15px;color:var(--rap-slate-700);margin-top:8px}
-.state .btns{margin-top:var(--s-5)}
-.state--empty{display:none}
-.state--empty.is-on{display:block}
-.stale{display:flex;gap:var(--s-3);align-items:flex-start;border:1px solid var(--rap-slate-300);border-left:3px solid var(--rap-slate-500);border-radius:var(--radius-sm);background:var(--rap-mist);padding:14px 16px;margin-top:var(--s-5)}
 .stale b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block}
 .stale p{font-size:14px;color:var(--rap-slate-700);margin-top:4px}
 
-/* demo state switcher (prototype only) */
-.demo{background:var(--rap-ink);color:#fff;padding:10px var(--margin);display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap}
-.demo p{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-right:auto}
-.demo button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);padding:7px 12px}
-.demo button:hover{background:#fff;color:var(--rap-ink)}
+/* metric cards */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7)}
+.metric{border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
+.metric__label{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);min-height:2.6em}
+.metric__val{font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;margin:var(--s-3) 0 var(--s-2);font-variant-numeric:tabular-nums}
+.metric__delta{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.up{color:var(--rap-up)}.down{color:var(--rap-down)}.flat{color:var(--rap-flat)}
+.metric__delta span{color:var(--rap-slate-500)}
+.metric__chart{
+  margin-top:var(--s-5);border:1px solid var(--rap-slate-200);border-radius:var(--radius-sm);
+  background:#fff;padding:var(--s-4);
+}
+.metric__cap{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--rap-slate-500);margin-top:var(--s-3);
+}
+.metric__src{
+  margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
+}
+.metric__src b{color:var(--rap-slate-700);font-weight:500}
 
 /* cross links */
 .xlinks{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-8);padding-top:var(--s-6);border-top:2px solid var(--rap-ink)}
@@ -328,7 +296,6 @@ button{font:inherit;cursor:pointer}
   :root{--margin:32px}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
-  .wire{gap:var(--s-6)}
 }
 @media (max-width:1024px){
   .nav{display:none}
@@ -342,8 +309,8 @@ button{font:inherit;cursor:pointer}
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .wire{grid-template-columns:1fr}
-  .rail{position:static}
+  .metrics{grid-template-columns:1fr;gap:var(--s-7)}
+  .metric__label{min-height:0}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
   .xlinks{grid-template-columns:1fr}
 }
@@ -358,12 +325,6 @@ button{font:inherit;cursor:pointer}
   .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
   .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
   .burger{width:42px;height:42px;flex:0 0 42px}
-  /* filter rail collapses behind a trigger; feed takes the full width */
-  .filterbtn{display:flex}
-  .rail{display:none}
-  .rail.is-open{display:block;margin-bottom:var(--s-6)}
-  .item{grid-template-columns:1fr;gap:var(--s-2)}
-  .item__src{padding-top:var(--s-2)}
   .btns .btn{width:100%;justify-content:center}
   .foot__cols{display:none}
   .foot__acc{display:block}
@@ -377,15 +338,10 @@ button{font:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
-@media print{.proto,.demo,.hdr,.drawer,.rail,.filterbtn{display:none}}
+@media print{.proto,.hdr,.drawer{display:none}}
 </style>
 </head>
 <body>
-
-<div class="proto">
-  Phase 2 UI/UX prototype &mdash; Newswire page, placeholder build.
-  <b>Every item below is fabricated for layout only</b> &mdash; no real story, publication, or link.
-</div>
 
 <input type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
 
@@ -428,8 +384,8 @@ button{font:inherit;cursor:pointer}
           <a href="programs.html#standard"><b>Standard Programs</b><span>Protection income with RAP retaining the underwriting</span></a>
         </div>
       </div>
-      <a href="newswire.html" aria-current="page">Newswire</a>
-      <a href="market-intelligence.html">Market Intelligence</a>
+      <a href="newswire.html">Newswire</a>
+      <a href="market-intelligence.html" aria-current="page">Market Intelligence</a>
       <a href="home.html#research">Research</a>
       <a href="home.html#why">Why RAP</a>
     </nav>
@@ -475,109 +431,148 @@ button{font:inherit;cursor:pointer}
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
 </div>
 
-<!-- prototype-only state switcher, so the owner can see the stale/empty designs -->
-<div class="demo">
-  <p>Prototype &mdash; feed states</p>
-  <button type="button" data-state="live">Live</button>
-  <button type="button" data-state="stale">Stale</button>
-  <button type="button" data-state="down">Unavailable</button>
-</div>
-
 <main id="top">
-<section class="sec sec--first" aria-labelledby="wire-h">
+<section class="sec sec--first" aria-labelledby="mi-h">
   <div class="wrap">
 
     <!-- masthead -->
-    <div class="mast" id="mast">
+    <div class="mast">
       <div>
-        <h1 class="mast__t" id="wire-h">Furniture Retail Newswire</h1>
-        <p class="mast__s">What happened.</p>
+        <h1 class="mast__t" id="mi-h">Market Intelligence</h1>
+        <p class="mast__s">What is changing.</p>
       </div>
       <div class="mast__r">
-        <span class="live"><span class="live__dot" aria-hidden="true"></span> <span id="live-label">Live</span></span>
-        <p class="mast__upd" id="upd">Last updated 09:14 AM ET &middot; 25 Aug 2026</p>
+        <p class="mast__upd">Last updated 25 Aug 2026</p>
+        <p class="mast__upd">Next update &mdash; [pending cadence]</p>
       </div>
     </div>
 
-    <!-- stale banner (shown only in the stale state) -->
-    <div class="stale" id="stale-banner" hidden>
+    <!-- Stale-data state. Shown whenever a metric has not refreshed within its
+         expected cadence; the cadence itself is defined in Phase 9. Cached values
+         keep rendering — a stale figure is more useful than an empty page. -->
+    <div class="stale">
       <span aria-hidden="true">&#9888;</span>
       <div>
-        <b>Updates delayed</b>
-        <p>Last successful update 09:14 AM ET, 25 Aug 2026. The items below are the most recent we have.</p>
+        <b>Placeholder data &middot; updates not yet live</b>
+        <p>Every figure below is a placeholder pending approved data sources. In production, a
+        metric that misses its expected update window keeps its last good value, greys its
+        source line and appends <span class="meta">&middot; stale</span>.</p>
       </div>
     </div>
 
-    <!-- feed unavailable state -->
-    <div class="state" id="down-state" hidden>
-      <h3>The newswire is temporarily unavailable.</h3>
-      <p>We could not load any items. The rest of the site is unaffected.</p>
-      <div class="btns">
-        <a class="btn btn--secondary" href="market-intelligence.html">Market Intelligence &rarr;</a>
-        <a class="btn btn--secondary" href="home.html#research">RAP Research &rarr;</a>
-        <a class="btn btn--secondary" href="#contact">Contact RAP &rarr;</a>
+    <!-- ============================================================
+         FOUR METRICS — relocated from the homepage Market Pulse section.
+         PLACEHOLDER VALUES pending approved data sources (Phase 9).
+         Source names are indicative of the kind of primary source
+         intended; neither the values nor the attributions are approved
+         facts. Charts render empty axes only — historical series arrive
+         with the Market Intelligence automation phase.
+         ============================================================ -->
+    <div class="metrics">
+
+      <!-- METRIC 1 — placeholder -->
+      <div class="metric">
+        <p class="metric__label">Furniture &amp; home furnishings store sales</p>
+        <p class="metric__val">$11.20B</p>
+        <p class="metric__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
+        <div class="metric__chart">
+          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
+            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
+            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
+            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
+            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
+              <text x="0" y="134">$&mdash;</text><text x="0" y="102">$&mdash;</text><text x="0" y="70">$&mdash;</text><text x="0" y="38">$&mdash;</text>
+              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
+            </g>
+            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
+          </svg>
+          <p class="metric__cap">Figure 1 &middot; Placeholder &mdash; no series plotted</p>
+        </div>
+        <p class="metric__src"><b>Census / FRED</b> &middot; UPD 08 Aug &middot; monthly</p>
       </div>
+
+      <!-- METRIC 2 — placeholder -->
+      <div class="metric">
+        <p class="metric__label">Existing-home sales (SAAR)</p>
+        <p class="metric__val">4.06M</p>
+        <p class="metric__delta flat">&#9654; 0.0% <span>year over year</span></p>
+        <div class="metric__chart">
+          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
+            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
+            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
+            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
+            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
+              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
+              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
+            </g>
+            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
+          </svg>
+          <p class="metric__cap">Figure 2 &middot; Placeholder &mdash; no series plotted</p>
+        </div>
+        <p class="metric__src"><b>NAR / FRED</b> &middot; UPD 21 Aug &middot; monthly</p>
+      </div>
+
+      <!-- METRIC 3 — placeholder -->
+      <div class="metric">
+        <p class="metric__label">Housing starts</p>
+        <p class="metric__val">1.31M</p>
+        <p class="metric__delta up">&#9650; 2.1% <span>year over year</span></p>
+        <div class="metric__chart">
+          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
+            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
+            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
+            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
+            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
+              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
+              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
+            </g>
+            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
+          </svg>
+          <p class="metric__cap">Figure 3 &middot; Placeholder &mdash; no series plotted</p>
+        </div>
+        <p class="metric__src"><b>Census</b> &middot; UPD 19 Aug &middot; monthly</p>
+      </div>
+
+      <!-- METRIC 4 — placeholder -->
+      <div class="metric">
+        <p class="metric__label">Furniture CPI</p>
+        <p class="metric__val">&minus;1.2%</p>
+        <p class="metric__delta down">&#9660; 0.4% <span>year over year</span></p>
+        <div class="metric__chart">
+          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
+            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
+            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
+            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
+            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
+              <text x="10" y="134">&mdash;%</text><text x="10" y="102">&mdash;%</text><text x="10" y="70">&mdash;%</text><text x="10" y="38">&mdash;%</text>
+              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
+            </g>
+            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
+          </svg>
+          <p class="metric__cap">Figure 4 &middot; Placeholder &mdash; no series plotted</p>
+        </div>
+        <p class="metric__src"><b>BLS</b> &middot; UPD 13 Aug &middot; monthly</p>
+      </div>
+
     </div>
 
-    <div class="wire" id="wire-body">
+    <p class="meta" style="margin-top:var(--s-6)">
+      Metric list, sources, update cadence and history depth are defined in the Market
+      Intelligence phase. Every metric ships with a source and a last-updated stamp.
+    </p>
 
-      <!-- filter rail -->
-      <div>
-        <button class="filterbtn" type="button" id="filterbtn" aria-expanded="false">
-          <span>Filter</span><span id="filterbtn-label">All</span>
-        </button>
-        <div class="rail" id="rail">
-          <p class="rail__h">Categories</p>
-          <div id="railcats"></div>
-          <div class="rail__arch">
-            <label for="arch">Archive</label>
-            <input id="arch" type="date" value="2026-08-25" aria-label="Jump to date">
-          </div>
-        </div>
-      </div>
-
-      <!-- feed -->
-      <div>
-        <div class="active-filter" id="active-filter">
-          <span class="chip">
-            <span id="chip-label">Housing</span>
-            <button type="button" id="chip-clear" aria-label="Clear filter">&times;</button>
-          </span>
-          <span class="counter"><span id="filter-count">0</span> items &middot;
-            <a class="qlink" href="#top" id="clear-all" style="font-size:12px">Clear all</a>
-          </span>
-        </div>
-
-        <div id="feed"></div>
-
-        <!-- empty category state -->
-        <div class="state state--empty" id="empty-state">
-          <h3>No items in <span id="empty-cat">this category</span> in the last 30 days.</h3>
-          <p>Zero-count categories stay listed — an empty wire category is information, not a bug.</p>
-          <div class="btns">
-            <button class="btn btn--secondary" type="button" id="empty-clear">Clear filter</button>
-          </div>
-        </div>
-
-        <div class="feedfoot" id="feedfoot">
-          <button class="btn btn--secondary" type="button" id="loadmore">Load 25 more</button>
-          <span class="counter">Showing <span id="shown">0</span> of <span id="total">0</span></span>
-        </div>
-
-        <!-- cross-links: separation preserved, navigation helped -->
-        <div class="xlinks">
-          <a class="xlink" href="market-intelligence.html">
-            <b>Market Intelligence</b>
-            <span>What is changing?</span>
-            <i>View the data &rarr;</i>
-          </a>
-          <a class="xlink" href="home.html#research">
-            <b>RAP Research</b>
-            <span>What does it mean?</span>
-            <i>Read the research &rarr;</i>
-          </a>
-        </div>
-      </div>
+    <!-- cross-links: the three information products stay separate but reachable -->
+    <div class="xlinks">
+      <a class="xlink" href="newswire.html">
+        <b>Furniture Retail Newswire</b>
+        <span>What happened?</span>
+        <i>Read the wire &rarr;</i>
+      </a>
+      <a class="xlink" href="home.html#research">
+        <b>RAP Research</b>
+        <span>What does it mean?</span>
+        <i>Read the research &rarr;</i>
+      </a>
     </div>
   </div>
 </section>
@@ -663,191 +658,14 @@ button{font:inherit;cursor:pointer}
     </div>
     <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
     <p class="foot__note" id="stub">
-      Prototype note &middot; every Newswire item on this page is fabricated placeholder content.
-      Source links do not resolve; real items and attribution arrive with Newswire automation.
+      Prototype note &middot; all Market Intelligence values, deltas, sources and update stamps on
+      this page are placeholders pending approved data sources (Phase 9).
     </p>
   </div>
 </footer>
 
 <script>
-/* ============================================================
-   NEWSWIRE PROTOTYPE SCRIPT
-   The DATA array below is ENTIRELY FABRICATED. Headlines,
-   synopses, publication names and times are invented to exercise
-   the layout. Nothing here is a real story and no link resolves.
-   ============================================================ */
-
-var CATS = [
-  'Furniture Retail','Manufacturers','Bedding','Housing','Economy','Consumer',
-  'Consumer Credit','Trade / Tariffs','Freight','M&A','Bankruptcies',
-  'Store Openings / Closings','Protection / Warranty','Retail Technology'
-];
-
-/* Fabricated placeholder feed — 25 items across three days. */
-var DATA = [
-  ['Tue 25 Aug 2026','12:38 PM','Housing','Existing-home sales hold near their multi-year floor in the latest monthly print','Placeholder synopsis for layout only. Two lines maximum, written from the original report and never republished in full.','Placeholder Wire'],
-  ['Tue 25 Aug 2026','11:52 AM','Furniture Retail','Regional furniture retailer confirms three new store locations for spring','Placeholder synopsis for layout only. Automated discovery, relevance filtering and deduplication are defined in the Newswire automation phase.','Placeholder Daily'],
-  ['Tue 25 Aug 2026','11:17 AM','Trade / Tariffs','Tariff schedule for upholstered wooden products updated in the register','Placeholder synopsis for layout only. Every item carries publication attribution and an outbound link to the original source.','Placeholder Trade Journal'],
-  ['Tue 25 Aug 2026','10:41 AM','Consumer Credit','Revolving balances tick higher in the latest consumer credit release','Placeholder synopsis for layout only. Category assignment follows the approved Newswire taxonomy.','Placeholder Financial Review'],
-  ['Tue 25 Aug 2026','10:04 AM','Manufacturers','Case goods manufacturer reports quarterly order growth against flat shipments','Placeholder synopsis for layout only. Suppressed sources and duplicate stories are handled before publication.','Placeholder Industry Report'],
-  ['Tue 25 Aug 2026','09:36 AM','Economy','Consumer sentiment reading comes in slightly ahead of expectations','Placeholder synopsis for layout only. No real figure is stated anywhere in this prototype.','Placeholder Economics Desk'],
-  ['Tue 25 Aug 2026','09:14 AM','Retail Technology','Point-of-sale vendor adds protection-plan attach reporting for dealers','Placeholder synopsis for layout only. Retail technology items cover systems dealers actually run.','Placeholder Tech Weekly'],
-  ['Tue 25 Aug 2026','08:47 AM','Bedding','Mattress specialist reports shifting mix toward adjustable bases','Placeholder synopsis for layout only.','Placeholder Bedding News'],
-  ['Tue 25 Aug 2026','08:20 AM','Freight','Container rates on transpacific lanes ease for a third consecutive week','Placeholder synopsis for layout only.','Placeholder Logistics Wire'],
-
-  ['Mon 24 Aug 2026','04:51 PM','M&A','Two regional furniture chains confirm merger discussions','Placeholder synopsis for layout only. M&A items are filtered for relevance to furniture retail specifically.','Placeholder Deal Report'],
-  ['Mon 24 Aug 2026','03:38 PM','Store Openings / Closings','Department store group to close four home furnishings departments','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
-  ['Mon 24 Aug 2026','02:55 PM','Protection / Warranty','Protection-plan provider expands subscription option to additional categories','Placeholder synopsis for layout only. Protection and warranty items are tracked as their own category.','Placeholder Coverage Journal'],
-  ['Mon 24 Aug 2026','01:22 PM','Housing','Building permits edge up in the latest release','Placeholder synopsis for layout only.','Placeholder Housing Wire'],
-  ['Mon 24 Aug 2026','12:40 PM','Consumer','Survey finds shoppers delaying large home purchases into the autumn','Placeholder synopsis for layout only.','Placeholder Consumer Insights'],
-  ['Mon 24 Aug 2026','11:58 AM','Furniture Retail','Independent retailer group reports mixed August floor traffic','Placeholder synopsis for layout only.','Placeholder Daily'],
-  ['Mon 24 Aug 2026','10:33 AM','Economy','Rate expectations shift after the latest inflation reading','Placeholder synopsis for layout only.','Placeholder Economics Desk'],
-  ['Mon 24 Aug 2026','09:47 AM','Manufacturers','Upholstery manufacturer announces capacity expansion','Placeholder synopsis for layout only.','Placeholder Industry Report'],
-  ['Mon 24 Aug 2026','09:05 AM','Retail Technology','Delivery-scheduling platform adds furniture-specific routing','Placeholder synopsis for layout only.','Placeholder Tech Weekly'],
-
-  ['Fri 21 Aug 2026','05:12 PM','Furniture Retail','Retailer reports quarterly results with protection attach rate commentary','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
-  ['Fri 21 Aug 2026','03:44 PM','Freight','Domestic trucking capacity tightens ahead of the autumn peak','Placeholder synopsis for layout only.','Placeholder Logistics Wire'],
-  ['Fri 21 Aug 2026','02:19 PM','Consumer Credit','Promotional financing offers broaden across home furnishings','Placeholder synopsis for layout only.','Placeholder Financial Review'],
-  ['Fri 21 Aug 2026','01:03 PM','Bedding','Sleep retailer trials a subscription mattress-care offer','Placeholder synopsis for layout only.','Placeholder Bedding News'],
-  ['Fri 21 Aug 2026','11:36 AM','Trade / Tariffs','Importers weigh sourcing shifts as duties are reviewed','Placeholder synopsis for layout only.','Placeholder Trade Journal'],
-  ['Fri 21 Aug 2026','10:12 AM','Store Openings / Closings','Furniture retailer opens flagship showroom in a converted warehouse','Placeholder synopsis for layout only.','Placeholder Retail Observer'],
-  ['Fri 21 Aug 2026','09:28 AM','Housing','Mortgage application volume rises week over week','Placeholder synopsis for layout only.','Placeholder Housing Wire']
-];
-
-/* Items per load. Production target is 25 (open question N-1); the prototype
-   uses 15 so the load-more affordance and the counter are actually visible
-   against a 25-item placeholder feed. */
-var PAGE = 15;
-var shown = PAGE;
-var filter = null;
-
-var feedEl = document.getElementById('feed');
-var railEl = document.getElementById('railcats');
-
-function counts() {
-  var c = {};
-  CATS.forEach(function (k) { c[k] = 0; });
-  DATA.forEach(function (r) { if (c[r[2]] !== undefined) { c[r[2]]++; } });
-  return c;
-}
-
-function buildRail() {
-  var c = counts();
-  var html = '<button class="rail__b" type="button" data-cat="" aria-pressed="true">' +
-             'All <span>' + DATA.length + '</span></button>';
-  CATS.forEach(function (k) {
-    var n = c[k];
-    html += '<button class="rail__b' + (n === 0 ? ' is-zero' : '') + '" type="button" data-cat="' +
-            k.replace(/"/g, '&quot;') + '" aria-pressed="false">' +
-            k + ' <span>' + n + '</span></button>';
-  });
-  railEl.innerHTML = html;
-  railEl.querySelectorAll('.rail__b').forEach(function (b) {
-    b.addEventListener('click', function () {
-      setFilter(b.getAttribute('data-cat') || null);
-    });
-  });
-}
-
-function matching() {
-  return filter ? DATA.filter(function (r) { return r[2] === filter; }) : DATA;
-}
-
-function render() {
-  var rows = matching();
-  var slice = rows.slice(0, shown);
-  var html = '';
-  var day = '';
-
-  slice.forEach(function (r) {
-    if (r[0] !== day) {
-      day = r[0];
-      html += '<p class="daybar">' + day + '</p>';
-    }
-    html += '<article class="item">' +
-      '<p class="item__t">' + r[1] + '</p>' +
-      '<div>' +
-        '<span class="item__c">' + r[2] + '</span>' +
-        '<h2 class="item__h">' + r[3] + '</h2>' +
-        '<p class="item__s">' + r[4] + '</p>' +
-        '<p class="item__p">' + r[5] + ' &middot; placeholder source</p>' +
-      '</div>' +
-      '<p class="item__src"><a class="qlink" href="#stub" title="Placeholder — resolves to the original publication in production">Source &rarr;</a></p>' +
-    '</article>';
-  });
-
-  feedEl.innerHTML = html;
-
-  /* counters + empty state */
-  document.getElementById('shown').textContent = slice.length;
-  document.getElementById('total').textContent = rows.length;
-  var more = rows.length - slice.length;
-  var lm = document.getElementById('loadmore');
-  lm.style.display = more > 0 ? '' : 'none';
-  lm.textContent = 'Load ' + Math.min(PAGE, more) + ' more';
-  document.getElementById('feedfoot').style.display = rows.length ? '' : 'none';
-
-  var empty = document.getElementById('empty-state');
-  empty.classList.toggle('is-on', rows.length === 0);
-  if (rows.length === 0 && filter) {
-    document.getElementById('empty-cat').textContent = filter;
-  }
-
-  /* active filter chip */
-  var af = document.getElementById('active-filter');
-  af.classList.toggle('is-on', !!filter);
-  if (filter) {
-    document.getElementById('chip-label').textContent = filter;
-    document.getElementById('filter-count').textContent = rows.length;
-  }
-  document.getElementById('filterbtn-label').textContent = filter || 'All';
-
-  railEl.querySelectorAll('.rail__b').forEach(function (b) {
-    b.setAttribute('aria-pressed', String((b.getAttribute('data-cat') || null) === filter));
-  });
-}
-
-function setFilter(cat) {
-  filter = cat;
-  shown = PAGE;
-  render();
-}
-
-document.getElementById('loadmore').addEventListener('click', function () {
-  shown += PAGE;
-  render();
-});
-document.getElementById('chip-clear').addEventListener('click', function () { setFilter(null); });
-document.getElementById('clear-all').addEventListener('click', function (e) { e.preventDefault(); setFilter(null); });
-document.getElementById('empty-clear').addEventListener('click', function () { setFilter(null); });
-
-/* mobile filter sheet */
-var fb = document.getElementById('filterbtn');
-fb.addEventListener('click', function () {
-  var rail = document.getElementById('rail');
-  var open = rail.classList.toggle('is-open');
-  fb.setAttribute('aria-expanded', String(open));
-});
-
-/* feed state switcher (prototype only) */
-document.querySelectorAll('.demo button').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var s = b.getAttribute('data-state');
-    var mast = document.getElementById('mast');
-    document.body.classList.toggle('is-stale', s === 'stale');
-    document.getElementById('stale-banner').hidden = s !== 'stale';
-    document.getElementById('down-state').hidden = s !== 'down';
-    document.getElementById('wire-body').hidden = s === 'down';
-    document.getElementById('live-label').textContent = s === 'stale' ? 'Delayed' : 'Live';
-    mast.classList.toggle('is-stale', s === 'stale');
-  });
-});
-
-buildRail();
-render();
-
-/* Sticky header condense, matching home.html; publishes --hdr-h so the
-   filter rail sticks directly beneath the header at both heights. */
+/* Sticky header condense, matching home.html. */
 (function () {
   var hdr = document.querySelector('.hdr');
   var root = document.documentElement;
