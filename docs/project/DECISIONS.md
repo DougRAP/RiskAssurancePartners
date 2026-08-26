@@ -602,6 +602,17 @@ Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [
 
 **Sequencing:** popup, chat UI, and admin console are mocked as static states in the Phase 2 prototype for owner approval; live Supabase transport is the first work package of the Supabase phase.
 
+## Decision 043 — Dealer Economics Page Redesign (amends 042-adjacent gate UX)
+
+**Status:** Approved (Owner, 2026-08-26)
+
+- **No request tracking / pending state.** Anonymous visitors can't be re-identified without login, and login adds unwanted friction. Flow: request access (email and mobile required) → on submit, immediate "we received your request" confirmation. RAP responds by email. Status tracking dropped.
+- **Page structure:**
+  1. **Hero:** left — H1 "Types of Plans", H2 "Subscription" + copy, H2 "Multi-Year" + copy; right — the homepage GM-per-ticket bar illustration.
+  2. **Calculator section:** "RAP Dealer Economics Calculator" ghosted/blurred illustration with the access CTA centered inside it.
+  3. **Request access form** (six fields; email + mobile required) with the dealer/customer/media triage block moved inside it; submit → received confirmation.
+- **Removed:** $19.99/$0/$8 stat strip; "Public on this page / Behind approved access" lists; both 01–06 step strips; "Why the gate…" and revocation copy; "Six fields · reviewed by RAP Sales…" meta; prototype stub note.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
