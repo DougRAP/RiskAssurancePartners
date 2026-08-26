@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Risk Assurance Partners — Homepage Design Prototype</title>
+<title>Risk Assurance Partners — Protection Programs for Home Furnishings Retail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -74,7 +74,8 @@ button{font:inherit;cursor:pointer}
 .sec--first{border-top:0;padding-top:var(--s-7)}
 .sec--tight{padding:var(--s-8) 0}
 .sec--mist{background:var(--rap-mist);border-top-color:var(--rap-slate-200)}
-.sec--cream{background:var(--rap-cream)}
+/* .sec--cream removed with the Research section — cream is the editorial ground
+   and now lives on research.html. */
 /* R10 — same-background adjacency: kill the border and halve the top padding
    so identical backgrounds never show a stranded hairline in dead space.
    The section order alternates backgrounds, so this is a safety net. */
@@ -96,7 +97,7 @@ button{font:inherit;cursor:pointer}
 .d2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d2);line-height:1.04;letter-spacing:-.02em}
 .d3{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.1;letter-spacing:-.01em}
 .acc{font-style:italic;color:var(--rap-ember)}
-.sec--ink .acc,.acc--brass{font-style:italic;color:var(--rap-brass)}
+.sec--ink .acc{font-style:italic;color:var(--rap-brass)}
 .lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:46ch}
 .sec--ink .lead{color:rgba(255,255,255,.78)}
 .body{color:var(--rap-slate-700);max-width:68ch}
@@ -127,13 +128,7 @@ button{font:inherit;cursor:pointer}
 .qlink:hover{color:#8E3B0C}
 .sec--ink .qlink{color:var(--rap-brass)}
 
-/* ---------- prototype banner ---------- */
-.proto{
-  background:#FFF6E8;border-bottom:1px solid #E8D5AE;color:#5A4413;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-  padding:8px var(--margin);text-align:center;
-}
-.proto b{color:#8E3B0C}
+/* Prototype banner removed — the prototype matches production chrome. */
 
 /* ---------- 00 utility bar (R3: +1 contrast step, CUSTOMERS label, Contact) ---------- */
 .utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
@@ -322,14 +317,27 @@ button{font:inherit;cursor:pointer}
 /* ---------- 09 newswire ---------- */
 
 /* ---------- 10 research ---------- */
-.research{display:grid;grid-template-columns:4fr 8fr;gap:var(--s-9);align-items:start;margin-top:var(--s-8)}
-.cover{aspect-ratio:3/4;background:var(--rap-ink);border:1px solid var(--rap-brass);border-radius:var(--radius-sm);padding:var(--s-6);display:flex;flex-direction:column;justify-content:space-between;color:#fff;max-width:330px}
-.cover__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-brass)}
-.cover__title{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.15}
-.cover__foot{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3)}
-.figs{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-7)}
-.fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-sm);padding:var(--s-4)}
-.fig__cap{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3)}
+/* Research section styles (.research, .cover*, .figs, .fig*) removed with the
+   section — that content now lives on research.html. */
+
+/* ---------- 11b directory band ---------- */
+/* Slim wayfinding strip: four peers, whole card clickable, no imagery. */
+.dir{padding:var(--s-7) 0}
+.dir__row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4)}
+.dir__card{
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:var(--s-3);
+  background:#fff;border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-ink);
+  border-radius:var(--radius-md);padding:var(--s-5);text-decoration:none;color:var(--rap-ink);
+  transition:border-color .12s,background .12s;min-height:104px;
+}
+.dir__card:hover{border-color:var(--rap-ink);background:var(--rap-mist)}
+.dir__card:hover .dir__a{color:var(--rap-ember-700);transform:translateX(2px)}
+.dir__k{
+  grid-column:1/-1;font-family:var(--mono);font-size:10px;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--rap-slate-500);
+}
+.dir__n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-.01em}
+.dir__a{color:var(--rap-slate-300);font-size:18px;line-height:1;transition:color .12s,transform .12s}
 
 /* ---------- 11 why rap ---------- */
 .why{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-6) var(--s-5);margin-top:var(--s-8)}
@@ -389,7 +397,8 @@ button{font:inherit;cursor:pointer}
    ============================================================ */
 @media (max-width:1100px){
   :root{--margin:32px}
-  .hero,.research{gap:var(--s-7)}
+  .hero{gap:var(--s-7)}
+  .dir__row{grid-template-columns:1fr 1fr}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
 }
@@ -417,13 +426,11 @@ button{font:inherit;cursor:pointer}
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .hero,.research,.teaser{grid-template-columns:1fr}
+  .hero,.teaser{grid-template-columns:1fr}
   .hero__fig{order:2}
-  .research .cover{max-width:260px}
   .branch{grid-template-columns:1fr 1fr;gap:var(--s-3)}
   .branch__card{padding:var(--s-4)}
   .branch__name{font-size:20px}
-  .figs{grid-template-columns:1fr}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
   .orient__progs{grid-template-columns:1fr}
   .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
@@ -448,6 +455,8 @@ button{font:inherit;cursor:pointer}
   .trust__i{border-left:0;padding-left:0}
   .trust__v{font-size:20px}
   .why{grid-template-columns:1fr}
+  .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
+  .dir__card{min-height:0}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .chain{flex-direction:column;gap:var(--s-2)}
   .chain__arrow{transform:rotate(90deg)}
@@ -466,7 +475,7 @@ button{font:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
-@media print{.proto,.hdr,.drawer{display:none}}
+@media print{.hdr,.drawer{display:none}}
 </style>
 </head>
 <body>
@@ -516,7 +525,7 @@ button{font:inherit;cursor:pointer}
       </div>
       <a href="newswire.html">Newswire</a>
       <a href="market-intelligence.html">Market Intelligence</a>
-      <a href="#research">Research</a>
+      <a href="research.html">Research</a>
       <a href="#why">Why RAP</a>
     </nav>
 
@@ -555,7 +564,7 @@ button{font:inherit;cursor:pointer}
     </div>
     <a href="newswire.html">Newswire</a>
     <a href="market-intelligence.html">Market Intelligence</a>
-    <a href="#research">Research</a>
+    <a href="research.html">Research</a>
     <a href="#why">Why RAP</a>
   </nav>
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
@@ -946,59 +955,7 @@ button{font:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- ============ 10 RAP RESEARCH ============ -->
-<section class="sec sec--cream" id="research" aria-labelledby="res-h">
-  <div class="wrap">
-    <p class="eyebrow">RAP Research</p>
-    <p class="meta" style="margin-top:-8px">What it means</p>
-
-    <div class="research">
-      <div class="cover">
-        <div>
-          <p class="cover__eyebrow">RAP Research &middot; No. 01</p>
-          <p class="cover__title" style="margin-top:var(--s-5)">
-            Furniture retail has changed. <span class="acc--brass">Protection has to change with it.</span>
-          </p>
-        </div>
-        <p class="cover__foot">Risk Assurance Partners &middot; August 2026</p>
-      </div>
-
-      <div>
-        <h2 class="d2" id="res-h">
-          Furniture retail has changed.<br>
-          <span class="acc--brass">Protection has to change with it.</span>
-        </h2>
-        <p class="lead" style="margin-top:var(--s-5);max-width:56ch">
-          Original Risk Assurance Partners research examining furniture retail economics, the way
-          today&rsquo;s customer decides, and what both mean for the protection model.
-        </p>
-
-        <div class="figs">
-          <figure class="fig" style="margin:0">
-            <svg viewBox="0 0 200 90" role="img" aria-label="Bar chart thumbnail" style="width:100%;height:auto">
-              <g fill="#204374"><rect x="6" y="20" width="26" height="56"/><rect x="46" y="30" width="26" height="46"/><rect x="86" y="40" width="26" height="36"/><rect x="126" y="32" width="26" height="44"/><rect x="166" y="38" width="26" height="38"/></g>
-              <line x1="0" y1="76" x2="200" y2="76" stroke="#C3CBD6"/>
-            </svg>
-            <figcaption class="fig__cap">Figure 1 &middot; Store sales run rate</figcaption>
-          </figure>
-          <figure class="fig" style="margin:0">
-            <svg viewBox="0 0 200 90" role="img" aria-label="Line chart thumbnail" style="width:100%;height:auto">
-              <path d="M4 18 L52 40 L100 62 L148 66 L196 66" fill="none" stroke="#C8581B" stroke-width="2"/>
-              <circle cx="196" cy="66" r="3" fill="#C8581B"/>
-              <line x1="0" y1="76" x2="200" y2="76" stroke="#C3CBD6"/>
-            </svg>
-            <figcaption class="fig__cap">Figure 2 &middot; Housing turnover</figcaption>
-          </figure>
-        </div>
-
-        <div class="btns">
-          <a class="btn btn--primary" href="#stub" title="Stub — research report page, later phase">Read research &rarr;</a>
-          <a class="btn btn--secondary" href="#stub" title="Stub — report PDF, later phase">Download report</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- RAP Research moved to research.html; the directory band below links to it. -->
 
 <!-- ============ 11 WHY RAP ============ -->
 <section class="sec" id="why" aria-labelledby="why-h">
@@ -1029,6 +986,39 @@ button{font:inherit;cursor:pointer}
       <div class="why__i"><p class="why__k">Program expertise</p><p class="why__b">Subscription, multi-year and reinsurance programs under one relationship.</p></div>
     </div>
 
+  </div>
+</section>
+
+<!-- ============ 11b DIRECTORY BAND ============ -->
+<!-- Slim wayfinding strip, not a content section. Placed ABOVE the final CTA so the
+     page still closes on ink → ink (CTA → footer); dropping it between the two ink
+     grounds would put a light interruption in the close. Mist ground keeps the
+     alternation running: Why RAP (paper) → band (mist) → CTA (ink) → footer (ink). -->
+<section class="sec sec--mist dir" aria-labelledby="dir-h">
+  <div class="wrap">
+    <h2 id="dir-h" class="eyebrow" style="margin-bottom:var(--s-5)">More from Risk Assurance Partners</h2>
+    <div class="dir__row">
+      <a class="dir__card" href="newswire.html">
+        <span class="dir__k">What happened</span>
+        <span class="dir__n">Newswire</span>
+        <span class="dir__a" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="dir__card" href="market-intelligence.html">
+        <span class="dir__k">What is changing</span>
+        <span class="dir__n">Market Intelligence</span>
+        <span class="dir__a" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="dir__card" href="research.html">
+        <span class="dir__k">What it means</span>
+        <span class="dir__n">Research</span>
+        <span class="dir__a" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="dir__card" href="economics-gate.html">
+        <span class="dir__k">Your numbers</span>
+        <span class="dir__n">Profit Calculator</span>
+        <span class="dir__a" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1114,7 +1104,7 @@ button{font:inherit;cursor:pointer}
       </div>
       <div>
         <p class="foot__h">Intelligence</p>
-        <a href="newswire.html">Newswire</a><a href="market-intelligence.html">Market Intelligence</a><a href="#research">Research</a>
+        <a href="newswire.html">Newswire</a><a href="market-intelligence.html">Market Intelligence</a><a href="research.html">Research</a>
       </div>
       <div>
         <p class="foot__h">Company</p>
@@ -1132,7 +1122,7 @@ button{font:inherit;cursor:pointer}
 
     <div class="foot__acc">
       <details><summary>Programs</summary><a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a></details>
-      <details><summary>Intelligence</summary><a href="newswire.html">Newswire</a><a href="market-intelligence.html">Market Intelligence</a><a href="#research">Research</a></details>
+      <details><summary>Intelligence</summary><a href="newswire.html">Newswire</a><a href="market-intelligence.html">Market Intelligence</a><a href="research.html">Research</a></details>
       <details><summary>Company</summary><a href="#why">Why RAP</a><a href="#contact">Contact</a></details>
       <details><summary>Customer</summary><a href="https://kiosk.furniturerx.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Manage My Plan</a></details>
       <details><summary>Dealer</summary><a href="https://kiosk.furniturerx.net/">Dealer Login</a><a href="#economics">Dealer Economics</a></details>

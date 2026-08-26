@@ -6,6 +6,12 @@
 **Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
 (DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
 
+## Revision 7 change log (2026-08-26)
+
+| Decision | Section | Change |
+|---|---|---|
+| Owner 2026-08-26 | 10 → `research.html`, new 11b | **Research section removed from the homepage** and rebuilt as `prototype-ui/research.html` — an editorial cream index listing both launch papers per DECISION 034 (No. 01 flagship with cover object and featured treatment; No. 02 *Compute, Credit & Couches* briefing), Read/Download as Phase 11 stubs. All 19 Research links across five pages rewired to `research.html`, plus 2 added on the gate page. Completes the pattern begun with Newswire and Market Intelligence: the homepage keeps the argument, the information products own their pages. **New 11b directory band** added between Why RAP and the Final CTA — four whole-card links at parity (Newswire "What happened" · Market Intelligence "What is changing" · Research "What it means" · Profit Calculator "Your numbers") on mist, keeping the paper → mist → ink → ink close. **Prototype banners removed sitewide** and `.proto` CSS deleted: the prototype now matches production chrome, with placeholder provenance carried by code comments and footer notes instead. |
+
 ## Revision 6 change log (2026-08-25)
 
 | Decision | Section | Change |
