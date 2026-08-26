@@ -682,7 +682,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 </section>
 
 <!-- ==================== REQUEST ACCESS ==================== -->
-<section class="state" id="state-b" aria-labelledby="b-h">
+<section class="state" id="state-b" aria-labelledby="b-h" hidden>
   <div class="wrap-wide">
     <h2 class="d3" id="b-h" style="max-width:24ch">Request access</h2>
     <p class="lead" style="margin-top:var(--s-4)">
@@ -1343,6 +1343,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
   document.getElementById('get-access').addEventListener('click', function (e) {
     e.preventDefault();
+    B.hidden = false;
     B.scrollIntoView({ behavior: 'smooth', block: 'start' });
     var first = document.getElementById('fn');
     if (first) { setTimeout(function () { first.focus({ preventScroll: true }); }, 320); }
