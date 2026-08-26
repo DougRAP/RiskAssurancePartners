@@ -212,13 +212,14 @@ button{font:inherit;cursor:pointer}
       </div>
       <div class="f">
         <label for="lg-pass">Passphrase</label>
-        <input id="lg-pass" type="password" autocomplete="current-password" value="demo">
+        <input id="lg-pass" type="password" autocomplete="current-password">
+        <p id="lg-err" hidden style="color:var(--rap-down);font-size:13px;margin-top:6px">Incorrect passphrase.</p>
       </div>
 
       <button class="btn btn--primary" type="submit">Sign in &rarr;</button>
 
       <p class="login__note">
-        Prototype &mdash; the credential is not checked and nothing is transmitted. One shared
+        Prototype &mdash; demo passphrase check only; nothing is transmitted. One shared
         &ldquo;Webstore Agent&rdquo; role in v1. Real authentication arrives with the Supabase phase.
       </p>
     </form>
@@ -316,7 +317,9 @@ button{font:inherit;cursor:pointer}
 
   document.getElementById('loginform').addEventListener('submit', function (e) {
     e.preventDefault();
-    show('console');
+    var ok = document.getElementById('lg-pass').value === 'rap-agent-2026';
+    document.getElementById('lg-err').hidden = ok;
+    if (ok) show('console');
   });
   document.getElementById('signout').addEventListener('click', function () { show('login'); });
 
@@ -470,7 +473,6 @@ button{font:inherit;cursor:pointer}
   tick(); setInterval(tick, 30000);
 
   renderInbox();
-  if (qs.get('state') === 'console') { show('console'); }
 })();
 </script>
 
