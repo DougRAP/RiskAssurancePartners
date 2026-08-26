@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAP Subscription Protection | Dealer Overview</title>
+<style>
+  :root{--navy:#101d3a;--navy2:#18294d;--ink:#14203a;--muted:#647084;--gold:#c99b28;--orange:#ce5a18;--cream:#f8f7f2;--paper:#fff;--line:#dce2eb;--green:#2f7d55;--shadow:0 18px 55px rgba(15,30,59,.14)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#edf1f7;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet{width:7.7in;min-height:10.2in;margin:24px auto;background:var(--paper);box-shadow:var(--shadow);display:flex;flex-direction:column}
+
+  .hdr{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold);padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:Georgia,serif;font-size:21px;font-weight:700;letter-spacing:-.5px}
+  .brand em{color:#e68a4e;font-style:italic}
+  .brand small{font-size:8.5px;letter-spacing:2px;color:#cbd3e4;margin-left:8px;font-weight:400;font-family:Inter,sans-serif}
+  .hdr .rt{font-family:Georgia,serif;font-size:18px;font-weight:400;color:#fff;letter-spacing:-.3px}
+  .hdr .rt.sm{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#cbd3e4;font-family:Inter,sans-serif}
+
+  /* ---------------- PAGE 1 ---------------- */
+  .title{padding:22px 24px 0}
+  .title h1{font-family:Georgia,serif;font-size:29px;line-height:1.08;letter-spacing:-.8px;color:var(--navy)}
+  .title h2{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--orange);margin-top:7px;letter-spacing:-.2px}
+
+  .qa{padding:20px 24px 0;column-count:2;column-gap:24px;column-rule:1px solid var(--line);flex:1}
+  .q{break-inside:avoid;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+  .q:last-child{border-bottom:0}
+  .q h3{font-size:11.3px;color:var(--navy);margin-bottom:4px;letter-spacing:-.1px}
+  .q p{font-size:10.1px;line-height:1.45;color:#3d4a63}
+  .q ol{margin:0;padding-left:15px}
+  .q li{font-size:10.1px;line-height:1.45;color:#3d4a63;margin-bottom:5px}
+  .q li:last-child{margin-bottom:0}
+  .q b{color:var(--navy)}
+  .q .g{color:var(--green)}
+  .q .o{color:var(--orange)}
+  .why h3{color:var(--orange)}
+
+  .fine{font-size:7.4px;line-height:1.42;color:var(--muted);padding:12px 24px 16px}
+
+  /* ---------------- PAGE 2 ---------------- */
+  .body{padding:0 24px 14px;flex:1;display:flex;flex-direction:column}
+  section{margin-top:13px}
+
+  .reframe{background:var(--navy);color:#fff;padding:11px 17px;display:flex;align-items:center;gap:15px;margin-top:16px}
+  .reframe .k{font-family:Georgia,serif;font-size:25px;color:var(--gold);line-height:1;flex-shrink:0}
+  .reframe p{font-family:Georgia,serif;font-size:14px;line-height:1.3;letter-spacing:-.2px}
+  .reframe p span{color:#e68a4e}
+  h4{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
+
+  .hero{border:1px solid var(--line);padding:14px 15px 11px}
+  .lane{display:grid;grid-template-columns:1.15in 1.35in 1fr;align-items:center;gap:12px;padding:12px 0}
+  .lane+.lane{border-top:1px solid var(--line)}
+  .lane .who{border-left:4px solid var(--muted);padding-left:9px}
+  .lane .who b{display:block;font-size:11.5px;color:var(--navy);letter-spacing:-.2px;line-height:1.15}
+  .lane .who i{font-style:normal;font-size:7.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .lane.sub .who{border-left-color:var(--orange)}
+  .lane.sub .who i{color:var(--orange)}
+  .price{font-family:Georgia,serif;font-size:17px;color:var(--navy);line-height:1.1}
+  .price s{display:block;text-decoration:none;font-family:Inter,sans-serif;font-size:8.5px;color:var(--muted);margin-top:2px}
+  .pay{display:flex;align-items:center;gap:5px}
+  .chip{width:31px;height:26px;flex-shrink:0;border:1px solid var(--line);background:var(--cream);color:var(--muted);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif}
+  .lane.sub .chip{border-color:var(--green);background:#eaf4ee;color:var(--green)}
+  .dots{color:var(--green);font-size:15px;font-weight:700;letter-spacing:1px}
+  .cap{font-size:8.5px;line-height:1.3;color:var(--muted);margin-left:4px}
+  .cap b{display:block;color:var(--navy);font-size:10px}
+  .lane.sub .cap b{color:var(--green)}
+  .arrow{color:var(--gold);font-size:14px;font-weight:700}
+  .picks{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:9.6px;color:var(--muted);text-align:center}
+  .picks b{color:var(--navy)}
+
+  .plays{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .play{border:1px solid var(--line);border-top:3px solid var(--gold);padding:9px 10px}
+  .play b{display:block;font-size:10.5px;color:var(--navy);margin-bottom:3px;line-height:1.2}
+  .play p{font-size:9.2px;line-height:1.35;color:#3d4a63}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .stp{border:1px solid var(--line);padding:7px 9px;display:flex;gap:7px;align-items:center}
+  .stp .n{font-family:Georgia,serif;font-size:17px;color:var(--gold);font-weight:700;line-height:1}
+  .stp p{font-size:8.8px;line-height:1.3;color:#3d4a63}
+  .stp p b{color:var(--navy)}
+
+  .intro{border:1px solid var(--line);border-left:4px solid var(--gold);background:var(--cream);padding:10px 14px}
+  .intro p{font-size:10.2px;line-height:1.5;color:#3d4a63}
+  .intro p+p{margin-top:5px}
+  .intro b{color:var(--navy)}
+  .intro .g{color:var(--green)}
+
+  .hook{margin-top:16px;background:var(--navy);color:#fff;padding:13px 18px 12px}
+  .hook h3{font-family:Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-.3px;line-height:1.25}
+  .hook h3 span{color:#e68a4e}
+  .hook p{font-size:9.6px;color:#cbd3e4;margin-top:5px;line-height:1.45}
+  .spiff{margin-top:9px;border-top:1px solid rgba(255,255,255,.18);padding-top:8px;font-size:10px;color:#fff;letter-spacing:.02em}
+  .spiff b{color:var(--gold);font-family:Georgia,serif;font-size:13px;letter-spacing:1px}
+
+  .objs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .obj{border:1px solid var(--line);border-top:3px solid var(--orange);padding:8px 10px 9px}
+  .obj b{display:block;font-size:10.3px;color:var(--orange);margin-bottom:4px;line-height:1.2}
+  .obj p{font-family:Georgia,serif;font-style:italic;font-size:10px;line-height:1.4;color:var(--navy)}
+  .obj p i{display:block;font-family:Inter,sans-serif;font-style:normal;font-size:7.8px;color:var(--muted);margin-top:4px;letter-spacing:.03em}
+
+  .flow{border:1px solid var(--line);padding:12px 14px 8px}
+  .flow svg{width:100%;height:auto;display:block}
+  .flow text{font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+  .fcap{margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);font-size:9.4px;line-height:1.4;color:#3d4a63;text-align:center}
+  .fcap b{color:var(--navy)}
+
+  .reads{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .read{border:1px solid var(--line);display:flex;flex-direction:column}
+  .read .rh{padding:8px 11px 7px;border-bottom:1px solid var(--line)}
+  .read .rh i{font-style:normal;font-size:7.3px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block}
+  .read .rh b{font-size:11px;color:var(--navy);line-height:1.25;display:block;margin-top:2px}
+  .read .rh p{font-size:8.8px;line-height:1.38;color:#3d4a63;margin-top:3px}
+  .read .lead{padding:6px 11px;font-size:8.2px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .read .lead.my{background:#f1f3f7;color:var(--muted)}
+  .read .lead.sb{background:#eaf4ee;color:var(--green)}
+  .read .line{padding:9px 11px 11px;flex:1;display:flex;align-items:flex-start;gap:6px}
+  .read .line .qm{font-family:Georgia,serif;font-size:22px;color:var(--gold);line-height:.7;flex-shrink:0;margin-top:3px}
+  .read .line p{font-family:Georgia,serif;font-style:italic;font-size:11px;line-height:1.42;color:var(--navy)}
+
+  .rule{margin-top:10px;border:1.5px solid var(--green);background:#f2f8f4;padding:8px 13px;display:flex;align-items:center;gap:10px}
+  .rule .rk{font-family:Georgia,serif;font-size:18px;color:var(--green);font-weight:700;flex-shrink:0}
+  .rule p{font-size:9.8px;line-height:1.4;color:#3d4a63}
+  .rule p b{color:var(--green)}
+
+  .cta{margin-top:auto;background:var(--navy);color:#fff;border-top:3px solid var(--gold);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .cta b{font-family:Georgia,serif;font-size:17px;letter-spacing:-.3px;display:block}
+  .cta span{font-size:9.5px;color:#cbd3e4}
+  .cta .u{font-size:9px;color:var(--gold);text-align:right;letter-spacing:.04em;white-space:nowrap}
+
+  .printbtn{display:block;margin:16px auto 24px;background:var(--navy);color:#fff;border:0;padding:9px 20px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:inherit}
+  @page{size:letter portrait;margin:.4in}
+  @media print{
+    body{background:#fff}
+    .sheet{width:auto;min-height:0;margin:0;box-shadow:none}
+    .sheet.p1{page-break-after:always;break-after:page}
+    .printbtn{display:none}
+    section,.hero,.lane,.play,.money,.sched,.cta,.q,.reframe,.obj,.stp,.read,.rule,.flow{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<div class="sheet p1">
+
+  <div class="hdr">
+    <div class="brand">Furniture<em>Rx</em><small>BY RAP</small></div>
+    <div class="rt sm">Dealer Overview</div>
+  </div>
+
+  <div class="title">
+    <h1>Introducing Subscription Protection Plans</h1>
+    <h2>Generate Recurring Revenue From Your Protection Program</h2>
+  </div>
+
+  <div class="qa">
+
+    <div class="q">
+      <h3>What is it?</h3>
+      <p>A monthly protection plan subscription program that complements your current multi-year protection programs. Similar coverage to your multi-year program, but for a low monthly cost of <b>$19.99/month</b>.</p>
+    </div>
+
+    <div class="q">
+      <h3>How is it merchandised?</h3>
+      <p>Subscription plans complement your multi-year programs by expanding options for your customers. On average <b>70% say “no”</b> to multi-year protection. Subscription captures a slice of that 70% — converting lost sales into recurring revenue for you.</p>
+    </div>
+
+    <div class="q">
+      <h3>Who is it for?</h3>
+      <p>Millennial shoppers, budget-minded consumers, lower-priced items, and anyone experiencing sticker shock or who wants more control over their protection program.</p>
+    </div>
+
+    <div class="q">
+      <h3>How is it sold?</h3>
+      <ol>
+        <li>Your associate offers the multi-year plan. The customer says “no” or balks at the price. Your associate offers a low, cancel-anytime <b>$19.99/month</b> plan instead.</li>
+        <li>Millennials are <b>55% of customers</b> — budget-conscious, with families. Your associate reads the customer and offers subscription first, knowing the lower monthly price lets the customer spend on merchandise instead of protection.</li>
+        <li>Your customer is buying a recliner, a single item, or something lower-priced. Multi-year isn’t a good fit budget-wise. Your associate offers $19.99/month.</li>
+      </ol>
+    </div>
+
+    <div class="q">
+      <h3>How does the sales process work?</h3>
+      <p>Set up a subscription SKU in your POS. When the customer says yes, ring one plan at <b>$0 retail</b>. Scan your QR code to open the kiosk on any device, or open it on desktop. Select the plan, enter a few details — sales order number, optional associate number — and the customer pays through Stripe. Scanning the QR is a safe, convenient way for the customer to enter their own card. That’s it. Coverage is bound.</p>
+    </div>
+
+    <div class="q">
+      <h3>How much do you make, and what does it cost?</h3>
+      <p>Each time a subscriber’s auto-pay runs you earn <b class="g">$8</b>, deposited by Stripe directly into your Stripe account. You owe RAP <b>$0</b>. There is no cost. Sell 200 new subscribers each month for 36 months and you’ll earn more than <b class="g">$1M</b> in found money.</p>
+    </div>
+
+    <div class="q">
+      <h3>Does it qualify for your reinsurance program?</h3>
+      <p>Yes — route all of your subscription revenue into your reinsurance program. A multi-year customer produces on average <b>$30</b> in reinsurance reserves. A subscription customer produces <b class="g">$288</b> over 36 months — <b class="o">9.6 times more</b>. Best of all, funds earn in 30 days from each payment.</p>
+    </div>
+
+    <div class="q">
+      <h3>What about coverage?</h3>
+      <p>Coverage closely mirrors your multi-year program. One subscription covers every type of item you sell, any number of pieces, up to a combined <b>$5,000</b> retail limit.</p>
+    </div>
+
+    <div class="q">
+      <h3>What do your customers get?</h3>
+      <p>Full coverage and the same RAP <b>4.5-star service</b> they receive today. Customers can cancel, pause and restart coverage anytime. Customers are in control.</p>
+    </div>
+
+    <div class="q">
+      <h3>How do you start?</h3>
+      <p>We already set up an account for you. <b>Schedule a Zoom training and start selling immediately.</b></p>
+    </div>
+
+    <div class="q why">
+      <h3>Why now?</h3>
+      <p>You are already competing with subscription programs. Amazon sells one on its own site for <b>$16.99</b>. Today’s higher prices and stressed consumers make lower monthly payment options more important than ever.</p>
+    </div>
+
+  </div>
+
+  <p class="fine">Reinsurance reserve figures are averages and vary by program structure. Funds typically earn 30 days from each payment. Illustration per the dealer proforma: 200 new subscribers per month, $8 dealer share per successful payment, 36 payments per subscriber. Excludes claim losses and any sales-associate commission, which the dealer sets. Expected cancellations approximately 2%. Not a guarantee of sales, subscriber duration, payment collection or profitability.</p>
+
+</div>
+
+<!-- ============ PAGE 2 — HOW IT WORKS ============ -->
+<div class="sheet p2">
+
+  <div class="hdr">
+    <div class="brand">Furniture<em>Rx</em><small>BY RAP</small></div>
+    <div class="rt">Sales Associate Training Points</div>
+  </div>
+
+  <div class="body">
+
+    <div class="hook">
+      <h3>7 out of 10 customers say no to protection. <span>Now a “no” is a second chance — not a dead ticket.</span></h3>
+      <p>Two programs: multi-year (~$250 upfront) and subscription ($19.99/month, cancel anytime, similar coverage). Read the shopper, lead with the one that fits — and get paid on every yes.</p>
+      <div class="spiff">Your spiff: <b>$______</b> per subscription — ask your manager. Every subscription counts as an attachment, not a turn-down.</div>
+    </div>
+
+    <section>
+      <h4>Three Reads · Three Leads · Three Lines</h4>
+      <div class="reads">
+
+        <div class="read">
+          <div class="rh">
+            <i>The read</i>
+            <b>Balks at the multi-year price</b>
+            <p>You offered multi-year — the customer says “no,” “too much,” or hesitates.</p>
+          </div>
+          <div class="lead sb">Pivot to subscription</div>
+          <div class="line"><span class="qm">“</span><p>No problem — we have a similar protection plan for just $19.99 a month, cancel anytime.</p></div>
+        </div>
+
+        <div class="read">
+          <div class="rh">
+            <i>The read</i>
+            <b>Young millennial couple, kids</b>
+            <p>$250 upfront is sticker shock — and they grew up on subscriptions. Keep their budget in the furniture.</p>
+          </div>
+          <div class="lead sb">Lead with subscription</div>
+          <div class="line"><span class="qm">“</span><p>One plan covers everything you’re buying today — the whole order, $19.99 a month, cancel anytime.</p></div>
+        </div>
+
+        <div class="read">
+          <div class="rh">
+            <i>The read</i>
+            <b>Single item or lower-priced purchase</b>
+            <p>A recliner, one piece, a smaller ticket. A $250 plan doesn’t fit the purchase.</p>
+          </div>
+          <div class="lead sb">Lead with subscription</div>
+          <div class="line"><span class="qm">“</span><p>For this piece I’d do the $19.99-a-month protection — less than one repair would cost.</p></div>
+        </div>
+
+      </div>
+
+      <div class="rule">
+        <div class="rk">✓</div>
+        <p><b>Bigger ticket, established buyer, wants it done in one decision? Lead with multi-year — it’s still your strongest program for that shopper.</b> The win is a protection sale on every ticket, whichever program it comes from.</p>
+      </div>
+    </section>
+
+    <section>
+      <h4>When They Push Back</h4>
+      <div class="objs">
+        <div class="obj">
+          <b>“I’ll just be careful.”</b>
+          <p>“Accidents are the whole point — kids, pets, guests. One professional stain removal and it’s paid for itself.”</p>
+        </div>
+        <div class="obj">
+          <b>“What’s actually covered?”</b>
+          <p>“The same kinds of accidental damage as our multi-year plan — stains, rips, tears — on everything you’re buying today, up to $5,000.”</p>
+        </div>
+        <div class="obj">
+          <b>“Can I really cancel?”</b>
+          <p>“Yes — you manage it yourself online. Cancel or pause anytime. You’re in control.” <i>Use this as a closer, not just a deflection.</i></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h4>How to Check Out</h4>
+      <div class="steps">
+        <div class="stp"><div class="n">1</div><p><b>Ring the subscription SKU</b> at $0 retail.</p></div>
+        <div class="stp"><div class="n">2</div><p><b>Customer scans the store QR</b> — or open the kiosk on any device.</p></div>
+        <div class="stp"><div class="n">3</div><p>Enter the <b>sales order #</b> and <b>your associate #</b> — your commission credit.</p></div>
+        <div class="stp"><div class="n">4</div><p><b>Customer enters their own card</b> — you never handle it. Coverage is bound.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h4>The Pivot at a Glance</h4>
+      <div class="flow">
+        <svg viewBox="0 0 690 176" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#9aa5b5"/></marker>
+            <marker id="ahg" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#2f7d55"/></marker>
+            <marker id="aho" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#ce5a18"/></marker>
+          </defs>
+
+          <!-- start node -->
+          <rect x="0" y="58" width="112" height="60" fill="#101d3a"/>
+          <rect x="0" y="58" width="112" height="3" fill="#c99b28"/>
+          <text x="56" y="84" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" letter-spacing="1">READ THE</text>
+          <text x="56" y="99" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff" letter-spacing="1">SHOPPER</text>
+
+          <!-- connectors from start -->
+          <line x1="112" y1="74" x2="134" y2="40" stroke="#9aa5b5" stroke-width="1.4" marker-end="url(#ah)"/>
+          <line x1="112" y1="102" x2="134" y2="136" stroke="#9aa5b5" stroke-width="1.4" marker-end="url(#ah)"/>
+
+          <!-- top read -->
+          <rect x="140" y="14" width="168" height="48" fill="#f8f7f2" stroke="#dce2eb"/>
+          <text x="224" y="34" text-anchor="middle" font-size="8.6" font-weight="700" fill="#101d3a">Bigger ticket · established buyer</text>
+          <text x="224" y="48" text-anchor="middle" font-size="8" fill="#647084">wants it done in one decision</text>
+          <line x1="308" y1="38" x2="326" y2="38" stroke="#9aa5b5" stroke-width="1.4" marker-end="url(#ah)"/>
+
+          <!-- top offer: multi-year -->
+          <rect x="330" y="12" width="152" height="52" fill="#fff" stroke="#dce2eb"/>
+          <rect x="330" y="12" width="152" height="3" fill="#c99b28"/>
+          <text x="406" y="34" text-anchor="middle" font-size="9.5" font-weight="700" fill="#101d3a">LEAD MULTI-YEAR</text>
+          <text x="406" y="48" text-anchor="middle" font-size="8" fill="#647084">~$250 · one payment</text>
+
+          <!-- yes from multi-year -->
+          <line x1="482" y1="38" x2="534" y2="72" stroke="#2f7d55" stroke-width="1.4" marker-end="url(#ahg)"/>
+          <text x="504" y="46" text-anchor="middle" font-size="7.8" font-weight="700" fill="#2f7d55">YES ✓</text>
+
+          <!-- no pivot down -->
+          <line x1="406" y1="64" x2="406" y2="108" stroke="#ce5a18" stroke-width="1.4" marker-end="url(#aho)"/>
+          <text x="414" y="89" font-size="7.8" font-weight="700" fill="#ce5a18">“NO”? PIVOT</text>
+
+          <!-- bottom read -->
+          <rect x="140" y="114" width="168" height="48" fill="#f8f7f2" stroke="#dce2eb"/>
+          <text x="224" y="134" text-anchor="middle" font-size="8.6" font-weight="700" fill="#101d3a">Millennials — 55% of shoppers</text>
+          <text x="224" y="148" text-anchor="middle" font-size="8" fill="#647084">budget-minded · young family · smaller ticket</text>
+          <line x1="308" y1="138" x2="326" y2="138" stroke="#9aa5b5" stroke-width="1.4" marker-end="url(#ah)"/>
+
+          <!-- bottom offer: subscription -->
+          <rect x="330" y="112" width="152" height="52" fill="#fff" stroke="#dce2eb"/>
+          <rect x="330" y="112" width="152" height="3" fill="#2f7d55"/>
+          <text x="406" y="134" text-anchor="middle" font-size="9.5" font-weight="700" fill="#101d3a">LEAD SUBSCRIPTION</text>
+          <text x="406" y="148" text-anchor="middle" font-size="8" fill="#647084">$19.99/mo · cancel anytime</text>
+
+          <!-- yes from subscription -->
+          <line x1="482" y1="138" x2="534" y2="104" stroke="#2f7d55" stroke-width="1.4" marker-end="url(#ahg)"/>
+          <text x="504" y="134" text-anchor="middle" font-size="7.8" font-weight="700" fill="#2f7d55">YES ✓</text>
+
+          <!-- final node -->
+          <rect x="540" y="58" width="150" height="60" fill="#2f7d55"/>
+          <rect x="540" y="58" width="150" height="3" fill="#c99b28"/>
+          <text x="615" y="84" text-anchor="middle" font-size="9.6" font-weight="700" fill="#fff" letter-spacing=".5">A PROTECTION SALE</text>
+          <text x="615" y="99" text-anchor="middle" font-size="9.6" font-weight="700" fill="#fff" letter-spacing=".5">ON EVERY TICKET</text>
+        </svg>
+        <p class="fcap">Subscription merchandises <b>alongside</b> multi-year — not instead of it. It’s one more tool in your kit to capture the <b>70% of customers who decline protection today</b>.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="cta">
+    <div><b>Never let a customer walk out unprotected.</b><span>Two programs — one of them fits the shopper in front of you.</span></div>
+    <div class="u">kiosk.furniturerx.net</div>
+  </div>
+
+</div>
+
+<button class="printbtn" onclick="window.print()">Print both pages</button>
+
+</body>
+</html>

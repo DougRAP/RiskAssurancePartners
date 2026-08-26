@@ -560,6 +560,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
         successful monthly payment. Custom coverage available &mdash;
         <a href="#contact">talk to us</a> to learn more.
       </p>
+      <p style="margin-top:var(--s-4)">
+        <a class="btn btn--secondary" href="#state-b" id="get-infosheet">Get the dealer info sheet &rarr;</a>
+      </p>
+      <p class="meta" style="margin-top:var(--s-2)">Sent with your access reply</p>
 
       <h3 class="plans__h">Multi-Year</h3>
       <p class="plans__p">
@@ -765,7 +769,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     <!-- Submitted confirmation. No tracking, no status: RAP replies by email. -->
     <div class="panel done" id="request-done" hidden>
       <p class="done__t">We received your request.</p>
-      <p class="done__p">A RAP Sales representative will respond to your email shortly.</p>
+      <p class="done__p">A RAP Sales representative will respond to your email shortly.<span id="done-sheet" hidden> We&rsquo;ll include the FurnitureRx Subscription info sheet in our reply.</span></p>
     </div>
   </div>
 </section>
@@ -1339,13 +1343,27 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   }
   D.hidden = true;
 
-  document.getElementById('get-access').addEventListener('click', function (e) {
-    e.preventDefault();
+  /* Both CTAs open the same form; the source travels with the lead (and, in
+     production, tells Sales to attach the info sheet). */
+  var leadSource = 'calculator';
+  function openForm(src) {
+    leadSource = src;
     B.hidden = false;
     B.scrollIntoView({ behavior: 'smooth', block: 'start' });
     var first = document.getElementById('fn');
     if (first) { setTimeout(function () { first.focus({ preventScroll: true }); }, 320); }
+  }
+  document.getElementById('get-access').addEventListener('click', function (e) {
+    e.preventDefault(); openForm('calculator');
   });
+  var sheetBtn = document.getElementById('get-infosheet');
+  if (sheetBtn) {
+    sheetBtn.addEventListener('click', function (e) {
+      e.preventDefault(); openForm('infosheet');
+      var ds = document.getElementById('done-sheet');
+      if (ds) { ds.hidden = false; }
+    });
+  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
