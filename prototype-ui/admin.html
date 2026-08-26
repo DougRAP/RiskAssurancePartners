@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Agent Console — Risk Assurance Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RAP AGENT CONSOLE — internal tool, static prototype states
+   DECISION 042.
+
+   NOT linked from any public navigation. Direct URL only, noindex.
+
+   STATIC PROTOTYPE. No transport, no authentication, no storage.
+   The credential check is mocked — any submit advances to the
+   console. Live Supabase Realtime broadcast, the shared Webstore
+   Agent credential, and local-storage transcripts with midnight-ET
+   purge are the first work package of the Supabase phase.
+
+   Utilitarian by intent: design tokens and type are shared with the
+   public site, but the layout is a working tool, not a page.
+
+   Demo:  admin.html               -> login state
+          admin.html?state=console -> console state
+   ============================================================ */
+
+:root{
+  --rap-ink:#0C172A; --rap-ink-800:#16243C; --rap-ink-700:#22334F;
+  --rap-paper:#FFFFFF; --rap-mist:#F3F5F8;
+  --rap-blue:#204374; --rap-blue-600:#2E5A96; --rap-blue-050:#E8EEF6;
+  --rap-ember:#C8581B; --rap-ember-700:#A3450F; --rap-ember-050:#FBEFE8;
+  --rap-brass:#C19541;
+  --rap-slate-700:#3D4A5C; --rap-slate-500:#64748B; --rap-slate-300:#C3CBD6;
+  --rap-slate-200:#DFE4EB; --rap-slate-100:#EEF1F5;
+  --rap-up:#1E6F50; --rap-down:#A8331F;
+
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+  --radius-sm:2px; --radius-md:4px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--rap-mist);color:var(--rap-ink);
+  font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p,ul,dl,dd{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;
+  font-weight:600;font-size:14px;line-height:1;border-radius:var(--radius-sm);
+  border:1px solid transparent;text-decoration:none;min-height:42px;
+}
+.btn--primary{background:var(--rap-ember-700);color:#fff}
+.btn--primary:hover{background:#8E3B0C}
+.btn--ghost{border-color:var(--rap-slate-300);color:var(--rap-slate-700);background:#fff}
+.btn--ghost:hover{border-color:var(--rap-ink);color:var(--rap-ink)}
+.btn--danger{border-color:rgba(168,51,31,.4);color:var(--rap-down);background:#fff}
+.btn--danger:hover{background:var(--rap-down);border-color:var(--rap-down);color:#fff}
+.btn--sm{padding:7px 12px;min-height:0;font-size:12px}
+
+/* ---------- state switching ---------- */
+.state{display:none}
+.state.is-active{display:block}
+
+/* ---------- login ---------- */
+.login{min-height:100%;display:grid;place-items:center;padding:var(--s-6)}
+.login__card{
+  width:min(420px,100%);background:#fff;border:1px solid var(--rap-slate-200);
+  border-top:3px solid var(--rap-ember);border-radius:var(--radius-md);padding:var(--s-7);
+  box-shadow:0 12px 40px rgba(12,23,42,.08);
+}
+.login__brand{display:flex;align-items:center;gap:10px;margin-bottom:var(--s-6)}
+.login__mark{width:30px;height:30px;flex:0 0 30px;border-radius:var(--radius-sm);background:var(--rap-blue);display:grid;place-items:center}
+.login__name{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.1}
+.login__t{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.15}
+.login__s{font-size:14px;color:var(--rap-slate-700);margin-top:var(--s-2)}
+.f{display:flex;flex-direction:column;gap:6px;margin-top:var(--s-5)}
+.f label{font-weight:600;font-size:13px}
+.f input{
+  height:44px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
+  padding:0 12px;font-family:var(--sans);font-size:16px;background:#fff;color:var(--rap-ink);
+}
+.f input:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
+.login .btn{width:100%;margin-top:var(--s-5)}
+.login__note{
+  margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200);
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--rap-slate-500);line-height:1.5;
+}
+
+/* ---------- console shell ---------- */
+.shell{display:flex;flex-direction:column;height:100%}
+.bar{
+  background:var(--rap-ink);color:#fff;padding:0 var(--s-5);min-height:52px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap;
+}
+.bar__l{display:flex;align-items:center;gap:var(--s-4)}
+.bar__t{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase}
+.bar__role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-brass);border:1px solid rgba(193,149,65,.5);border-radius:var(--radius-sm);padding:3px 8px}
+.bar__r{display:flex;align-items:center;gap:var(--s-4)}
+.alerts{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.alerts__i{opacity:.55}
+.alerts.is-on{color:var(--rap-brass)}
+.alerts.is-on .alerts__i{opacity:1}
+.bar__out{background:none;border:1px solid rgba(255,255,255,.3);border-radius:var(--radius-sm);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px}
+.bar__out:hover{background:#fff;color:var(--rap-ink)}
+
+.work{flex:1;display:grid;grid-template-columns:320px 1fr;min-height:0}
+
+/* ---------- inbox ---------- */
+.inbox{background:#fff;border-right:1px solid var(--rap-slate-200);display:flex;flex-direction:column;min-height:0}
+.inbox__h{
+  padding:var(--s-4) var(--s-5);border-bottom:1px solid var(--rap-slate-200);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
+}
+.inbox__t{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
+.inbox__n{font-family:var(--mono);font-size:11px;color:var(--rap-ember-700);font-weight:600}
+.inbox__l{overflow-y:auto;flex:1}
+.thread{
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rap-slate-200);
+  border-left:3px solid transparent;padding:var(--s-4) var(--s-5);display:grid;gap:4px;
+}
+.thread:hover{background:var(--rap-mist)}
+.thread.is-active{background:var(--rap-mist);border-left-color:var(--rap-ember)}
+.thread__top{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}
+.thread__n{font-weight:600;font-size:15px}
+.thread__t{font-family:var(--mono);font-size:10px;color:var(--rap-slate-500);white-space:nowrap}
+.thread__p{font-size:13px;color:var(--rap-slate-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{
+  display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;
+  background:var(--rap-ember-700);color:#fff;border-radius:10px;
+  font-family:var(--mono);font-size:11px;font-weight:600;
+}
+.thread__done{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-300)}
+
+/* ---------- chat view ---------- */
+.view{display:flex;flex-direction:column;min-height:0;background:var(--rap-mist)}
+.view__pin{
+  background:#fff;border-bottom:1px solid var(--rap-slate-200);padding:var(--s-4) var(--s-5);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap;
+}
+.pin__n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.1}
+.pin__c{display:flex;gap:var(--s-4);flex-wrap:wrap;margin-top:6px}
+.pin__c span{font-family:var(--mono);font-size:12px;color:var(--rap-slate-700)}
+.pin__c b{color:var(--rap-slate-500);font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:.08em;margin-right:5px}
+.pin__topic{font-size:13px;color:var(--rap-slate-700);margin-top:8px;max-width:60ch}
+.view__log{flex:1;overflow-y:auto;padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4)}
+.m{max-width:78%;padding:10px 14px;border-radius:var(--radius-md);font-size:15px;line-height:1.45}
+.m--cust{background:#fff;border:1px solid var(--rap-slate-200);align-self:flex-start}
+.m--agent{background:var(--rap-ink);color:#fff;align-self:flex-end}
+.m--sys{align-self:center;background:none;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.m__t{font-family:var(--mono);font-size:10px;letter-spacing:.06em;opacity:.6;margin-top:5px}
+.view__form{background:#fff;border-top:1px solid var(--rap-slate-200);padding:var(--s-4) var(--s-5);display:flex;gap:var(--s-3)}
+.view__in{
+  flex:1;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);height:44px;
+  padding:0 12px;font-family:var(--sans);font-size:15px;
+}
+.view__in:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
+.view__foot{
+  background:#fff;border-top:1px solid var(--rap-slate-200);padding:10px var(--s-5);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);flex-wrap:wrap;
+}
+.purge{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.empty{flex:1;display:grid;place-items:center;padding:var(--s-7);text-align:center}
+.empty p{color:var(--rap-slate-500);font-size:14px;margin-top:var(--s-2)}
+
+@media (max-width:860px){
+  .work{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .inbox{border-right:0;border-bottom:1px solid var(--rap-slate-200);max-height:34vh}
+  .m{max-width:88%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     STATE A — LOGIN (shared Webstore Agent credential, mocked)
+     ============================================================ -->
+<div class="state is-active" id="state-login">
+  <div class="login">
+    <form class="login__card" id="loginform" novalidate>
+      <div class="login__brand">
+        <span class="login__mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <span class="login__name">Risk Assurance Partners</span>
+      </div>
+
+      <h1 class="login__t">Agent Console</h1>
+      <p class="login__s">Sign in with the shared Webstore Agent credential.</p>
+
+      <div class="f">
+        <label for="lg-user">Agent ID</label>
+        <input id="lg-user" type="text" autocomplete="username" value="webstore-agent">
+      </div>
+      <div class="f">
+        <label for="lg-pass">Passphrase</label>
+        <input id="lg-pass" type="password" autocomplete="current-password" value="demo">
+      </div>
+
+      <button class="btn btn--primary" type="submit">Sign in &rarr;</button>
+
+      <p class="login__note">
+        Prototype &mdash; the credential is not checked and nothing is transmitted. One shared
+        &ldquo;Webstore Agent&rdquo; role in v1. Real authentication arrives with the Supabase phase.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     STATE B — CONSOLE
+     ============================================================ -->
+<div class="state" id="state-console">
+  <div class="shell">
+
+    <div class="bar">
+      <div class="bar__l">
+        <span class="bar__t">RAP Agent Console</span>
+        <span class="bar__role">Webstore Agent</span>
+      </div>
+      <div class="bar__r">
+        <!-- Alerts indicator: muted by default, click to arm (demo only). -->
+        <button class="alerts" id="alerts" type="button" aria-pressed="false"
+                title="Sound + browser notification on new chat">
+          <span class="alerts__i" aria-hidden="true">&#128266;</span>
+          <span class="alerts__i" aria-hidden="true">&#128276;</span>
+          <span id="alerts-t">Alerts muted</span>
+        </button>
+        <button class="bar__out" type="button" id="signout">Sign out</button>
+      </div>
+    </div>
+
+    <div class="work">
+
+      <!-- inbox -->
+      <div class="inbox">
+        <div class="inbox__h">
+          <span class="inbox__t">Active chats</span>
+          <span class="inbox__n" id="unread-total">3 unread</span>
+        </div>
+        <div class="inbox__l" id="inbox"></div>
+      </div>
+
+      <!-- chat view -->
+      <div class="view" id="view">
+        <div class="empty" id="view-empty">
+          <div>
+            <p class="meta">No chat selected</p>
+            <p>Pick a conversation from the inbox.</p>
+          </div>
+        </div>
+
+        <div id="view-body" hidden style="display:flex;flex-direction:column;min-height:0;flex:1">
+          <div class="view__pin">
+            <div>
+              <p class="pin__n" id="pin-name">&mdash;</p>
+              <div class="pin__c">
+                <span><b>Email</b><span id="pin-email">&mdash;</span></span>
+                <span><b>Phone</b><span id="pin-phone">&mdash;</span></span>
+                <span><b>Started</b><span id="pin-started">&mdash;</span></span>
+              </div>
+              <p class="pin__topic" id="pin-topic"></p>
+            </div>
+            <button class="btn btn--danger btn--sm" type="button" id="end-session">End session</button>
+          </div>
+
+          <div class="view__log" id="log"></div>
+
+          <form class="view__form" id="replyform">
+            <input class="view__in" id="reply" type="text" placeholder="Type a reply" autocomplete="off" aria-label="Reply">
+            <button class="btn btn--primary" type="submit">Send</button>
+          </form>
+
+          <div class="view__foot">
+            <span class="purge">Transcripts live in this browser only &middot; purged at midnight ET</span>
+            <span class="purge" id="clock">&mdash;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Agent console — static prototype behaviour only.
+   No transport, no auth, no persistence. All threads below are
+   fabricated demo data.
+   ============================================================ */
+(function () {
+  var qs = new URLSearchParams(location.search);
+
+  function show(name) {
+    document.getElementById('state-login').classList.toggle('is-active', name === 'login');
+    document.getElementById('state-console').classList.toggle('is-active', name === 'console');
+  }
+
+  document.getElementById('loginform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    show('console');
+  });
+  document.getElementById('signout').addEventListener('click', function () { show('login'); });
+
+  /* ---- fabricated demo threads ---- */
+  var THREADS = [
+    {
+      id: 't1', name: 'Dana Whitfield', email: 'dana.w@example.com', phone: '(555) 214-8890',
+      started: '10:42 AM ET', unread: 2,
+      topic: 'Stain on a sectional bought in March — not sure if it is covered.',
+      msgs: [
+        ['sys', 'Chat started 10:42 AM ET'],
+        ['cust', 'Hi — I have a stain on a sectional I bought in March. Is that covered?'],
+        ['agent', 'Hi Dana — happy to check. Do you have the order or plan number handy?'],
+        ['cust', 'I think it is FRX-4471. It happened yesterday.'],
+        ['cust', 'Should I file a claim or can you do it from there?']
+      ]
+    },
+    {
+      id: 't2', name: 'Marcus Bell', email: '', phone: '(555) 677-1042',
+      started: '10:58 AM ET', unread: 1,
+      topic: 'Wants to pause the subscription for two months.',
+      msgs: [
+        ['sys', 'Chat started 10:58 AM ET'],
+        ['cust', 'Can I pause my plan for a couple of months while I move?'],
+        ['agent', 'Yes — pausing is available any time. I can walk you through it.'],
+        ['cust', 'Great, what do I need to do?']
+      ]
+    },
+    {
+      id: 't3', name: 'Priya Raman', email: 'praman@example.com', phone: '',
+      started: '11:15 AM ET', unread: 0,
+      topic: 'Question about what the plan covers on an adjustable base.',
+      msgs: [
+        ['sys', 'Chat started 11:15 AM ET'],
+        ['cust', 'Does my plan cover the motor on an adjustable base?'],
+        ['agent', 'It does — mechanical and electrical failure is included. Want me to note it on your account?'],
+        ['cust', 'No need, that was all I wanted to confirm. Thanks!']
+      ]
+    }
+  ];
+
+  var active = null;
+  var inbox = document.getElementById('inbox');
+  var log = document.getElementById('log');
+
+  function stamp() {
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit'
+    }).format(new Date()) + ' ET';
+  }
+
+  function unreadTotal() {
+    var n = THREADS.reduce(function (a, t) { return a + (t.ended ? 0 : t.unread); }, 0);
+    document.getElementById('unread-total').textContent = n ? n + ' unread' : 'All read';
+  }
+
+  function renderInbox() {
+    inbox.innerHTML = '';
+    THREADS.forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'thread' + (active === t.id ? ' is-active' : '');
+      var last = t.msgs[t.msgs.length - 1];
+      b.innerHTML =
+        '<span class="thread__top">' +
+          '<span class="thread__n"></span>' +
+          (t.ended ? '<span class="thread__done">Ended</span>'
+                   : (t.unread ? '<span class="badge">' + t.unread + '</span>'
+                               : '<span class="thread__t">' + t.started + '</span>')) +
+        '</span>' +
+        '<span class="thread__p"></span>';
+      b.querySelector('.thread__n').textContent = t.name;
+      b.querySelector('.thread__p').textContent = last[1];
+      b.addEventListener('click', function () { openThread(t.id); });
+      inbox.appendChild(b);
+    });
+    unreadTotal();
+  }
+
+  function pushMsg(kind, text, time) {
+    var d = document.createElement('div');
+    d.className = 'm m--' + kind;
+    if (kind === 'sys') { d.textContent = text; }
+    else {
+      var p = document.createElement('div'); p.textContent = text;
+      var s = document.createElement('p'); s.className = 'm__t'; s.textContent = time || stamp();
+      d.appendChild(p); d.appendChild(s);
+    }
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function openThread(id) {
+    var t = THREADS.filter(function (x) { return x.id === id; })[0];
+    if (!t) { return; }
+    active = id;
+    t.unread = 0;
+
+    document.getElementById('view-empty').hidden = true;
+    document.getElementById('view-body').hidden = false;
+
+    document.getElementById('pin-name').textContent = t.name;
+    document.getElementById('pin-email').textContent = t.email || '—';
+    document.getElementById('pin-phone').textContent = t.phone || '—';
+    document.getElementById('pin-started').textContent = t.started;
+    document.getElementById('pin-topic').textContent = t.topic;
+
+    log.innerHTML = '';
+    t.msgs.forEach(function (m) { pushMsg(m[0], m[1], t.started); });
+    if (t.ended) { pushMsg('sys', 'Session ended'); }
+
+    document.getElementById('replyform').hidden = !!t.ended;
+    renderInbox();
+  }
+
+  document.getElementById('replyform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var i = document.getElementById('reply');
+    var v = i.value.trim();
+    if (!v || !active) { return; }
+    var t = THREADS.filter(function (x) { return x.id === active; })[0];
+    t.msgs.push(['agent', v]);
+    pushMsg('agent', v);
+    i.value = '';
+    renderInbox();
+  });
+
+  document.getElementById('end-session').addEventListener('click', function () {
+    if (!active) { return; }
+    var t = THREADS.filter(function (x) { return x.id === active; })[0];
+    t.ended = true;
+    t.unread = 0;
+    pushMsg('sys', 'Session ended');
+    document.getElementById('replyform').hidden = true;
+    renderInbox();
+  });
+
+  /* alerts indicator — muted by default; demo toggle only */
+  var al = document.getElementById('alerts');
+  al.addEventListener('click', function () {
+    var on = al.getAttribute('aria-pressed') === 'true';
+    al.setAttribute('aria-pressed', String(!on));
+    al.classList.toggle('is-on', !on);
+    document.getElementById('alerts-t').textContent = !on ? 'Alerts on · sound + notification' : 'Alerts muted';
+  });
+
+  /* ET clock in the footer, so the midnight-purge note has context */
+  function tick() {
+    document.getElementById('clock').textContent = stamp();
+  }
+  tick(); setInterval(tick, 30000);
+
+  renderInbox();
+  if (qs.get('state') === 'console') { show('console'); }
+})();
+</script>
+
+</body>
+</html>

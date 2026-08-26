@@ -373,7 +373,80 @@ button{font:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
-@media print{.demo,.hdr,.drawer,.rail,.filterbtn{display:none}}
+/* ---------- customer support popup + chat (DECISION 042) ----------
+   Static prototype states — local demo only, no transport.
+   Shared block, byte-identical on every page. */
+.sup{position:fixed;inset:0;z-index:200;display:none;overflow-y:auto}
+.sup.is-open{display:block}
+.sup__scrim{position:fixed;inset:0;background:rgba(12,23,42,.6)}
+.sup__panel{
+  position:relative;width:min(540px,calc(100% - 32px));margin:7vh auto;background:#fff;
+  border-radius:var(--radius-md);border-top:3px solid var(--rap-ember);
+  box-shadow:0 24px 60px rgba(12,23,42,.28);
+}
+.sup__head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4);padding:var(--s-6) var(--s-6) 0}
+.sup__t{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1}
+.sup__x{background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:38px;height:38px;flex:0 0 38px;font-size:18px;line-height:1;color:var(--rap-slate-700)}
+.sup__x:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
+.sup__body{padding:var(--s-5) var(--s-6) var(--s-6)}
+.sup__hours{display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap;padding-bottom:var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
+.sup__hrs{font-family:var(--mono);font-size:12px;color:var(--rap-slate-700)}
+.hchip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:var(--radius-sm);padding:4px 9px;border:1px solid}
+.hchip--open{color:var(--rap-up);border-color:rgba(30,111,80,.4);background:rgba(30,111,80,.07)}
+.hchip--closed{color:var(--rap-slate-500);border-color:var(--rap-slate-300);background:var(--rap-mist)}
+.hchip__dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 7px}
+.sup__steer{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-5)}
+.sup__acts{display:grid;gap:var(--s-3);margin-top:var(--s-4)}
+.sup__acts .btn{width:100%;justify-content:center}
+.sup__phone{margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200)}
+.sup__phk{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
+.sup__phv{font-family:var(--serif);font-size:26px;font-weight:500;text-decoration:none;color:var(--rap-ink);display:inline-block;margin-top:2px}
+.sup__phv:hover{color:var(--rap-ember-700)}
+.sup__note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
+.sup__view{display:none}
+.sup__view.is-active{display:block}
+.sup__back{background:none;border:0;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-4)}
+.pf{display:grid;gap:var(--s-4)}
+.pf__f{display:flex;flex-direction:column;gap:6px}
+.pf__f label{font-weight:600;font-size:13px}
+.pf__f label i{color:var(--rap-ember-700);font-style:normal}
+.pf__f input,.pf__f textarea{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 12px;height:46px;font-family:var(--sans);font-size:16px;color:var(--rap-ink);background:#fff}
+.pf__f textarea{height:auto;padding:12px;min-height:76px;resize:vertical}
+.pf__f input:focus,.pf__f textarea:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
+.pf__hint{font-family:var(--mono);font-size:11px;color:var(--rap-slate-500)}
+.pf__err{display:none;color:var(--rap-down);font-size:13px;font-weight:500;gap:6px;align-items:flex-start}
+.pf__err.is-on{display:flex}
+.chat{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:210;display:none}
+.chat.is-open{display:block}
+.chat__panel{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;box-shadow:-16px 0 48px rgba(12,23,42,.18);border-left:1px solid var(--rap-slate-200)}
+.chat__head{background:var(--rap-ink);color:#fff;padding:var(--s-5);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4)}
+.chat__who{font-weight:600;font-size:16px}
+.chat__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-brass);margin-top:5px;display:flex;align-items:center;gap:7px}
+.chat__x{background:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);color:#fff;width:34px;height:34px;flex:0 0 34px;font-size:16px;line-height:1}
+.chat__x:hover{background:#fff;color:var(--rap-ink)}
+.chat__log{flex:1;overflow-y:auto;padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4);background:var(--rap-mist)}
+.msg{max-width:84%;padding:11px 14px;border-radius:var(--radius-md);font-size:15px;line-height:1.45}
+.msg--agent{background:#fff;border:1px solid var(--rap-slate-200);align-self:flex-start}
+.msg--cust{background:var(--rap-ink);color:#fff;align-self:flex-end}
+.msg--sys{align-self:center;background:none;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);text-align:center}
+.msg__m{font-family:var(--mono);font-size:10px;letter-spacing:.06em;opacity:.6;margin-top:5px}
+.chat__form{border-top:1px solid var(--rap-slate-200);padding:var(--s-4);display:flex;gap:var(--s-3);background:#fff}
+.chat__in{flex:1;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);height:46px;padding:0 12px;font-family:var(--sans);font-size:16px}
+.chat__in:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
+.chat__send{background:var(--rap-ember-700);color:#fff;border:0;border-radius:var(--radius-sm);padding:0 18px;font-weight:600;font-size:14px}
+.chat__send:hover{background:#8E3B0C}
+.chat__off{padding:var(--s-5);overflow-y:auto;flex:1}
+.typing{display:inline-flex;gap:3px;align-items:center}
+.typing i{width:5px;height:5px;border-radius:50%;background:var(--rap-brass);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}
+.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+@media (max-width:560px){
+  .sup__panel{margin:0;width:100%;min-height:100vh;border-radius:0;border-top:0}
+  .sup__head{padding-top:var(--s-5)}
+}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.6}}
+@media print{.demo,.hdr,.drawer,.rail,.filterbtn,.sup,.chat{display:none}}
 </style>
 </head>
 <body>
@@ -386,7 +459,7 @@ button{font:inherit;cursor:pointer}
     <div class="utility__left">
       <a href="https://www.5starservice.net/">File a Claim</a>
       <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Subscription Plans</a>
-      <a class="utility__secondary" href="https://kiosk.furniturerx.net/">Customer Support</a>
+      <a class="utility__secondary" href="https://kiosk.furniturerx.net/" data-support-open aria-haspopup="dialog">Customer Support</a>
     </div>
     <div class="utility__right">
       <a class="utility__secondary" href="#contact">Contact</a>
@@ -451,7 +524,7 @@ button{font:inherit;cursor:pointer}
     <p class="drawer__utillabel">Customers</p>
     <a href="https://www.5starservice.net/">File a Claim</a>
     <a href="https://kiosk.furniturerx.net/">Subscription Plans</a>
-    <a href="https://kiosk.furniturerx.net/">Customer Support</a>
+    <a href="https://kiosk.furniturerx.net/" data-support-open aria-haspopup="dialog">Customer Support</a>
     <a href="#contact">Contact</a>
     <a href="https://portal.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
   </div>
@@ -641,7 +714,7 @@ button{font:inherit;cursor:pointer}
       </div>
       <div>
         <p class="foot__h">Customer</p>
-        <a href="https://www.5starservice.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Subscription Plans</a>
+        <a href="https://www.5starservice.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/" data-support-open aria-haspopup="dialog">Customer Support</a><a href="https://kiosk.furniturerx.net/">Subscription Plans</a>
       </div>
       <div>
         <p class="foot__h">Dealer</p>
@@ -653,7 +726,7 @@ button{font:inherit;cursor:pointer}
       <details><summary>Programs</summary><a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a></details>
       <details><summary>Intelligence</summary><a href="newswire.html">Newswire</a><a href="market-intelligence.html">Market Intelligence</a><a href="research.html">Research</a></details>
       <details><summary>Company</summary><a href="home.html#why">Why RAP</a><a href="#contact">Contact</a></details>
-      <details><summary>Customer</summary><a href="https://www.5starservice.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/">Customer Support</a><a href="https://kiosk.furniturerx.net/">Subscription Plans</a></details>
+      <details><summary>Customer</summary><a href="https://www.5starservice.net/">File a Claim</a><a href="https://kiosk.furniturerx.net/" data-support-open aria-haspopup="dialog">Customer Support</a><a href="https://kiosk.furniturerx.net/">Subscription Plans</a></details>
       <details><summary>Dealer</summary><a href="https://portal.furniturerx.net/">Dealer Login</a><a href="home.html#economics">Dealer Economics</a></details>
     </div>
 
@@ -871,6 +944,312 @@ document.addEventListener('keydown', function (e) {
     if (t && t.checked) { t.checked = false; }
   }
 });
+</script>
+
+<!-- ============ CUSTOMER SUPPORT (DECISION 042) ============================
+     Shared block — byte-identical on every page. Static prototype states:
+     local demo only, no transport and nothing stored. Live Supabase Realtime
+     broadcast is the first work package of the Supabase phase.
+
+     Demo via URL:
+       ?support=1        open the popup
+       ?support=chat     open the popup on the pre-chat form
+       ?support=offline  open the popup forced to the closed state
+       ?hours=open  |  ?hours=closed   force the open/closed chip
+========================================================================= -->
+<div class="sup" id="sup" role="dialog" aria-modal="true" aria-labelledby="sup-t" hidden>
+  <div class="sup__scrim" data-support-close></div>
+  <div class="sup__panel" tabindex="-1">
+    <div class="sup__head">
+      <h2 class="sup__t" id="sup-t">Customer Support</h2>
+      <button class="sup__x" type="button" data-support-close aria-label="Close">&times;</button>
+    </div>
+    <div class="sup__body">
+
+      <div class="sup__view is-active" data-view="menu">
+        <div class="sup__hours">
+          <span class="sup__hrs">9 AM &ndash; 6 PM ET &middot; Monday&ndash;Saturday &middot; Closed Sunday</span>
+          <span class="hchip hchip--closed" id="sup-chip"><span class="hchip__dot" aria-hidden="true"></span><span id="sup-chip-t">Closed</span></span>
+        </div>
+
+        <p class="sup__steer">Need service on a covered item? File a claim &mdash; it&rsquo;s the fastest path.</p>
+
+        <div class="sup__acts">
+          <a class="btn btn--primary" href="https://www.5starservice.net/">File a Claim &rarr;</a>
+          <button class="btn btn--secondary" type="button" data-chat-start>Chat with an Agent</button>
+        </div>
+
+        <div class="sup__phone">
+          <p class="sup__phk">Call for immediate assistance</p>
+          <a class="sup__phv" href="tel:+18007325856">1.800.732.5856</a>
+        </div>
+
+        <p class="sup__note" id="sup-offnote" hidden>We&rsquo;re closed right now &mdash; chat will take a message.</p>
+      </div>
+
+      <div class="sup__view" data-view="prechat">
+        <button class="sup__back" type="button" data-view-go="menu">&larr; Back</button>
+        <p class="sup__steer" style="margin-top:0">Tell us who you are and we&rsquo;ll connect you with an agent.</p>
+        <form class="pf" id="pf" novalidate>
+          <div class="pf__f">
+            <label for="pf-name">Name <i aria-hidden="true">&bull;</i></label>
+            <input id="pf-name" type="text" autocomplete="name">
+          </div>
+          <div class="pf__f">
+            <label for="pf-email">Email</label>
+            <input id="pf-email" type="email" autocomplete="email">
+          </div>
+          <div class="pf__f">
+            <label for="pf-phone">Phone</label>
+            <input id="pf-phone" type="tel" autocomplete="tel">
+            <span class="pf__hint">Email or phone &mdash; at least one, so we can reach you.</span>
+          </div>
+          <div class="pf__f">
+            <label for="pf-topic">What can we help with?</label>
+            <textarea id="pf-topic" rows="3"></textarea>
+          </div>
+          <p class="pf__err" id="pf-err"><span aria-hidden="true">&#9888;</span><span id="pf-err-t"></span></p>
+          <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Start chat &rarr;</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="chat" id="chat" role="dialog" aria-modal="true" aria-labelledby="chat-who" hidden>
+  <div class="chat__panel" tabindex="-1">
+    <div class="chat__head">
+      <div>
+        <p class="chat__who" id="chat-who">RAP Customer Support</p>
+        <p class="chat__st">
+          <span class="typing" id="chat-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span id="chat-st-t">Connecting you to an agent</span>
+        </p>
+      </div>
+      <button class="chat__x" type="button" data-chat-close aria-label="Close chat">&times;</button>
+    </div>
+
+    <div class="chat__log" id="chat-log"></div>
+    <form class="chat__form" id="chat-form">
+      <input class="chat__in" id="chat-in" type="text" placeholder="Type a message" autocomplete="off" aria-label="Message">
+      <button class="chat__send" type="submit">Send</button>
+    </form>
+
+    <div class="chat__off" id="chat-off" hidden>
+      <span class="hchip hchip--closed"><span class="hchip__dot" aria-hidden="true"></span>Closed</span>
+      <p class="sup__steer">We&rsquo;re closed right now. Hours are 9 AM &ndash; 6 PM ET, Monday&ndash;Saturday.</p>
+      <div class="sup__acts">
+        <a class="btn btn--primary" href="https://www.5starservice.net/">File a Claim &rarr;</a>
+        <a class="btn btn--secondary" href="tel:+18007325856">Call 1.800.732.5856</a>
+      </div>
+      <div class="sup__phone">
+        <p class="sup__phk">Leave a message</p>
+        <form class="pf" id="lm" novalidate style="margin-top:var(--s-4)">
+          <div class="pf__f">
+            <label for="lm-msg">Message</label>
+            <textarea id="lm-msg" rows="4"></textarea>
+          </div>
+          <p class="pf__err" id="lm-err"><span aria-hidden="true">&#9888;</span><span>Add a message so we know how to help.</span></p>
+          <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Send message</button>
+        </form>
+        <p class="sup__note" id="lm-ok" hidden>Thanks &mdash; we&rsquo;ll reply when we open. Demo only; nothing was sent.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Customer support popup + chat — DECISION 042, static prototype states.
+   No transport, no persistence. Supabase Realtime broadcast lands later. */
+(function () {
+  var sup = document.getElementById('sup');
+  var chat = document.getElementById('chat');
+  if (!sup || !chat) { return; }
+
+  var qs = new URLSearchParams(location.search);
+  var lastFocus = null;
+
+  function hit(e, sel) { var t = e.target; return (t && t.closest) ? t.closest(sel) : null; }
+  function etParts() {
+    var p = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hour12: false })
+      .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    return { day: p.weekday, hour: parseInt(p.hour, 10) };
+  }
+  function stamp() {
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' })
+      .format(new Date()) + ' ET';
+  }
+  /* 9 AM – 6 PM ET, Monday–Saturday. Closed Sunday. */
+  function isOpen() {
+    var f = qs.get('hours');
+    if (f === 'open') { return true; }
+    if (f === 'closed') { return false; }
+    if (qs.get('support') === 'offline') { return false; }
+    var n = etParts();
+    if (n.day === 'Sun') { return false; }
+    return n.hour >= 9 && n.hour < 18;
+  }
+  function paintHours() {
+    var open = isOpen();
+    var chip = document.getElementById('sup-chip');
+    chip.className = 'hchip ' + (open ? 'hchip--open' : 'hchip--closed');
+    document.getElementById('sup-chip-t').textContent = open ? 'Open now' : 'Closed';
+    document.getElementById('sup-offnote').hidden = open;
+    return open;
+  }
+
+  function focusables(root) {
+    return Array.prototype.slice.call(root.querySelectorAll(
+      'a[href],button:not([disabled]),input:not([type=hidden]),textarea,select,[tabindex]:not([tabindex="-1"])'
+    )).filter(function (el) { return el.offsetWidth || el.offsetHeight || el.getClientRects().length; });
+  }
+  function trap(e, root) {
+    if (e.key !== 'Tab') { return; }
+    var f = focusables(root);
+    if (!f.length) { return; }
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+  function showView(name) {
+    Array.prototype.forEach.call(sup.querySelectorAll('.sup__view'), function (v) {
+      v.classList.toggle('is-active', v.getAttribute('data-view') === name);
+    });
+  }
+  function lock() { document.body.style.overflow = 'hidden'; document.body.classList.add('sup-open'); }
+  function unlock() {
+    if (sup.classList.contains('is-open') || chat.classList.contains('is-open')) { return; }
+    document.body.style.overflow = ''; document.body.classList.remove('sup-open');
+  }
+
+  function openSup() {
+    lastFocus = document.activeElement;
+    paintHours(); showView('menu');
+    sup.hidden = false; sup.classList.add('is-open'); lock();
+    sup.querySelector('.sup__panel').focus();
+  }
+  function closeSup() {
+    sup.hidden = true; sup.classList.remove('is-open'); unlock();
+    if (lastFocus && !chat.classList.contains('is-open')) { lastFocus.focus(); }
+  }
+  function closeChat() {
+    chat.hidden = true; chat.classList.remove('is-open'); unlock();
+    if (lastFocus) { lastFocus.focus(); }
+  }
+
+  document.addEventListener('click', function (e) {
+    if (hit(e, '[data-support-open]')) {
+      e.preventDefault();
+      var nt = document.getElementById('navtoggle'); if (nt) { nt.checked = false; }
+      openSup(); return;
+    }
+    if (hit(e, '[data-support-close]')) { e.preventDefault(); closeSup(); return; }
+    if (hit(e, '[data-chat-close]')) { e.preventDefault(); closeChat(); return; }
+    if (hit(e, '[data-chat-start]')) {
+      e.preventDefault(); showView('prechat');
+      var n = document.getElementById('pf-name'); if (n) { n.focus(); } return;
+    }
+    var g = hit(e, '[data-view-go]');
+    if (g) { e.preventDefault(); showView(g.getAttribute('data-view-go')); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (chat.classList.contains('is-open')) { closeChat(); return; }
+      if (sup.classList.contains('is-open')) { closeSup(); return; }
+    }
+    if (chat.classList.contains('is-open')) { trap(e, chat); }
+    else if (sup.classList.contains('is-open')) { trap(e, sup); }
+  }, true);
+
+  /* pre-chat: Name required, and at least one of email / phone */
+  document.getElementById('pf').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('pf-name');
+    var email = document.getElementById('pf-email');
+    var phone = document.getElementById('pf-phone');
+    var err = document.getElementById('pf-err');
+    var errT = document.getElementById('pf-err-t');
+    var msg = '';
+    if (!name.value.trim()) { msg = 'Enter your name so the agent knows who they are helping.'; }
+    else if (!email.value.trim() && !phone.value.trim()) { msg = 'Add an email address or a phone number so we can reach you.'; }
+    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) { msg = 'That email address does not look right.'; }
+    if (msg) { errT.textContent = msg; err.classList.add('is-on'); return; }
+    err.classList.remove('is-on');
+    startChat(name.value.trim(), document.getElementById('pf-topic').value.trim());
+  });
+
+  var log = document.getElementById('chat-log');
+  var cform = document.getElementById('chat-form');
+  var coff = document.getElementById('chat-off');
+  var typing = document.getElementById('chat-typing');
+  var cstT = document.getElementById('chat-st-t');
+
+  function push(kind, text) {
+    var d = document.createElement('div');
+    d.className = 'msg msg--' + kind;
+    if (kind === 'sys') { d.textContent = text; }
+    else {
+      var b = document.createElement('div'); b.textContent = text;
+      var m = document.createElement('p'); m.className = 'msg__m'; m.textContent = stamp();
+      d.appendChild(b); d.appendChild(m);
+    }
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+  }
+
+  function startChat(name, topic) {
+    closeSup();
+    chat.hidden = false; chat.classList.add('is-open'); lock();
+    var open = isOpen();
+    log.hidden = !open; cform.hidden = !open; coff.hidden = open;
+    log.innerHTML = '';
+
+    if (!open) {
+      typing.style.display = 'none';
+      cstT.textContent = 'Closed — leave a message';
+      var f = focusables(coff); if (f.length) { f[0].focus(); }
+      return;
+    }
+    chat.querySelector('.chat__panel').focus();
+    typing.style.display = '';
+    cstT.textContent = 'Connecting you to an agent';
+    push('sys', 'Chat started ' + stamp());
+    if (topic) { push('cust', topic); }
+    setTimeout(function () {
+      typing.style.display = 'none';
+      cstT.textContent = 'Maya · RAP Customer Support';
+      push('agent', 'Hi ' + (name || 'there') + ' — Maya here. How can I help today?');
+      var ci = document.getElementById('chat-in'); if (ci) { ci.focus(); }
+    }, 2200);
+  }
+
+  cform.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var i = document.getElementById('chat-in');
+    var v = i.value.trim(); if (!v) { return; }
+    push('cust', v); i.value = '';
+    setTimeout(function () {
+      push('agent', 'Thanks — noted. (Demo reply: no live agent is connected in the prototype.)');
+    }, 1400);
+  });
+
+  document.getElementById('lm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var m = document.getElementById('lm-msg');
+    var err = document.getElementById('lm-err');
+    if (!m.value.trim()) { err.classList.add('is-on'); return; }
+    err.classList.remove('is-on');
+    document.getElementById('lm').hidden = true;
+    document.getElementById('lm-ok').hidden = false;
+  });
+
+  paintHours();
+  var s = qs.get('support');
+  if (s === '1' || s === 'open' || s === 'offline') { openSup(); }
+  else if (s === 'chat') { openSup(); showView('prechat'); }
+})();
 </script>
 
 </body>

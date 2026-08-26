@@ -1,6 +1,18 @@
 # Risk Assurance Partners — DESIGN SYSTEM
 
 **Phase 2 / UI-UX deliverable 2 of 5.**
+**Revision 6 — 2026-08-26.** DECISION 042: three components added, built from existing tokens —
+**support popup** (`.sup`, centred dialog with `aria-modal`, focus trap, Esc-to-close, ember top
+rule; hours line with a live open/closed `.hchip` computed in ET; primary File a Claim, secondary
+Chat with an Agent, phone at Playfair 26px), **chat panel** (`.chat`, right-side slide-in on ink
+header with `.msg` bubbles, typing indicator, agent-connecting state and an offline variant
+carrying phone + File a Claim + leave-a-message), and the **pre-chat form** (`.pf`, Name required
+plus at least one of email/phone, validated inline). Popup + chat ship as one byte-identical
+block on all six public pages. `admin.html` reuses the tokens in a deliberately utilitarian
+console layout (inbox with unread badges, pinned customer contact, reply box, End Session,
+midnight-ET purge note, muted alerts indicator) and is noindex, direct-URL only, never linked
+from public navigation. All states are static prototype demos — no transport, no persistence.
+No token, typeface, scale, or grid value changed.
 **Revision 5 — 2026-08-25.** DECISION 039: the system now spans four prototype pages
 (`home` · `programs` · `newswire` · `economics-gate`). Shared chrome — utility bar, sticky
 condensing header, drawer, contact block, footer — is identical on every page; the condense
