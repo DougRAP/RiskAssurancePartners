@@ -575,6 +575,15 @@ Site map: Standard Programs gets its own program page under Programs (built Phas
 
 Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [Profit Calculator →]
 
+## Decision 041 — Utility Link Labels & Destinations
+
+**Status:** Approved (Owner, 2026-08-26)
+
+- "Manage My Plan" renamed **"Subscription Plans"** → https://kiosk.furniturerx.net
+- **Dealer Login** → https://portal.furniturerx.net/
+- **File a Claim** → https://www.5starservice.net/
+- Customer Support remains → kiosk.furniturerx.net (pending Phase 12 inventory)
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
