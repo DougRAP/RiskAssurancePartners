@@ -6,6 +6,12 @@
 **Revision 2 — 2026-08-24.** Design approved by owner; updated for the R1–R6 clarity set
 (DECISIONS 024–028, LOCKED_WIREFRAME v1.1).
 
+## Revision 8 change log (2026-08-26)
+
+| Decision | Page | Change |
+|---|---|---|
+| 043 | Dealer Economics (`economics-gate.html`) | **Page rebuilt to three sections.** Hero is now two-column — H1 "Types of Plans" with Subscription and Multi-Year copy on the left, the homepage GM-per-ticket illustration ($480 vs $180) transplanted verbatim on the right. Calculator section keeps the ghosted panel with the access CTA centred inside it, replacing the lock chip. Request-access section carries the six-field form (email **and** mobile now both required and validated) with the dealer / protection-plan / media triage moved in from the footer as a "who is this for" router; submit swaps the form for a one-line confirmation. **Request tracking dropped entirely** — anonymous visitors can't be re-identified without a login the owner declined, so RAP replies by email and the page claims no status. Removed: the $19.99/$0/$8 strip, the public-vs-gated lists, both 01–06 step strips, the standalone illustrative-contribution figure, the "why the gate"/revocation copy, the Step-1-of-3 indicators, State C in full, and the prototype stub note. State D stays reviewer-only via `?state=d`. |
+
 ## Revision 7 change log (2026-08-26)
 
 | Decision | Section | Change |

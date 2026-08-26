@@ -9,6 +9,12 @@ Content in both is placeholder pending owner-supplied copy, coverage lists and N
 Authority: DECISIONS.md through **038**, LOCKED_WIREFRAME v1.1, MASTER_SPEC, AGENT_RULES.
 Design system: `docs/design/DESIGN_SYSTEM.md` (rev 4).
 
+## Revision 3 change log (2026-08-26)
+
+| Ref | Change |
+|---|---|
+| 043 | **Dealer Economics page rebuilt** (`economics-gate.html`): Hero "Types of Plans" (Subscription / Multi-Year copy + the homepage GM-per-ticket illustration) → Calculator section (ghosted panel, access CTA centred inside it) → Request-access section (six fields, email **and** mobile required, triage router moved in from the footer, submit → "We received your request" confirmation). **Request tracking removed** — no pending state, no status, no edit-request; RAP replies by email. State D remains reviewer-only via `?state=d`. |
+
 ## Revision 2 change log
 
 | Ref | Change |

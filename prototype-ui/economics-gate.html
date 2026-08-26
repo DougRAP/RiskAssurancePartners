@@ -148,6 +148,14 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
 .contact__grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-8);align-items:start;margin-top:var(--s-5)}
 .contact__routes{display:grid;gap:var(--s-3)}
+/* Footer keeps only the contact details now that triage moved into the form. */
+.contact__grid--details{grid-template-columns:1fr}
+.contact__grid--details .contact__det{grid-template-columns:repeat(3,1fr);display:grid;gap:var(--s-5)}
+/* Triage inside the request section sits on light ground, not the ink footer. */
+.aside .contact__route{border-color:var(--rap-slate-300);color:var(--rap-ink)}
+.aside .contact__route:hover{border-color:var(--rap-ink);background:#fff}
+.aside .contact__route span span{color:var(--rap-slate-500)}
+.aside .contact__route i{color:var(--rap-ember-700)}
 .contact__route{
   display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
   border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);padding:14px 16px;
@@ -219,17 +227,19 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 /* .state__tag removed — the dev annotation banners are gone; this reads as
    the real Dealer Economics page. */
 
-/* ---- flow diagram ---- */
-.flow{display:flex;align-items:stretch;gap:var(--s-2);flex-wrap:wrap;margin-top:var(--s-7)}
-.flow__step{flex:1 1 140px;border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:var(--s-4);background:#fff}
-.flow__step[data-now]{border-top-color:var(--rap-ember);background:var(--rap-ember-050)}
-.flow__n{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--rap-slate-500)}
-.flow__t{font-weight:600;font-size:14px;margin-top:6px;line-height:1.3}
+/* ---- hero: types of plans (DECISION 043) ---- */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-9);align-items:center}
+.plans__h{font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);font-weight:500;line-height:1.15;letter-spacing:-.01em;margin-top:var(--s-7)}
+.plans__p{font-size:16px;color:var(--rap-slate-700);margin-top:var(--s-3);max-width:52ch}
+.hero__fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-md);padding:var(--s-6)}
+.figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
+.figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
 
-/* ---- public teaser ---- */
-.pub{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);border-top:2px solid var(--rap-ink);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0;margin-top:var(--s-7)}
-.pub__v{font-family:var(--serif);font-size:clamp(34px,3.6vw,48px);font-weight:500;line-height:1}
-.pub__k{font-size:14px;color:var(--rap-slate-700);margin-top:var(--s-2)}
+/* ---- submitted confirmation ---- */
+.done{margin-top:var(--s-7);border-top:3px solid var(--rap-ember)}
+.done__t{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);font-weight:500;line-height:1.15}
+.done__p{font-size:16px;color:var(--rap-slate-700);margin-top:var(--s-3);max-width:56ch}
+
 .panel{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
 .gate{position:relative;overflow:hidden;margin-top:var(--s-6)}
 .gate__blur{filter:blur(3px);opacity:.5;pointer-events:none;user-select:none}
@@ -237,11 +247,9 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .gate__field{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:10px 12px}
 .gate__field b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
 .gate__field span{font-family:var(--mono);font-size:16px}
-.gate__chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--rap-ink);color:#fff;border-radius:var(--radius-sm);padding:12px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;display:flex;align-items:center;gap:10px;text-align:center}
-.will{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7)}
-.will ul li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--rap-slate-200);font-size:15px;color:var(--rap-slate-700)}
-.will h3{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin-bottom:var(--s-3)}
-.tick{color:var(--rap-up);font-weight:700}.lock{color:var(--rap-slate-500)}
+/* Access CTA centred inside the ghosted panel, where the lock chip sat. */
+.gate__cta{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:calc(100% - 32px)}
+.gate__cta .btn{box-shadow:0 10px 30px rgba(12,23,42,.22)}
 
 /* ---- form ---- */
 .form{display:grid;grid-template-columns:5fr 4fr;gap:var(--s-8);align-items:start;margin-top:var(--s-7)}
@@ -264,19 +272,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .aside li:last-child{border-bottom:0}
 .privacy{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-500)}
 
-/* ---- pending ---- */
-.pending{max-width:640px}
-.track{margin-top:var(--s-7);border-left:2px solid var(--rap-ink-700);padding-left:var(--s-5)}
-.track__i{position:relative;padding:0 0 var(--s-6) 0}
-.track__i::before{content:"";position:absolute;left:calc(-1 * var(--s-5) - 6px);top:6px;width:10px;height:10px;border-radius:50%;background:var(--rap-ink-700);border:2px solid var(--rap-ink)}
-.track__i[data-done]::before{background:var(--rap-brass)}
-.track__i[data-now]::before{background:var(--rap-ember);box-shadow:0 0 0 4px rgba(200,88,27,.25)}
-.track__t{font-weight:600;font-size:16px}
-.track__d{font-size:14px;color:rgba(255,255,255,.65);margin-top:2px}
-.track__ts{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
-.recap{margin-top:var(--s-7);border:1px solid var(--rap-ink-700);border-radius:var(--radius-md);padding:var(--s-5)}
-.recap dl{display:grid;grid-template-columns:auto 1fr;gap:8px var(--s-5);font-size:14px}
-.recap dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);align-self:center}
+/* Pending/tracking styles removed — DECISION 043 drops request tracking. */
 
 /* ---- calculator ---- */
 .calc__bar{background:var(--rap-ink);color:#fff;padding:var(--s-4) 0}
@@ -314,7 +310,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
 @media (max-width:960px){
   :root{--margin:24px}
-  .form,.calc,.will{grid-template-columns:1fr}
+  .form,.calc{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr;gap:var(--s-7)}
   .controls{position:static}
   .gate__grid{grid-template-columns:1fr 1fr}
   .outrow{grid-template-columns:1fr 1fr}
@@ -322,10 +319,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 @media (max-width:640px){
   .state{padding:var(--s-8) 0}
   .fields{grid-template-columns:1fr}
-  .pub{grid-template-columns:1fr}
   .gate__grid,.outrow{grid-template-columns:1fr}
   .btns .btn{width:100%}
-  .flow__step{flex:1 1 100%}
   /* R3(a) — slim utility strip survives on mobile */
   .utility__inner{min-height:32px}
   .utility a{font-size:12px}
@@ -512,111 +507,109 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
 <main>
 
-<!-- ==================== STATE A — PUBLIC TEASER ==================== -->
-<section class="state" id="state-a" aria-labelledby="a-h">
-  <div class="wrap-wide">
-    <p class="eyebrow">Profit Calculator</p>
-    <h1 class="d2" id="a-h" style="max-width:20ch">What could this mean for <span class="acc">your dealership?</span></h1>
-    <p class="lead" style="margin-top:var(--s-5)">
-      The public page shows the program economics that are public. The detailed model behind them
-      &mdash; the <strong>RAP Dealer Economics Calculator</strong> &mdash; is reviewed before
-      release, which is how RAP keeps dealer economics out of competitor hands.
-    </p>
+<!-- ==================== HERO — TYPES OF PLANS ==================== -->
+<section class="state" id="state-a" aria-labelledby="a-h" style="border-top:0">
+  <div class="wrap-wide plans">
+    <div>
+      <h1 class="d2" id="a-h">Types of Plans</h1>
 
-    <div class="pub">
-      <div><p class="pub__v">$19.99</p><p class="pub__k">the customer pays, monthly</p></div>
-      <div><p class="pub__v">$0</p><p class="pub__k">the dealer remits to participate</p></div>
-      <div><p class="pub__v">$8</p><p class="pub__k">dealer commission per successful monthly payment</p></div>
-    </div>
+      <h2 class="plans__h">Subscription</h2>
+      <p class="plans__p">
+        The customer pays \.99 a month for the same coverage as a multi-year plan, and can
+        cancel, start or restart at any time. The dealer earns a recurring commission on every
+        successful monthly payment.
+      </p>
 
-    <div class="panel" style="margin-top:var(--s-7)">
-      <p class="eyebrow" style="margin-bottom:var(--s-5)">Illustrative recurring contribution &mdash; shape only</p>
-      <svg viewBox="0 0 900 220" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating from month one to month thirty-six. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
-        <line x1="0" y1="180" x2="900" y2="180" stroke="#C3CBD6"/>
-        <g stroke="#EEF1F5"><line x1="0" y1="140" x2="900" y2="140"/><line x1="0" y1="100" x2="900" y2="100"/><line x1="0" y1="60" x2="900" y2="60"/></g>
-        <path d="M0 180 L0 174 L75 174 L75 162 L150 162 L150 150 L225 150 L225 138 L300 138 L300 126 L375 126 L375 114 L450 114 L450 102 L525 102 L525 90 L600 90 L600 78 L675 78 L675 66 L750 66 L750 54 L825 54 L825 42 L900 42 L900 180 Z" fill="#E8EEF6"/>
-        <path d="M0 174 L75 174 L75 162 L150 162 L150 150 L225 150 L225 138 L300 138 L300 126 L375 126 L375 114 L450 114 L450 102 L525 102 L525 90 L600 90 L600 78 L675 78 L675 66 L750 66 L750 54 L825 54 L825 42 L900 42" fill="none" stroke="#204374" stroke-width="2"/>
-        <g font-family="IBM Plex Mono" font-size="11" fill="#64748B">
-          <text x="0" y="200">M1</text><text x="280" y="200">M12</text><text x="580" y="200">M24</text><text x="860" y="200">M36</text>
-          <text x="0" y="18">NO SCALE SHOWN</text>
-        </g>
-      </svg>
-      <p style="margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)">
-        <b class="meta" style="display:block;color:var(--rap-ember-700);margin-bottom:4px">Figure 1 &middot; Illustrative</b>
-        Recurring commission accumulates for as long as payments succeed. The vertical scale is
-        deliberately omitted. This is not a forecast and not an offer.
+      <h2 class="plans__h">Multi-Year</h2>
+      <p class="plans__p">
+        The customer pays an average of \ once, and the protection income is earned at the
+        original sale. If they cancel, a prorated share is returned.
       </p>
     </div>
 
-    <div class="panel gate">
-      <p class="eyebrow" style="margin-bottom:var(--s-5)">RAP Dealer Economics Calculator</p>
+  <figure class="hero__fig" style="margin:0">
+        <!-- R11 — owner-directed split: subscription GM beside multi-year GM,
+             divider bar between, in the same figure space. Figures per owner
+             (DECISION 036); bars proportional to $480 vs $180. -->
+        <svg viewBox="0 0 520 350" role="img" aria-label="Comparison: FurnitureRx subscription, 8 dollars times 60 payments, equals 480 dollars gross margin per customer &mdash; beside Multi-Year, 250 dollars retail times 72 percent, equals 180 dollars gross margin." style="width:100%;height:auto">
+          <text x="0" y="14" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#64748B">CHOOSE SUBSCRIPTION OR MULTI-YEAR PLANS, OR MIX &amp; MATCH</text>
+
+          <!-- divider bar -->
+          <rect x="258" y="34" width="3" height="298" fill="#C3CBD6"/>
+
+          <!-- left: subscription -->
+          <text x="0" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">SUBSCRIPTION</text>
+          <text x="0" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$8 &#215; 60 PAYMENTS</text>
+          <rect x="60" y="88" width="120" height="222" fill="#C19541"/>
+          <text x="120" y="134" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#FCF8F5">$480</text>
+          <text x="120" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
+          <text x="0" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">RECURRING &mdash; PAID MONTHLY</text>
+
+          <!-- right: multi-year -->
+          <text x="290" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">MULTI-YEAR</text>
+          <text x="290" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$250 RETAIL &#215; 72%</text>
+          <rect x="350" y="227" width="120" height="83" fill="#C8581B"/>
+          <text x="410" y="218" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#0C172A">$180</text>
+          <text x="410" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
+          <text x="290" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">ONE-TIME &mdash; AT SALE</text>
+
+          <!-- shared baseline -->
+          <line x1="0" y1="310" x2="240" y2="310" stroke="#C3CBD6" stroke-width="1"/>
+          <line x1="280" y1="310" x2="520" y2="310" stroke="#C3CBD6" stroke-width="1"/>
+        </svg>
+        <figcaption class="figcap">
+          <b>Illustrative</b> &mdash; one protected customer, two ways to earn.
+          Subscription: the dealer earns $8 on every successful $19.99 monthly payment &mdash;
+          shown at 60 payments, and it keeps accruing while the subscription stays active.
+          Multi-Year: margin earned once, at the original sale.
+        </figcaption>
+      </figure>
+  </div>
+</section>
+
+<!-- ==================== CALCULATOR ==================== -->
+<section class="state state--mist" aria-labelledby="calc-h">
+  <div class="wrap-wide">
+    <p class="eyebrow">RAP Dealer Economics</p>
+    <h2 class="d3" id="calc-h" style="max-width:26ch">
+      Model it against <span class="acc">your own numbers.</span>
+    </h2>
+
+    <div class="panel gate" style="margin-top:var(--s-6)">
       <div class="gate__blur" aria-hidden="true">
         <div class="gate__grid">
           <div class="gate__field"><b>Active subscribers</b><span>0,000</span></div>
           <div class="gate__field"><b>Locations</b><span>00</span></div>
-          <div class="gate__field"><b>Horizon</b><span>12 / 24 / 36 months</span></div>
+          <div class="gate__field"><b>Horizon</b><span>12 / 36 / 60 months</span></div>
           <div class="gate__field"><b>Cancellation assumption</b><span>0.0%</span></div>
-          <div class="gate__field"><b>Cumulative dealer commission</b><span>$000,000</span></div>
-          <div class="gate__field"><b>Multi-Year comparison</b><span>$000,000</span></div>
+          <div class="gate__field"><b>Cumulative dealer commission</b><span>\,000</span></div>
+          <div class="gate__field"><b>Multi-Year comparison</b><span>\,000</span></div>
         </div>
         <svg viewBox="0 0 900 120" style="width:100%;height:auto;margin-top:20px" aria-hidden="true">
           <path d="M0 108 L112 96 L225 88 L338 72 L450 62 L562 46 L675 34 L788 22 L900 14" fill="none" stroke="#204374" stroke-width="2"/>
           <path d="M0 112 L112 108 L225 104 L338 98 L450 94 L562 88 L675 82 L788 78 L900 72" fill="none" stroke="#C8581B" stroke-width="2"/>
         </svg>
       </div>
-      <div class="gate__chip"><span aria-hidden="true">&#128274;</span> Requires approved access</div>
-    </div>
 
-    <div class="will">
-      <div>
-        <h3>Public on this page</h3>
-        <ul>
-          <li><span class="tick">&#10003;</span> Customer price, dealer remit, dealer commission</li>
-          <li><span class="tick">&#10003;</span> The recurring-income concept</li>
-          <li><span class="tick">&#10003;</span> An illustrative accumulation shape with no scale</li>
-        </ul>
+      <!-- CTA sits where the lock chip used to, centred inside the ghosted panel. -->
+      <div class="gate__cta">
+        <a class="btn btn--primary" href="#state-b" id="get-access">
+          <span aria-hidden="true">&#128274;</span> Request access to the calculator &rarr;
+        </a>
       </div>
-      <div>
-        <h3>Behind approved access</h3>
-        <ul>
-          <li><span class="lock">&#128274;</span> Editable subscriber volumes and locations</li>
-          <li><span class="lock">&#128274;</span> 12 / 24 / 36-month scenarios</li>
-          <li><span class="lock">&#128274;</span> Approved cancellation assumptions</li>
-          <li><span class="lock">&#128274;</span> Cumulative dealer commission modelling</li>
-          <li><span class="lock">&#128274;</span> Future Multi-Year and Reinsurance comparisons</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="btns">
-      <a class="btn btn--primary" href="#state-b" id="get-access">Get access to the RAP Dealer Economics Calculator &rarr;</a>
-    </div>
-    <p class="meta" style="margin-top:var(--s-4)">Six fields &middot; reviewed by RAP Sales &middot; no password to create</p>
-
-    <div class="flow">
-      <div class="flow__step" data-now><p class="flow__n">01</p><p class="flow__t">Request access</p></div>
-      <div class="flow__step"><p class="flow__n">02</p><p class="flow__t">Lead saved</p></div>
-      <div class="flow__step"><p class="flow__n">03</p><p class="flow__t">RAP Sales review</p></div>
-      <div class="flow__step"><p class="flow__n">04</p><p class="flow__t">Approve or decline</p></div>
-      <div class="flow__step"><p class="flow__n">05</p><p class="flow__t">Secure email access</p></div>
-      <div class="flow__step"><p class="flow__n">06</p><p class="flow__t">Calculator opens</p></div>
     </div>
   </div>
 </section>
 
-<!-- ==================== STATE B — REQUEST ACCESS ==================== -->
-<section class="state state--mist" id="state-b" aria-labelledby="b-h" hidden>
+<!-- ==================== REQUEST ACCESS ==================== -->
+<section class="state" id="state-b" aria-labelledby="b-h">
   <div class="wrap-wide">
-    <p class="eyebrow">Step 1 of 3</p>
-    <h2 class="d3" id="b-h" style="max-width:24ch;margin-top:var(--s-3)">
-      Get access to the <span class="acc">RAP Dealer Economics Calculator.</span>
-    </h2>
+    <h2 class="d3" id="b-h" style="max-width:24ch">Request access</h2>
     <p class="lead" style="margin-top:var(--s-4)">
-      Six fields. A RAP Sales representative reviews every request. Approved dealers receive a
-      secure link by email &mdash; there is no password to create.
+      A RAP Sales representative reviews every request and replies by email.
     </p>
 
-    <div class="form">
+    <div class="form" id="request-form">
       <form class="panel" id="accessform" novalidate>
         <div class="fields">
           <div class="field">
@@ -634,11 +627,12 @@ a{color:inherit}button{font:inherit;cursor:pointer}
           <div class="field field--full">
             <label for="em">Business email <i aria-hidden="true">&bull;</i></label>
             <input id="em" name="em" type="email" autocomplete="email" aria-describedby="em-hint" required>
-            <small id="em-hint">The access link is sent here.</small>
+            <small id="em-hint">Required &mdash; we reply here.</small>
           </div>
           <div class="field">
-            <label for="ph">Phone <i aria-hidden="true">&bull;</i></label>
-            <input id="ph" name="ph" type="tel" autocomplete="tel" required>
+            <label for="ph">Mobile phone <i aria-hidden="true">&bull;</i></label>
+            <input id="ph" name="ph" type="tel" autocomplete="tel" aria-describedby="ph-hint" required>
+            <small id="ph-hint">Required.</small>
           </div>
           <div class="field">
             <label for="rl">Role / title <i aria-hidden="true">&bull;</i></label>
@@ -663,98 +657,40 @@ a{color:inherit}button{font:inherit;cursor:pointer}
         </div>
         <p class="privacy">
           <i aria-hidden="true">&bull;</i> All six fields required. RAP collects only what is needed to
-          verify a dealer and route the request to Sales. Your details are not used for anything else.
+          verify a dealer and route the request to Sales.
         </p>
       </form>
 
       <aside class="aside">
-        <h3>What happens next</h3>
-        <ul>
-          <li><span class="mono">01</span> Your request is saved and RAP Sales is notified.</li>
-          <li><span class="mono">02</span> A representative reviews it, typically within one business day.</li>
-          <li><span class="mono">03</span> On approval you receive a secure link by email that opens the calculator directly.</li>
-          <li><span class="mono">04</span> Access can be revoked, and the calculator is never publicly indexed.</li>
-        </ul>
-        <p class="privacy" style="border-top-color:var(--rap-slate-300)">
-          Why the gate: the detailed model contains RAP&rsquo;s dealer economics. Keeping it behind
-          review protects the dealers already using it.
+        <h3>Who is this for</h3>
+        <div class="contact__routes">
+          <a class="contact__route" href="economics-gate.html">
+            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="https://kiosk.furniturerx.net/">
+            <span><b>I have a protection plan</b><span>File a claim, manage or cancel your plan</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+          <a class="contact__route" href="mailto:sales@raptns.com">
+            <span><b>Media or other</b><span>Everything else</span></span>
+            <i aria-hidden="true">&rarr;</i>
+          </a>
+        </div>
+
+        <p class="privacy">
+          Not a dealer? The first two routes get you to the right place faster than this form.
         </p>
       </aside>
     </div>
 
-    <div class="flow">
-      <div class="flow__step" data-now><p class="flow__n">01</p><p class="flow__t">Request access</p></div>
-      <div class="flow__step"><p class="flow__n">02</p><p class="flow__t">Lead saved</p></div>
-      <div class="flow__step"><p class="flow__n">03</p><p class="flow__t">RAP Sales review</p></div>
-      <div class="flow__step"><p class="flow__n">04</p><p class="flow__t">Approve or decline</p></div>
-      <div class="flow__step"><p class="flow__n">05</p><p class="flow__t">Secure email access</p></div>
-      <div class="flow__step"><p class="flow__n">06</p><p class="flow__t">Calculator opens</p></div>
+    <!-- Submitted confirmation. No tracking, no status: RAP replies by email. -->
+    <div class="panel done" id="request-done" hidden>
+      <p class="done__t">We received your request.</p>
+      <p class="done__p">A RAP Sales representative will respond to your email shortly.</p>
     </div>
   </div>
 </section>
-
-<!-- ==================== STATE C — PENDING APPROVAL ==================== -->
-<section class="state state--ink" id="state-c" aria-labelledby="c-h" hidden>
-  <div class="wrap-wide">
-    <div class="pending">
-      <p class="eyebrow">Step 2 of 3</p>
-      <h2 class="d3" id="c-h" style="margin-top:var(--s-3)">
-        Request received. It&rsquo;s with <span class="acc" style="color:var(--rap-brass)">RAP Sales now.</span>
-      </h2>
-      <p class="lead" style="margin-top:var(--s-4)">
-        A representative reviews every request personally. When it is approved you will receive a
-        secure link at the address below that opens the calculator directly &mdash; no password, no
-        account to set up.
-      </p>
-
-      <div class="track">
-        <div class="track__i" data-done>
-          <p class="track__t">Request submitted</p>
-          <p class="track__d">Six fields received and validated.</p>
-          <p class="track__ts">24 Aug 2026 &middot; 10:42 AM ET</p>
-        </div>
-        <div class="track__i" data-done>
-          <p class="track__t">Lead saved</p>
-          <p class="track__d">Routed to the RAP Sales queue with dealership context.</p>
-          <p class="track__ts">24 Aug 2026 &middot; 10:42 AM ET</p>
-        </div>
-        <div class="track__i" data-now>
-          <p class="track__t">RAP Sales review</p>
-          <p class="track__d">In progress. Typically completed within one business day.</p>
-          <p class="track__ts">Expected by 25 Aug 2026</p>
-        </div>
-        <div class="track__i">
-          <p class="track__t">Secure access sent</p>
-          <p class="track__d">A single-use link is emailed on approval.</p>
-        </div>
-        <div class="track__i" style="padding-bottom:0">
-          <p class="track__t">Calculator opens</p>
-          <p class="track__d">FurnitureRx Subscription economics, with your inputs.</p>
-        </div>
-      </div>
-
-      <div class="recap">
-        <dl>
-          <dt>Name</dt><dd id="recap-name">&mdash;</dd>
-          <dt>Dealership</dt><dd id="recap-co">&mdash;</dd>
-          <dt>Email</dt><dd id="recap-email">&mdash;</dd>
-          <dt>Role</dt><dd id="recap-role">&mdash;</dd>
-        </dl>
-        <p style="margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700);font-size:13px;color:rgba(255,255,255,.6)">
-          Something wrong? <button class="qlink" type="button" id="edit-request" style="color:var(--rap-brass);background:none;border:0;border-bottom:1px solid currentColor;padding:0 0 2px">Edit your request &rarr;</button>
-        </p>
-      </div>
-
-      <div class="btns">
-        <a class="btn btn--secondary" href="home.html" style="border-color:rgba(255,255,255,.45);color:#fff">Back to Risk Assurance Partners</a>
-      </div>
-      <p class="meta" style="margin-top:var(--s-5);color:rgba(255,255,255,.5)">
-        Declined requests receive a reply from a named RAP representative, not an automated rejection.
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== STATE D — AUTHORIZED CALCULATOR ==================== -->
 <section id="state-d" aria-labelledby="d-h" hidden>
   <div class="calc__bar">
@@ -905,22 +841,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
       <p class="eyebrow">Contact</p>
       <h2 class="d3">Talk to Risk Assurance Partners.</h2>
 
-      <div class="contact__grid">
-        <div class="contact__routes">
-          <a class="contact__route" href="economics-gate.html">
-            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </a>
-          <a class="contact__route" href="https://kiosk.furniturerx.net/">
-            <span><b>I have a protection plan</b><span>File a claim, manage or cancel your plan</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </a>
-          <a class="contact__route" href="mailto:sales@raptns.com">
-            <span><b>Media or other</b><span>Everything else</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </a>
-        </div>
-
+      <!-- DECISION 043 — the dealer / protection-plan / media triage moved out of
+           the footer and into the request-access section, where it routes people
+           before they fill in the form. The footer keeps the contact details. -->
+      <div class="contact__grid contact__grid--details">
         <dl class="contact__det">
           <div>
             <dt>Phone</dt>
@@ -984,13 +908,10 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
     <div class="foot__legal">
       <span>&copy; 2026 Risk Assurance Partners</span>
-      <span><a href="#stub" title="Stub — legal page, later phase">Privacy</a> &middot; <a href="#stub" title="Stub — legal page, later phase">Terms</a> &middot; <a href="admin.html">Agent Login</a></span>
+      <span><a href="home.html#stub" title="Legal page — later phase">Privacy</a> &middot; <a href="home.html#stub" title="Legal page — later phase">Terms</a> &middot; <a href="admin.html">Agent Login</a></span>
     </div>
     <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
-    <p class="foot__note" id="stub">
-      Prototype note &middot; links marked &ldquo;stub&rdquo; target pages built in a later phase, or
-      outbound publication URLs that cannot be invented at design time.
-    </p>
+    
   </div>
 </footer>
 
@@ -1302,41 +1223,46 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
 <script>
 /* ============================================================
-   Dealer Economics access flow.
+   Dealer Economics request flow (DECISION 043).
 
-   Reads as the real page: only the public teaser is visible on load.
-   Requesting access reveals the form in place; submitting it replaces
-   the form with the pending-approval confirmation.
+   The page reads straight through: types of plans, the gated
+   calculator, then the request form. Nothing is hidden on load.
+   The CTA inside the ghosted panel scrolls to the form; submitting
+   it swaps the form for a short confirmation.
 
-   The authorized calculator is NOT reachable from this flow — in
+   NO request tracking. An anonymous visitor cannot be re-identified
+   without a login, and the owner declined that friction — so RAP
+   replies by email and the page claims no status.
+
+   The authorized calculator is NOT reachable from this flow; in
    production it opens from a secure emailed link after RAP Sales
    approves the request (DECISION 013). ?state=d renders it for
-   review only; nothing on the page links to it.
+   review only, and nothing on the page links to it.
 
    Demo only: no transport, nothing submitted or stored.
    ============================================================ */
 (function () {
-  var A = document.getElementById('state-a');
-  var B = document.getElementById('state-b');
-  var C = document.getElementById('state-c');
-  var D = document.getElementById('state-d');
+  var A    = document.getElementById('state-a');
+  var CALC = document.getElementById('calc-h');
+  var B    = document.getElementById('state-b');
+  var D    = document.getElementById('state-d');
   var form = document.getElementById('accessform');
-  if (!A || !B || !C || !D || !form) { return; }
+  if (!A || !B || !D || !form) { return; }
 
-  function show(el, on) { el.hidden = !on; }
+  var calcSection = CALC ? CALC.closest('section') : null;
 
   /* Reviewer-only view of the authorized calculator. */
   if (new URLSearchParams(location.search).get('state') === 'd') {
-    show(A, false); show(B, false); show(C, false); show(D, true);
+    A.hidden = true;
+    if (calcSection) { calcSection.hidden = true; }
+    B.hidden = true;
+    D.hidden = false;
     return;
   }
-
-  /* Normal entry: public teaser only. */
-  show(A, true); show(B, false); show(C, false); show(D, false);
+  D.hidden = true;
 
   document.getElementById('get-access').addEventListener('click', function (e) {
     e.preventDefault();
-    show(B, true);
     B.scrollIntoView({ behavior: 'smooth', block: 'start' });
     var first = document.getElementById('fn');
     if (first) { setTimeout(function () { first.focus({ preventScroll: true }); }, 320); }
@@ -1350,18 +1276,27 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     var bad  = null, msg = '';
 
     ids.forEach(function (id) {
-      var el = document.getElementById(id);
-      el.closest('.field').classList.remove('field--error');
+      document.getElementById(id).closest('.field').classList.remove('field--error');
     });
 
     for (var i = 0; i < ids.length; i++) {
       var el = document.getElementById(ids[i]);
-      if (!el.value.trim()) { bad = el; msg = 'Complete all six fields — RAP Sales needs them to verify the dealership.'; break; }
+      if (!el.value.trim()) {
+        bad = el;
+        msg = 'Complete all six fields — RAP Sales needs them to verify the dealership.';
+        break;
+      }
     }
     if (!bad) {
       var em = document.getElementById('em');
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())) {
-        bad = em; msg = 'Enter a valid business email address. The access link is sent here.';
+        bad = em; msg = 'Enter a valid business email address — we reply there.';
+      }
+    }
+    if (!bad) {
+      var ph = document.getElementById('ph');
+      if (ph.value.replace(/[^0-9]/g, '').length < 10) {
+        bad = ph; msg = 'Enter a mobile phone number we can reach you on.';
       }
     }
 
@@ -1374,29 +1309,13 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     }
 
     err.hidden = true;
-
-    /* Carry the submitted details into the confirmation. */
-    var name = document.getElementById('fn').value.trim() + ' ' + document.getElementById('ln').value.trim();
-    var set = function (id, v) { var n = document.getElementById(id); if (n) { n.textContent = v; } };
-    set('recap-name',  name);
-    set('recap-co',    document.getElementById('co').value.trim());
-    set('recap-email', document.getElementById('em').value.trim());
-    set('recap-role',  document.getElementById('rl').value);
-
-    show(B, false);
-    show(C, true);
-    C.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('request-form').hidden = true;
+    var done = document.getElementById('request-done');
+    done.hidden = false;
+    done.setAttribute('tabindex', '-1');
+    done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(function () { done.focus({ preventScroll: true }); }, 320);
   });
-
-  /* Back to the form from the confirmation, with the entries still in place. */
-  var edit = document.getElementById('edit-request');
-  if (edit) {
-    edit.addEventListener('click', function () {
-      show(C, false);
-      show(B, true);
-      B.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
 })();
 </script>
 
