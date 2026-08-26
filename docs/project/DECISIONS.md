@@ -565,6 +565,16 @@ Site map: Standard Programs gets its own program page under Programs (built Phas
 - Coverage-grid lists: placeholders until owner supplies.
 - **Care Kits** appear at the bottom of both the Subscription and Multi-Year sections. Approved facts: kits are **drop-shipped to the customer or the dealer can stock them**; on drop-ship, the dealer earns a **$20 commission per kit shipped to the dealer's trading-area zip codes** — the trading area **must be claimed by the dealer and cannot overlap a previously claimed dealer's territory**.
 
+## Decision 040 — Navigation Consolidation (amends 009)
+
+**Status:** Approved (Owner, 2026-08-26)
+
+- "Dealer Economics" removed from primary nav and drawer — the Profit Calculator header CTA is the single route; homepage teaser section remains, reached by scroll. Footer sitemap link remains.
+- "Market Intelligence" and "Research" combine into one nav item **"Market Intel"** with a two-item dropdown (Market Intelligence → its page; Research → its page), mirroring the Programs dropdown pattern.
+- The Market Intelligence and Research pages each carry a prominent CTA button to the other.
+
+Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [Profit Calculator →]
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
