@@ -268,6 +268,64 @@ button{font:inherit;cursor:pointer}
 .trust__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 
 
+/* ---------- 04 revenue structure: where the dollar goes ----------
+   Replaces the converging-costs SVG. Built in HTML/flex rather than SVG on
+   purpose: SVG text scales with the viewBox, so in-bar percentages would fall
+   to ~5px at phone width. In flex the bar keeps its exact proportions at every
+   width while the type stays at its real size, and the labels can be dropped
+   or re-flowed per breakpoint.
+
+   Every row below (heads, rule, bar) shares the same 91.5 / 8.5 split, so the
+   headline numerals sit over the span of bar they describe.
+
+   Segment colors are tokens only, alternating the blue and slate families so
+   no two neighbours share a tone; the 2px gaps let the ink ground through as
+   the separator. The 8.5% remainder is the one brass element — per the design
+   system, brass (6.53:1 on ink) is THE accent on ink grounds; ember is display
+   only there (4.16:1) so it is used for no text in this figure. */
+.rev{margin:var(--s-7) 0 0;text-align:left}
+.rev__heads{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-5)}
+.rev__head--acc{text-align:right}
+.rev__num{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.4vw,58px);line-height:1;letter-spacing:-.02em;color:#fff}
+.rev__num--acc{color:var(--rap-brass)}
+.rev__cap{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:var(--s-3)}
+.rev__cap--acc{color:var(--rap-brass)}
+
+/* Ticked hairlines tying each headline to its span of the bar. */
+.rev__rule{display:flex;gap:2px;margin-top:var(--s-4)}
+.rev__rule span{position:relative;height:10px;border-top:1px solid rgba(255,255,255,.28)}
+.rev__rule span::before,.rev__rule span::after{content:"";position:absolute;top:0;width:1px;height:10px;background:rgba(255,255,255,.28)}
+.rev__rule span::before{left:0}
+.rev__rule span::after{right:0}
+.rev__rule .rev__rule--acc{border-top-color:var(--rap-brass)}
+.rev__rule .rev__rule--acc::before,.rev__rule .rev__rule--acc::after{background:var(--rap-brass)}
+
+/* The bar. flex-grow carries the percentage, so the geometry is the data. */
+.rev__bar{display:flex;gap:2px;height:62px;margin-top:2px}
+.rev__seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;border-radius:1px}
+.rev__seg--acc{background:var(--rap-brass);color:var(--rap-ink);font-weight:600}
+
+/* Legend. Carries every segment name; at desktop the bar shows percentages
+   too, below 900px the bar goes label-free and this becomes the only reading. */
+.rev__key{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--s-3) var(--s-5);
+  margin-top:var(--s-6);padding:0;list-style:none}
+.rev__item{display:flex;align-items:baseline;gap:10px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);
+  border-top:1px solid var(--rap-ink-700);padding-top:10px}
+.rev__chip{flex:0 0 10px;width:10px;height:10px;border-radius:1px;transform:translateY(-1px)}
+.rev__name{flex:1;min-width:0}
+.rev__pct{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rev__item--acc{color:var(--rap-brass);border-top-color:var(--rap-brass)}
+.rev__item--acc .rev__pct{color:var(--rap-brass)}
+/* slate-500 is only ~3.3:1 on the ink ground, so the caption uses a white
+   alpha (~5.9:1) instead — same visual weight, AA at 11px. */
+.rev__cite{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.6);
+  margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
+.rev__cite b{display:block;color:rgba(255,255,255,.72);font-weight:400;text-transform:uppercase;
+  letter-spacing:.10em;margin-bottom:6px}
+
+
 /* ---------- 05 three paths ---------- */
 .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-8)}
 .path{
@@ -425,6 +483,15 @@ button{font:inherit;cursor:pointer}
 /* DECISION 038 — four cards in a row on desktop, stacked below. No 2x2 stage.
    4-across holds to ~900px (~190px per card); below that the serif titles
    break down, so the row goes straight to stacked. */
+/* "4.5%" in 11px mono is ~29px wide. Below ~1000px the 4.5% segment drops
+   under 40px, leaving no clearance, so every in-bar percentage goes at once —
+   a bar labelled only where the label happens to fit reads as a bug. The
+   legend carries the numbers from here down; the bar keeps its exact
+   proportions and stays the picture. */
+@media (max-width:1000px){
+  .rev__seg{font-size:0}
+  .rev__bar{height:52px}
+}
 @media (max-width:900px){
   .paths{grid-template-columns:1fr}
 }
@@ -460,6 +527,14 @@ button{font:inherit;cursor:pointer}
   .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
   .trust__i{border-left:0;padding-left:0}
   .trust__v{font-size:20px}
+  /* Phone: the two headline numerals stack rather than sit at opposite ends of
+     a ~310px row, and the 8.5% block flips back to left alignment so both read
+     off the same margin. The rule + bar keep the 91.5 / 8.5 split. */
+  .rev__heads{flex-direction:column;align-items:stretch;gap:var(--s-5)}
+  .rev__head--acc{text-align:left}
+  .rev__key{grid-template-columns:1fr;gap:0}
+  .rev__item{padding:10px 0}
+  .rev__bar{height:44px}
   .why{grid-template-columns:1fr}
   .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
   .dir__card{min-height:0}
@@ -800,37 +875,61 @@ button{font:inherit;cursor:pointer}
       Why You Must Maximize Protection <span class="acc">in Today&rsquo;s Economy</span>
     </h2>
 
-    <svg viewBox="0 0 900 300" role="img" aria-label="Diagram: advertising, inventory, payroll, rent, freight and warehousing all converge into a single customer purchase, which raises the question of how much economic value that transaction creates." style="width:100%;height:auto;margin-top:var(--s-7)">
-      <g font-family="Inter" font-size="11" font-weight="600" letter-spacing="1" fill="#ffffff" text-anchor="middle">
-        <text x="75"  y="26">ADVERTISING</text>
-        <text x="225" y="26">INVENTORY</text>
-        <text x="375" y="26">PAYROLL</text>
-        <text x="525" y="26">RENT</text>
-        <text x="675" y="26">FREIGHT</text>
-        <text x="825" y="26">WAREHOUSING</text>
-      </g>
-      <g stroke="#22334F" stroke-width="1" fill="none">
-        <path d="M75 40 V72 Q75 92 95 92 H430 Q450 92 450 112 V132"/>
-        <path d="M225 40 V80 Q225 92 245 92"/>
-        <path d="M375 40 V80 Q375 92 395 92"/>
-        <path d="M525 40 V80 Q525 92 505 92"/>
-        <path d="M675 40 V80 Q675 92 655 92"/>
-        <path d="M825 40 V72 Q825 92 805 92"/>
-      </g>
-      <g font-family="IBM Plex Mono" font-size="9" fill="#64748B" text-anchor="middle">
-        <text x="75" y="58">RECURS</text><text x="225" y="58">RECURS</text><text x="375" y="58">RECURS</text>
-        <text x="525" y="58">RECURS</text><text x="675" y="58">RECURS</text><text x="825" y="58">RECURS</text>
-      </g>
-      <rect x="330" y="132" width="240" height="52" fill="none" stroke="#C19541" stroke-width="2" rx="2"/>
-      <text x="450" y="163" font-family="Inter" font-size="13" font-weight="600" letter-spacing="1.4" fill="#C19541" text-anchor="middle">CUSTOMER PURCHASE</text>
-      <path d="M450 184 V214" stroke="#22334F" stroke-width="1"/>
-      <path d="M444 208 L450 216 L456 208" fill="none" stroke="#22334F" stroke-width="1"/>
-      <text x="450" y="250" font-family="Playfair Display" font-size="27" fill="#ffffff" text-anchor="middle">How much economic value does</text>
-      <text x="450" y="284" font-family="Playfair Display" font-size="27" fill="#ffffff" text-anchor="middle">that transaction create?</text>
-    </svg>
+    <!-- Where the revenue dollar goes. Owner-supplied cost structure for a
+         typical independent furniture retailer; percentages of revenue:
+           COGS (ex-freight) 50 · payroll (ex-warehouse) 18 · rent 8 ·
+           advertising 6 · freight-in 5 · warehouse/delivery 4.5  = 91.5
+         leaving 8.5 for insurance, admin, credit-card fees and profit.
+         These are owner estimates, not RAP financials and not sourced to any
+         third party — the caption says exactly that and nothing more.
+
+         The flex-grow value on each segment IS the percentage, so the drawing
+         cannot drift from the numbers beside it. -->
+    <figure class="rev">
+      <div class="rev__heads">
+        <div class="rev__head">
+          <p class="rev__num">91.5%</p>
+          <p class="rev__cap">Gone before profit &mdash; and all of it recurs</p>
+        </div>
+        <div class="rev__head rev__head--acc">
+          <p class="rev__num rev__num--acc">8.5%</p>
+          <p class="rev__cap rev__cap--acc">What&rsquo;s left &mdash; including profit</p>
+        </div>
+      </div>
+
+      <div class="rev__rule" aria-hidden="true">
+        <span style="flex-grow:91.5"></span>
+        <span class="rev__rule--acc" style="flex-grow:8.5"></span>
+      </div>
+
+      <div class="rev__bar" role="img" aria-label="Stacked bar of every revenue dollar at a typical independent furniture retailer: cost of goods sold excluding freight 50 percent, payroll excluding warehouse 18 percent, rent 8 percent, advertising 6 percent, freight-in 5 percent, warehouse and delivery 4.5 percent. Those six recurring costs take 91.5 percent, leaving 8.5 percent to cover insurance, administration, credit-card fees and profit.">
+        <span class="rev__seg" style="flex-grow:50;background:#204374">50%</span>
+        <span class="rev__seg" style="flex-grow:18;background:#3D4A5C">18%</span>
+        <span class="rev__seg" style="flex-grow:8;background:#2E5A96">8%</span>
+        <span class="rev__seg" style="flex-grow:6;background:#64748B">6%</span>
+        <span class="rev__seg" style="flex-grow:5;background:#22334F">5%</span>
+        <span class="rev__seg" style="flex-grow:4.5;background:#C3CBD6;color:#0C172A">4.5%</span>
+        <span class="rev__seg rev__seg--acc" style="flex-grow:8.5">8.5%</span>
+      </div>
+
+      <ul class="rev__key">
+        <li class="rev__item"><span class="rev__chip" style="background:#204374"></span><span class="rev__name">COGS (ex-freight)</span><span class="rev__pct">50%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#3D4A5C"></span><span class="rev__name">Payroll (ex-warehouse)</span><span class="rev__pct">18%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#2E5A96"></span><span class="rev__name">Rent</span><span class="rev__pct">8%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#64748B"></span><span class="rev__name">Advertising</span><span class="rev__pct">6%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#22334F"></span><span class="rev__name">Freight-in</span><span class="rev__pct">5%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#C3CBD6"></span><span class="rev__name">Warehouse / delivery</span><span class="rev__pct">4.5%</span></li>
+        <li class="rev__item rev__item--acc"><span class="rev__chip" style="background:#C19541"></span><span class="rev__name">Insurance, admin, card fees &mdash; and profit</span><span class="rev__pct">8.5%</span></li>
+      </ul>
+
+      <figcaption class="rev__cite">
+        <b>Illustrative &mdash; typical independent furniture retailer cost structure</b>
+        Percent of revenue. Owner-supplied estimates for illustration; not RAP financials.
+      </figcaption>
+    </figure>
 
     <p class="lead" style="margin:var(--s-7) auto 0;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);max-width:60ch">
-      Every cost above recurs. The transaction does not.
+      Every cost in that bar recurs. The transaction does not.
       <strong style="color:#fff;font-weight:600">We build the programs that change that math.</strong>
     </p>
   </div>
