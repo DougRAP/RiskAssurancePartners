@@ -216,6 +216,7 @@ button{font:inherit;cursor:pointer}
 .mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 .mast__r{text-align:right}
 .mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
+.mast__cta{margin-bottom:var(--s-3)}
 
 /* stale-data note */
 .stale{
@@ -379,8 +380,16 @@ button{font:inherit;cursor:pointer}
         </div>
       </div>
       <a href="newswire.html">Newswire</a>
-      <a href="market-intelligence.html" aria-current="page">Market Intelligence</a>
-      <a href="research.html">Research</a>
+      <!-- DECISION 040 — Market Intel dropdown, same pattern as Programs.
+           aria-current sits on the trigger, as it does for Programs on
+           programs.html, because this page lives inside the group. -->
+      <div class="nav__drop">
+        <a href="market-intelligence.html" class="nav__progs" aria-current="page">Market Intel <span aria-hidden="true">▾</span></a>
+        <div class="nav__panel">
+          <a href="market-intelligence.html"><b>Market Intelligence</b><span>What is changing</span></a>
+          <a href="research.html"><b>Research</b><span>What it means</span></a>
+        </div>
+      </div>
       <a href="home.html#why">Why RAP</a>
     </nav>
 
@@ -417,8 +426,11 @@ button{font:inherit;cursor:pointer}
       <a href="programs.html#standard">Standard Programs</a>
     </div>
     <a href="newswire.html">Newswire</a>
-    <a href="market-intelligence.html">Market Intelligence</a>
-    <a href="research.html">Research</a>
+    <a href="market-intelligence.html">Market Intel</a>
+    <div class="drawer__sub">
+      <a href="market-intelligence.html">Market Intelligence</a>
+      <a href="research.html">Research</a>
+    </div>
     <a href="home.html#why">Why RAP</a>
   </nav>
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
@@ -435,6 +447,8 @@ button{font:inherit;cursor:pointer}
         <p class="mast__s">What is changing.</p>
       </div>
       <div class="mast__r">
+        <!-- DECISION 040 — prominent CTA to the sibling Market Intel page. -->
+        <a class="btn btn--secondary mast__cta" href="research.html">RAP Research &rarr;</a>
         <p class="mast__upd">Last updated 25 Aug 2026</p>
         <p class="mast__upd">Next update &mdash; [pending cadence]</p>
       </div>

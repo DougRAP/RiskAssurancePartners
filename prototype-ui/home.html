@@ -528,8 +528,16 @@ button{font:inherit;cursor:pointer}
         </div>
       </div>
       <a href="newswire.html">Newswire</a>
-      <a href="market-intelligence.html">Market Intelligence</a>
-      <a href="research.html">Research</a>
+      <!-- DECISION 040 — Market Intelligence + Research consolidate into one
+           "Market Intel" item. Same markup/classes as the Programs dropdown,
+           so hover, focus-within and keyboard behaviour are identical. -->
+      <div class="nav__drop">
+        <a href="market-intelligence.html" class="nav__progs">Market Intel <span aria-hidden="true">▾</span></a>
+        <div class="nav__panel">
+          <a href="market-intelligence.html"><b>Market Intelligence</b><span>What is changing</span></a>
+          <a href="research.html"><b>Research</b><span>What it means</span></a>
+        </div>
+      </div>
       <a href="#why">Why RAP</a>
     </nav>
 
@@ -566,8 +574,11 @@ button{font:inherit;cursor:pointer}
       <a href="programs.html#standard">Standard Programs</a>
     </div>
     <a href="newswire.html">Newswire</a>
-    <a href="market-intelligence.html">Market Intelligence</a>
-    <a href="research.html">Research</a>
+    <a href="market-intelligence.html">Market Intel</a>
+    <div class="drawer__sub">
+      <a href="market-intelligence.html">Market Intelligence</a>
+      <a href="research.html">Research</a>
+    </div>
     <a href="#why">Why RAP</a>
   </nav>
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>

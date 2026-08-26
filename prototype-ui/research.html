@@ -208,7 +208,10 @@ button{font:inherit;cursor:pointer}
    RESEARCH INDEX — page-specific
    ============================================================ */
 
-.mast{border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4)}
+.mast{
+  border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4);
+  display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-5);flex-wrap:wrap;
+}
 .mast__t{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
 .mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 
@@ -384,8 +387,16 @@ button{font:inherit;cursor:pointer}
         </div>
       </div>
       <a href="newswire.html">Newswire</a>
-      <a href="market-intelligence.html">Market Intelligence</a>
-      <a href="research.html" aria-current="page">Research</a>
+      <!-- DECISION 040 — Market Intel dropdown, same pattern as Programs.
+           aria-current sits on the trigger because Research lives inside
+           this group, mirroring Programs on programs.html. -->
+      <div class="nav__drop">
+        <a href="market-intelligence.html" class="nav__progs" aria-current="page">Market Intel <span aria-hidden="true">▾</span></a>
+        <div class="nav__panel">
+          <a href="market-intelligence.html"><b>Market Intelligence</b><span>What is changing</span></a>
+          <a href="research.html"><b>Research</b><span>What it means</span></a>
+        </div>
+      </div>
       <a href="home.html#why">Why RAP</a>
     </nav>
 
@@ -422,8 +433,11 @@ button{font:inherit;cursor:pointer}
       <a href="programs.html#standard">Standard Programs</a>
     </div>
     <a href="newswire.html">Newswire</a>
-    <a href="market-intelligence.html">Market Intelligence</a>
-    <a href="research.html">Research</a>
+    <a href="market-intelligence.html">Market Intel</a>
+    <div class="drawer__sub">
+      <a href="market-intelligence.html">Market Intelligence</a>
+      <a href="research.html">Research</a>
+    </div>
     <a href="home.html#why">Why RAP</a>
   </nav>
   <div class="drawer__cta"><a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a></div>
@@ -434,8 +448,12 @@ button{font:inherit;cursor:pointer}
   <div class="wrap">
 
     <div class="mast">
-      <h1 class="mast__t" id="res-h">RAP Research</h1>
-      <p class="mast__s">What it means.</p>
+      <div>
+        <h1 class="mast__t" id="res-h">RAP Research</h1>
+        <p class="mast__s">What it means.</p>
+      </div>
+      <!-- DECISION 040 — prominent CTA to the sibling Market Intel page. -->
+      <a class="btn btn--secondary" href="market-intelligence.html">Market Intelligence &rarr;</a>
     </div>
 
     <p class="lead" style="margin-top:var(--s-6)">
