@@ -584,6 +584,24 @@ Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [
 - **File a Claim** → https://www.5starservice.net/
 - Customer Support remains → kiosk.furniturerx.net (pending Phase 12 inventory)
 
+## Decision 042 — Customer Support Popup & Live Chat
+
+**Status:** Approved (Owner, 2026-08-26)
+
+**Popup** (triggered by utility-bar "Customer Support", all pages):
+- Hours shown: 9 AM – 6 PM ET, Monday–Saturday; closed Sunday (live open/closed state).
+- **File a Claim** button → 5starservice.net, visually primary; copy steers service-need questions to it.
+- **Chat with Agent** → pre-chat form requiring Name + (Email or Phone), plus a topic line, before chat opens.
+- Phone for immediate assistance: **1.800.732.5856**.
+
+**Chat architecture:**
+- Transport: **Supabase Realtime broadcast channels** — messages relay in real time, nothing stored server-side. Owner will connect a Supabase account; SQL/setup script to be supplied when ready.
+- **No transcript retention** (owner: no dual history systems). Agent-side transcripts live in the agent machine's local storage only, purged at midnight ET daily. Agent notes go to the CRM manually. Database functionality may be added later if scale demands.
+- **/admin agent console** on the site: noindex, login required (shared credential, v1 — one "Webstore Agent" role). Alerts: sound + browser notification on new chat. Per-chat End Session control.
+- Offline / outside-hours / lunch state: phone + File a Claim + leave-a-message with contact details (lunch backup agreed).
+
+**Sequencing:** popup, chat UI, and admin console are mocked as static states in the Phase 2 prototype for owner approval; live Supabase transport is the first work package of the Supabase phase.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
