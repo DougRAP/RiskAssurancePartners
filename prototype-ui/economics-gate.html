@@ -234,6 +234,35 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .hero__fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-md);padding:var(--s-6)}
 .figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
 .figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
+.plans__p a{color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;font-weight:600}
+.plans__p a:hover{color:var(--rap-ember)}
+
+/* ---- hero figure: new-sales-per-month sliders ----------------------------
+   Range inputs are painted from the design tokens and nothing else:
+     track  = --rap-slate-300 (#C3CBD6), 4px, 2px radius
+     thumb  = --rap-ember (#C8581B) filled, --rap-ember-700 (#A3450F) border,
+              swapping to the ember-700 fill on hover/active
+     focus  = the page-wide --rap-blue-600 focus ring, applied to the thumb
+   This is the single definition of the styled range control; the gated
+   calculator's .ctl ranges keep their plain accent-color treatment. Both the
+   WebKit and Gecko pseudo-elements must be written out separately — they
+   cannot be combined into one selector list, one bad selector drops the rule. */
+.tick{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-5)}
+.tick__lab{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.tick__lab b{font-weight:600;color:var(--rap-ink);font-variant-numeric:tabular-nums}
+.rng{-webkit-appearance:none;appearance:none;width:100%;margin:10px 0 0;padding:0;background:transparent}
+.rng:focus{outline:none}
+.rng::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--rap-slate-300)}
+.rng::-moz-range-track{height:4px;border-radius:2px;background:var(--rap-slate-300)}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-7px;border-radius:50%;background:var(--rap-ember);border:1px solid var(--rap-ember-700);cursor:pointer}
+.rng::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--rap-ember);border:1px solid var(--rap-ember-700);cursor:pointer}
+.rng:hover::-webkit-slider-thumb{background:var(--rap-ember-700)}
+.rng:hover::-moz-range-thumb{background:var(--rap-ember-700)}
+.rng:active::-webkit-slider-thumb{background:var(--rap-ember-700)}
+.rng:active::-moz-range-thumb{background:var(--rap-ember-700)}
+.rng:focus-visible::-webkit-slider-thumb{outline:2px solid var(--rap-blue-600);outline-offset:2px}
+.rng:focus-visible::-moz-range-thumb{outline:2px solid var(--rap-blue-600);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* ---- submitted confirmation ---- */
 .done{margin-top:var(--s-7);border-top:3px solid var(--rap-ember)}
@@ -320,6 +349,9 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   .state{padding:var(--s-8) 0}
   .fields{grid-template-columns:1fr}
   .gate__grid,.outrow{grid-template-columns:1fr}
+  /* Sliders stay two-up so each keeps sitting under its half of the figure;
+     only the gutter between them tightens. */
+  .tick{gap:var(--s-4)}
   .btns .btn{width:100%}
   /* R3(a) — slim utility strip survives on mobile */
   .utility__inner{min-height:32px}
@@ -527,21 +559,35 @@ a{color:inherit}button{font:inherit;cursor:pointer}
       <p class="plans__p">
         The customer pays $19.99 a month for the same coverage as a multi-year plan, and can
         cancel, start or restart at any time. The dealer earns a recurring commission on every
-        successful monthly payment.
+        successful monthly payment. Custom coverage available &mdash;
+        <a href="#contact">talk to us</a> to learn more.
       </p>
 
       <h3 class="plans__h">Multi-Year</h3>
       <p class="plans__p">
         The customer pays an average of $250 once, and the protection income is earned at the
-        original sale. If they cancel, a prorated share is returned.
+        original sale. If they cancel, a prorated share is returned. Custom coverage available
+        &mdash; <a href="#contact">talk to us</a> to learn more.
       </p>
     </div>
 
   <figure class="hero__fig" style="margin:0">
         <!-- R11 — owner-directed split: subscription GM beside multi-year GM,
-             divider bar between, in the same figure space. Figures per owner
-             (DECISION 036); bars proportional to $480 vs $180. -->
-        <svg viewBox="0 0 520 350" role="img" aria-label="Comparison: FurnitureRx subscription, 8 dollars times 60 payments, equals 480 dollars gross margin per customer &mdash; beside Multi-Year, 250 dollars retail times 72 percent, equals 180 dollars gross margin." style="width:100%;height:auto">
+             divider bar between, in the same figure space. Per-ticket figures
+             per DECISION 036 ($8 x 60 = $480 · $250 x 72% = $180).
+
+             R12 — the two sliders below drive a 60-MONTH TOTAL for each side.
+             The sliders are NEW SALES PER MONTH, not a flat ticket count, so
+             subscription accrues as the same cohort waterfall the programs.html
+             mini-calculator uses (DECISION 039):
+                 subscription(m) = 8 * m * 1830     (SUM_{k=1..60} k = 1830)
+                 multi-year(m)   = 180 * m * 60
+             Bars normalise to the taller of the two totals; the taller one takes
+             the original 222px subscription-bar height, the other is
+             proportional with a 6px floor so it stays visible. Numerals and
+             in-bar labels are repositioned in JS as the bars and the strings
+             change size — see the script at the foot of the page. -->
+        <svg id="gm-svg" viewBox="0 0 520 350" role="img" aria-label="Sixty-month gross margin comparison at one new sale per month: subscription 14,640 dollars, Multi-Year 10,800 dollars." style="width:100%;height:auto">
           <text x="0" y="14" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#64748B">CHOOSE SUBSCRIPTION OR MULTI-YEAR PLANS, OR MIX &amp; MATCH</text>
 
           <!-- divider bar -->
@@ -549,29 +595,55 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
           <!-- left: subscription -->
           <text x="0" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">SUBSCRIPTION</text>
-          <text x="0" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$8 &#215; 60 PAYMENTS</text>
-          <rect x="60" y="88" width="120" height="222" fill="#C19541"/>
-          <text x="120" y="134" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#FCF8F5">$480</text>
-          <text x="120" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
+          <text id="gm-sub-f1" x="0" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$8 / PAYMENT &#183; 1 NEW SALE / MO</text>
+          <text id="gm-sub-f2" x="0" y="80" font-family="IBM Plex Mono" font-size="11" fill="#64748B">60-MONTH WATERFALL</text>
+          <rect id="gm-sub-bar" x="60" y="88" width="120" height="222" fill="#C19541"/>
+          <text id="gm-sub-val" x="120" y="128" text-anchor="middle" font-family="Playfair Display" font-size="30" font-weight="600" fill="#FCF8F5">$14,640</text>
+          <text id="gm-sub-lab" x="120" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">60-MONTH TOTAL</text>
           <text x="0" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">RECURRING &mdash; PAID MONTHLY</text>
 
           <!-- right: multi-year -->
           <text x="290" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">MULTI-YEAR</text>
-          <text x="290" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$250 RETAIL &#215; 72%</text>
-          <rect x="350" y="227" width="120" height="83" fill="#C8581B"/>
-          <text x="410" y="218" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#0C172A">$180</text>
-          <text x="410" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
+          <text id="gm-mul-f1" x="290" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$180 GM &#215; 1 SALE / MO</text>
+          <text id="gm-mul-f2" x="290" y="80" font-family="IBM Plex Mono" font-size="11" fill="#64748B">&#215; 60 MONTHS</text>
+          <rect id="gm-mul-bar" x="350" y="146" width="120" height="164" fill="#C8581B"/>
+          <text id="gm-mul-val" x="410" y="186" text-anchor="middle" font-family="Playfair Display" font-size="30" font-weight="600" fill="#FCF8F5">$10,800</text>
+          <text id="gm-mul-lab" x="410" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">60-MONTH TOTAL</text>
           <text x="290" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">ONE-TIME &mdash; AT SALE</text>
 
           <!-- shared baseline -->
           <line x1="0" y1="310" x2="240" y2="310" stroke="#C3CBD6" stroke-width="1"/>
           <line x1="280" y1="310" x2="520" y2="310" stroke="#C3CBD6" stroke-width="1"/>
         </svg>
+
+        <!-- One slider per half of the figure. Defaults reproduce the static
+             markup above exactly, so the figure is correct with JS disabled.
+             Each aria-label opens with the side name and then repeats the
+             visible label verbatim, so the accessible name contains the visible
+             one (WCAG 2.5.3) while still telling the two sliders apart. -->
+        <div class="tick">
+          <div>
+            <label class="tick__lab" for="gm-sub-rng">New sales / month &middot; <b id="gm-sub-n">1</b></label>
+            <input class="rng" id="gm-sub-rng" type="range" min="1" max="500" step="1" value="1"
+                   aria-label="Subscription &mdash; new sales / month"
+                   aria-valuetext="1 new sale per month, $14,640 gross margin over 60 months">
+          </div>
+          <div>
+            <label class="tick__lab" for="gm-mul-rng">New sales / month &middot; <b id="gm-mul-n">1</b></label>
+            <input class="rng" id="gm-mul-rng" type="range" min="1" max="500" step="1" value="1"
+                   aria-label="Multi-Year &mdash; new sales / month"
+                   aria-valuetext="1 new sale per month, $10,800 gross margin over 60 months">
+          </div>
+        </div>
+        <p class="vh" id="gm-live" role="status" aria-live="polite"></p>
+
         <figcaption class="figcap">
-          <b>Illustrative</b> &mdash; one protected customer, two ways to earn.
-          Subscription: the dealer earns $8 on every successful $19.99 monthly payment &mdash;
-          shown at 60 payments, and it keeps accruing while the subscription stays active.
-          Multi-Year: margin earned once, at the original sale.
+          <b>Illustrative</b> &mdash; per ticket: $8 &#215; 60 payments = $480 on a subscription
+          &middot; $250 &#215; 72% = $180 on a multi-year plan. The bars show the 60-month gross-margin
+          total at the new-sales-per-month rate set below each side &mdash; subscription accrues
+          as a cohort waterfall (each month&rsquo;s new subscribers keep paying), multi-year is earned
+          at each sale. Totals are illustrative gross margin at the sales rates you choose; they
+          assume sales continue at that rate every month and that monthly payments succeed. Not a forecast.
         </figcaption>
       </figure>
   </div>
@@ -1340,6 +1412,152 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     if (!ticking) { ticking = true; requestAnimationFrame(apply); }
   }, { passive: true });
   apply();
+})();
+
+/* ------------------------------------------------------------------ R12
+   HERO FIGURE — 60-month gross-margin totals, driven by two sliders.
+
+   Each slider is NEW SALES PER MONTH (m), 1-500. The model is the one the
+   programs.html mini-calculators use (DECISION 039), read at the 60-month
+   horizon, so the two pages agree number for number:
+
+     subscription(m) = RATE * m * SUM_{k=1..60} min(k,60)
+                     = 8 * m * 1830          -> 14,640 per new sale / month
+     multi-year(m)   = MARGIN * m * 60
+                     = 180 * m * 60          -> 10,800 per new sale / month
+
+   Subscription stacks because every cohort keeps paying (capped at 60
+   payments); multi-year does not, because the margin lands at the sale.
+
+   Geometry: the bars share the y=310 baseline. The taller total takes the
+   original 222px subscription-bar height, the shorter is proportional with a
+   6px floor. Because the numerals grow to ten characters ($7,320,000) and the
+   short bar can shrink below them, both the numeral and the in-bar label are
+   re-placed every frame: the numeral drops inside the bar only when the bar
+   can hold it, otherwise it sits above the bar top in ink; the label sits
+   inside the bar only while the bar is at least 40px, otherwise it stacks
+   above the numeral in slate. Numeral font-size steps down with string length
+   so it never overruns the 120px bar or its column. */
+(function () {
+  var BASE = 310;      /* shared baseline y                        */
+  var MAXH = 222;      /* the original subscription-bar height     */
+  var MINH = 6;        /* keep the shorter bar visible             */
+  var TERM = 60;       /* months                                   */
+  var WFALL = TERM * (TERM + 1) / 2;   /* 1830 payment-months per new sale/mo */
+  var SUB_PER_M = 8 * WFALL;           /* 14,640 */
+  var MUL_PER_M = 180 * TERM;          /* 10,800 */
+
+  function el(id) { return document.getElementById(id); }
+
+  var sub = {
+    rng: el('gm-sub-rng'), n: el('gm-sub-n'), bar: el('gm-sub-bar'),
+    val: el('gm-sub-val'), lab: el('gm-sub-lab'),
+    f1: el('gm-sub-f1'), f2: el('gm-sub-f2'),
+    name: 'Subscription',
+    per: SUB_PER_M,
+    f2text: '60-MONTH WATERFALL',
+    f1text: function (m) {
+      return '$8 / PAYMENT · ' + fmt(m) + (m === 1 ? ' NEW SALE / MO' : ' NEW SALES / MO');
+    }
+  };
+  var mul = {
+    rng: el('gm-mul-rng'), n: el('gm-mul-n'), bar: el('gm-mul-bar'),
+    val: el('gm-mul-val'), lab: el('gm-mul-lab'),
+    f1: el('gm-mul-f1'), f2: el('gm-mul-f2'),
+    name: 'Multi-Year',
+    per: MUL_PER_M,
+    f2text: '× 60 MONTHS',
+    f1text: function (m) {
+      return '$180 GM × ' + fmt(m) + (m === 1 ? ' SALE / MO' : ' SALES / MO');
+    }
+  };
+
+  var svg = el('gm-svg');
+  var live = el('gm-live');
+  if (!sub.rng || !mul.rng || !svg) { return; }
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function money(n) { return '$' + fmt(n); }
+  function read(o) {
+    var v = parseInt(o.rng.value, 10);
+    if (!isFinite(v) || v < 1) { v = 1; }
+    if (v > 500) { v = 500; }
+    return v;
+  }
+  /* Step the numeral down as the string grows, so ten characters still clear
+     the 120px bar and stay inside the 240px column. */
+  function size(s) {
+    if (s.length <= 5) { return 36; }
+    if (s.length <= 7) { return 30; }
+    if (s.length <= 8) { return 26; }
+    if (s.length <= 10) { return 23; }
+    return 20;
+  }
+
+  function draw(o, m, total, tallest) {
+    var h = Math.max(MINH, Math.round(MAXH * (total / tallest)));
+    var top = BASE - h;
+    var s = money(total);
+    var fs = size(s);
+
+    o.bar.setAttribute('y', top);
+    o.bar.setAttribute('height', h);
+
+    o.val.textContent = s;
+    o.val.setAttribute('font-size', fs);
+    if (h >= 120) {                      /* numeral fits inside the bar */
+      o.val.setAttribute('y', top + 10 + fs);
+      o.val.setAttribute('fill', '#FCF8F5');
+    } else {                             /* park it above the bar top   */
+      o.val.setAttribute('y', top - 9);
+      o.val.setAttribute('fill', '#0C172A');
+    }
+
+    o.lab.textContent = '60-MONTH TOTAL';
+    if (h >= 40) {                       /* label fits inside the bar   */
+      o.lab.setAttribute('y', 298);
+      o.lab.setAttribute('fill', '#FCF8F5');
+    } else {                             /* stack it above the numeral  */
+      o.lab.setAttribute('y', top - 39);
+      o.lab.setAttribute('fill', '#64748B');
+    }
+
+    o.n.textContent = fmt(m);
+    o.f1.textContent = o.f1text(m);
+    o.f2.textContent = o.f2text;
+    o.rng.setAttribute('aria-valuetext',
+      fmt(m) + (m === 1 ? ' new sale per month, ' : ' new sales per month, ') +
+      s + ' gross margin over 60 months');
+  }
+
+  var liveTimer = null;
+
+  function render() {
+    var ms = read(sub), mm = read(mul);
+    var ts = ms * sub.per, tm = mm * mul.per;
+    var tallest = Math.max(ts, tm) || 1;
+
+    draw(sub, ms, ts, tallest);
+    draw(mul, mm, tm, tallest);
+
+    svg.setAttribute('aria-label',
+      'Sixty-month gross margin comparison. Subscription at ' + fmt(ms) +
+      ' new sales per month: ' + money(ts) + '. Multi-Year at ' + fmt(mm) +
+      ' new sales per month: ' + money(tm) + '.');
+
+    /* Announce once the slider settles, so dragging does not flood the queue. */
+    if (liveTimer) { clearTimeout(liveTimer); }
+    liveTimer = setTimeout(function () {
+      live.textContent =
+        'Subscription ' + fmt(ms) + ' new sales per month, ' + money(ts) +
+        ' gross margin over 60 months. Multi-Year ' + fmt(mm) +
+        ' new sales per month, ' + money(tm) + ' gross margin over 60 months.';
+    }, 350);
+  }
+
+  sub.rng.addEventListener('input', render);
+  mul.rng.addEventListener('input', render);
+  render();
 })();
 
 /* Drawer: close on Esc. */
