@@ -650,6 +650,18 @@ The MOBILE_AUDIT.md list (commit a01b1b3) is approved for remediation with these
   - master QA adds a mobile grep pass (new fixed px widths, SVG font-size < 14, `display:` on hidden-toggled elements) alongside forbidden strings;
   - MOBILE_AUDIT.md is the living punch list, items marked as resolved.
 
+## Decision 047 — Mobile Must-Fix Pass Merged
+
+**Status:** Approved (Owner, 2026-08-27)
+
+Owner phone-reviewed the branch preview and approved the merge of the must-fix pass to main (a94910f, cfbfb02):
+- GM comparison figure rebuilt as HTML (shared `.gmf` pattern, home + gate); gate copy keeps live sliders, now full-width on mobile with two-way-synced numeric inputs (1–500) and 44px hit areas. Locked math unchanged ($8 × m × 1830; $180 × m × 60). Gate sliders keep their existing m=1 default.
+- Gate access CTA centering fixed; gate footer contact grid stacks on mobile.
+- Homepage teaser chart's month labels and "SHAPE ONLY — NO SCALE SHOWN" disclaimer moved from SVG to real HTML text (claims hygiene); SVG height trimmed 220→190 (dead band only, plot untouched).
+- research.html missing `--rap-up/--rap-down/--rap-flat` tokens restored.
+
+No *broken* MOBILE_AUDIT items remain. Remaining degraded/cosmetic items fold into content passes per Decision 046.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

@@ -11,7 +11,7 @@
 ## Status — 2026-08-27 (living punch list per Decision 046)
 
 - **Resolved on main:** S1 (header shrink, all 7 pages — c8d2f90); S2 (`[hidden]` guard sitewide, incl. E4, E5, A2, admin End-session, plus latent finds: newswire stale banner on load, newswire down-state feed, chat log behind after-hours panel — c8d2f90); S7-drawer + S8-drawer rows and full drawer redesign per owner plan (8b65b65). S7's `.sup`/`.chat__log` portions and S8's utility-pill portion remain open.
-- **Next (must-fix pass on `mobile-fixes`):** H1/E1 (GM figure HTML rebuild), E2/E7 (sliders + numeric inputs), E3 (gate CTA), E6 (gate footer grid), H2 (disclaimer lift), R3 (research tokens).
+- **Resolved on main (must-fix pass, merged 2026-08-27):** H1/E1 (GM figure HTML rebuild, shared `.gmf` pattern — a94910f), E2/E7/E8 (sliders full-width + numeric inputs + 44px hit areas), E3 (gate CTA), E6 (gate footer grid), H2 (teaser labels/disclaimer to HTML), R3 (research tokens) — cfbfb02. No *broken* items remain open.
 - **All remaining degraded/cosmetic items:** folded into the content pass that next touches each page (Decision 046); no standalone batches.
 
 ---
