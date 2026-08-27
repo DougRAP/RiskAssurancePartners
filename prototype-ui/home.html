@@ -1008,8 +1008,11 @@ button{font:inherit;cursor:pointer}
       </div>
 
       <div class="rev__rule" aria-hidden="true">
-        <span data-rev-rule-exp style="flex-grow:94.5"></span>
-        <span class="rev__rule--acc" data-rev-rule-op style="flex-grow:5.5"></span>
+        <!-- The bar has six 2px inter-segment gaps (12px total), five of them inside
+             the expense run (10px). The bracket has one. Sizing the expense span with
+             that compensation keeps the bracket seam on the bar's segment boundary. -->
+        <span data-rev-rule-exp style="flex:0 0 calc((100% - 12px)*0.945 + 10px)"></span>
+        <span class="rev__rule--acc" data-rev-rule-op style="flex:1 1 auto"></span>
       </div>
 
       <div class="rev__bar" role="img" aria-label="Stacked bar of every revenue dollar at a typical independent furniture retailer at a zero percent protection attachment rate: cost of goods sold excluding freight 50 percent, payroll excluding warehouse 18 percent, rent 8 percent, advertising 6 percent, freight-in 5 percent, warehouse, delivery and other 7.5 percent. Those six recurring costs take 94.5 percent, leaving 5.5 percent operating profit. The attachment-rate slider below redraws the bar; the readout beneath it reports the resulting operating margin and profit.">
@@ -1429,8 +1432,7 @@ button{font:inherit;cursor:pointer}
       if (i === BASE.length - 1) { op = p; } else { exp += p; }
     }
 
-    rExp.style.flexGrow = exp;
-    rOp.style.flexGrow = op;
+    rExp.style.flex = '0 0 calc((100% - 12px)*' + (exp / 100) + ' + 10px)';
     hExp.textContent = pct(exp);
     hOp.textContent = pct(op);
 
