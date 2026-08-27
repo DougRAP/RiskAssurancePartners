@@ -16,7 +16,7 @@
    grammatical actor in the hero, orientation
    claim made visible, ink section closes with RAP as the answer.
    R10: hero rebuilt (clarity-first), trust strip added, section rhythm
-   tightened (96/128px), axes matrix moved to #paths, Market Pulse moved
+   tightened (96/128px), axes matrix moved to the Programs page, Market Pulse moved
    adjacent to Newswire, backgrounds alternated so no two match.
    DESIGN ONLY. Not production code. No framework, no build.
    Palette pixel-sampled from the RAP corporate site (#204374)
@@ -383,20 +383,6 @@ button{font:inherit;cursor:pointer}
   letter-spacing:.10em;margin-bottom:6px}
 
 
-/* ---------- 05 three paths ---------- */
-.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5);margin-top:var(--s-8)}
-.path{
-  border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);
-  padding:var(--s-6);display:flex;flex-direction:column;background:#fff;
-}
-.path__num{font-family:var(--mono);font-size:12px;letter-spacing:.10em;color:var(--rap-slate-500)}
-.path__name{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin-top:var(--s-2)}
-.path__diag{margin:var(--s-5) 0;padding:var(--s-4) 0;border-top:1px solid var(--rap-slate-100);border-bottom:1px solid var(--rap-slate-100)}
-.path__timing{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-2)}
-.path__title{font-family:var(--serif);font-size:24px;font-weight:500;line-height:1.15;margin-bottom:var(--s-3)}
-.path__body{font-size:15px;color:var(--rap-slate-700);flex:1}
-.path__cta{margin-top:var(--s-6)}
-
 /* ---------- 06 changed customer ---------- */
 .chain{display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap;justify-content:center;margin:var(--s-8) 0 var(--s-6)}
 .chain__node{
@@ -549,9 +535,6 @@ button{font:inherit;cursor:pointer}
   .trust__i:last-child{grid-column:1/-1}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
 }
-/* DECISION 038 — four cards in a row on desktop, stacked below. No 2x2 stage.
-   4-across holds to ~900px (~190px per card); below that the serif titles
-   break down, so the row goes straight to stacked. */
 /* "4.5%" in 11px mono is ~29px wide. Below ~1000px the 4.5% segment drops
    under 40px, leaving no clearance, so every in-bar percentage goes at once —
    a bar labelled only where the label happens to fit reads as a bug. The
@@ -560,9 +543,6 @@ button{font:inherit;cursor:pointer}
 @media (max-width:1000px){
   .rev__seg{font-size:0}
   .rev__bar{height:52px}
-}
-@media (max-width:900px){
-  .paths{grid-template-columns:1fr}
 }
 @media (max-width:860px){
   :root{--margin:24px}
@@ -1014,120 +994,8 @@ button{font:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- ============ 05 THREE ECONOMIC PATHS ============ -->
-<section class="sec" id="paths" aria-labelledby="paths-h">
-  <div class="wrap">
-    <div class="center">
-      <p class="eyebrow">Risk Assurance Partners</p>
-      <h2 class="d2" id="paths-h" style="max-width:22ch;margin:0 auto">
-        Four ways to create more value from <span class="acc">the same customer.</span>
-      </h2>
-      <p class="lead" style="margin-top:var(--s-5);max-width:62ch">
-        Four RAP strategies. They are not alternatives to one another &mdash; most dealers will use
-        more than one, and the right mix depends on the dealership.
-      </p>
-    </div>
-
-    <div class="paths">
-      <article class="path" id="program-subscription">
-        <div class="path__meta">
-          <p class="path__num">01</p>
-          <p class="path__name">Subscription</p>
-          <div class="path__diag">
-            <svg viewBox="0 0 160 34" role="img" aria-label="Repeating monthly pulses" style="width:100%;height:auto">
-              <g fill="#204374">
-                <rect x="0" y="10" width="12" height="18"/><rect x="21" y="10" width="12" height="18"/>
-                <rect x="42" y="10" width="12" height="18"/><rect x="63" y="10" width="12" height="18"/>
-                <rect x="84" y="10" width="12" height="18"/><rect x="105" y="10" width="12" height="18"/>
-                <rect x="126" y="10" width="12" height="18"/><rect x="147" y="10" width="12" height="18"/>
-              </g>
-              <line x1="0" y1="28" x2="160" y2="28" stroke="#C3CBD6"/>
-            </svg>
-            <p class="path__timing">Recurring &middot; monthly</p>
-          </div>
-        </div>
-        <div class="path__body">
-          <h3 class="path__title">FurnitureRx Subscription</h3>
-          <p>Another way for the customer to say yes.</p>
-          <p class="path__cta"><a class="qlink" href="programs.html#subscription">Learn more &rarr;</a></p>
-        </div>
-      </article>
-
-      <article class="path" id="program-multiyear">
-        <div class="path__meta">
-          <p class="path__num">02</p>
-          <p class="path__name">Multi-Year</p>
-          <div class="path__diag">
-            <svg viewBox="0 0 160 34" role="img" aria-label="A single block of income at the original sale" style="width:100%;height:auto">
-              <rect x="0" y="6" width="34" height="22" fill="#204374"/>
-              <line x1="0" y1="28" x2="160" y2="28" stroke="#C3CBD6"/>
-            </svg>
-            <p class="path__timing">At the original sale</p>
-          </div>
-        </div>
-        <div class="path__body">
-          <h3 class="path__title">Multi-Year Protection</h3>
-          <p>One decision, made once.</p>
-          <p class="path__cta"><a class="qlink" href="programs.html#multi-year">Learn more &rarr;</a></p>
-        </div>
-      </article>
-
-      <article class="path" id="program-reinsurance">
-        <div class="path__meta">
-          <p class="path__num">03</p>
-          <p class="path__name">Reinsurance</p>
-          <div class="path__diag">
-            <svg viewBox="0 0 160 34" role="img" aria-label="Value accruing gradually over a longer horizon" style="width:100%;height:auto">
-              <path d="M0 28 L160 8 L160 28 Z" fill="#204374" opacity=".85"/>
-              <line x1="0" y1="28" x2="160" y2="28" stroke="#C3CBD6"/>
-            </svg>
-            <p class="path__timing">Accrues over time</p>
-          </div>
-        </div>
-        <div class="path__body">
-          <h3 class="path__title">Reinsurance</h3>
-          <p>Keep the underwriting profit.</p>
-          <p class="path__cta"><a class="qlink" href="programs.html#reinsurance">Learn more &rarr;</a></p>
-        </div>
-      </article>
-
-      <!-- DECISION 037 — Standard Programs as a fourth path, at strict parity.
-           Copy is limited to the approved facts in Decisions 028/029: RAP retains
-           the underwriting, the dealer earns protection income without reinsurance
-           participation, and it is the simplest structure. No comparison against
-           Reinsurance, no invented economics. -->
-      <article class="path" id="program-standard">
-        <div class="path__meta">
-          <p class="path__num">04</p>
-          <p class="path__name">Standard</p>
-          <div class="path__diag">
-            <svg viewBox="0 0 160 34" role="img" aria-label="A single block of income at the original sale, with underwriting retained by RAP shown as a separate flat line" style="width:100%;height:auto">
-              <rect x="0" y="6" width="34" height="22" fill="#204374"/>
-              <line x1="44" y1="20" x2="160" y2="20" stroke="#C3CBD6" stroke-width="2" stroke-dasharray="3 4"/>
-              <line x1="0" y1="28" x2="160" y2="28" stroke="#C3CBD6"/>
-            </svg>
-            <p class="path__timing">At the sale &middot; simplest structure</p>
-          </div>
-        </div>
-        <div class="path__body">
-          <h3 class="path__title">Standard Programs</h3>
-          <p>The simplest way to run a protection program.</p>
-          <p class="path__cta"><a class="qlink" href="programs.html#standard">Learn more &rarr;</a></p>
-        </div>
-      </article>
-    </div>
-
-    <!-- The two-axis matrix (plan type x underwriting type) now lives on the
-         Programs page. Removed here to stop the homepage carrying program-page
-         depth — the cards tease, programs.html explains. -->
-    <p class="center" style="margin-top:var(--s-7)">
-      <a class="qlink" href="programs.html">Compare all four programs &rarr;</a>
-    </p>
-  </div>
-</section>
-
 <!-- ============ 06 CHANGED CUSTOMER ============ -->
-<section class="sec sec--mist" aria-labelledby="cust-h">
+<section class="sec" aria-labelledby="cust-h">
   <div class="wrap center">
     <p class="eyebrow">What changed</p>
     <h2 class="d2" id="cust-h" style="max-width:24ch;margin:0 auto">
