@@ -309,12 +309,20 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- 02b trust strip (R10) ---------- */
 .trust{background:var(--rap-paper);border-top:1px solid var(--rap-slate-200);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0}
-.trust__row{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-5)}
-.trust__i{border-left:1px solid var(--rap-slate-200);padding-left:var(--s-5)}
+/* One compact line per credential — the 10px mono kickers were dropped, so the
+   strip is a single row of hairline-separated labels rather than a two-tier
+   block. Items are content-sized (not 1fr tracks): "All Furniture Categories"
+   is 3x the width of "15+ Years", and equal tracks would either clip the long
+   label or leave the short one stranded. Flex-wrap is a safety net only —
+   at 18px the five labels + separators measure ~856px against ~1005px of
+   content at the narrowest desktop width, so the row does not wrap here. */
+.trust__row{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--s-4);row-gap:var(--s-3)}
+.trust__i{border-left:1px solid var(--rap-slate-200);padding-left:var(--s-4)}
 .trust__i:first-child{border-left:0;padding-left:0}
-.trust__v{font-family:var(--serif);font-size:24px;font-weight:500;line-height:1;white-space:nowrap}
-.trust__stars{font-size:.55em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:2px}
-.trust__k{font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
+.trust__v{font-family:var(--serif);font-size:18px;font-weight:500;line-height:1.3}
+/* .62em of 18px would fall below the 12px floor, so the stars ride at .72em
+   (~13px). nowrap keeps the five glyphs together; the label itself may wrap. */
+.trust__stars{font-size:.72em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:1px;white-space:nowrap}
 
 
 /* ---------- 04 revenue structure: where the dollar goes ----------
@@ -532,8 +540,13 @@ button{font:inherit;cursor:pointer}
   .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
   .hdr.is-condensed .hdr__util{display:none}
   .why{grid-template-columns:1fr 1fr}
-  .trust__row{grid-template-columns:repeat(3,1fr);row-gap:var(--s-5)}
-  .trust__i:nth-child(4){border-left:0;padding-left:0}
+  /* Tablet: two columns, with the fifth (longest) label spanning the full
+     width rather than sitting alone in column 1. That kills the ragged 3+2
+     shape the old five-across grid produced here. Odd children are column 1,
+     so they lose the hairline; the rule survives on column 2 only. */
+  .trust__row{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s-5);row-gap:var(--s-4)}
+  .trust__i:nth-child(odd){border-left:0;padding-left:0}
+  .trust__i:last-child{grid-column:1/-1}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
 }
 /* DECISION 038 — four cards in a row on desktop, stacked below. No 2x2 stage.
@@ -580,9 +593,11 @@ button{font:inherit;cursor:pointer}
   .lockup__tag{display:none}
   .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
   .burger{width:42px;height:42px;flex:0 0 42px}
-  .trust__row{grid-template-columns:1fr 1fr;row-gap:var(--s-4)}
+  /* Phone: one label per row. Two columns would give ~163px tracks at 390px,
+     which "A-Rated Underwriting" (~177px) and "All Furniture Categories"
+     (~193px) overrun; single column gives them the full ~342px. */
+  .trust__row{grid-template-columns:1fr;row-gap:var(--s-3)}
   .trust__i{border-left:0;padding-left:0}
-  .trust__v{font-size:20px}
   /* Phone: the two headline numerals stack rather than sit at opposite ends of
      a ~310px row, and the 8.5% block flips back to left alignment so both read
      off the same margin. The rule + bar keep the 91.5 / 8.5 split. */
@@ -914,24 +929,19 @@ button{font:inherit;cursor:pointer}
   <div class="wrap">
     <ul class="trust__row">
       <li class="trust__i">
-        <p class="trust__v">4.5 <span class="trust__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9734;</span></p>
-        <p class="trust__k">RAP Google rating</p>
+        <p class="trust__v">4.5 <span class="trust__stars" role="img" aria-label="out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> Google</p>
       </li>
       <li class="trust__i">
-        <p class="trust__v">15+ years</p>
-        <p class="trust__k">Furniture protection programs</p>
+        <p class="trust__v">15+ Years</p>
       </li>
       <li class="trust__i">
-        <p class="trust__v">A Rated</p>
-        <p class="trust__k">Underwriting</p>
+        <p class="trust__v">A-Rated Underwriting</p>
       </li>
       <li class="trust__i">
-        <p class="trust__v">In-house</p>
-        <p class="trust__k">Claims administered by RAP</p>
+        <p class="trust__v">Claims In-House</p>
       </li>
       <li class="trust__i">
-        <p class="trust__v">All categories</p>
-        <p class="trust__k">Furniture &middot; Mattress &middot; Designer</p>
+        <p class="trust__v">All Furniture Categories</p>
       </li>
     </ul>
   </div>
