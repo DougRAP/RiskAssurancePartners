@@ -130,19 +130,34 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 /* mobile drawer */
 .drawer{
   position:fixed;inset:0;z-index:80;background:var(--rap-ink);color:#fff;
-  padding:var(--s-6) var(--s-5) var(--s-5);display:none;flex-direction:column;overflow-y:auto;
+  padding:0;display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
 }
 .drawer a{text-decoration:none;color:#fff}
-.drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s-7)}
-.drawer__close{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;width:46px;height:46px;border-radius:var(--radius-sm);font-size:20px;line-height:1}
-.drawer__nav a{display:block;font-family:var(--serif);font-size:30px;font-weight:500;padding:10px 0}
-.drawer__sub{padding-left:var(--s-5);border-left:1px solid var(--rap-ink-700);margin:var(--s-2) 0 var(--s-4)}
-.drawer__sub a{font-family:var(--sans);font-size:16px;font-weight:500;padding:8px 0;color:rgba(255,255,255,.8)}
-/* R3(b) — utility links sit at the TOP of the drawer, above primary nav */
-.drawer__util{padding-bottom:var(--s-5);margin-bottom:var(--s-5);border-bottom:1px solid var(--rap-ink-700);display:grid;gap:var(--s-3)}
-.drawer__util a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88)}
-.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500)}
-.drawer__cta{margin-top:auto;padding-top:var(--s-6)}
+.drawer__top{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);flex-shrink:0;padding:var(--s-6) var(--s-5) var(--s-5)}
+.drawer__close{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;width:46px;height:46px;border-radius:var(--radius-sm);font-size:20px;line-height:1;flex-shrink:0}
+/* R4 — 22px serif primary rows; Programs / Market Intel are native <details> accordions, collapsed by default */
+.drawer__nav{flex-shrink:0;padding:0 var(--s-5)}
+.drawer__nav > a,.drawer__acc > summary{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
+  font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.2;
+  color:#fff;padding:14px 0;min-height:52px;
+}
+.drawer__acc > summary{cursor:pointer;list-style:none}
+.drawer__acc > summary::-webkit-details-marker{display:none}
+.drawer__acc > summary::after{
+  content:"";flex-shrink:0;width:9px;height:9px;margin-right:4px;
+  border-right:1.5px solid rgba(255,255,255,.6);border-bottom:1.5px solid rgba(255,255,255,.6);
+  transform:translateY(-3px) rotate(45deg);transition:transform .18s ease;
+}
+.drawer__acc[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
+.drawer__sub{padding-left:var(--s-4);border-left:1px solid var(--rap-ink-700);margin:var(--s-1) 0 var(--s-3)}
+.drawer__sub a{display:block;font-family:var(--sans);font-size:16px;font-weight:500;line-height:1.35;padding:12px 0;color:rgba(255,255,255,.8)}
+/* R4 — customers cluster sits BELOW the primary nav, under a hairline */
+.drawer__util{flex-shrink:0;margin-top:var(--s-5);padding:var(--s-5) var(--s-5) var(--s-3);border-top:1px solid var(--rap-ink-700);display:grid}
+.drawer__util a{display:block;font-family:var(--sans);font-size:15px;font-weight:500;line-height:1.4;letter-spacing:normal;text-transform:none;padding:12px 0;color:rgba(255,255,255,.88)}
+.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-2)}
+/* R4 — CTA pinned to the drawer's bottom edge: sticky + in-flow, ink ground so rows slide beneath it */
+.drawer__cta{position:sticky;bottom:0;flex-shrink:0;margin-top:auto;padding:var(--s-4) var(--s-5) var(--s-5);background:var(--rap-ink);box-shadow:0 -14px 18px -6px var(--rap-ink)}
 .drawer__cta .btn{width:100%;justify-content:center}
 #navtoggle:checked ~ .drawer{display:flex}
 /* ---------- contact block, inside the footer region (R6) ---------- */
@@ -504,9 +519,30 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 
 <div class="drawer" role="dialog" aria-label="Site menu">
   <div class="drawer__top">
-    <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
+    <a class="lockup__name" style="color:#fff" href="home.html">Risk Assurance Partners</a>
     <label class="drawer__close" for="navtoggle" role="button" tabindex="0" aria-label="Close menu">&times;</label>
   </div>
+  <nav class="drawer__nav" aria-label="Mobile">
+    <details class="drawer__acc">
+      <summary>Programs</summary>
+      <div class="drawer__sub">
+        <a href="programs.html">All programs &rarr;</a>
+        <a href="programs.html#subscription">FurnitureRx Subscription</a>
+        <a href="programs.html#multi-year">Multi-Year Protection</a>
+        <a href="programs.html#reinsurance">Reinsurance</a>
+        <a href="programs.html#standard">Standard Programs</a>
+      </div>
+    </details>
+    <a href="newswire.html">Newswire</a>
+    <details class="drawer__acc">
+      <summary>Market Intel</summary>
+      <div class="drawer__sub">
+        <a href="market-intelligence.html">Market Intelligence</a>
+        <a href="research.html">Research</a>
+      </div>
+    </details>
+    <a href="home.html#why">Why RAP</a>
+  </nav>
   <div class="drawer__util">
     <p class="drawer__utillabel">Customers</p>
     <a href="https://kiosk.furniturerx.net/">Subscription Plans</a>
@@ -514,23 +550,6 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     <a href="#contact">Contact</a>
     <a href="https://portal.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
   </div>
-  <nav class="drawer__nav" aria-label="Mobile">
-    <a href="home.html">Home</a>
-    <a href="programs.html">Programs</a>
-    <div class="drawer__sub">
-      <a href="programs.html#subscription">FurnitureRx Subscription</a>
-      <a href="programs.html#multi-year">Multi-Year Protection</a>
-      <a href="programs.html#reinsurance">Reinsurance</a>
-      <a href="programs.html#standard">Standard Programs</a>
-    </div>
-    <a href="newswire.html">Newswire</a>
-    <a href="market-intelligence.html">Market Intel</a>
-    <div class="drawer__sub">
-      <a href="market-intelligence.html">Market Intelligence</a>
-      <a href="research.html">Research</a>
-    </div>
-    <a href="home.html#why">Why RAP</a>
-  </nav>
 </div>
 
 <main>
