@@ -441,31 +441,14 @@ button{font:inherit;cursor:pointer}
   transform:translateY(-50%);height:44px}
 
 
-/* ---------- 08 economics teaser ---------- */
-/* .pub (the $19.99/$0/$8 strip) removed — Section 07 already carries those figures. */
-.teaser{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7);align-items:stretch}
-.panel{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
-/* Audit H2 — month axis + no-scale disclaimer as HTML, outside the scaling SVG.
-   The plot spans x=0..456 of a 460-wide viewBox, so the row is inset .9% on the
-   right to end where the last step ends; space-between puts M1/M60 on the ends. */
-.chartx{display:flex;justify-content:space-between;padding-right:.9%;margin-top:var(--s-2);
-  font-family:var(--mono);font-size:12px;color:var(--rap-slate-500)}
-.chartnote{margin-top:var(--s-3);font-family:var(--mono);font-size:12px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--rap-slate-500)}
-.gate{position:relative;overflow:hidden}
-.gate__blur{filter:blur(3px);opacity:.5;pointer-events:none;user-select:none}
-.gate__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4)}
-.gate__field{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:10px 12px}
-.gate__field b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
-.gate__field span{font-family:var(--mono);font-size:16px}
-.gate__chip{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  background:var(--rap-ink);color:#fff;border-radius:var(--radius-sm);padding:12px 20px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
-  display:flex;align-items:center;gap:10px;white-space:nowrap;
-}
-.teaser__cta{margin-top:var(--s-8);text-align:center}
-.teaser__cta .meta{margin-top:var(--s-4)}
+/* ---------- 08 profit calculator ---------- */
+/* Single centred lead-gen column. The illustrative chart, the preview panel and
+   their styles were removed with the markup; .figcap survives on the hero figure. */
+.econ{max-width:750px;margin:0 auto}
+.econ .lead{max-width:52ch}
+.econ .btns{justify-content:center;margin-top:var(--s-6)}
+.econ__note{margin-top:var(--s-5);font-family:var(--mono);font-size:12px;
+  letter-spacing:.06em;color:var(--rap-slate-500)}
 
 /* ---------- 09 newswire ---------- */
 
@@ -587,7 +570,7 @@ button{font:inherit;cursor:pointer}
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .hero,.teaser{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr}
   .hero__fig{order:2}
   .cust__pains{gap:var(--s-6) var(--s-5)}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
@@ -632,7 +615,6 @@ button{font:inherit;cursor:pointer}
   .dir__card{min-height:0}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .cust__pains{grid-template-columns:1fr;gap:var(--s-6)}
-  .gate__grid{grid-template-columns:1fr}
   .btns .btn{width:100%;justify-content:center}
   .foot__cols{display:none}
   .foot__acc{display:block}
@@ -1091,59 +1073,22 @@ button{font:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- ============ 08 DEALER ECONOMICS TEASER ============ -->
-<section class="sec sec--mist" id="economics" aria-labelledby="econ-h">
+<!-- ============ 08 PROFIT CALCULATOR ============ -->
+<section class="sec sec--mist" id="economics" aria-labelledby="econ-h" style="padding:var(--s-8) 0">
   <div class="wrap">
-    <div class="center">
-      <p class="eyebrow">RAP Dealer Economics</p>
-      <h2 class="d2" id="econ-h" style="max-width:20ch;margin:0 auto">
-        What could this mean for <span class="acc">your dealership?</span>
+    <div class="center econ">
+      <p class="eyebrow">Profit Calculator</p>
+      <h2 class="d2" id="econ-h" style="max-width:18ch;margin:0 auto">
+        Run your numbers. <span class="acc">See your upside.</span>
       </h2>
-    </div>
-
-    <!-- The $19.99 / $0 / $8 strip was removed here: Section 07 already states
-         those three figures, and the Programs page states them again. This
-         section's job is the gate, not the numbers. -->
-    <div class="teaser">
-      <div class="panel">
-        <p class="eyebrow" style="margin-bottom:var(--s-5)">Illustrative recurring contribution</p>
-        <svg viewBox="0 0 460 190" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating across a 60-month term. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
-          <line x1="0" y1="180" x2="460" y2="180" stroke="#C3CBD6"/>
-          <g stroke="#EEF1F5"><line x1="0" y1="140" x2="460" y2="140"/><line x1="0" y1="100" x2="460" y2="100"/><line x1="0" y1="60" x2="460" y2="60"/></g>
-          <path d="M0 180 L0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42 L456 180 Z" fill="#E8EEF6"/>
-          <path d="M0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42" fill="none" stroke="#204374" stroke-width="2"/>
-        </svg>
-        <!-- H2 — month labels and the no-scale disclaimer live in HTML, not inside
-             the scaling SVG, so they hold 12px at every viewport. -->
-        <div class="chartx" aria-hidden="true"><span>M1</span><span>M12</span><span>M36</span><span>M60</span></div>
-        <p class="chartnote">SHAPE ONLY &mdash; NO SCALE SHOWN</p>
-        <p class="figcap"><b>Figure 2 &middot; Illustrative</b>
-          Recurring commission accumulates for as long as payments succeed. The vertical scale is
-          deliberately omitted. This is not a forecast.</p>
+      <p class="lead" style="margin-top:var(--s-5)">
+        Use your dealership&rsquo;s actual sales and attachment assumptions to model the
+        potential impact of Multi-Year, Subscription, and Reinsurance.
+      </p>
+      <div class="btns">
+        <a class="btn btn--primary" href="economics-gate.html">Request Access to the Profit Calculator &rarr;</a>
       </div>
-
-      <div class="panel gate">
-        <p class="eyebrow" style="margin-bottom:var(--s-5)">RAP Dealer Economics Calculator</p>
-        <div class="gate__blur" aria-hidden="true">
-          <div class="gate__grid">
-            <div class="gate__field"><b>Active subscribers</b><span>0,000</span></div>
-            <div class="gate__field"><b>Locations</b><span>00</span></div>
-            <div class="gate__field"><b>Horizon</b><span>12 / 36 / 60 mo</span></div>
-            <div class="gate__field"><b>Cancellation assumption</b><span>0.0%</span></div>
-            <div class="gate__field"><b>Cumulative commission</b><span>$000,000</span></div>
-            <div class="gate__field"><b>Multi-Year comparison</b><span>$000,000</span></div>
-          </div>
-          <svg viewBox="0 0 460 90" style="width:100%;height:auto;margin-top:16px" aria-hidden="true">
-            <path d="M0 80 L60 70 L120 66 L180 54 L240 48 L300 36 L360 28 L420 18 L460 12" fill="none" stroke="#204374" stroke-width="2"/>
-            <path d="M0 84 L60 80 L120 78 L180 72 L240 70 L300 66 L360 62 L420 58 L460 56" fill="none" stroke="#C8581B" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="gate__chip"><span aria-hidden="true">&#128274;</span> Requires approved access</div>
-      </div>
-    </div>
-
-    <div class="teaser__cta">
-      <a class="btn btn--primary" href="economics-gate.html">Profit Calculator &rarr;</a>
+      <p class="econ__note">Available to qualified furniture retailers and design partners.</p>
     </div>
   </div>
 </section>
