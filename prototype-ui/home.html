@@ -80,7 +80,6 @@ button{font:inherit;cursor:pointer}
 /* R10 — same-background adjacency: kill the border and halve the top padding
    so identical backgrounds never show a stranded hairline in dead space.
    The section order alternates backgrounds, so this is a safety net. */
-.sec--mist + .sec--mist{border-top:0;padding-top:var(--s-7)}
 .sec--ink{
   background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
   background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
@@ -1265,13 +1264,9 @@ button{font:inherit;cursor:pointer}
 
     <div class="foot__legal">
       <span>&copy; 2026 Risk Assurance Partners</span>
-      <span><a href="#stub" title="Stub — legal page, later phase">Privacy</a> &middot; <a href="#stub" title="Stub — legal page, later phase">Terms</a> &middot; <a href="admin.html">Admin</a></span>
+      <span>Privacy &middot; Terms &middot; <a href="admin.html">Admin</a></span>
     </div>
     <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
-    <p class="foot__note" id="stub">
-      Prototype note &middot; links marked &ldquo;stub&rdquo; target pages built in a later phase, or
-      outbound publication URLs that cannot be invented at design time.
-    </p>
   </div>
 </footer>
 
