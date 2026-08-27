@@ -338,7 +338,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .gate__field b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
 .gate__field span{font-family:var(--mono);font-size:16px}
 /* Access CTA centred inside the ghosted panel, where the lock chip sat. */
-.gate__cta{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:calc(100% - 32px)}
+.gate__cta{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);text-align:center}
 .gate__cta .btn{box-shadow:0 10px 30px rgba(12,23,42,.22)}
 
 /* ---- form ---- */
@@ -421,6 +421,9 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   .utility a{font-size:12px}
   .utility__label,.utility__secondary{display:none}
   .utility__login{padding:4px 8px}
+  /* Audit E6 — the three contact detail columns never stacked here, which forced
+     page-wide horizontal scroll at 390px. Stack them, as home/programs do. */
+  .contact__grid--details .contact__det{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* ---------- customer support popup + chat (DECISION 042) ----------

@@ -412,6 +412,13 @@ button{font:inherit;cursor:pointer}
 /* .pub (the $19.99/$0/$8 strip) removed — Section 07 already carries those figures. */
 .teaser{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7);align-items:stretch}
 .panel{background:#fff;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6)}
+/* Audit H2 — month axis + no-scale disclaimer as HTML, outside the scaling SVG.
+   The plot spans x=0..456 of a 460-wide viewBox, so the row is inset .9% on the
+   right to end where the last step ends; space-between puts M1/M60 on the ends. */
+.chartx{display:flex;justify-content:space-between;padding-right:.9%;margin-top:var(--s-2);
+  font-family:var(--mono);font-size:12px;color:var(--rap-slate-500)}
+.chartnote{margin-top:var(--s-3);font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--rap-slate-500)}
 .gate{position:relative;overflow:hidden}
 .gate__blur{filter:blur(3px);opacity:.5;pointer-events:none;user-select:none}
 .gate__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4)}
@@ -1168,16 +1175,16 @@ button{font:inherit;cursor:pointer}
     <div class="teaser">
       <div class="panel">
         <p class="eyebrow" style="margin-bottom:var(--s-5)">Illustrative recurring contribution</p>
-        <svg viewBox="0 0 460 220" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating across a 60-month term. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
+        <svg viewBox="0 0 460 190" role="img" aria-label="Illustrative stepped area showing recurring contribution accumulating across a 60-month term. The vertical axis is intentionally unlabelled." style="width:100%;height:auto">
           <line x1="0" y1="180" x2="460" y2="180" stroke="#C3CBD6"/>
           <g stroke="#EEF1F5"><line x1="0" y1="140" x2="460" y2="140"/><line x1="0" y1="100" x2="460" y2="100"/><line x1="0" y1="60" x2="460" y2="60"/></g>
           <path d="M0 180 L0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42 L456 180 Z" fill="#E8EEF6"/>
           <path d="M0 172 L38 172 L38 158 L76 158 L76 146 L114 146 L114 132 L152 132 L152 120 L190 120 L190 108 L228 108 L228 96 L266 96 L266 84 L304 84 L304 72 L342 72 L342 62 L380 62 L380 52 L418 52 L418 42 L456 42" fill="none" stroke="#204374" stroke-width="2"/>
-          <g font-family="IBM Plex Mono" font-size="10" fill="#64748B">
-            <text x="0" y="198">M1</text><text x="140" y="198">M12</text><text x="290" y="198">M36</text><text x="424" y="198">M60</text>
-          </g>
-          <text x="0" y="16" font-family="IBM Plex Mono" font-size="10" fill="#64748B">SHAPE ONLY &mdash; NO SCALE SHOWN</text>
         </svg>
+        <!-- H2 — month labels and the no-scale disclaimer live in HTML, not inside
+             the scaling SVG, so they hold 12px at every viewport. -->
+        <div class="chartx" aria-hidden="true"><span>M1</span><span>M12</span><span>M36</span><span>M60</span></div>
+        <p class="chartnote">SHAPE ONLY &mdash; NO SCALE SHOWN</p>
         <p class="figcap"><b>Figure 2 &middot; Illustrative</b>
           Recurring commission accumulates for as long as payments succeed. The vertical scale is
           deliberately omitted. This is not a forecast.</p>
