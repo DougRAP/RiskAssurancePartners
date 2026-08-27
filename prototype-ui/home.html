@@ -475,23 +475,25 @@ button{font:inherit;cursor:pointer}
 .dir__n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-.01em}
 .dir__a{color:var(--rap-slate-300);font-size:18px;line-height:1;transition:color .12s,transform .12s}
 
-/* ---------- 11 why rap ---------- */
-.why{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-6) var(--s-5);margin-top:var(--s-8)}
-.why__i{border-top:2px solid var(--rap-ink);padding-top:var(--s-4)}
-.why__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase}
-.why__b{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-3)}
-/* DECISION 030 — Google rating in lead proof position, not a footnote */
-.rating{
-  display:flex;align-items:center;gap:var(--s-7);margin-top:var(--s-8);
-  padding:var(--s-6) 0;border-top:2px solid var(--rap-ink);border-bottom:1px solid var(--rap-slate-200);
-}
-.rating__v{
-  font-family:var(--serif);font-size:clamp(56px,7vw,86px);font-weight:500;line-height:1;
-  display:flex;align-items:center;gap:var(--s-4);flex-shrink:0;
-}
-.rating__stars{font-size:.32em;letter-spacing:.08em;color:var(--rap-brass);font-family:var(--sans)}
-.rating__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.rating__b{font-size:16px;color:var(--rap-slate-700);margin-top:var(--s-2);max-width:56ch}
+/* ---------- 11 why rap — closing proof ---------- */
+/* Separator dots trail their item rather than leading the next one, so a wrap
+   ends a line with a dot instead of starting one with it. The dot travels with
+   the item, so the widest wrap unit is "4.5 ★★★★☆ Google Rating ·" (~205px at
+   390px width) against ~342px of content — the row never overflows, it wraps. */
+.wproof{list-style:none;margin:var(--s-5) 0 0;padding:0;display:flex;flex-wrap:wrap;
+  align-items:baseline;justify-content:center;column-gap:var(--s-4);row-gap:var(--s-2)}
+.wproof li{font-family:var(--serif);font-size:clamp(15px,1.4vw,17px);font-weight:500;line-height:1.4}
+.wproof li:not(:last-child)::after{content:"\00B7";margin-left:var(--s-4);color:var(--rap-slate-300)}
+/* U+200A is a breakable space, so the numeral + stars are held together. */
+.wproof__n{white-space:nowrap}
+/* .8em of the 15px floor lands exactly on 12px; nowrap keeps the five glyphs
+   together the way the top strip does. */
+.wproof__stars{font-size:.8em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:1px;white-space:nowrap}
+/* Same plain-block idiom as .cust__pains — no cards, bold lead over one line. */
+.wproof__pts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6) var(--s-7);
+  max-width:900px;margin:var(--s-7) auto 0;text-align:left}
+.wproof__lead{margin:0 0 var(--s-2);font-weight:600;font-size:17px;line-height:1.35;color:var(--rap-ink)}
+.wproof__body{margin:0;font-size:15px;line-height:1.6;color:var(--rap-slate-700)}
 
 /* ---------- 12/13 ---------- */
 .final .btns{justify-content:center}
@@ -547,7 +549,6 @@ button{font:inherit;cursor:pointer}
      strip (R3a) already carries File a Claim + Dealer Login persistently. */
   .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
   .hdr.is-condensed .hdr__util{display:none}
-  .why{grid-template-columns:1fr 1fr}
   /* Tablet: two columns, with the fifth (longest) label spanning the full
      width rather than sitting alone in column 1. That kills the ragged 3+2
      shape the old five-across grid produced here. Odd children are column 1,
@@ -573,6 +574,9 @@ button{font:inherit;cursor:pointer}
   .hero{grid-template-columns:1fr}
   .hero__fig{order:2}
   .cust__pains{gap:var(--s-6) var(--s-5)}
+  /* Tablet: three tracks of ~195px. "Administration" (~130px) is the longest
+     unbreakable word, so the leads wrap to two lines rather than overflow. */
+  .wproof__pts{gap:var(--s-6) var(--s-5)}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
   .orient__progs{grid-template-columns:1fr}
   .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
@@ -610,10 +614,14 @@ button{font:inherit;cursor:pointer}
      nothing sets a floor wider than the ~342px of content. */
   .atr__out{flex-direction:column;gap:var(--s-2)}
   .atr__head{gap:var(--s-3)}
-  .why{grid-template-columns:1fr}
+  /* Phone: the strip keeps its 15px type (the stars ride on it and must clear
+     12px) and tightens the separator gaps instead, so the four labels land in
+     two lines at 390px rather than three. */
+  .wproof{column-gap:var(--s-2)}
+  .wproof li:not(:last-child)::after{margin-left:var(--s-2)}
+  .wproof__pts{grid-template-columns:1fr;gap:var(--s-6)}
   .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
   .dir__card{min-height:0}
-  .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
   .cust__pains{grid-template-columns:1fr;gap:var(--s-6)}
   .btns .btn{width:100%;justify-content:center}
   .foot__cols{display:none}
@@ -1096,32 +1104,38 @@ button{font:inherit;cursor:pointer}
 <!-- RAP Research moved to research.html; the directory band below links to it. -->
 
 <!-- ============ 11 WHY RAP ============ -->
-<section class="sec" id="why" aria-labelledby="why-h">
+<section class="sec" id="why" aria-labelledby="why-h" style="padding:var(--s-8) 0">
   <div class="wrap">
     <div class="center">
       <p class="eyebrow">Why RAP</p>
       <h2 class="d2" id="why-h">Built around <span class="acc">furniture retail.</span></h2>
     </div>
 
-    <!-- DECISION 030 — the Google rating leads this section rather than closing it. -->
-    <div class="rating">
-      <p class="rating__v">4.5<span class="rating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9734;</span></p>
-      <div>
-        <p class="rating__k">RAP Google rating</p>
-        <p class="rating__b">Today&rsquo;s customer researches the provider before they agree to the
-        program &mdash; and the retailer that sold it wears the result. This is what they find.</p>
-      </div>
-    </div>
+    <!-- Closing proof strip. Same idiom as the top credential strip (.trust__row):
+         serif labels, brass stars carrying the rating for sighted readers with an
+         aria-label for everyone else. Lighter build though — no hairline cells or
+         space-between row, just a centred wrapping line with dot separators, so it
+         reads as a caption under the headline rather than a second trust band. -->
+    <ul class="wproof">
+      <li><span class="wproof__n">4.5&#8202;<span class="wproof__stars" role="img" aria-label="out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span> Google Rating</li>
+      <li>15+ Years</li>
+      <li>A-Rated Underwriting</li>
+      <li>Claims In-House</li>
+    </ul>
 
-    <div class="why">
-      <div class="why__i"><p class="why__k">15+ years</p><p class="why__b">Fifteen-plus years building and administering protection programs for furniture retail.</p></div>
-      <div class="why__i"><p class="why__k">Furniture focus</p><p class="why__b">Programs built for furniture dealers rather than adapted from another category.</p></div>
-      <div class="why__i"><p class="why__k">Claims administration</p><p class="why__b">Claims are administered by RAP rather than handed to an unrelated third party.</p></div>
-      <div class="why__i"><p class="why__k">Underwriting relationships</p><p class="why__b">Programs are backed by underwriting partners.</p></div>
-      <div class="why__i"><p class="why__k">Technology</p><p class="why__b">Enrollment, recurring billing, dealer reporting and claims are built in-house.</p></div>
-      <div class="why__i"><p class="why__k">Customer experience</p><p class="why__b">US-based service with self-serve claim filing through the FurnitureRx app.</p></div>
-      <div class="why__i"><p class="why__k">Dealer support</p><p class="why__b">Training and sales-floor materials for the associates who present the program.</p></div>
-      <div class="why__i"><p class="why__k">Program expertise</p><p class="why__b">Subscription, multi-year and reinsurance programs under one relationship.</p></div>
+    <div class="wproof__pts">
+      <div>
+        <p class="wproof__lead">Furniture Focus</p>
+        <p class="wproof__body">Programs built specifically for furniture retailers.</p>
+      </div>
+      <div>
+        <p class="wproof__lead">In-House Administration</p>
+        <p class="wproof__body">Claims, technology, reporting, and dealer support managed by RAP.</p>
+      </div>
+      <div>
+        <p class="wproof__lead">More Ways to Earn</p>
+        <p class="wproof__body">Subscription, Multi-Year, Standard, and Reinsurance under one relationship.</p>
+      </div>
     </div>
 
   </div>
