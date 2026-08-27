@@ -613,6 +613,16 @@ Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [
   3. **Request access form** (six fields; email + mobile required) with the dealer/customer/media triage block moved inside it; submit → received confirmation.
 - **Removed:** $19.99/$0/$8 stat strip; "Public on this page / Behind approved access" lists; both 01–06 step strips; "Why the gate…" and revocation copy; "Six fields · reviewed by RAP Sales…" meta; prototype stub note.
 
+## Decision 044 — Post-043 Approved Changes (batch log, session handoff)
+
+**Status:** Approved (Owner, 2026-08-26/27) — all implemented and deployed
+
+- **Gate page (Profit Calculator):** hero = H1 "Profit Calculator", H2 "Types of Plans" + owner "toolbox" intro (millennial/budget/single-item → $19.99 subscription; >$5,000 or longer program → multi-year, incl. dealer's existing plan; both plan types qualify for reinsurance programs); H3 Subscription / H3 Multi-Year with "Custom coverage available — talk to us" lines; live ticket sliders on the GM illustration (new sales per month 1–500; subscription = $8 × m × 1830 across the 60-month waterfall — verified vs owner proforma: $5,328 @ 1/mo/36mo, $532,800 @ 100/mo/36mo; multi-year = $180 × m × 60); simplified caption; request form hidden until CTA; second CTA "Get the dealer info sheet →" routes to the same form with source tag (sheet sent with Sales reply; file kept OUT of deploy at docs/source/FurnitureRx-Subscription-Plan-Info.html, corrected to $250); self-referencing Profit Calculator button removed from this page's header/drawer.
+- **Nav/utility:** "Agent Login" renamed **"Admin"**; **File a Claim removed from nav chrome** (lives in the Customer Support popup; footer sitemap keeps it) — B2B-first site; possible future "For Customers" page noted.
+- **Admin console:** full site nav chrome added (links open new tabs); login enforces demo passphrase `rap-agent-2026`; reachable via utility-bar "Admin" link; real auth deferred to Supabase phase (owner accepted).
+- **Homepage:** orientation claim = "Turn key protection programs built for furniture retailers and interior designers."; orientation descriptor replaced with owner copy (subscription reinsurance "$1M in 36 months" framing — **volume qualifier question open**, true at 200 new subscribers/month); ink section headline = "Why You Must Maximize Protection in Today's Economy" (eyebrow removed, top padding 64px); ink illustration = 100%-of-revenue stacked cost bar (COGS 50, payroll 18, rent 8, advertising 6, freight-in 5, warehouse 4.5 = 91.5%, brass 8.5% remainder; owner-supplied illustrative figures).
+- Dropdown hover-gap bug fixed sitewide (invisible bridge).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
