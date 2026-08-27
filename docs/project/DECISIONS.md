@@ -662,6 +662,32 @@ Owner phone-reviewed the branch preview and approved the merge of the must-fix p
 
 No *broken* MOBILE_AUDIT items remain. Remaining degraded/cosmetic items fold into content passes per Decision 046.
 
+## Decision 048 — Home-Page Polish Pass (batch log, 2026-08-27)
+
+**Status:** Approved (Owner) — all implemented and deployed (through commit 1111cea)
+
+**Hero:** eyebrow "Protection Programs for Furniture Retailers & Designers"; H1 "2x Your Profits With / RAP Protection" (forced break); lead "Turn more customers into recurring profit…" (pain framing moved wholly to ink section); secondary button "See the Profit Math" → ink section. GM figure kicker "Subscription vs Multi-year Plan GM"; caption "Illustrative — one customer, two profit models. Subscription $480 / Multi-Year $180 over 60 months."
+
+**Orientation strip:** headline "Protection programs built around how you want to earn." + one-line descriptor (text-wrap:balance). Cards get economic-model kickers — Recurring Income / Upfront Income / Underwriting Profit / Turnkey — new body copy, "Explore →" links. The "$1M in 36 months" claim removed (open volume-qualifier question mooted); "turnkey" (one word) is the settled spelling.
+
+**Reinsurance clarification (supersedes 029's "shares in" phrasing):** Reinsurance is an underwriting option available on Subscription and Multi-Year — a participating dealer **retains** the underwriting profits; otherwise RAP keeps them. It is not a third product. Card copy "Retain underwriting profit over time." approved.
+
+**Trust strip:** compact single-line labels (4.5★ Google · 15+ Years · A-Rated Underwriting · Claims In-House · All Furniture Categories), full-content-width distribution, 17–20px clamp.
+
+**Structure:** "Four Ways" paths section REMOVED as duplicative (amends the 010/037 homepage sequence); changed-customer section switched to white to preserve striping.
+
+**Ink section:** headline "RAP Helps You Maximize / Protection Profits". Cost bar corrected (supersedes 044 figures): COGS 50 · Payroll 18 · Rent 8 · Advertising 6 · Freight-in 5 · Warehouse/Delivery/Other 7.5 · Operating Profit 5.5 (brass). Bar made DYNAMIC: "Protection Plan Attachment Rate" slider 0–60%, default 0, numeric twin; normalized to 100 furniture sales at $2,250 avg ($225,000); **new approved facts:** per attached plan $250 retail = $70 plan COGS + $50 sales commission (20%) + $130 operating profit; readouts (margin 5.5%→x, OP $12,375→$x, +x%); verified checkpoints 0/30/60%. "Illustrative percentages" caption removed. Closer: "Furniture sales carry the full cost structure. Protection profit does not." / "Most incremental protection margin flows to profit."
+
+**Changed-customer section rebuilt:** eyebrow "~70% of customers say no to Multi-Year plans"; headline "More customers are saying no. Give them another way to say yes."; two pain-point blocks ($250 checkout-resistance moment; millennial buying habits); centered solution block "Add subscription. Don't replace Multi-Year." + "See the $19.99 Subscription Program →" (qlink, not button); source line removed.
+
+**Economics teaser rebuilt** as centered lead-gen block: eyebrow "Profit Calculator" (one name everywhere), "Run your numbers. See your upside.", brass CTA "Request Access to the Profit Calculator →" (same gate destination/logic); illustrative chart, blurred preview, and lock chip removed; no "locked/restricted" language permitted.
+
+**Why RAP simplified** to closing proof: strip (4.5★ Google Rating · 15+ Years · A-Rated Underwriting · Claims In-House) + three proof points (Furniture Focus / In-House Administration / More Ways to Earn); rating block and 8 capability blocks removed (030's prominence carried by the two strips).
+
+**Sitewide:** footer tagline → "Protection Programs for Furniture Retailers & Designers" (supersedes 036 tagline wording); prototype stub notes removed from home/programs/market-intelligence footers, Privacy/Terms plain text pending legal pages (gate page cross-links fixed); newswire/research keep their #stub targets until their page passes.
+
+**Still open:** contact-hours conflict — footer 8–6 Mon–Fri EST (027) vs support popup 9–6 Mon–Sat ET (042).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
