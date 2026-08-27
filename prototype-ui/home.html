@@ -423,22 +423,24 @@ button{font:inherit;cursor:pointer}
 
 
 /* ---------- 06 changed customer ---------- */
-.chain{display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap;justify-content:center;margin:var(--s-8) 0 var(--s-6)}
-.chain__node{
-  border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:12px 18px;
-  font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:#fff;
-}
-.chain__node--final{border-color:var(--rap-ink);border-width:2px}
-.chain__arrow{color:var(--rap-slate-300);font-size:14px}
-.branch{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);max-width:900px;margin:0 auto}
-.branch__card{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-6);text-align:left;background:#fff}
-.branch__cond{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
-.branch__name{font-family:var(--serif);font-size:26px;font-weight:500;margin:var(--s-3) 0}
-.branch__body{font-size:15px;color:var(--rap-slate-700)}
-.statement{
-  margin-top:var(--s-8);padding-top:var(--s-6);border-top:2px solid var(--rap-ink);
-  font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);font-weight:500;line-height:1.25;text-align:center;
-}
+/* Plain stacked text, no cards: two pain points side by side, then the solution
+   block full width under a hairline as the section's landing point. */
+.cust__pains{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6) var(--s-7);
+  max-width:900px;margin:var(--s-7) auto 0;text-align:left}
+.cust__lead{margin:0 0 var(--s-2);font-weight:600;font-size:17px;line-height:1.35;color:var(--rap-ink)}
+.cust__body{margin:0;font-size:15px;line-height:1.6;color:var(--rap-slate-700)}
+.cust__sol{max-width:900px;margin:var(--s-7) auto 0;padding-top:var(--s-6);
+  border-top:1px solid var(--rap-slate-200);text-align:left}
+.cust__sol .cust__lead{font-size:19px}
+.cust__sol .cust__body{max-width:70ch}
+.cust__src{margin:var(--s-3) 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--rap-slate-500)}
+/* The arrow link keeps its 14px underline look; the pseudo-element lifts the
+   effective tap target to 44px without padding the underline away from the text. */
+.cust__cta{margin:var(--s-5) 0 0}
+.cust__cta .qlink{position:relative}
+.cust__cta .qlink::after{content:"";position:absolute;left:0;right:0;top:50%;
+  transform:translateY(-50%);height:44px}
 
 
 /* ---------- 08 economics teaser ---------- */
@@ -589,9 +591,7 @@ button{font:inherit;cursor:pointer}
   .sec--ink{padding:var(--s-9) 0}
   .hero,.teaser{grid-template-columns:1fr}
   .hero__fig{order:2}
-  .branch{grid-template-columns:1fr 1fr;gap:var(--s-3)}
-  .branch__card{padding:var(--s-4)}
-  .branch__name{font-size:20px}
+  .cust__pains{gap:var(--s-6) var(--s-5)}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
   .orient__progs{grid-template-columns:1fr}
   .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
@@ -633,9 +633,7 @@ button{font:inherit;cursor:pointer}
   .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
   .dir__card{min-height:0}
   .rating{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
-  .chain{flex-direction:column;gap:var(--s-2)}
-  .chain__arrow{transform:rotate(90deg)}
-  .chain__node{width:100%;text-align:center}
+  .cust__pains{grid-template-columns:1fr;gap:var(--s-6)}
   .gate__grid{grid-template-columns:1fr}
   .btns .btn{width:100%;justify-content:center}
   .foot__cols{display:none}
@@ -1069,37 +1067,32 @@ button{font:inherit;cursor:pointer}
   <div class="wrap center">
     <p class="eyebrow">What changed</p>
     <h2 class="d2" id="cust-h" style="max-width:24ch;margin:0 auto">
-      The customer may not be saying &ldquo;no to protection.&rdquo;
-      They may be saying <span class="acc">&ldquo;not another large purchase today.&rdquo;</span>
+      More customers are saying no.
+      <span class="acc">Give them another way to say yes.</span>
     </h2>
 
-    <div class="chain" role="img" aria-label="The customer's sequence of decisions: furniture, tax, delivery, financing, and only then the protection decision.">
-      <span class="chain__node">Furniture</span><span class="chain__arrow">&rarr;</span>
-      <span class="chain__node">Tax</span><span class="chain__arrow">&rarr;</span>
-      <span class="chain__node">Delivery</span><span class="chain__arrow">&rarr;</span>
-      <span class="chain__node">Financing</span><span class="chain__arrow">&rarr;</span>
-      <span class="chain__node chain__node--final">Protection decision</span>
-    </div>
-
-    <p class="meta" style="margin-bottom:var(--s-6)">Two valid outcomes &mdash; not one right and one wrong</p>
-
-    <div class="branch">
-      <div class="branch__card">
-        <p class="branch__cond">Upfront format fits</p>
-        <p class="branch__name">Multi-Year Protection</p>
-        <p class="branch__body">One complete decision at the point of sale. This is the sale that
-        works, and it stays the first ask.</p>
+    <div class="cust__pains">
+      <div>
+        <p class="cust__lead">Higher prices are increasing checkout resistance.</p>
+        <p class="cust__body">After furniture, tax, delivery and financing, another $250 can be
+        the point where the customer says no.</p>
       </div>
-      <div class="branch__card">
-        <p class="branch__cond">Upfront format doesn&rsquo;t fit</p>
-        <p class="branch__name">FurnitureRx</p>
-        <p class="branch__body">Roughly <strong>70% of customers say no</strong> to Multi-Year plans.
-        This is that group &mdash; customers who want protection, but not another large purchase today.
-        <span class="meta" style="display:block;margin-top:8px">Source: RAP program experience</span></p>
+      <div>
+        <p class="cust__lead">Today&rsquo;s shoppers buy differently.</p>
+        <p class="cust__body">Millennials &mdash; the largest consumer generation &mdash; are
+        accustomed to subscriptions, monthly payments and lower upfront commitments.</p>
       </div>
     </div>
 
-    <p class="statement">Keep the sale that works. Add another way to say yes.</p>
+    <div class="cust__sol">
+      <p class="cust__lead">Add subscription. Don&rsquo;t replace Multi-Year.</p>
+      <p class="cust__body">FurnitureRx gives customers a $19.99/month protection option alongside
+      your existing program &mdash; expanding the ways customers can buy protection and giving you
+      another opportunity to improve attachment. Roughly <strong>70% of customers say no</strong>
+      to Multi-Year plans &mdash; FurnitureRx is built for that group.</p>
+      <p class="cust__src">Source: RAP program experience</p>
+      <p class="cust__cta"><a class="qlink" href="programs.html#subscription">See the $19.99 Subscription Program &rarr;</a></p>
+    </div>
   </div>
 </section>
 
