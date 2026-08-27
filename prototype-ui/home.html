@@ -376,13 +376,6 @@ button{font:inherit;cursor:pointer}
 .rev__pct{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .rev__item--acc{color:var(--rap-brass);border-top-color:var(--rap-brass)}
 .rev__item--acc .rev__pct{color:var(--rap-brass)}
-/* slate-500 is only ~3.3:1 on the ink ground, so the caption uses a white
-   alpha (~5.9:1) instead — same visual weight, AA at 11px. */
-.rev__cite{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.6);
-  margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
-.rev__cite b{display:block;color:rgba(255,255,255,.72);font-weight:400;text-transform:uppercase;
-  letter-spacing:.10em;margin-bottom:6px}
-
 /* ---------- attachment-rate control under the revenue bar ----------
    Ink-ground twin of the economics-gate .rng: identical geometry (44px hit
    area over a 4px visual track, 18px thumb) with the palette swapped to the
@@ -391,7 +384,7 @@ button{font:inherit;cursor:pointer}
    and its 16px type keeps iOS from zooming on focus.
    Both the WebKit and Gecko pseudo-elements are written out separately; they
    cannot be combined into one selector list, one bad selector drops the rule. */
-.atr{margin-top:var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);text-align:left}
+.atr{margin-top:var(--s-4);text-align:left}
 .atr__head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-4)}
 .atr__lab{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;
   color:rgba(255,255,255,.72)}
@@ -1035,9 +1028,6 @@ button{font:inherit;cursor:pointer}
         <li class="rev__item rev__item--acc"><span class="rev__chip" style="background:#C19541"></span><span class="rev__name">Operating Profit</span><span class="rev__pct">5.5%</span></li>
       </ul>
 
-      <figcaption class="rev__cite">
-        Illustrative percentages based on dealer-supplied operating assumptions.
-      </figcaption>
     </figure>
 
     <!-- Attachment-rate control. Drives the bar above from one set of dollar
