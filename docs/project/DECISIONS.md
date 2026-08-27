@@ -623,6 +623,22 @@ Primary nav is now: Programs ▾ · Newswire · Market Intel ▾ · Why RAP · [
 - **Homepage:** orientation claim = "Turn key protection programs built for furniture retailers and interior designers."; orientation descriptor replaced with owner copy (subscription reinsurance "$1M in 36 months" framing — **volume qualifier question open**, true at 200 new subscribers/month); ink section headline = "Why You Must Maximize Protection in Today's Economy" (eyebrow removed, top padding 64px); ink illustration = 100%-of-revenue stacked cost bar (COGS 50, payroll 18, rent 8, advertising 6, freight-in 5, warehouse 4.5 = 91.5%, brass 8.5% remainder; owner-supplied illustrative figures).
 - Dropdown hover-gap bug fixed sitewide (invisible bridge).
 
+## Decision 045 — Mobile Remediation Plan Approved
+
+**Status:** Approved (Owner, 2026-08-27)
+
+The MOBILE_AUDIT.md list (commit a01b1b3) is approved for remediation with these owner rulings (via Agent 1 review):
+
+- **Utility bar on phone (S6):** keep a slim strip with **Customer Support + Dealer Login only**; everything else → drawer.
+- **Hover dropdowns on touch (S14):** below 1024px is a non-issue (drawer); add **tap-to-toggle fallback** at desktop widths for touch devices — first tap opens panel, second tap on trigger navigates.
+- **Cost bar mobile (H8):** keep horizontal, color-only segments, legend carries the reading; **bump bar height** so the 4.5% sliver stays visible. No vertical rebuild.
+- **GM figure (H1/E1):** **HTML rebuild** of both copies (home + gate) from one shared pattern; gate keeps its sliders wired to it.
+- **Newswire state bar (N7):** **remove** (dev chrome policy); keep states reachable via URL param like the gate's `?state=d`.
+- **Admin minimal drawer (A8):** intentional, keep. The both-panes bug (A2) is must-fix.
+- **Elevated to must-fix:** teaser chart's shrunken "no scale shown" disclaimer (H2 — claims hygiene); gate sliders (E2 — full-width tracks **plus a small numeric input beside each slider** for precise 1–500 entry); gate footer grid (E6); research missing color tokens (R3).
+
+**Process:** all fixes on branch `mobile-fixes` (main untouched; owner reviews branch deploy on phone per batch). Batches: 1 = two sitewide root causes (S1 header overflow, S2 hidden-vs-display); 2 = three visual rebuilds (H1/E1, H2, M1-class SVG type); 3 = page-specific broken items; 4 = degraded/cosmetic sweep. Owner reviews each batch before the next starts. Merge to main logged as its own decision on approval.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
