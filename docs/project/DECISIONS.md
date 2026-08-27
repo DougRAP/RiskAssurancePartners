@@ -639,6 +639,17 @@ The MOBILE_AUDIT.md list (commit a01b1b3) is approved for remediation with these
 
 **Process:** all fixes on branch `mobile-fixes` (main untouched; owner reviews branch deploy on phone per batch). Batches: 1 = two sitewide root causes (S1 header overflow, S2 hidden-vs-display); 2 = three visual rebuilds (H1/E1, H2, M1-class SVG type); 3 = page-specific broken items; 4 = degraded/cosmetic sweep. Owner reviews each batch before the next starts. Merge to main logged as its own decision on approval.
 
+## Decision 046 — Mobile Batch 1 + Drawer Merged; Mobile-as-Part-of-Done Working Model
+
+**Status:** Approved (Owner, 2026-08-27)
+
+- **Merged to main** (owner phone-reviewed on branch preview): batch 1 sitewide fixes (header shrink S1, `[hidden]` guard S2 — c8d2f90) and the mobile drawer redesign (accordions for Programs/Market Intel, Home row removed with wordmark as home link, CUSTOMERS cluster below nav, 22px serif rows / 15px sans customer links, pinned Profit Calculator CTA — 8b65b65).
+- **Batch plan revised** (supersedes Decision 045 sequencing after batch 1): next, one must-fix pass on `mobile-fixes` for the remaining *broken* items — GM figure HTML rebuild (H1/E1, both pages, sliders kept), gate sliders full-width + numeric inputs (E2/E7), gate CTA centering (E3), gate footer grid (E6), teaser-chart disclaimer lift (H2, claims hygiene), research color tokens (R3). After that, remaining degraded/cosmetic audit items fold into whichever content pass touches that page — no standalone batches 3–4.
+- **Working model going forward:** content work continues per page; mobile is part of "done":
+  - every maker brief carries a standing mobile acceptance section (no new fixed widths; no text inside scaling SVGs; `hidden` never paired with bare CSS `display`; ≥44px tap targets; 12px type floor; wide content overflow-wrapped);
+  - master QA adds a mobile grep pass (new fixed px widths, SVG font-size < 14, `display:` on hidden-toggled elements) alongside forbidden strings;
+  - MOBILE_AUDIT.md is the living punch list, items marked as resolved.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
