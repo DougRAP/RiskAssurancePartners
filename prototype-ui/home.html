@@ -359,7 +359,9 @@ button{font:inherit;cursor:pointer}
 /* The bar. flex-grow carries the percentage, so the geometry is the data. */
 .rev__bar{display:flex;gap:2px;height:62px;margin-top:2px}
 .rev__seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;border-radius:1px}
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;border-radius:1px;
+  transition:flex-grow .25s ease}
+@media (prefers-reduced-motion:reduce){.rev__seg{transition:none}}
 .rev__seg--acc{background:var(--rap-brass);color:var(--rap-ink);font-weight:600}
 
 /* Legend. Carries every segment name; at desktop the bar shows percentages
@@ -380,6 +382,51 @@ button{font:inherit;cursor:pointer}
   margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
 .rev__cite b{display:block;color:rgba(255,255,255,.72);font-weight:400;text-transform:uppercase;
   letter-spacing:.10em;margin-bottom:6px}
+
+/* ---------- attachment-rate control under the revenue bar ----------
+   Ink-ground twin of the economics-gate .rng: identical geometry (44px hit
+   area over a 4px visual track, 18px thumb) with the palette swapped to the
+   ink section's own — brass is THE accent on ink, ember is display-only there.
+   The compact numeric twin is what makes a 60-step range landable on a phone,
+   and its 16px type keeps iOS from zooming on focus.
+   Both the WebKit and Gecko pseudo-elements are written out separately; they
+   cannot be combined into one selector list, one bad selector drops the rule. */
+.atr{margin-top:var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);text-align:left}
+.atr__head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-4)}
+.atr__lab{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:rgba(255,255,255,.72)}
+.atr__val{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;color:var(--rap-brass)}
+.atr__row{display:flex;align-items:center;gap:var(--s-3);margin-top:2px}
+.atr__row .rng{flex:1 1 auto;min-width:0}
+.rng{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;padding:0;background:transparent}
+.rng:focus{outline:none}
+.rng::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:rgba(255,255,255,.28)}
+.rng::-moz-range-track{height:4px;border-radius:2px;background:rgba(255,255,255,.28)}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-7px;
+  border-radius:50%;background:var(--rap-brass);border:1px solid var(--rap-brass);cursor:pointer}
+.rng::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
+  background:var(--rap-brass);border:1px solid var(--rap-brass);cursor:pointer}
+.rng:hover::-webkit-slider-thumb{background:#fff;border-color:#fff}
+.rng:hover::-moz-range-thumb{background:#fff;border-color:#fff}
+.rng:active::-webkit-slider-thumb{background:#fff;border-color:#fff}
+.rng:active::-moz-range-thumb{background:#fff;border-color:#fff}
+.rng:focus-visible::-webkit-slider-thumb{outline:2px solid #fff;outline-offset:2px}
+.rng:focus-visible::-moz-range-thumb{outline:2px solid #fff;outline-offset:2px}
+.num{flex:0 0 auto;width:5ch;height:44px;padding:0 4px;border:1px solid rgba(255,255,255,.38);
+  border-radius:var(--radius-sm);background:transparent;color:#fff;font-family:var(--mono);font-size:16px;
+  font-variant-numeric:tabular-nums;text-align:center;-moz-appearance:textfield;appearance:textfield}
+.num:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.num::-webkit-outer-spin-button,.num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.atr__out{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s-2) var(--s-5);margin-top:var(--s-4)}
+.atr__o{display:flex;align-items:baseline;gap:8px;margin:0;font-family:var(--mono);font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.62);font-variant-numeric:tabular-nums}
+.atr__o i{font-style:normal;color:rgba(255,255,255,.45)}
+.atr__o b{color:#fff;font-weight:600}
+.atr__o--acc{color:var(--rap-brass)}
+.atr__o--acc b{color:var(--rap-brass)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);
+  white-space:nowrap;border:0}
 
 
 /* ---------- 06 changed customer ---------- */
@@ -534,11 +581,11 @@ button{font:inherit;cursor:pointer}
   .trust__i:last-child{grid-column:1/-1}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
 }
-/* "4.5%" in 11px mono is ~29px wide. Below ~1000px the 4.5% segment drops
-   under 40px, leaving no clearance, so every in-bar percentage goes at once —
-   a bar labelled only where the label happens to fit reads as a bug. The
-   legend carries the numbers from here down; the bar keeps its exact
-   proportions and stays the picture. */
+/* A one-decimal percentage in 11px mono runs ~29-34px wide. Below ~1000px the
+   smallest segment drops under 40px, leaving no clearance, so every in-bar
+   percentage goes at once — a bar labelled only where the label happens to fit
+   reads as a bug. The legend carries the numbers from here down; the bar keeps
+   its exact proportions and stays the picture. */
 @media (max-width:1000px){
   .rev__seg{font-size:0}
   .rev__bar{height:52px}
@@ -578,13 +625,17 @@ button{font:inherit;cursor:pointer}
   .trust__row{grid-template-columns:1fr;row-gap:var(--s-3)}
   .trust__i{border-left:0;padding-left:0}
   /* Phone: the two headline numerals stack rather than sit at opposite ends of
-     a ~310px row, and the 8.5% block flips back to left alignment so both read
-     off the same margin. The rule + bar keep the 91.5 / 8.5 split. */
+     a ~310px row, and the right-hand block flips back to left alignment so both
+     read off the same margin. The rule + bar keep the live split. */
   .rev__heads{flex-direction:column;align-items:stretch;gap:var(--s-5)}
   .rev__head--acc{text-align:left}
   .rev__key{grid-template-columns:1fr;gap:0}
   .rev__item{padding:10px 0}
   .rev__bar{height:44px}
+  /* Phone: the control keeps the full column and the three readouts stack, so
+     nothing sets a floor wider than the ~342px of content. */
+  .atr__out{flex-direction:column;gap:var(--s-2)}
+  .atr__head{gap:var(--s-3)}
   .why{grid-template-columns:1fr}
   .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
   .dir__card{min-height:0}
@@ -936,38 +987,39 @@ button{font:inherit;cursor:pointer}
     <!-- Where the revenue dollar goes. Owner-supplied cost structure for a
          typical independent furniture retailer; percentages of revenue:
            COGS (ex-freight) 50 · payroll (ex-warehouse) 18 · rent 8 ·
-           advertising 6 · freight-in 5 · warehouse/delivery 4.5  = 91.5
-         leaving 8.5 for insurance, admin, credit-card fees and profit.
+           advertising 6 · freight-in 5 · warehouse/delivery/other 7.5  = 94.5
+         leaving 5.5 operating profit.
          These are owner estimates, not RAP financials and not sourced to any
          third party — the caption says exactly that and nothing more.
 
          The flex-grow value on each segment IS the percentage, so the drawing
-         cannot drift from the numbers beside it. -->
+         cannot drift from the numbers beside it. The attachment-rate control
+         below rewrites both from one set of dollar figures, so they stay tied. -->
     <figure class="rev">
       <div class="rev__heads">
         <div class="rev__head">
-          <p class="rev__num">91.5%</p>
+          <p class="rev__num" data-rev-exp>94.5%</p>
           <p class="rev__cap">Gone before profit &mdash; and all of it recurs</p>
         </div>
         <div class="rev__head rev__head--acc">
-          <p class="rev__num rev__num--acc">8.5%</p>
+          <p class="rev__num rev__num--acc" data-rev-op>5.5%</p>
           <p class="rev__cap rev__cap--acc">What&rsquo;s left &mdash; including profit</p>
         </div>
       </div>
 
       <div class="rev__rule" aria-hidden="true">
-        <span style="flex-grow:91.5"></span>
-        <span class="rev__rule--acc" style="flex-grow:8.5"></span>
+        <span data-rev-rule-exp style="flex-grow:94.5"></span>
+        <span class="rev__rule--acc" data-rev-rule-op style="flex-grow:5.5"></span>
       </div>
 
-      <div class="rev__bar" role="img" aria-label="Stacked bar of every revenue dollar at a typical independent furniture retailer: cost of goods sold excluding freight 50 percent, payroll excluding warehouse 18 percent, rent 8 percent, advertising 6 percent, freight-in 5 percent, warehouse and delivery 4.5 percent. Those six recurring costs take 91.5 percent, leaving 8.5 percent to cover insurance, administration, credit-card fees and profit.">
+      <div class="rev__bar" role="img" aria-label="Stacked bar of every revenue dollar at a typical independent furniture retailer at a zero percent protection attachment rate: cost of goods sold excluding freight 50 percent, payroll excluding warehouse 18 percent, rent 8 percent, advertising 6 percent, freight-in 5 percent, warehouse, delivery and other 7.5 percent. Those six recurring costs take 94.5 percent, leaving 5.5 percent operating profit. The attachment-rate slider below redraws the bar; the readout beneath it reports the resulting operating margin and profit.">
         <span class="rev__seg" style="flex-grow:50;background:#204374">50%</span>
         <span class="rev__seg" style="flex-grow:18;background:#3D4A5C">18%</span>
         <span class="rev__seg" style="flex-grow:8;background:#2E5A96">8%</span>
         <span class="rev__seg" style="flex-grow:6;background:#64748B">6%</span>
         <span class="rev__seg" style="flex-grow:5;background:#22334F">5%</span>
-        <span class="rev__seg" style="flex-grow:4.5;background:#C3CBD6;color:#0C172A">4.5%</span>
-        <span class="rev__seg rev__seg--acc" style="flex-grow:8.5">8.5%</span>
+        <span class="rev__seg" style="flex-grow:7.5;background:#C3CBD6;color:#0C172A">7.5%</span>
+        <span class="rev__seg rev__seg--acc" style="flex-grow:5.5">5.5%</span>
       </div>
 
       <ul class="rev__key">
@@ -976,14 +1028,39 @@ button{font:inherit;cursor:pointer}
         <li class="rev__item"><span class="rev__chip" style="background:#2E5A96"></span><span class="rev__name">Rent</span><span class="rev__pct">8%</span></li>
         <li class="rev__item"><span class="rev__chip" style="background:#64748B"></span><span class="rev__name">Advertising</span><span class="rev__pct">6%</span></li>
         <li class="rev__item"><span class="rev__chip" style="background:#22334F"></span><span class="rev__name">Freight-in</span><span class="rev__pct">5%</span></li>
-        <li class="rev__item"><span class="rev__chip" style="background:#C3CBD6"></span><span class="rev__name">Warehouse / delivery</span><span class="rev__pct">4.5%</span></li>
-        <li class="rev__item rev__item--acc"><span class="rev__chip" style="background:#C19541"></span><span class="rev__name">Insurance, admin, card fees &mdash; and profit</span><span class="rev__pct">8.5%</span></li>
+        <li class="rev__item"><span class="rev__chip" style="background:#C3CBD6"></span><span class="rev__name">Warehouse/Delivery/Other</span><span class="rev__pct">7.5%</span></li>
+        <li class="rev__item rev__item--acc"><span class="rev__chip" style="background:#C19541"></span><span class="rev__name">Operating Profit</span><span class="rev__pct">5.5%</span></li>
       </ul>
 
       <figcaption class="rev__cite">
         Illustrative percentages based on dealer-supplied operating assumptions.
       </figcaption>
     </figure>
+
+    <!-- Attachment-rate control. Drives the bar above from one set of dollar
+         figures normalised to 100 furniture sales; see the JS block for the
+         arithmetic. Default 0 so the section still opens on the baseline. -->
+    <div class="atr">
+      <div class="atr__head">
+        <label class="atr__lab" for="atr-rng">Protection Plan Attachment Rate</label>
+        <b class="atr__val" id="atr-val">0%</b>
+      </div>
+      <div class="atr__row">
+        <input class="rng" id="atr-rng" type="range" min="0" max="60" step="1" value="0"
+               aria-label="Protection plan attachment rate" aria-valuetext="0 percent">
+        <input class="num" id="atr-num" type="number" inputmode="numeric" min="0" max="60" step="1" value="0"
+               aria-label="Protection plan attachment rate, numeric entry">
+      </div>
+      <div class="atr__out">
+        <p class="atr__o">Operating Margin <span>5.5%</span> <i>&rarr;</i> <b id="atr-mgn">5.5%</b></p>
+        <p class="atr__o">Operating Profit <span>$12,375</span> <i>&rarr;</i> <b id="atr-prf">$12,375</b></p>
+        <p class="atr__o atr__o--acc"><span class="vh">Operating profit increase</span><b id="atr-inc">+0%</b></p>
+      </div>
+      <!-- The announcement is spoken from here, not from the readouts above, so
+           dragging the slider does not flood the queue; it lands once the value
+           settles. Same pattern as the gross-margin figure on economics-gate. -->
+      <p class="vh" id="atr-live" role="status" aria-live="polite"></p>
+    </div>
 
     <p class="lead" style="margin:var(--s-7) auto 0;padding-top:var(--s-6);border-top:1px solid var(--rap-ink-700);max-width:80ch">
       Furniture sales carry the full cost structure. <strong style="color:#fff;font-weight:600">Protection profit does not.</strong>
@@ -1286,6 +1363,116 @@ button{font:inherit;cursor:pointer}
     if (!ticking) { ticking = true; requestAnimationFrame(apply); }
   }, { passive: true });
   apply();
+})();
+
+/* Revenue bar × protection attachment rate.
+   Owner-approved arithmetic, normalised to 100 furniture sales:
+     baseline dollars  COGS 112,500 · payroll 40,500 · rent 18,000 ·
+       advertising 13,500 · freight-in 11,250 · warehouse/delivery/other 16,875 ·
+       operating profit 12,375  =  225,000 revenue
+     per attached plan  +250 revenue, +70 COGS, +50 payroll, +130 operating
+       profit (70 + 50 + 130 = 250, so the ledger always closes)
+   Rent, advertising, freight-in and warehouse/delivery/other are fixed in
+   dollars and only fall as a share. Every segment is dollars ÷ revenue, so the
+   seven percentages sum to 100 at any attachment rate. The bar's aria-label is
+   the static baseline description and is deliberately never rewritten — the
+   readout below is the live region. */
+(function () {
+  var rng = document.getElementById('atr-rng');
+  var num = document.getElementById('atr-num');
+  var bar = document.querySelector('.rev__bar');
+  if (!rng || !num || !bar) { return; }
+
+  var MIN = 0, MAX = 60;
+  var BASE = [112500, 40500, 18000, 13500, 11250, 16875, 12375];
+  var PER  = [70, 50, 0, 0, 0, 0, 130];
+  var BASE_REV = 225000, PER_REV = 250, BASE_OP = 12375;
+
+  var segs  = bar.querySelectorAll('.rev__seg');
+  var pcts  = document.querySelectorAll('.rev__key .rev__pct');
+  var rExp  = document.querySelector('[data-rev-rule-exp]');
+  var rOp   = document.querySelector('[data-rev-rule-op]');
+  var hExp  = document.querySelector('[data-rev-exp]');
+  var hOp   = document.querySelector('[data-rev-op]');
+  var val   = document.getElementById('atr-val');
+  var mgn   = document.getElementById('atr-mgn');
+  var prf   = document.getElementById('atr-prf');
+  var inc   = document.getElementById('atr-inc');
+  var live  = document.getElementById('atr-live');
+  if (segs.length !== BASE.length || pcts.length !== BASE.length) { return; }
+
+  var liveTimer = null;
+
+  /* Matches the bar's existing convention: integer when whole, else one
+     decimal — "50%", "7.5%". */
+  function pct(x) {
+    var r = Math.round(x * 10) / 10;
+    return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1)) + '%';
+  }
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function clamp(v) {
+    if (!isFinite(v)) { return MIN; }
+    return v < MIN ? MIN : (v > MAX ? MAX : v);
+  }
+
+  function render() {
+    var plans = clamp(parseInt(rng.value, 10));
+    var rev = BASE_REV + PER_REV * plans;
+    var i, d, p, op = 0, exp = 0;
+
+    for (i = 0; i < BASE.length; i++) {
+      d = BASE[i] + PER[i] * plans;
+      p = d / rev * 100;
+      segs[i].style.flexGrow = p;
+      segs[i].textContent = pct(p);
+      pcts[i].textContent = pct(p);
+      if (i === BASE.length - 1) { op = p; } else { exp += p; }
+    }
+
+    rExp.style.flexGrow = exp;
+    rOp.style.flexGrow = op;
+    hExp.textContent = pct(exp);
+    hOp.textContent = pct(op);
+
+    var opD = BASE_OP + PER[6] * plans;
+    var mgnT = (Math.round(op * 10) / 10).toFixed(1) + '%';
+    var incT = '+' + Math.round((opD / BASE_OP - 1) * 100) + '%';
+    val.textContent = plans + '%';
+    mgn.textContent = mgnT;
+    prf.textContent = money(opD);
+    inc.textContent = incT;
+    rng.setAttribute('aria-valuetext', plans + ' percent');
+
+    /* Announce once the slider settles, so dragging does not flood the queue.
+       The visible readouts above are already current at this point. */
+    if (liveTimer) { clearTimeout(liveTimer); }
+    liveTimer = setTimeout(function () {
+      live.textContent = plans + ' percent attachment rate. Operating margin ' +
+        mgnT + ', operating profit ' + money(opD) + ', ' + incT + '.';
+    }, 350);
+  }
+
+  /* Two-way sync with the numeric twin: the field is left alone while it is
+     being typed in unless the typed value is out of range; on blur an empty or
+     unparseable field falls back to the slider. */
+  rng.addEventListener('input', function () { num.value = clamp(parseInt(rng.value, 10)); render(); });
+  num.addEventListener('input', function () {
+    var raw = parseInt(num.value, 10);
+    if (!isFinite(raw)) { return; }
+    var v = clamp(raw);
+    if (v !== raw) { num.value = v; }
+    rng.value = v;
+    render();
+  });
+  num.addEventListener('blur', function () {
+    var raw = parseInt(num.value, 10);
+    var v = isFinite(raw) ? clamp(raw) : clamp(parseInt(rng.value, 10));
+    num.value = v;
+    rng.value = v;
+    render();
+  });
+
+  render();
 })();
 
 /* Drawer: close on Esc. */
