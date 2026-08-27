@@ -250,6 +250,39 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 .hero__fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-md);padding:var(--s-6)}
 .figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
 .figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
+
+/* ---------- GM comparison figure — shared HTML pattern (home + gate) ----------
+   DECISION 045 (audit H1/E1). Replaces the 520x350 SVG whose labels scaled with
+   the container (5.3-6.9px at 390px). Same reason the .rev cost bar is HTML:
+   geometry scales, type does not. Every label below is a real pixel size and
+   never drops under 12px. Bar LENGTH carries the comparison — one scale for both
+   columns — and the bars are aria-hidden decoration; the numerals are real text.
+   On this page the two sliders drive --h, the numerals and the formula lines. */
+.gmf{--gmf-h:clamp(156px,25vw,222px)}
+.gmf__kick{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
+.gmf__cols{display:grid;grid-template-columns:1fr 3px 1fr;gap:var(--s-5);align-items:end;margin-top:var(--s-5)}
+.gmf__rule{align-self:stretch;background:var(--rap-slate-300)}
+.gmf__col{min-width:0}
+.gmf__name{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ink)}
+.gmf__f{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
+.gmf__plot{position:relative;height:var(--gmf-h);margin-top:var(--s-5);border-bottom:1px solid var(--rap-slate-300)}
+.gmf__bar{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);background:var(--c,var(--rap-brass))}
+.gmf__lbl{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);display:flex;flex-direction:column;justify-content:space-between;gap:6px;padding:10px 6px;min-width:0}
+.gmf__val{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,36px);line-height:1;letter-spacing:-.01em;text-align:center;color:var(--rap-cream);overflow-wrap:anywhere}
+.gmf__cap{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--rap-cream);line-height:1.2}
+/* Short bar — the numeral parks above the bar top in ink, as the SVG did. */
+.gmf__lbl--valout{justify-content:flex-end}
+.gmf__lbl--valout .gmf__val{position:absolute;left:0;right:0;bottom:100%;margin-bottom:8px;color:var(--rap-ink)}
+/* Very short bar — caption and numeral both stack above it. */
+.gmf__lbl--allout{height:auto;bottom:var(--h,100%);margin-bottom:8px;flex-direction:column-reverse;padding:0}
+.gmf__lbl--allout .gmf__val{color:var(--rap-ink)}
+.gmf__lbl--allout .gmf__cap{color:var(--rap-slate-500)}
+.gmf__foot{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3);line-height:1.4}
+@media (max-width:680px){
+  .hero__fig{padding:var(--s-4)}
+  .gmf__cols{gap:var(--s-4)}
+  .gmf__lbl{padding:8px 4px}
+}
 .plans__p a{color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;font-weight:600}
 .plans__p a:hover{color:var(--rap-ember)}
 
@@ -264,9 +297,21 @@ a{color:inherit}button{font:inherit;cursor:pointer}
    WebKit and Gecko pseudo-elements must be written out separately — they
    cannot be combined into one selector list, one bad selector drops the rule. */
 .tick{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-5)}
-.tick__lab{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
+.tick__lab{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
 .tick__lab b{font-weight:600;color:var(--rap-ink);font-variant-numeric:tabular-nums}
-.rng{-webkit-appearance:none;appearance:none;width:100%;margin:10px 0 0;padding:0;background:transparent}
+/* Slider + a compact numeric twin, two-way synced (audit E7). The number field
+   is the accessible and the touch-precise way in: at 342px of content a 500-step
+   range is ~0.6px per step, so the field is the one that lets you land on a
+   value. 16px type keeps iOS from zooming on focus. */
+.tick__row{display:flex;align-items:center;gap:var(--s-3);margin-top:6px}
+.tick__row .rng{flex:1 1 auto;min-width:0}
+.num{flex:0 0 auto;width:5ch;height:44px;padding:0 4px;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);
+     background:#fff;color:var(--rap-ink);font-family:var(--mono);font-size:16px;font-variant-numeric:tabular-nums;text-align:center;
+     -moz-appearance:textfield;appearance:textfield}
+.num::-webkit-outer-spin-button,.num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+/* 44px hit area; the visual track stays 4px and both engines centre it in the
+   control box, so the weight of the control is unchanged (audit E8). */
+.rng{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;padding:0;background:transparent}
 .rng:focus{outline:none}
 .rng::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--rap-slate-300)}
 .rng::-moz-range-track{height:4px;border-radius:2px;background:var(--rap-slate-300)}
@@ -365,9 +410,11 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   .state{padding:var(--s-8) 0}
   .fields{grid-template-columns:1fr}
   .gate__grid,.outrow{grid-template-columns:1fr}
-  /* Sliders stay two-up so each keeps sitting under its half of the figure;
-     only the gutter between them tightens. */
-  .tick{gap:var(--s-4)}
+  /* Audit E2 — two-up left each slider ~150px wide, i.e. ~0.3px per step, which
+     is not operable by touch. Single column below 640px: each slider takes the
+     full content width and keeps its numeric twin. */
+  .tick{grid-template-columns:1fr;gap:var(--s-5)}
+  .tick__lab{font-size:13px}
   .btns .btn{width:100%}
   /* R3(a) — slim utility strip survives on mobile */
   .utility__inner{min-height:32px}
@@ -601,57 +648,79 @@ a{color:inherit}button{font:inherit;cursor:pointer}
              mini-calculator uses (DECISION 039):
                  subscription(m) = 8 * m * 1830     (SUM_{k=1..60} k = 1830)
                  multi-year(m)   = 180 * m * 60
-             Bars normalise to the taller of the two totals; the taller one takes
-             the original 222px subscription-bar height, the other is
-             proportional with a 6px floor so it stays visible. Numerals and
-             in-bar labels are repositioned in JS as the bars and the strings
-             change size — see the script at the foot of the page. -->
-        <svg id="gm-svg" viewBox="0 0 520 350" role="img" aria-label="Sixty-month gross margin comparison at one new sale per month: subscription 14,640 dollars, Multi-Year 10,800 dollars." style="width:100%;height:auto">
-          <text x="0" y="14" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#64748B">CHOOSE SUBSCRIPTION OR MULTI-YEAR PLANS, OR MIX &amp; MATCH</text>
+             Bars normalise to the taller of the two totals; the taller one fills
+             the plot, the other is proportional with a floor so it stays visible.
 
-          <!-- divider bar -->
-          <rect x="258" y="34" width="3" height="298" fill="#C3CBD6"/>
+             DECISION 045 — rebuilt on the shared .gmf HTML pattern (same as
+             home.html) so the labels no longer scale with the container. JS sets
+             --h on each .gmf__plot and rewrites the numerals, formula lines and
+             captions — see the script at the foot of the page. -->
+        <div class="gmf" id="gm-fig" role="group" aria-label="Sixty-month gross margin comparison at one new sale per month: subscription 14,640 dollars, Multi-Year 10,800 dollars.">
+          <p class="gmf__kick">Choose subscription or multi-year plans, or mix &amp; match</p>
 
-          <!-- left: subscription -->
-          <text x="0" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">SUBSCRIPTION</text>
-          <text id="gm-sub-f1" x="0" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$8 / PAYMENT &#183; 1 NEW SALE / MO</text>
-          <text id="gm-sub-f2" x="0" y="80" font-family="IBM Plex Mono" font-size="11" fill="#64748B">60-MONTH WATERFALL</text>
-          <rect id="gm-sub-bar" x="60" y="88" width="120" height="222" fill="#C19541"/>
-          <text id="gm-sub-val" x="120" y="128" text-anchor="middle" font-family="Playfair Display" font-size="30" font-weight="600" fill="#FCF8F5">$14,640</text>
-          <text id="gm-sub-lab" x="120" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">60-MONTH TOTAL</text>
-          <text x="0" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">RECURRING &mdash; PAID MONTHLY</text>
+          <div class="gmf__cols">
+            <!-- left: subscription -->
+            <div class="gmf__col">
+              <p class="gmf__name">Subscription</p>
+              <p class="gmf__f" id="gm-sub-f1">$8 / payment &#183; 1 new sale / mo</p>
+              <p class="gmf__f" id="gm-sub-f2">60-month waterfall</p>
+              <div class="gmf__plot" id="gm-sub-plot" style="--h:100%;--c:var(--rap-brass)">
+                <div class="gmf__bar" aria-hidden="true"></div>
+                <div class="gmf__lbl" id="gm-sub-lbl">
+                  <p class="gmf__val" id="gm-sub-val">$14,640</p>
+                  <p class="gmf__cap" id="gm-sub-lab">60-month total</p>
+                </div>
+              </div>
+              <p class="gmf__foot">Recurring &mdash; paid monthly</p>
+            </div>
 
-          <!-- right: multi-year -->
-          <text x="290" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">MULTI-YEAR</text>
-          <text id="gm-mul-f1" x="290" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$180 GM &#215; 1 SALE / MO</text>
-          <text id="gm-mul-f2" x="290" y="80" font-family="IBM Plex Mono" font-size="11" fill="#64748B">&#215; 60 MONTHS</text>
-          <rect id="gm-mul-bar" x="350" y="146" width="120" height="164" fill="#C8581B"/>
-          <text id="gm-mul-val" x="410" y="186" text-anchor="middle" font-family="Playfair Display" font-size="30" font-weight="600" fill="#FCF8F5">$10,800</text>
-          <text id="gm-mul-lab" x="410" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">60-MONTH TOTAL</text>
-          <text x="290" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">ONE-TIME &mdash; AT SALE</text>
+            <div class="gmf__rule" aria-hidden="true"></div>
 
-          <!-- shared baseline -->
-          <line x1="0" y1="310" x2="240" y2="310" stroke="#C3CBD6" stroke-width="1"/>
-          <line x1="280" y1="310" x2="520" y2="310" stroke="#C3CBD6" stroke-width="1"/>
-        </svg>
+            <!-- right: multi-year -->
+            <div class="gmf__col">
+              <p class="gmf__name">Multi-Year</p>
+              <p class="gmf__f" id="gm-mul-f1">$180 GM &#215; 1 sale / mo</p>
+              <p class="gmf__f" id="gm-mul-f2">&#215; 60 months</p>
+              <div class="gmf__plot" id="gm-mul-plot" style="--h:73.77%;--c:var(--rap-ember)">
+                <div class="gmf__bar" aria-hidden="true"></div>
+                <div class="gmf__lbl" id="gm-mul-lbl">
+                  <p class="gmf__val" id="gm-mul-val">$10,800</p>
+                  <p class="gmf__cap" id="gm-mul-lab">60-month total</p>
+                </div>
+              </div>
+              <p class="gmf__foot">One-time &mdash; at sale</p>
+            </div>
+          </div>
+        </div>
 
         <!-- One slider per half of the figure. Defaults reproduce the static
              markup above exactly, so the figure is correct with JS disabled.
              Each aria-label opens with the side name and then repeats the
              visible label verbatim, so the accessible name contains the visible
-             one (WCAG 2.5.3) while still telling the two sliders apart. -->
+             one (WCAG 2.5.3) while still telling the two sliders apart.
+             Each slider carries a numeric twin (audit E7): 1-500 in a ~150px
+             track is not landable by touch, so the field is the precise way in.
+             The two stay synced both directions — see the script. -->
         <div class="tick">
           <div>
             <label class="tick__lab" for="gm-sub-rng">New sales per month = <b id="gm-sub-n">1</b></label>
-            <input class="rng" id="gm-sub-rng" type="range" min="1" max="500" step="1" value="1"
-                   aria-label="Subscription &mdash; new sales / month"
-                   aria-valuetext="1 new sale per month, $14,640 gross margin over 60 months">
+            <div class="tick__row">
+              <input class="rng" id="gm-sub-rng" type="range" min="1" max="500" step="1" value="1"
+                     aria-label="Subscription &mdash; new sales / month"
+                     aria-valuetext="1 new sale per month, $14,640 gross margin over 60 months">
+              <input class="num" id="gm-sub-num" type="number" inputmode="numeric" min="1" max="500" step="1" value="1"
+                     aria-label="Subscription &mdash; new sales / month, typed">
+            </div>
           </div>
           <div>
             <label class="tick__lab" for="gm-mul-rng">New sales per month = <b id="gm-mul-n">1</b></label>
-            <input class="rng" id="gm-mul-rng" type="range" min="1" max="500" step="1" value="1"
-                   aria-label="Multi-Year &mdash; new sales / month"
-                   aria-valuetext="1 new sale per month, $10,800 gross margin over 60 months">
+            <div class="tick__row">
+              <input class="rng" id="gm-mul-rng" type="range" min="1" max="500" step="1" value="1"
+                     aria-label="Multi-Year &mdash; new sales / month"
+                     aria-valuetext="1 new sale per month, $10,800 gross margin over 60 months">
+              <input class="num" id="gm-mul-num" type="number" inputmode="numeric" min="1" max="500" step="1" value="1"
+                     aria-label="Multi-Year &mdash; new sales / month, typed">
+            </div>
           </div>
         </div>
         <p class="vh" id="gm-live" role="status" aria-live="polite"></p>
@@ -1461,19 +1530,28 @@ a{color:inherit}button{font:inherit;cursor:pointer}
    Subscription stacks because every cohort keeps paying (capped at 60
    payments); multi-year does not, because the margin lands at the sale.
 
-   Geometry: the bars share the y=310 baseline. The taller total takes the
-   original 222px subscription-bar height, the shorter is proportional with a
-   6px floor. Because the numerals grow to ten characters ($7,320,000) and the
-   short bar can shrink below them, both the numeral and the in-bar label are
-   re-placed every frame: the numeral drops inside the bar only when the bar
-   can hold it, otherwise it sits above the bar top in ink; the label sits
-   inside the bar only while the bar is at least 40px, otherwise it stacks
-   above the numeral in slate. Numeral font-size steps down with string length
-   so it never overruns the 120px bar or its column. */
+   Geometry (DECISION 045 — the figure is now HTML, not SVG): the bars share the
+   plot baseline and are sized as a PERCENTAGE of the plot height, so the shapes
+   scale with the container while every label keeps its real pixel size. The
+   taller total fills the plot, the shorter is proportional with a 2.7% floor
+   (the old 6px-of-222px floor) so it stays visible. Because the numerals grow to
+   ten characters ($5,400,000) and the short bar can shrink below them, the label
+   block is re-placed every frame by class, on the same thresholds the SVG used,
+   expressed as percentages of the old 222px plot:
+     >= 54% (120/222) — numeral sits inside the bar in cream;
+     >= 18%  (40/222) — caption sits inside the bar, numeral parks above in ink;
+     below that       — caption and numeral both stack above the bar.
+   Numeral font-size steps down with string length so it never overruns its
+   column, and never goes below 16px.
+
+   Each slider is paired with a numeric field (audit E7). The RANGE input is the
+   single source of truth; the field writes into it and is written back from it,
+   clamped to 1-500 both ways. */
 (function () {
-  var BASE = 310;      /* shared baseline y                        */
-  var MAXH = 222;      /* the original subscription-bar height     */
-  var MINH = 6;        /* keep the shorter bar visible             */
+  var MINPCT = 100 * 6 / 222;   /* the old 6px floor, as a share of the plot */
+  var VAL_IN = 100 * 120 / 222; /* numeral fits inside the bar above this    */
+  var CAP_IN = 100 * 40 / 222;  /* caption fits inside the bar above this    */
+  var MIN_M = 1, MAX_M = 500;
   var TERM = 60;       /* months                                   */
   var WFALL = TERM * (TERM + 1) / 2;   /* 1830 payment-months per new sale/mo */
   var SUB_PER_M = 8 * WFALL;           /* 14,640 */
@@ -1482,7 +1560,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
   function el(id) { return document.getElementById(id); }
 
   var sub = {
-    rng: el('gm-sub-rng'), n: el('gm-sub-n'), bar: el('gm-sub-bar'),
+    rng: el('gm-sub-rng'), num: el('gm-sub-num'), n: el('gm-sub-n'),
+    plot: el('gm-sub-plot'), lbl: el('gm-sub-lbl'),
     val: el('gm-sub-val'), lab: el('gm-sub-lab'),
     f1: el('gm-sub-f1'), f2: el('gm-sub-f2'),
     name: 'Subscription',
@@ -1493,7 +1572,8 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     }
   };
   var mul = {
-    rng: el('gm-mul-rng'), n: el('gm-mul-n'), bar: el('gm-mul-bar'),
+    rng: el('gm-mul-rng'), num: el('gm-mul-num'), n: el('gm-mul-n'),
+    plot: el('gm-mul-plot'), lbl: el('gm-mul-lbl'),
     val: el('gm-mul-val'), lab: el('gm-mul-lab'),
     f1: el('gm-mul-f1'), f2: el('gm-mul-f2'),
     name: 'Multi-Year',
@@ -1504,59 +1584,47 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     }
   };
 
-  var svg = el('gm-svg');
+  var fig = el('gm-fig');
   var live = el('gm-live');
-  if (!sub.rng || !mul.rng || !svg) { return; }
+  if (!sub.rng || !mul.rng || !fig) { return; }
 
   function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
   function money(n) { return '$' + fmt(n); }
-  function read(o) {
-    var v = parseInt(o.rng.value, 10);
-    if (!isFinite(v) || v < 1) { v = 1; }
-    if (v > 500) { v = 500; }
+  function clamp(v) {
+    if (!isFinite(v)) { return MIN_M; }
+    if (v < MIN_M) { return MIN_M; }
+    if (v > MAX_M) { return MAX_M; }
     return v;
   }
-  /* Step the numeral down as the string grows, so ten characters still clear
-     the 120px bar and stay inside the 240px column. */
+  function read(o) { return clamp(parseInt(o.rng.value, 10)); }
+  /* Step the numeral down as the string grows, so ten characters still sit
+     inside a phone-width column. Floor is 16px — real pixels, not viewport
+     units, at the small end. */
   function size(s) {
-    if (s.length <= 5) { return 36; }
-    if (s.length <= 7) { return 30; }
-    if (s.length <= 8) { return 26; }
-    if (s.length <= 10) { return 23; }
-    return 20;
+    if (s.length <= 5) { return 'clamp(24px,3.2vw,36px)'; }
+    if (s.length <= 7) { return 'clamp(22px,2.9vw,30px)'; }
+    if (s.length <= 8) { return 'clamp(20px,2.5vw,26px)'; }
+    if (s.length <= 10) { return 'clamp(18px,2.2vw,23px)'; }
+    return 'clamp(16px,2vw,20px)';
   }
 
   function draw(o, m, total, tallest) {
-    var h = Math.max(MINH, Math.round(MAXH * (total / tallest)));
-    var top = BASE - h;
+    var pct = Math.max(MINPCT, 100 * total / tallest);
     var s = money(total);
-    var fs = size(s);
 
-    o.bar.setAttribute('y', top);
-    o.bar.setAttribute('height', h);
+    o.plot.style.setProperty('--h', pct.toFixed(2) + '%');
 
     o.val.textContent = s;
-    o.val.setAttribute('font-size', fs);
-    if (h >= 120) {                      /* numeral fits inside the bar */
-      o.val.setAttribute('y', top + 10 + fs);
-      o.val.setAttribute('fill', '#FCF8F5');
-    } else {                             /* park it above the bar top   */
-      o.val.setAttribute('y', top - 9);
-      o.val.setAttribute('fill', '#0C172A');
-    }
+    o.val.style.fontSize = size(s);
 
     o.lab.textContent = '60-MONTH TOTAL';
-    if (h >= 40) {                       /* label fits inside the bar   */
-      o.lab.setAttribute('y', 298);
-      o.lab.setAttribute('fill', '#FCF8F5');
-    } else {                             /* stack it above the numeral  */
-      o.lab.setAttribute('y', top - 39);
-      o.lab.setAttribute('fill', '#64748B');
-    }
+    o.lbl.className = 'gmf__lbl' +
+      (pct < CAP_IN ? ' gmf__lbl--allout' : (pct < VAL_IN ? ' gmf__lbl--valout' : ''));
 
     o.n.textContent = fmt(m);
     o.f1.textContent = o.f1text(m);
     o.f2.textContent = o.f2text;
+    if (o.num && document.activeElement !== o.num) { o.num.value = m; }
     o.rng.setAttribute('aria-valuetext',
       fmt(m) + (m === 1 ? ' new sale per month, ' : ' new sales per month, ') +
       s + ' gross margin over 60 months');
@@ -1572,7 +1640,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     draw(sub, ms, ts, tallest);
     draw(mul, mm, tm, tallest);
 
-    svg.setAttribute('aria-label',
+    fig.setAttribute('aria-label',
       'Sixty-month gross margin comparison. Subscription at ' + fmt(ms) +
       ' new sales per month: ' + money(ts) + '. Multi-Year at ' + fmt(mm) +
       ' new sales per month: ' + money(tm) + '.');
@@ -1587,8 +1655,34 @@ a{color:inherit}button{font:inherit;cursor:pointer}
     }, 350);
   }
 
-  sub.rng.addEventListener('input', render);
-  mul.rng.addEventListener('input', render);
+  /* Two-way sync. The field is left alone while it is being typed in unless the
+     typed value is out of range, in which case it is snapped back at once; on
+     blur an empty or unparseable field falls back to the slider's value. */
+  function bind(o) {
+    if (!o.num) { o.rng.addEventListener('input', render); return; }
+    o.rng.addEventListener('input', function () {
+      o.num.value = read(o);
+      render();
+    });
+    o.num.addEventListener('input', function () {
+      var raw = parseInt(o.num.value, 10);
+      if (!isFinite(raw)) { return; }        /* mid-edit, e.g. a cleared field */
+      var v = clamp(raw);
+      if (v !== raw) { o.num.value = v; }
+      o.rng.value = v;
+      render();
+    });
+    o.num.addEventListener('blur', function () {
+      var v = clamp(parseInt(o.num.value, 10));
+      if (!isFinite(parseInt(o.num.value, 10))) { v = read(o); }
+      o.num.value = v;
+      o.rng.value = v;
+      render();
+    });
+  }
+
+  bind(sub);
+  bind(mul);
   render();
 })();
 

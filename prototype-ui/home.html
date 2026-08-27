@@ -252,6 +252,39 @@ button{font:inherit;cursor:pointer}
 .figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
 .figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
 
+/* ---------- GM comparison figure — shared HTML pattern (home + gate) ----------
+   DECISION 045 (audit H1/E1). Replaces the 520x350 SVG whose labels scaled with
+   the container (5.3-6.9px at 390px). Same reason the .rev cost bar is HTML:
+   geometry scales, type does not. Every label below is a real pixel size and
+   never drops under 12px. Bar LENGTH carries the comparison — one scale for both
+   columns ($480 vs $180 = 100% vs 37.5%) — and the bars are aria-hidden
+   decoration; the numerals are real text. */
+.gmf{--gmf-h:clamp(156px,25vw,222px)}
+.gmf__kick{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
+.gmf__cols{display:grid;grid-template-columns:1fr 3px 1fr;gap:var(--s-5);align-items:end;margin-top:var(--s-5)}
+.gmf__rule{align-self:stretch;background:var(--rap-slate-300)}
+.gmf__col{min-width:0}
+.gmf__name{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ink)}
+.gmf__f{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
+.gmf__plot{position:relative;height:var(--gmf-h);margin-top:var(--s-5);border-bottom:1px solid var(--rap-slate-300)}
+.gmf__bar{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);background:var(--c,var(--rap-brass))}
+.gmf__lbl{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);display:flex;flex-direction:column;justify-content:space-between;gap:6px;padding:10px 6px;min-width:0}
+.gmf__val{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,36px);line-height:1;letter-spacing:-.01em;text-align:center;color:var(--rap-cream);overflow-wrap:anywhere}
+.gmf__cap{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--rap-cream);line-height:1.2}
+/* Short bar — the numeral parks above the bar top in ink, as the SVG did. */
+.gmf__lbl--valout{justify-content:flex-end}
+.gmf__lbl--valout .gmf__val{position:absolute;left:0;right:0;bottom:100%;margin-bottom:8px;color:var(--rap-ink)}
+/* Very short bar — caption and numeral both stack above it. */
+.gmf__lbl--allout{height:auto;bottom:var(--h,100%);margin-bottom:8px;flex-direction:column-reverse;padding:0}
+.gmf__lbl--allout .gmf__val{color:var(--rap-ink)}
+.gmf__lbl--allout .gmf__cap{color:var(--rap-slate-500)}
+.gmf__foot{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3);line-height:1.4}
+@media (max-width:680px){
+  .hero__fig{padding:var(--s-4)}
+  .gmf__cols{gap:var(--s-4)}
+  .gmf__lbl{padding:8px 4px}
+}
+
 /* ---------- 02b orientation strip (R2) — a directory object, not a pitch ---------- */
 .orient{margin-top:var(--s-7);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
 .orient__claim{font-family:var(--serif);font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--s-3)}
@@ -778,33 +811,46 @@ button{font:inherit;cursor:pointer}
     <figure class="hero__fig" style="margin:0">
       <!-- R11 — owner-directed split: subscription GM beside multi-year GM,
            divider bar between, in the same figure space. Figures per owner
-           (DECISION 036); bars proportional to $480 vs $180. -->
-      <svg viewBox="0 0 520 350" role="img" aria-label="Comparison: FurnitureRx subscription, 8 dollars times 60 payments, equals 480 dollars gross margin per customer &mdash; beside Multi-Year, 250 dollars retail times 72 percent, equals 180 dollars gross margin." style="width:100%;height:auto">
-        <text x="0" y="14" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#64748B">CHOOSE SUBSCRIPTION OR MULTI-YEAR PLANS, OR MIX &amp; MATCH</text>
+           (DECISION 036); bars proportional to $480 vs $180 on one scale
+           (100% / 37.5% of the plot height).
+           DECISION 045 — rebuilt from the shared .gmf HTML pattern (see the CSS
+           block of the same name). The gate page uses the same pattern with the
+           sliders wired to it. -->
+      <div class="gmf" role="group" aria-label="Gross margin per protected customer &mdash; subscription beside Multi-Year">
+        <p class="gmf__kick">Choose subscription or multi-year plans, or mix &amp; match</p>
 
-        <!-- divider bar -->
-        <rect x="258" y="34" width="3" height="298" fill="#C3CBD6"/>
+        <div class="gmf__cols">
+          <!-- left: subscription -->
+          <div class="gmf__col">
+            <p class="gmf__name">Subscription</p>
+            <p class="gmf__f">$8 &#215; 60 payments</p>
+            <div class="gmf__plot" style="--h:100%;--c:var(--rap-brass)">
+              <div class="gmf__bar" aria-hidden="true"></div>
+              <div class="gmf__lbl">
+                <p class="gmf__val">$480</p>
+                <p class="gmf__cap">GM per ticket</p>
+              </div>
+            </div>
+            <p class="gmf__foot">Recurring &mdash; paid monthly</p>
+          </div>
 
-        <!-- left: subscription -->
-        <text x="0" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">SUBSCRIPTION</text>
-        <text x="0" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$8 &#215; 60 PAYMENTS</text>
-        <rect x="60" y="88" width="120" height="222" fill="#C19541"/>
-        <text x="120" y="134" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#FCF8F5">$480</text>
-        <text x="120" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
-        <text x="0" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">RECURRING &mdash; PAID MONTHLY</text>
+          <div class="gmf__rule" aria-hidden="true"></div>
 
-        <!-- right: multi-year -->
-        <text x="290" y="48" font-family="IBM Plex Mono" font-size="13" font-weight="600" letter-spacing="1" fill="#0C172A">MULTI-YEAR</text>
-        <text x="290" y="66" font-family="IBM Plex Mono" font-size="11" fill="#64748B">$250 RETAIL &#215; 72%</text>
-        <rect x="350" y="227" width="120" height="83" fill="#C8581B"/>
-        <text x="410" y="218" text-anchor="middle" font-family="Playfair Display" font-size="36" font-weight="600" fill="#0C172A">$180</text>
-        <text x="410" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" letter-spacing="1" fill="#FCF8F5">GM PER TICKET</text>
-        <text x="290" y="332" font-family="IBM Plex Mono" font-size="11" fill="#64748B">ONE-TIME &mdash; AT SALE</text>
-
-        <!-- shared baseline -->
-        <line x1="0" y1="310" x2="240" y2="310" stroke="#C3CBD6" stroke-width="1"/>
-        <line x1="280" y1="310" x2="520" y2="310" stroke="#C3CBD6" stroke-width="1"/>
-      </svg>
+          <!-- right: multi-year -->
+          <div class="gmf__col">
+            <p class="gmf__name">Multi-Year</p>
+            <p class="gmf__f">$250 retail &#215; 72%</p>
+            <div class="gmf__plot" style="--h:37.5%;--c:var(--rap-ember)">
+              <div class="gmf__bar" aria-hidden="true"></div>
+              <div class="gmf__lbl gmf__lbl--valout">
+                <p class="gmf__val">$180</p>
+                <p class="gmf__cap">GM per ticket</p>
+              </div>
+            </div>
+            <p class="gmf__foot">One-time &mdash; at sale</p>
+          </div>
+        </div>
+      </div>
       <figcaption class="figcap">
         <b>Illustrative</b> &mdash; one protected customer, two ways to earn.
         Subscription: the dealer earns $8 on every successful $19.99 monthly payment &mdash;
