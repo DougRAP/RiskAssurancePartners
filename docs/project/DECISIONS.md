@@ -715,7 +715,7 @@ All three open one shared form: required Name / Email / Phone + "What are you in
 
 Every form collecting email or phone must block submission until formats are valid: **email** matches `name@domain.tld` (`[^@\s]+@[^@\s]+\.[A-Za-z]{2,}`); **phone** carries **10–15 digits** after stripping formatting. Format checks fire only on non-empty values, so optional/either-or rules (pre-chat's "email OR phone") are unchanged. Errors use each form's existing mechanism (native bubbles or `.err`/`.pf__err` lines). Applied to: footer contact form (6 pages), research topic form, gate access form, popup pre-chat. Standard applies to all future forms.
 
-**Gap flagged, not changed:** the popup's leave-a-message form collects only a message — no contact fields — so an offline message cannot be answered. Decision 042 described it as "leave-a-message with contact details." Awaiting owner ruling.
+**Gap resolved (Owner, 2026-08-28):** the leave-a-message form now requires Name, Company, Position, and Message, plus at least one of Email / Phone (both format-checked per this standard) — errors via the existing inline line, first failing field focused (ef92648). Fulfills 042's "leave-a-message with contact details."
 
 ## Open / Not Yet Decided
 
