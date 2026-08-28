@@ -1508,7 +1508,7 @@ document.addEventListener('keydown', function (e) {
           <p class="pf__err" id="lm-err"><span aria-hidden="true">&#9888;</span><span id="lm-err-t"></span></p>
           <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Send message</button>
         </form>
-        <p class="sup__note" id="lm-ok" hidden>Thanks &mdash; we&rsquo;ll reply when we open. Demo only; nothing was sent.</p>
+        <p class="sup__note" id="lm-ok" hidden>Thanks &mdash; we&rsquo;ll reply when we open.</p>
       </div>
     </div>
   </div>
@@ -1668,12 +1668,13 @@ document.addEventListener('keydown', function (e) {
     var err = document.getElementById('pf-err');
     var errT = document.getElementById('pf-err-t');
     var msg = '';
+    var bad = null;
     var pd = phone.value.replace(/[^0-9]/g, '');
-    if (!name.value.trim()) { msg = 'Enter your name so the agent knows who they are helping.'; }
-    else if (!email.value.trim() && !phone.value.trim()) { msg = 'Add an email address or a phone number so we can reach you.'; }
-    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value.trim())) { msg = 'That email address does not look right.'; }
-    else if (phone.value.trim() && (pd.length < 10 || pd.length > 15)) { msg = 'That phone number does not look right — use 10–15 digits.'; }
-    if (msg) { errT.textContent = msg; err.classList.add('is-on'); return; }
+    if (!name.value.trim()) { msg = 'Enter your name so the agent knows who they are helping.'; bad = name; }
+    else if (!email.value.trim() && !phone.value.trim()) { msg = 'Add an email address or a phone number so we can reach you.'; bad = email; }
+    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value.trim())) { msg = 'That email address does not look right.'; bad = email; }
+    else if (phone.value.trim() && (pd.length < 10 || pd.length > 15)) { msg = 'That phone number does not look right — use 10–15 digits.'; bad = phone; }
+    if (msg) { errT.textContent = msg; err.classList.add('is-on'); if (bad) { bad.focus(); } return; }
     err.classList.remove('is-on');
     startChat(name.value.trim(), document.getElementById('pf-topic').value.trim());
   });
