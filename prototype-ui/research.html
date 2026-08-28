@@ -234,36 +234,22 @@ button{font:inherit;cursor:pointer}
 .mast__t{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
 .mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
 
-/* cover object — 3:4 portrait, ink ground, brass hairline (DESIGN_SYSTEM 5.3) */
+/* cover object — ink ground, brass hairline (DESIGN_SYSTEM 5.3);
+   uniform landscape card for the research grid (DECISION 049) */
 .cover{
-  aspect-ratio:3/4;background:var(--rap-ink);border:1px solid var(--rap-brass);
+  aspect-ratio:4/3;background:var(--rap-ink);border:1px solid var(--rap-brass);
   border-radius:var(--radius-sm);padding:var(--s-6);display:flex;flex-direction:column;
   justify-content:space-between;color:#fff;
 }
-.cover--sm{padding:var(--s-5)}
-.cover__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-brass)}
-.cover__title{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.15}
-.cover--sm .cover__title{font-size:19px;line-height:1.2}
-.cover__foot{
-  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.65);border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3);
-}
+.cover__title{font-family:var(--serif);font-size:clamp(22px,2.3vw,30px);font-weight:500;line-height:1.18;max-width:18ch}
+.cover__art{width:68%;max-width:280px;height:auto;flex-shrink:0;margin-top:var(--s-5)}
 
-/* featured (No. 01) */
-.feature{display:grid;grid-template-columns:4fr 8fr;gap:var(--s-9);align-items:start;margin-top:var(--s-7)}
-.feature .cover{max-width:330px}
-.rlabel{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-ember-700)}
-.figs{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-7)}
-.fig{border:1px solid var(--rap-slate-200);background:var(--rap-paper);border-radius:var(--radius-sm);padding:var(--s-4)}
-.fig__cap{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3)}
-
-/* index rows (No. 02 onward) */
-.rlist{margin-top:var(--s-8);border-top:2px solid var(--rap-ink)}
-.rrow{display:grid;grid-template-columns:190px 1fr;gap:var(--s-7);padding:var(--s-7) 0;border-bottom:1px solid var(--rap-slate-200)}
-.rrow:last-child{border-bottom:0}
-.rrow__t{font-family:var(--serif);font-size:clamp(22px,2.2vw,30px);font-weight:500;line-height:1.15;letter-spacing:-.01em;margin-top:var(--s-3)}
-.rrow__d{font-size:16px;color:var(--rap-slate-700);margin-top:var(--s-3);max-width:62ch}
-.rrow__m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
+/* research grid — one card per report, fills in as reports are added */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-8) var(--s-7);margin-top:var(--s-7)}
+.rcard__d{font-size:16px;line-height:1.55;color:var(--rap-slate-700);margin-top:var(--s-4);max-width:52ch}
+.rcard__m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3)}
+.rcard__btns{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-4)}
+.btn--sm{padding:10px 18px;font-size:14px;min-height:40px}
 
 /* contact block in footer */
 .contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
@@ -300,7 +286,6 @@ button{font:inherit;cursor:pointer}
   :root{--margin:32px}
   .nav{gap:20px}
   .nav a,.nav__drop>.nav__progs{font-size:14px}
-  .feature{gap:var(--s-7)}
 }
 @media (max-width:1024px){
   .nav{display:none}
@@ -314,10 +299,6 @@ button{font:inherit;cursor:pointer}
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .feature{grid-template-columns:1fr;gap:var(--s-6)}
-  .feature .cover{max-width:260px}
-  .rrow{grid-template-columns:1fr;gap:var(--s-5)}
-  .rrow .cover{max-width:200px}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
 }
 @media (max-width:680px){
@@ -331,8 +312,8 @@ button{font:inherit;cursor:pointer}
   .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
   .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
   .burger{width:42px;height:42px;flex:0 0 42px}
-  .figs{grid-template-columns:1fr}
-  .btns .btn{width:100%;justify-content:center}
+  .rgrid{grid-template-columns:1fr;gap:var(--s-7)}
+  .rcard__btns .btn{width:100%;justify-content:center;min-height:44px}
   .foot__cols{display:none}
   .foot__acc{display:block}
   .foot__acc details{border-bottom:1px solid var(--rap-ink-700)}
@@ -537,91 +518,62 @@ button{font:inherit;cursor:pointer}
       <a class="btn btn--secondary" href="market-intelligence.html">Market Intelligence &rarr;</a>
     </div>
 
-    <p class="lead" style="margin-top:var(--s-6)">
-      Original Risk Assurance Partners research on furniture retail economics, the way today&rsquo;s
-      customer decides, and what both mean for the protection model.
-    </p>
-
     <!-- ============================================================
-         NO. 01 — flagship, featured treatment (DECISION 034)
+         RESEARCH GRID — one cover card per report (DECISIONS 034, 049)
+         Grid fills in as reports are added.
          ============================================================ -->
-    <div class="feature">
-      <div class="cover">
-        <div>
-          <p class="cover__eyebrow">RAP Research &middot; No. 01</p>
-          <p class="cover__title" style="margin-top:var(--s-5)">
+    <div class="rgrid">
+      <article class="rcard">
+        <div class="cover">
+          <h2 class="cover__title">
             Furniture retail has changed. <span class="acc--brass">Protection has to change with it.</span>
-          </p>
+          </h2>
+          <svg class="cover__art" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+            <g fill="#FFFFFF" fill-opacity=".28"><rect x="6" y="14" width="26" height="56"/><rect x="46" y="24" width="26" height="46"/><rect x="86" y="34" width="26" height="36"/><rect x="126" y="26" width="26" height="44"/><rect x="166" y="32" width="26" height="38"/></g>
+            <line x1="0" y1="70" x2="200" y2="70" style="stroke:var(--rap-brass)" stroke-opacity=".7"/>
+          </svg>
         </div>
-        <p class="cover__foot">Risk Assurance Partners &middot; August 2026</p>
-      </div>
-
-      <div>
-        <p class="rlabel">No. 01 &middot; Flagship study</p>
-        <h2 class="d2" style="margin-top:var(--s-3)">
-          Furniture retail has changed.<br>
-          <span class="acc--brass">Protection has to change with it.</span>
-        </h2>
-        <p class="lead" style="margin-top:var(--s-5)">
+        <p class="rcard__d">
           Why a recurring protection model fits the cash-flow reality of furniture retail and the
           way today&rsquo;s customer increasingly wants to buy.
         </p>
-
-        <div class="figs">
-          <figure class="fig" style="margin:0">
-            <svg viewBox="0 0 200 90" role="img" aria-label="Illustrative bar chart thumbnail" style="width:100%;height:auto">
-              <g fill="#204374"><rect x="6" y="20" width="26" height="56"/><rect x="46" y="30" width="26" height="46"/><rect x="86" y="40" width="26" height="36"/><rect x="126" y="32" width="26" height="44"/><rect x="166" y="38" width="26" height="38"/></g>
-              <line x1="0" y1="76" x2="200" y2="76" stroke="#C3CBD6"/>
-            </svg>
-            <figcaption class="fig__cap">Figure 1 &middot; Store sales run rate</figcaption>
-          </figure>
-          <figure class="fig" style="margin:0">
-            <svg viewBox="0 0 200 90" role="img" aria-label="Illustrative line chart thumbnail" style="width:100%;height:auto">
-              <path d="M4 18 L52 40 L100 62 L148 66 L196 66" fill="none" stroke="#C8581B" stroke-width="2"/>
-              <circle cx="196" cy="66" r="3" fill="#C8581B"/>
-              <line x1="0" y1="76" x2="200" y2="76" stroke="#C3CBD6"/>
-            </svg>
-            <figcaption class="fig__cap">Figure 2 &middot; Housing turnover</figcaption>
-          </figure>
+        <p class="rcard__m">August 2026</p>
+        <div class="rcard__btns">
+          <a class="btn btn--primary btn--sm" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
+          <a class="btn btn--secondary btn--sm" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
         </div>
+      </article>
 
-        <div class="btns">
-          <a class="btn btn--primary" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
-          <a class="btn btn--secondary" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================================
-         NO. 02 — research briefing (DECISION 034)
-         ============================================================ -->
-    <div class="rlist">
-      <article class="rrow">
-        <div class="cover cover--sm">
-          <div>
-            <p class="cover__eyebrow">RAP Research &middot; No. 02</p>
-            <p class="cover__title" style="margin-top:var(--s-4)">
-              Compute, Credit &amp; <span class="acc--brass">Couches.</span>
-            </p>
-          </div>
-          <p class="cover__foot">Risk Assurance Partners &middot; August 2026</p>
-        </div>
-
-        <div>
-          <p class="rlabel">No. 02 &middot; Research briefing</p>
-          <h2 class="rrow__t">
-            Compute, Credit &amp; Couches &mdash; AI Data-Center Debt, the 10-Year Treasury,
-            Housing Turnover, and the Outlook for U.S. Furniture Sales
+      <article class="rcard">
+        <div class="cover">
+          <h2 class="cover__title">
+            Compute, Credit &amp; <span class="acc--brass">Couches.</span>
           </h2>
-          <p class="rrow__d">
-            How data-center borrowing, long rates and housing turnover connect to the outlook for
-            U.S. furniture sales.
-          </p>
-          <p class="rrow__m">August 2026 &middot; Research briefing</p>
-          <div class="btns">
-            <a class="btn btn--primary" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
-            <a class="btn btn--secondary" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
-          </div>
+          <svg class="cover__art" viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="#FFFFFF" stroke-opacity=".35">
+              <rect x="22" y="8" width="44" height="62" rx="3"/>
+              <rect x="78" y="8" width="44" height="62" rx="3"/>
+              <rect x="134" y="8" width="44" height="62" rx="3"/>
+            </g>
+            <g stroke="#FFFFFF" stroke-opacity=".22">
+              <line x1="28" y1="24" x2="60" y2="24"/><line x1="28" y1="34" x2="60" y2="34"/><line x1="28" y1="44" x2="60" y2="44"/><line x1="28" y1="54" x2="60" y2="54"/><line x1="28" y1="64" x2="60" y2="64"/>
+              <line x1="84" y1="24" x2="116" y2="24"/><line x1="84" y1="34" x2="116" y2="34"/><line x1="84" y1="44" x2="116" y2="44"/><line x1="84" y1="54" x2="116" y2="54"/><line x1="84" y1="64" x2="116" y2="64"/>
+              <line x1="140" y1="24" x2="172" y2="24"/><line x1="140" y1="34" x2="172" y2="34"/><line x1="140" y1="44" x2="172" y2="44"/><line x1="140" y1="54" x2="172" y2="54"/><line x1="140" y1="64" x2="172" y2="64"/>
+            </g>
+            <g style="fill:var(--rap-brass)" fill-opacity=".9">
+              <circle cx="59" cy="16" r="2"/><circle cx="115" cy="16" r="2"/><circle cx="171" cy="16" r="2"/>
+            </g>
+            <line x1="0" y1="78" x2="200" y2="78" style="stroke:var(--rap-brass)" stroke-opacity=".7"/>
+          </svg>
+        </div>
+        <p class="rcard__d">
+          How data-center borrowing, long rates and housing turnover connect to the outlook for
+          U.S. furniture sales.
+        </p>
+        <p class="rcard__m">August 2026</p>
+        <div class="rcard__btns">
+          <a class="btn btn--primary btn--sm" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
+          <a class="btn btn--secondary btn--sm" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
         </div>
       </article>
     </div>
