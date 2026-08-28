@@ -578,9 +578,37 @@ button{font:inherit;cursor:pointer}
           proposed research project.
         </p>
         <div class="rcard__btns">
-          <a class="btn btn--primary btn--sm" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
-          <a class="btn btn--secondary btn--sm" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
+          <button type="button" class="btn btn--primary btn--sm" id="prop-open" aria-controls="prop-form" aria-expanded="false">Propose a topic &rarr;</button>
         </div>
+        <!-- static prototype — transport lands with the Supabase lead-capture
+             work package (DECISIONS 042/043), source tag "research-topic" -->
+        <form class="pf" id="prop-form" style="margin-top:var(--s-4)" hidden>
+          <div class="pf__f">
+            <label for="prop-name">Name <i>*</i></label>
+            <input id="prop-name" type="text" autocomplete="name" required>
+          </div>
+          <div class="pf__f">
+            <label for="prop-co">Company <i>*</i></label>
+            <input id="prop-co" type="text" autocomplete="organization" required>
+          </div>
+          <div class="pf__f">
+            <label for="prop-phone">Phone <i>*</i></label>
+            <input id="prop-phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="pf__f">
+            <label for="prop-email">Email <i>*</i></label>
+            <input id="prop-email" type="email" autocomplete="email" required>
+          </div>
+          <div class="pf__f">
+            <label for="prop-topic">Proposed research topic <i>*</i></label>
+            <textarea id="prop-topic" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--sm">Send proposal &rarr;</button>
+        </form>
+        <p class="rcard__d" id="prop-done" hidden>
+          Thank you &mdash; we received your proposal. If it fits the research agenda,
+          the RAP Research team will follow up.
+        </p>
       </article>
     </div>
 
@@ -671,6 +699,27 @@ button{font:inherit;cursor:pointer}
 </footer>
 
 <script>
+/* Propose-a-topic form (coming-soon card). Static prototype:
+   validation is native `required`; transport arrives with the
+   Supabase lead-capture package (source tag "research-topic"). */
+(function () {
+  var open = document.getElementById('prop-open');
+  var form = document.getElementById('prop-form');
+  var done = document.getElementById('prop-done');
+  if (!open || !form || !done) return;
+  open.addEventListener('click', function () {
+    form.hidden = false;
+    open.hidden = true;
+    open.setAttribute('aria-expanded', 'true');
+    document.getElementById('prop-name').focus();
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    form.hidden = true;
+    done.hidden = false;
+  });
+})();
+
 /* Sticky header condense, matching home.html. */
 (function () {
   var hdr = document.querySelector('.hdr');
