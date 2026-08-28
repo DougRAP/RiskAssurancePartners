@@ -697,6 +697,18 @@ No *broken* MOBILE_AUDIT items remain. Remaining degraded/cosmetic items fold in
 - **Research index rebuilt as uniform cover grid (owner-directed):** owner rejected the featured-No. 01 + row-list layout as wasted space; grid chosen over carousel (mobile/a11y, fills in as reports are added). Each report = one 4:3 ink cover card (title inside + illustrative shape-only art: bar graph for No. 01, abstract data-center racks for No. 02) over a one-line caption, **date-only** meta line (owner ruling — no type labels), and compact Read/Download buttons (full-width 44px at phone). Removed: eyebrows, No. 01's duplicated headline/side column, figure thumbnails with fake captions, index lead paragraph, No. 02's 128-char full title (short display title used; full title lives on the Phase 11 report page). Resolves MOBILE_AUDIT R1/R2/R4 (968bda5).
 - **Grid is 3-up on desktop with a coming-soon card** (owner: 2-up wasted desktop width): same ink cover, centered brass "Coming soon" label, caption inviting topic proposals (sales@raptns.com mailto), and a **Propose a topic → form** — required Name / Company / Phone / Email + topic textarea, native validation, `hidden`-attr toggling under the sitewide guard, static confirmation on submit. Transport joins the Supabase lead-capture work package (042/043) with **new source tag "research-topic"**. 2-up ≤1024, 1-col ≤680 (2b30c79, d93e9c5, 1bceac5).
 
+## Decision 050 — Contact Routes Open a Shared Lead Form (partially resolves the Contact routing question)
+
+**Status:** Approved (Owner, 2026-08-28) — implemented and deployed
+
+The three contact route cards ("Talk to Risk Assurance Partners" block, all six public pages; on economics-gate they live in the request-access aside per 043):
+
+1. **"I'm a dealer"** — kept; now opens an inline form instead of linking to the gate page.
+2. **"How do I start selling subscription programs"** (subline "Get started with the FurnitureRx subscription program") — replaces "I have a protection plan" / kiosk link. Plan-holder self-service leaves the contact triage (kiosk remains in utility bar, popup, drawer, footer).
+3. **"Media or other"** — kept; form replaces the mailto link.
+
+All three open one shared form: required Name / Email / Phone + "What are you interested in?" textarea; hidden route field records the clicked card (`dealer` / `subscription` / `media`). Native validation; `hidden`-attr toggling under the sitewide guard; static confirmation on submit. **Supabase wiring queued in DEV_NOTES: source tag `contact` + route value.** Gate page's utility Contact link fixed to self-anchor (`#contact`); its stale "Not a dealer?" routing copy removed. Byte-identical block on all six pages (Opus maker subagent; master QA'd).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

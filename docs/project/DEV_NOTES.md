@@ -45,3 +45,19 @@ include this form:**
 - **source tag: `research-topic`** (joins `calculator`, `infosheet`, `contact`);
 - deliver to RAP Sales / the RAP Research team alongside other leads;
 - no status tracking or login (matches Decision 043's no-friction ruling).
+
+## Supabase phase — 2026-08-28 — Footer contact-routes form wiring
+
+The footer "Talk to Risk Assurance Partners" block (all six public pages)
+now opens a shared inline form (`#contact-form`) from its three route cards:
+**I'm a dealer** · **How do I start selling subscription programs** · **Media
+or other**. Required Name / Email / Phone + "What are you interested in?"
+textarea; hidden `#contact-route` field records the clicked card
+(`dealer` / `subscription` / `media`). Static prototype today — no transport.
+
+**When the Supabase lead-capture work package runs, include this form:**
+- same lead table as the other forms;
+- **source tag: `contact`**, with the route value stored alongside
+  (`dealer` / `subscription` / `media`) for triage;
+- deliver to RAP Sales; media-route entries flagged for whoever handles press;
+- no status tracking or login (Decision 043 ruling).
