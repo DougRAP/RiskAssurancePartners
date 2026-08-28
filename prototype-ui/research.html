@@ -227,11 +227,14 @@ button{font:inherit;cursor:pointer}
   border-radius:var(--radius-sm);padding:var(--s-6);display:flex;flex-direction:column;
   justify-content:space-between;color:#fff;
 }
-.cover__title{font-family:var(--serif);font-size:clamp(22px,2.3vw,30px);font-weight:500;line-height:1.18;max-width:18ch}
+.cover__title{font-family:var(--serif);font-size:clamp(20px,1.9vw,26px);font-weight:500;line-height:1.2;max-width:18ch}
 .cover__art{width:68%;max-width:280px;height:auto;flex-shrink:0;margin-top:var(--s-5)}
+/* coming-soon placeholder cover */
+.cover--soon{background:transparent;border:1px dashed var(--rap-slate-300);justify-content:center;align-items:center}
+.cover__soon{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rap-slate-500)}
 
 /* research grid — one card per report, fills in as reports are added */
-.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-8) var(--s-7);margin-top:var(--s-7)}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-8) var(--s-6);margin-top:var(--s-7)}
 .rcard__d{font-size:16px;line-height:1.55;color:var(--rap-slate-700);margin-top:var(--s-4);max-width:52ch}
 .rcard__m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3)}
 .rcard__btns{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-4)}
@@ -280,6 +283,9 @@ button{font:inherit;cursor:pointer}
   .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
   .hdr.is-condensed .hdr__util{display:none}
   .foot__cols{grid-template-columns:1fr 1fr 1fr}
+  .rgrid{grid-template-columns:1fr 1fr}
+  .rcard--soon{grid-column:1/-1}
+  .rcard--soon .cover{aspect-ratio:auto;padding:var(--s-7) var(--s-6)}
 }
 @media (max-width:860px){
   :root{--margin:24px}
@@ -300,6 +306,7 @@ button{font:inherit;cursor:pointer}
   .burger{width:42px;height:42px;flex:0 0 42px}
   .rgrid{grid-template-columns:1fr;gap:var(--s-7)}
   .rcard__btns .btn{width:100%;justify-content:center;min-height:44px}
+  .cover__title{font-size:22px}
   .foot__cols{display:none}
   .foot__acc{display:block}
   .foot__acc details{border-bottom:1px solid var(--rap-ink-700)}
@@ -560,6 +567,12 @@ button{font:inherit;cursor:pointer}
         <div class="rcard__btns">
           <a class="btn btn--primary btn--sm" href="#stub" title="Stub — report page, Phase 11">Read research &rarr;</a>
           <a class="btn btn--secondary btn--sm" href="#stub" title="Stub — report PDF, Phase 11">Download report</a>
+        </div>
+      </article>
+
+      <article class="rcard rcard--soon">
+        <div class="cover cover--soon">
+          <p class="cover__soon">Coming soon</p>
         </div>
       </article>
     </div>
