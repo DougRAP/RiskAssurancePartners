@@ -51,7 +51,7 @@
 - Never pair `hidden` with an author CSS `display` rule — the sitewide guard exists; use it properly in new code.
 - No text inside scaling SVGs — labels shrink to 5–7px on phones; rebuild as HTML (`.gmf` is the shared pattern).
 - Proportional flex bars need `flex-basis:0` or content skews geometry; the cost-bar bracket needs inter-segment-gap compensation (see code comment).
-- PowerShell regex edits can strip CRLF — check diffs for whitespace noise.
+- PowerShell regex edits can strip CRLF — **permanently fenced by Agent 1 at `f050ffe`**: `.gitattributes` now enforces `* text=auto` (LF in-repo, binaries declared); renormalization found zero drift, so no sweep commit exists. Line-ending pollution can no longer enter history; the checkout-conversion warnings git prints are expected and harmless. Still check diffs for noise as a habit.
 - newswire + research keep their `#stub` anchors and prototype notes DELIBERATELY (live JS deps) — clean up only in their page passes.
 - economics-gate request form must stay `hidden` on load. Never expose cancellation/retention assumptions publicly (013). FurnitureRx-Subscription-Plan-Info.html (docs/source, corrected to $250) must never enter prototype-ui/. No prototype banners/dev chrome — owner removes on sight. Subagents must not reintroduce named underwriters.
 
