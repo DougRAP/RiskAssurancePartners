@@ -1552,10 +1552,31 @@ document.addEventListener('keydown', function (e) {
         <p class="sup__phk">Leave a message</p>
         <form class="pf" id="lm" novalidate style="margin-top:var(--s-4)">
           <div class="pf__f">
-            <label for="lm-msg">Message</label>
+            <label for="lm-name">Name <i aria-hidden="true">&bull;</i></label>
+            <input id="lm-name" type="text" autocomplete="name">
+          </div>
+          <div class="pf__f">
+            <label for="lm-co">Company <i aria-hidden="true">&bull;</i></label>
+            <input id="lm-co" type="text" autocomplete="organization">
+          </div>
+          <div class="pf__f">
+            <label for="lm-pos">Position <i aria-hidden="true">&bull;</i></label>
+            <input id="lm-pos" type="text" autocomplete="organization-title">
+          </div>
+          <div class="pf__f">
+            <label for="lm-email">Email</label>
+            <input id="lm-email" type="email" autocomplete="email">
+          </div>
+          <div class="pf__f">
+            <label for="lm-phone">Phone</label>
+            <input id="lm-phone" type="tel" autocomplete="tel">
+            <span class="pf__hint">Email or phone &mdash; at least one, so we can reply.</span>
+          </div>
+          <div class="pf__f">
+            <label for="lm-msg">Message <i aria-hidden="true">&bull;</i></label>
             <textarea id="lm-msg" rows="4"></textarea>
           </div>
-          <p class="pf__err" id="lm-err"><span aria-hidden="true">&#9888;</span><span>Add a message so we know how to help.</span></p>
+          <p class="pf__err" id="lm-err"><span aria-hidden="true">&#9888;</span><span id="lm-err-t"></span></p>
           <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Send message</button>
         </form>
         <p class="sup__note" id="lm-ok" hidden>Thanks &mdash; we&rsquo;ll reply when we open. Demo only; nothing was sent.</p>
@@ -1782,11 +1803,28 @@ document.addEventListener('keydown', function (e) {
     }, 1400);
   });
 
+  /* leave a message: name / company / position / message required, and at least one of email / phone */
   document.getElementById('lm').addEventListener('submit', function (e) {
     e.preventDefault();
+    var name = document.getElementById('lm-name');
+    var co = document.getElementById('lm-co');
+    var pos = document.getElementById('lm-pos');
+    var email = document.getElementById('lm-email');
+    var phone = document.getElementById('lm-phone');
     var m = document.getElementById('lm-msg');
     var err = document.getElementById('lm-err');
-    if (!m.value.trim()) { err.classList.add('is-on'); return; }
+    var errT = document.getElementById('lm-err-t');
+    var msg = '';
+    var bad = null;
+    var pd = phone.value.replace(/[^0-9]/g, '');
+    if (!name.value.trim()) { msg = 'Add your name so we know who to reply to.'; bad = name; }
+    else if (!co.value.trim()) { msg = 'Add your company.'; bad = co; }
+    else if (!pos.value.trim()) { msg = 'Add your position.'; bad = pos; }
+    else if (!email.value.trim() && !phone.value.trim()) { msg = 'Add an email or phone number so we can reply.'; bad = email; }
+    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value.trim())) { msg = 'That email address does not look right.'; bad = email; }
+    else if (phone.value.trim() && (pd.length < 10 || pd.length > 15)) { msg = 'That phone number does not look right — use 10–15 digits.'; bad = phone; }
+    else if (!m.value.trim()) { msg = 'Add a message so we know how to help.'; bad = m; }
+    if (msg) { errT.textContent = msg; err.classList.add('is-on'); if (bad) { bad.focus(); } return; }
     err.classList.remove('is-on');
     document.getElementById('lm').hidden = true;
     document.getElementById('lm-ok').hidden = false;
