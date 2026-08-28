@@ -709,6 +709,14 @@ The three contact route cards ("Talk to Risk Assurance Partners" block, all six 
 
 All three open one shared form: required Name / Email / Phone + "What are you interested in?" textarea; hidden route field records the clicked card (`dealer` / `subscription` / `media`). Native validation; `hidden`-attr toggling under the sitewide guard; static confirmation on submit. **Supabase wiring queued in DEV_NOTES: source tag `contact` + route value.** Gate page's utility Contact link fixed to self-anchor (`#contact`); its stale "Not a dealer?" routing copy removed. Byte-identical block on all six pages (Opus maker subagent; master QA'd).
 
+## Decision 051 — Sitewide Form Validation Standard
+
+**Status:** Approved (Owner, 2026-08-28) — implemented and deployed (70fea04)
+
+Every form collecting email or phone must block submission until formats are valid: **email** matches `name@domain.tld` (`[^@\s]+@[^@\s]+\.[A-Za-z]{2,}`); **phone** carries **10–15 digits** after stripping formatting. Format checks fire only on non-empty values, so optional/either-or rules (pre-chat's "email OR phone") are unchanged. Errors use each form's existing mechanism (native bubbles or `.err`/`.pf__err` lines). Applied to: footer contact form (6 pages), research topic form, gate access form, popup pre-chat. Standard applies to all future forms.
+
+**Gap flagged, not changed:** the popup's leave-a-message form collects only a message — no contact fields — so an offline message cannot be answered. Decision 042 described it as "leave-a-message with contact details." Awaiting owner ruling.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
