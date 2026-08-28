@@ -688,6 +688,13 @@ No *broken* MOBILE_AUDIT items remain. Remaining degraded/cosmetic items fold in
 
 **Still open:** contact-hours conflict — footer 8–6 Mon–Fri EST (027) vs support popup 9–6 Mon–Sat ET (042).
 
+## Decision 049 — Research-Page Cleanup Pass (batch log, 2026-08-28, in progress)
+
+**Status:** Approved (Owner) — implemented and deployed as logged
+
+- **Prototype footer notes removed sitewide** (owner order "remove from all footers"): research + newswire footer "Prototype note ·" paragraphs deleted; Privacy/Terms converted to plain text per the 048 pattern (d494415). Newswire's fabricated-content disclaimer went with it — flagged to owner; site remains password-protected + noindex. Research report buttons and newswire Source links keep `href="#stub"` (now no-op) until their content arrives.
+- **Research cross-link cards removed (amends 040):** the bottom-of-page Newswire / Market Intelligence card block was redundant (owner ruling); the research→MI prominent CTA from Decision 040 is dropped — MI stays reachable via the Market Intel ▾ nav dropdown. MI's CTA to Research is unchanged. Phase-11 stub note above the cards removed with it (dev-chrome policy). All supporting CSS deleted (6ae315a).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
