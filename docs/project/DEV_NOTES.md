@@ -31,3 +31,17 @@ Requirements:
 Context: the RAP site refactor is dealer-first with customer functions living
 in these external apps. Round-trip navigation keeps customers and dealers from
 getting stranded in either direction.
+
+## Supabase phase — 2026-08-28 — Research topic-proposal form wiring
+
+The research page's coming-soon card carries a **Propose a topic** form
+(research.html, `#prop-form`): required Name / Company / Phone / Email plus a
+proposed-topic textarea. It is a static prototype today — native validation,
+confirmation message, no transport.
+
+**When the Supabase lead-capture work package runs (DECISIONS 042/043/049),
+include this form:**
+- store submissions in the same lead/access-request table as the other forms;
+- **source tag: `research-topic`** (joins `calculator`, `infosheet`, `contact`);
+- deliver to RAP Sales / the RAP Research team alongside other leads;
+- no status tracking or login (matches Decision 043's no-friction ruling).
