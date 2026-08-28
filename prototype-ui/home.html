@@ -1230,7 +1230,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
             </div>
             <div class="pf__f">
               <label for="contact-email">Email <i>*</i></label>
-              <input id="contact-email" type="email" autocomplete="email" required>
+              <input id="contact-email" type="email" autocomplete="email" required pattern="[^@\s]+@[^@\s]+\.[A-Za-z]{2,}" title="Enter a valid email address.">
             </div>
             <div class="pf__f">
               <label for="contact-phone">Phone <i>*</i></label>
@@ -1566,16 +1566,19 @@ document.addEventListener('keydown', function (e) {
 
 <script>
 /* Footer contact routes. The three route cards open one shared form and record
-   which route was chosen. Static prototype: native `required` is the only
-   validation; transport arrives with the Supabase lead-capture package,
-   source tag "contact". */
+   which route was chosen. Static prototype: native `required` plus an email
+   pattern and a 10–15 digit phone check; transport arrives with the Supabase
+   lead-capture package, source tag "contact". */
 (function () {
   var form = document.getElementById('contact-form');
   var done = document.getElementById('contact-done');
   var route = document.getElementById('contact-route');
   var name = document.getElementById('contact-name');
+  var phone = document.getElementById('contact-phone');
   var btns = document.querySelectorAll('.contact__route[data-route]');
-  if (!form || !done || !route || !name || !btns.length) { return; }
+  if (!form || !done || !route || !name || !phone || !btns.length) { return; }
+  function phoneOk(v) { var d = String(v).replace(/[^0-9]/g, ''); return d.length >= 10 && d.length <= 15; }
+  phone.addEventListener('input', function () { phone.setCustomValidity(''); });
   Array.prototype.forEach.call(btns, function (b) {
     b.addEventListener('click', function () {
       route.value = b.getAttribute('data-route');
@@ -1589,6 +1592,12 @@ document.addEventListener('keydown', function (e) {
   });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (!phoneOk(phone.value)) {
+      phone.setCustomValidity('Enter a valid phone number (10–15 digits).');
+      phone.reportValidity();
+      return;
+    }
+    phone.setCustomValidity('');
     form.hidden = true;
     done.hidden = false;
   });
@@ -1709,9 +1718,11 @@ document.addEventListener('keydown', function (e) {
     var err = document.getElementById('pf-err');
     var errT = document.getElementById('pf-err-t');
     var msg = '';
+    var pd = phone.value.replace(/[^0-9]/g, '');
     if (!name.value.trim()) { msg = 'Enter your name so the agent knows who they are helping.'; }
     else if (!email.value.trim() && !phone.value.trim()) { msg = 'Add an email address or a phone number so we can reach you.'; }
-    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) { msg = 'That email address does not look right.'; }
+    else if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value.trim())) { msg = 'That email address does not look right.'; }
+    else if (phone.value.trim() && (pd.length < 10 || pd.length > 15)) { msg = 'That phone number does not look right — use 10–15 digits.'; }
     if (msg) { errT.textContent = msg; err.classList.add('is-on'); return; }
     err.classList.remove('is-on');
     startChat(name.value.trim(), document.getElementById('pf-topic').value.trim());
