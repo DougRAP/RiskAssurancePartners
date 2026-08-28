@@ -1,0 +1,11 @@
+# Normalize line endings repo-wide: text files stored as LF in git,
+# checked out per-platform. Ends the CRLF-noise class of diff pollution
+# (HANDOFF.md, technical trap #4).
+* text=auto
+
+# Binary formats — never touch line endings.
+*.docx binary
+*.xlsx binary
+*.png binary
+*.jpg binary
+*.pdf binary
