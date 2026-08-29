@@ -23,8 +23,8 @@
 
    Charts draw shapes only. Every label, value and stamp is HTML
    outside the SVG — no SVG text element appears anywhere on the
-   page. Time ranges are supported internally; range controls are
-   not rendered until live series exist.
+   page. One global range control governs all eight charts
+   (Decision 052: global, never per-card).
 
    DESIGN ONLY. Not production code. No framework, no build.
    Shared chrome copied verbatim from home.html.
@@ -273,9 +273,30 @@ button{font:inherit;cursor:pointer}
 .mic__score b{font-weight:500;color:rgba(255,255,255,.68)}
 .mic__foot{margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
 
+/* range control — ONE global selector governing all eight charts
+   (Decision 052: global, never per-card). Same segmented-control
+   family as the economics page: hairline frame, mono segments, ink
+   ground with white text on the active one. */
+.rangebar{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-4);margin-top:var(--s-7)}
+.rangebar__lbl{
+  font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-slate-500);line-height:1.7;
+}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm)}
+.seg button{
+  background:#fff;border:0;border-left:1px solid var(--rap-slate-200);
+  padding:10px 18px;min-height:40px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rap-slate-700);transition:background .12s,color .12s;
+}
+.seg button:first-child{border-left:0}
+.seg button:hover{background:var(--rap-mist);color:var(--rap-ink)}
+.seg button[aria-pressed=true]{background:var(--rap-ink);color:#fff}
+
 /* metric grid — four themed rows, two cards per row on desktop.
    Normal page scroll only: no internal scrollers, no carousels. */
 .metrics{display:grid;gap:var(--s-8);margin-top:var(--s-7)}
+.rangebar + .metrics{margin-top:var(--s-5)}
 .metrics__theme{
   font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
   color:var(--rap-slate-500);line-height:1.7;margin-bottom:var(--s-4);
@@ -370,6 +391,10 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
   .mic{padding:var(--s-5)}
   .mic__await{max-width:none}
   .mic__await--sm{max-width:none}
+  /* range segments grow to a comfortable thumb target and the row
+     wraps rather than scrolling sideways. */
+  .rangebar{gap:var(--s-3)}
+  .seg button{min-height:44px;padding:12px 20px}
   .metrics{gap:var(--s-7)}
   .metrics__pair{grid-template-columns:1fr;gap:var(--s-7)}
   .metric__label{min-height:0}
@@ -629,6 +654,16 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
     </section>
 
     <!-- ============================================================
+         RANGE CONTROL — one global selector for every chart on the
+         page. The segments are rendered from the RANGES array in the
+         metric-grid script, so the list has exactly one definition.
+         ============================================================ -->
+    <div class="rangebar">
+      <p class="rangebar__lbl">Range</p>
+      <div class="seg" id="range-seg" role="group" aria-label="Chart time range"></div>
+    </div>
+
+    <!-- ============================================================
          METRIC GRID — eight indicators in four themed pairs, rendered
          from one data array through one card component. See the
          metric-grid script below the main element.
@@ -653,10 +688,11 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 
    TIME RANGES. Each metric carries one series array per range
    (1Y / 3Y / 5Y / 10Y), all empty until live data lands.
-   activeRange holds the state and renderChart(metric, range)
-   reads it, so the wiring is real — but no range control is
-   rendered, because a control that does nothing is worse than no
-   control. Controls ship with the series.
+   activeRange is the single piece of state: ONE global range for
+   the whole page, never one per card (Decision 052). The segments
+   are built from RANGES, so the range list is defined once. Empty
+   series simply plot nothing — the frame is the honest state and
+   no placeholder message is written over it.
 
    CHARTS. SVG draws shapes only: axes, hairline gridlines and,
    once a series exists, a polyline. No SVG text element, ever —
@@ -664,6 +700,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
    ============================================================ */
 (function () {
   var grid = document.getElementById('metric-grid');
+  var seg = document.getElementById('range-seg');
   if (!grid) { return; }
 
   var RANGES = ['1Y', '3Y', '5Y', '10Y'];
@@ -814,6 +851,44 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
     grid.innerHTML = html;
   }
 
+  /* One segment per entry in RANGES — the array is the only place the
+     range list is written down. */
+  function renderSeg() {
+    if (!seg) { return; }
+    var html = '';
+    for (var i = 0; i < RANGES.length; i++) {
+      html += '<button type="button" data-range="' + RANGES[i] + '" aria-pressed="' +
+        (RANGES[i] === activeRange) + '">' + RANGES[i] + '</button>';
+    }
+    seg.innerHTML = html;
+  }
+
+  function syncSeg() {
+    if (!seg) { return; }
+    var bs = seg.querySelectorAll('button[data-range]');
+    for (var i = 0; i < bs.length; i++) {
+      bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-range') === activeRange));
+    }
+  }
+
+  /* Global state change: set the range, move the pressed segment, redraw
+     all eight cards together. Cards hold no interactive element, so a
+     full rebuild costs no focus. */
+  function setRange(range) {
+    if (RANGES.indexOf(range) === -1) { return; }
+    activeRange = range;
+    syncSeg();
+    renderGrid();
+  }
+
+  if (seg) {
+    seg.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-range]') : null;
+      if (b && seg.contains(b)) { setRange(b.getAttribute('data-range')); }
+    });
+  }
+
+  renderSeg();
   renderGrid();
 })();
 </script>
