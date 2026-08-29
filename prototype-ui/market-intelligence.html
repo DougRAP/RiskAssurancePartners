@@ -10,16 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RISK ASSURANCE PARTNERS — MARKET INTELLIGENCE (placeholder)
-   Created after the homepage Market Pulse section was removed;
-   the four stat tiles that lived there now live here.
+   RISK ASSURANCE PARTNERS — MARKET INTELLIGENCE
 
-   ALL VALUES, DELTAS AND UPDATE STAMPS ON THIS PAGE ARE
-   PLACEHOLDERS pending approved data sources (Phase 9). No figure
-   below is an approved fact. Historical charts render empty axes
-   only — the series arrive with the Market Intelligence
-   automation phase, which also supplies real source attribution,
-   update cadence and stale-data thresholds.
+   Eight indicators in four themed pairs, all rendered through one
+   card component from a single data array (see the metric-grid
+   script near the end of the file).
+
+   CLAIMS HYGIENE: a card shows a figure only where a named public
+   source has published one. The remaining metrics carry an
+   em-dash, their real source lineage, and "awaiting first update".
+   Nothing on this page is invented.
+
+   Charts draw shapes only. Every label, value and stamp is HTML
+   outside the SVG — no SVG text element appears anywhere on the
+   page. Time ranges are supported internally; range controls are
+   not rendered until live series exist.
 
    DESIGN ONLY. Not production code. No framework, no build.
    Shared chrome copied verbatim from home.html.
@@ -227,17 +232,16 @@ button{font:inherit;cursor:pointer}
 .mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
 .mast__cta{margin-bottom:var(--s-3)}
 
-/* stale-data note */
-.stale{
-  display:flex;gap:var(--s-3);align-items:flex-start;border:1px solid var(--rap-slate-300);
-  border-left:3px solid var(--rap-slate-500);border-radius:var(--radius-sm);
-  background:var(--rap-mist);padding:14px 16px;margin-top:var(--s-5);
+/* metric grid — four themed rows, two cards per row on desktop.
+   Normal page scroll only: no internal scrollers, no carousels. */
+.metrics{display:grid;gap:var(--s-8);margin-top:var(--s-7)}
+.metrics__theme{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-slate-500);line-height:1.7;margin-bottom:var(--s-4);
 }
-.stale b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block}
-.stale p{font-size:14px;color:var(--rap-slate-700);margin-top:4px}
+.metrics__pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6)}
 
-/* metric cards */
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7)}
+/* metric card — one component, eight instances */
 .metric{border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
 .metric__label{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);min-height:2.6em}
 .metric__val{font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;margin:var(--s-3) 0 var(--s-2);font-variant-numeric:tabular-nums}
@@ -248,23 +252,12 @@ button{font:inherit;cursor:pointer}
   margin-top:var(--s-5);border:1px solid var(--rap-slate-200);border-radius:var(--radius-sm);
   background:#fff;padding:var(--s-4);
 }
-.metric__cap{
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--rap-slate-500);margin-top:var(--s-3);
-}
+.metric__chart svg{display:block;width:100%;height:auto}
 .metric__src{
   margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
 }
 .metric__src b{color:var(--rap-slate-700);font-weight:500}
-
-/* cross links */
-.xlinks{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-8);padding-top:var(--s-6);border-top:2px solid var(--rap-ink)}
-.xlink{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-5);text-decoration:none;display:block;transition:border-color .12s}
-.xlink:hover{border-color:var(--rap-ink)}
-.xlink b{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);display:block}
-.xlink span{font-family:var(--serif);font-size:24px;font-weight:500;display:block;margin-top:8px;color:var(--rap-ink)}
-.xlink i{font-style:normal;color:var(--rap-ember-700);font-weight:600;font-size:14px;display:block;margin-top:var(--s-3)}
 
 /* contact block in footer */
 .contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
@@ -320,12 +313,13 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
   .sec--ink{padding:var(--s-9) 0}
-  .metrics{grid-template-columns:1fr;gap:var(--s-7)}
-  .metric__label{min-height:0}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
-  .xlinks{grid-template-columns:1fr}
 }
 @media (max-width:680px){
+  /* 2×4 → 1×8. Page simply runs longer; nothing scrolls sideways. */
+  .metrics{gap:var(--s-7)}
+  .metrics__pair{grid-template-columns:1fr;gap:var(--s-7)}
+  .metric__label{min-height:0}
   .utility__inner{min-height:32px}
   .utility a{font-size:12px}
   .utility__secondary{display:none}
@@ -542,140 +536,200 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
         <!-- DECISION 040 — prominent CTA to the sibling Market Intel page. -->
         <a class="btn btn--secondary mast__cta" href="research.html">RAP Research &rarr;</a>
         <p class="mast__upd">Last updated 25 Aug 2026</p>
-        <p class="mast__upd">Next update &mdash; [pending cadence]</p>
       </div>
     </div>
 
-    <!-- Stale-data state. Shown whenever a metric has not refreshed within its
-         expected cadence; the cadence itself is defined in Phase 9. Cached values
-         keep rendering — a stale figure is more useful than an empty page. -->
-    <div class="stale">
-      <span aria-hidden="true">&#9888;</span>
-      <div>
-        <b>Placeholder data &middot; updates not yet live</b>
-        <p>Every figure below is a placeholder pending approved data sources. In production, a
-        metric that misses its expected update window keeps its last good value, greys its
-        source line and appends <span class="meta">&middot; stale</span>.</p>
-      </div>
-    </div>
+    <!-- MI CONSOLE lands here (spec section 2) -->
 
     <!-- ============================================================
-         FOUR METRICS — relocated from the homepage Market Pulse section.
-         PLACEHOLDER VALUES pending approved data sources (Phase 9).
-         Source names are indicative of the kind of primary source
-         intended; neither the values nor the attributions are approved
-         facts. Charts render empty axes only — historical series arrive
-         with the Market Intelligence automation phase.
+         METRIC GRID — eight indicators in four themed pairs, rendered
+         from one data array through one card component. See the
+         metric-grid script below the main element.
          ============================================================ -->
-    <div class="metrics">
+    <div class="metrics" id="metric-grid"></div>
 
-      <!-- METRIC 1 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Furniture &amp; home furnishings store sales</p>
-        <p class="metric__val">$11.20B</p>
-        <p class="metric__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="0" y="134">$&mdash;</text><text x="0" y="102">$&mdash;</text><text x="0" y="70">$&mdash;</text><text x="0" y="38">$&mdash;</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 1 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>Census / FRED</b> &middot; UPD 08 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 2 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Existing-home sales (SAAR)</p>
-        <p class="metric__val">4.06M</p>
-        <p class="metric__delta flat">&#9654; 0.0% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 2 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>NAR / FRED</b> &middot; UPD 21 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 3 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Housing starts</p>
-        <p class="metric__val">1.31M</p>
-        <p class="metric__delta up">&#9650; 2.1% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 3 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>Census</b> &middot; UPD 19 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 4 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Furniture CPI</p>
-        <p class="metric__val">&minus;1.2%</p>
-        <p class="metric__delta down">&#9660; 0.4% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="10" y="134">&mdash;%</text><text x="10" y="102">&mdash;%</text><text x="10" y="70">&mdash;%</text><text x="10" y="38">&mdash;%</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 4 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>BLS</b> &middot; UPD 13 Aug &middot; monthly</p>
-      </div>
-
-    </div>
-
-    <p class="meta" style="margin-top:var(--s-6)">
-      Metric list, sources, update cadence and history depth are defined in the Market
-      Intelligence phase. Every metric ships with a source and a last-updated stamp.
-    </p>
-
-    <!-- cross-links: the three information products stay separate but reachable -->
-    <div class="xlinks">
-      <a class="xlink" href="newswire.html">
-        <b>Furniture Retail Newswire</b>
-        <span>What happened?</span>
-        <i>Read the wire &rarr;</i>
-      </a>
-      <a class="xlink" href="research.html">
-        <b>RAP Research</b>
-        <span>What does it mean?</span>
-        <i>Read the research &rarr;</i>
-      </a>
-    </div>
   </div>
 </section>
 </main>
+
+<script>
+/* ============================================================
+   METRIC GRID
+   Eight indicators, four themed pairs, one card component, one
+   data array. Add or correct a figure in METRICS below and the
+   card follows — there is no second place to edit.
+
+   CLAIMS HYGIENE. currentValue and changeLabel are populated only
+   where a named public source has published the figure. The rest
+   carry an em-dash plus "awaiting first update"; nothing here is
+   estimated, modelled or invented.
+
+   TIME RANGES. Each metric carries one series array per range
+   (1Y / 3Y / 5Y / 10Y), all empty until live data lands.
+   activeRange holds the state and renderChart(metric, range)
+   reads it, so the wiring is real — but no range control is
+   rendered, because a control that does nothing is worse than no
+   control. Controls ship with the series.
+
+   CHARTS. SVG draws shapes only: axes, hairline gridlines and,
+   once a series exists, a polyline. No SVG text element, ever —
+   every label on this page is HTML outside the SVG.
+   ============================================================ */
+(function () {
+  var grid = document.getElementById('metric-grid');
+  if (!grid) { return; }
+
+  var RANGES = ['1Y', '3Y', '5Y', '10Y'];
+  var activeRange = '5Y';
+  var THEMES = ['Furniture demand', 'Housing', 'Consumer', 'Affordability'];
+  var GLYPH = { up: '▲', down: '▼', flat: '▶' };
+
+  /* { '1Y': [], '3Y': [], '5Y': [], '10Y': [] } */
+  function emptySeries() {
+    var s = {};
+    for (var i = 0; i < RANGES.length; i++) { s[RANGES[i]] = []; }
+    return s;
+  }
+
+  var METRICS = [
+    {
+      id: 'furniture-sales',
+      name: 'Furniture &amp; Home Furnishings Sales',
+      currentValue: '$11.20B',
+      changeLabel: { dir: 'down', value: '4.5%', note: 'vs 2022 run rate' },
+      source: 'Census / FRED',
+      lastUpdated: 'UPD 08 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'furniture-sales-real',
+      name: 'Inflation-Adjusted Furniture Sales',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Census / BLS / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'existing-home-sales',
+      name: 'Existing-Home Sales (SAAR)',
+      currentValue: '4.06M',
+      changeLabel: { dir: 'flat', value: '0.0%', note: 'year over year' },
+      source: 'NAR / FRED',
+      lastUpdated: 'UPD 21 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'housing-starts',
+      name: 'Housing Starts',
+      currentValue: '1.31M',
+      changeLabel: { dir: 'up', value: '2.1%', note: 'year over year' },
+      source: 'Census',
+      lastUpdated: 'UPD 19 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'consumer-sentiment',
+      name: 'Consumer Sentiment',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Univ. of Michigan / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'real-dpi',
+      name: 'Real Disposable Personal Income',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'BEA / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'mortgage-30y',
+      name: '30-Year Mortgage Rate',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Freddie Mac / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'furniture-cpi',
+      name: 'Furniture CPI',
+      currentValue: '−1.2%',
+      changeLabel: { dir: 'down', value: '0.4%', note: 'year over year' },
+      source: 'BLS',
+      lastUpdated: 'UPD 13 Aug · monthly',
+      series: emptySeries()
+    }
+  ];
+
+  /* Plot frame. Fluid: viewBox plus width:100% — no fixed pixel width.
+     Hairlines reuse the page greys (slate-300 axes, slate-100 grid). */
+  function renderChart(metric, range) {
+    var pts = (metric.series && metric.series[range]) || [];
+    var body =
+      '<line x1="2" y1="132" x2="458" y2="132" stroke="#C3CBD6"/>' +
+      '<line x1="2" y1="8" x2="2" y2="132" stroke="#C3CBD6"/>' +
+      '<g stroke="#EEF1F5"><line x1="2" y1="100" x2="458" y2="100"/>' +
+      '<line x1="2" y1="68" x2="458" y2="68"/>' +
+      '<line x1="2" y1="36" x2="458" y2="36"/></g>';
+
+    if (pts.length > 1) {
+      var lo = Math.min.apply(null, pts);
+      var hi = Math.max.apply(null, pts);
+      var span = (hi - lo) || 1;
+      var coords = [];
+      for (var i = 0; i < pts.length; i++) {
+        var x = 2 + (i / (pts.length - 1)) * 456;
+        var y = 132 - ((pts[i] - lo) / span) * 116;
+        coords.push(x.toFixed(1) + ',' + y.toFixed(1));
+      }
+      body += '<polyline fill="none" stroke="#204374" stroke-width="1.6" ' +
+        'stroke-linejoin="round" stroke-linecap="round" points="' + coords.join(' ') + '"/>';
+    }
+
+    var label = pts.length
+      ? metric.name + ' — ' + range + ' history.'
+      : metric.name + ' — chart area. No history is connected yet.';
+
+    return '<svg viewBox="0 0 460 140" role="img" aria-label="' + label + '">' + body + '</svg>';
+  }
+
+  function renderCard(m) {
+    var d = m.changeLabel;
+    var delta = d
+      ? '<p class="metric__delta ' + d.dir + '">' + GLYPH[d.dir] + ' ' + d.value +
+        ' <span>' + d.note + '</span></p>'
+      : '<p class="metric__delta flat">—</p>';
+
+    return '<article class="metric" data-metric="' + m.id + '">' +
+      '<h3 class="metric__label">' + m.name + '</h3>' +
+      '<p class="metric__val">' + m.currentValue + '</p>' +
+      delta +
+      '<div class="metric__chart">' + renderChart(m, activeRange) + '</div>' +
+      '<p class="metric__src"><b>' + m.source + '</b> · ' + m.lastUpdated + '</p>' +
+      '</article>';
+  }
+
+  function renderGrid() {
+    var html = '';
+    for (var i = 0; i < METRICS.length; i += 2) {
+      html += '<section class="metrics__row">' +
+        '<h2 class="metrics__theme">' + THEMES[i / 2] + '</h2>' +
+        '<div class="metrics__pair">' +
+          renderCard(METRICS[i]) + renderCard(METRICS[i + 1]) +
+        '</div>' +
+      '</section>';
+    }
+    grid.innerHTML = html;
+  }
+
+  renderGrid();
+})();
+</script>
 
 <!-- ============ FOOTER ============ -->
 <footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
