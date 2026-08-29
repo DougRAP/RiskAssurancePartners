@@ -725,6 +725,7 @@ Every form collecting email or phone must block submission until formats are val
 - **Part 2 (8307ba0):** RAP Intelligence console — full-width ink block below the masthead, 2px brass top rule; AI-interpretation awaiting state ("awaiting first run" + "No interpretation has been generated"); Furniture Retail Outlook `-- / 100`, "Not yet scored", deliberately unscored treatment (no gauge/scale/colors); Key signals awaiting state; "Ask RAP Intelligence — coming soon." teaser with zero interactive elements. Pure markup/CSS.
 - **Mobile audit:** resolves M1 (no SVG text left) and M3/M4 (grid holds 2-up to 680; captions removed, source line at floor). M2 masthead-wrap softened (pending-cadence line gone) — verify on phone preview.
 - **For owner review on preview:** console h2 reads "RAP Intelligence" (eyebrow "Interpretation layer") — spec's container name is "RAP Market Intelligence console"; masthead "RAP Research →" button now competes visually with the console below it.
+- **Timeframe control ruling (Owner, 2026-08-29): GLOBAL, not per-chart.** One shared range state (default 5Y) drives all eight charts — already how the hidden plumbing works (single `activeRange` variable). When Phase 9 exposes controls, build ONE global selector above the grid; never per-card range buttons.
 
 ## Open / Not Yet Decided
 
