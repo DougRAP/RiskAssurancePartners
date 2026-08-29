@@ -232,6 +232,47 @@ button{font:inherit;cursor:pointer}
 .mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
 .mast__cta{margin-bottom:var(--s-3)}
 
+/* RAP Intelligence console — the page's focal surface, and an honest
+   awaiting state throughout. Ink ground under a brass rule so it reads
+   as the interpretation layer above the evidence; flat colour, one
+   hairline column rule, no gauge, no control of any kind. Every region
+   states that nothing has been generated yet. */
+.mic{
+  margin-top:var(--s-7);background:var(--rap-ink);color:#fff;
+  border-top:2px solid var(--rap-brass);padding:var(--s-6);
+}
+.mic__eyebrow{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-brass);line-height:1.7;
+}
+.mic__t{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.1;letter-spacing:-.01em;margin-top:2px}
+.mic__body{
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:var(--s-7);margin-top:var(--s-6);
+}
+.mic__rail{border-left:1px solid var(--rap-ink-700);padding-left:var(--s-7);display:grid;gap:var(--s-5);align-content:start}
+.mic__panel + .mic__panel{border-top:1px solid var(--rap-ink-700);padding-top:var(--s-5)}
+.mic__lbl{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-brass);line-height:1.7;
+}
+.mic__read{display:flex;flex-direction:column;min-height:9em}
+.mic__await{
+  font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.7vw,24px);line-height:1.35;
+  color:rgba(255,255,255,.62);margin-top:var(--s-3);max-width:44ch;
+}
+.mic__await--sm{font-size:clamp(16px,1.3vw,19px);max-width:30ch}
+.mic__read .mic__await{margin-bottom:var(--s-5)}
+.mic__read .meta{margin-top:auto}
+.mic .meta{font-size:12px;color:rgba(255,255,255,.5)}
+.mic__score{
+  font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;
+  color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;
+  margin:var(--s-3) 0 var(--s-2);letter-spacing:.02em;
+}
+.mic__score b{font-weight:500;color:rgba(255,255,255,.68)}
+.mic__foot{margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
+
 /* metric grid — four themed rows, two cards per row on desktop.
    Normal page scroll only: no internal scrollers, no carousels. */
 .metrics{display:grid;gap:var(--s-8);margin-top:var(--s-7)}
@@ -315,8 +356,20 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
   .sec--ink{padding:var(--s-9) 0}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
 }
+@media (max-width:860px){
+  /* Console collapses to one column; the rail's column rule becomes a
+     horizontal hairline. Nothing scrolls sideways. */
+  .mic__body{grid-template-columns:1fr;gap:var(--s-6)}
+  .mic__rail{border-left:0;border-top:1px solid var(--rap-ink-700);padding-left:0;padding-top:var(--s-6)}
+  .mic__read{min-height:0}
+  .mic__read .mic__await{margin-bottom:var(--s-4)}
+  .mic__read .meta{margin-top:0}
+}
 @media (max-width:680px){
   /* 2×4 → 1×8. Page simply runs longer; nothing scrolls sideways. */
+  .mic{padding:var(--s-5)}
+  .mic__await{max-width:none}
+  .mic__await--sm{max-width:none}
   .metrics{gap:var(--s-7)}
   .metrics__pair{grid-template-columns:1fr;gap:var(--s-7)}
   .metric__label{min-height:0}
@@ -539,7 +592,41 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       </div>
     </div>
 
-    <!-- MI CONSOLE lands here (spec section 2) -->
+    <!-- ============================================================
+         RAP INTELLIGENCE CONSOLE
+         The interpretation layer, shown in its true state: nothing is
+         wired, so nothing is claimed. No model, no score, no cadence,
+         no sample output. The console holds no control — not a link,
+         a field or a button — because the evidence sits directly
+         below and a control that does nothing is worse than none.
+         ============================================================ -->
+    <section class="mic" aria-labelledby="mic-h">
+      <p class="mic__eyebrow">Interpretation layer</p>
+      <h2 class="mic__t" id="mic-h">RAP Intelligence</h2>
+
+      <div class="mic__body">
+        <div class="mic__read">
+          <h3 class="mic__lbl">AI interpretation</h3>
+          <p class="mic__await">Automated interpretation of the indicators below &mdash; awaiting first run.</p>
+          <p class="meta">No interpretation has been generated</p>
+        </div>
+
+        <div class="mic__rail">
+          <div class="mic__panel">
+            <h3 class="mic__lbl">Furniture Retail Outlook</h3>
+            <p class="mic__score"><b>--</b> / 100</p>
+            <p class="meta">Not yet scored</p>
+          </div>
+          <div class="mic__panel">
+            <h3 class="mic__lbl">Key signals</h3>
+            <p class="mic__await mic__await--sm">What changed this update &mdash; awaiting first run.</p>
+            <p class="meta">No signals have been generated</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="mic__foot meta">Ask RAP Intelligence &mdash; coming soon.</p>
+    </section>
 
     <!-- ============================================================
          METRIC GRID — eight indicators in four themed pairs, rendered
