@@ -717,6 +717,15 @@ Every form collecting email or phone must block submission until formats are val
 
 **Gap resolved (Owner, 2026-08-28):** the leave-a-message form now requires Name, Company, Position, and Message, plus at least one of Email / Phone (both format-checked per this standard) — errors via the existing inline line, first failing field focused (ef92648). Fulfills 042's "leave-a-message with contact details."
 
+## Decision 052 — Market Intelligence Page Refactor (branch pass, awaiting owner merge approval)
+
+**Status:** Built to owner-approved MI_REFACTOR_SPEC.md (2026-08-29) on branch `mi-refactor`; NOT merged — owner reviews branch preview desktop + phone.
+
+- **Part 1 (3083177):** stale banner, old 4-metric block (in-SVG text), "[pending cadence]" line, phase footnote, and cross-link cards removed with their CSS. Metric grid rebuilt: one reusable card rendered from the spec data shape (`changeLabel` refined to `{dir,value,note}` — key name kept, feeds the up/down/flat convention); 8 FRED-family metrics in mandated themed pairs; four kept values/sources/stamps, four em-dash "awaiting first update" cards with real source lineage; hidden 1Y/3Y/5Y/10Y range plumbing, default 5Y, zero rendered controls; shape-only chart frames, every label HTML; 2-col desktop → 1-col ≤680. `.metric__src` raised 11→12px (phone type floor).
+- **Part 2 (8307ba0):** RAP Intelligence console — full-width ink block below the masthead, 2px brass top rule; AI-interpretation awaiting state ("awaiting first run" + "No interpretation has been generated"); Furniture Retail Outlook `-- / 100`, "Not yet scored", deliberately unscored treatment (no gauge/scale/colors); Key signals awaiting state; "Ask RAP Intelligence — coming soon." teaser with zero interactive elements. Pure markup/CSS.
+- **Mobile audit:** resolves M1 (no SVG text left) and M3/M4 (grid holds 2-up to 680; captions removed, source line at floor). M2 masthead-wrap softened (pending-cadence line gone) — verify on phone preview.
+- **For owner review on preview:** console h2 reads "RAP Intelligence" (eyebrow "Interpretation layer") — spec's container name is "RAP Market Intelligence console"; masthead "RAP Research →" button now competes visually with the console below it.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
