@@ -61,3 +61,9 @@ textarea; hidden `#contact-route` field records the clicked card
   (`dealer` / `subscription` / `media`) for triage;
 - deliver to RAP Sales; media-route entries flagged for whoever handles press;
 - no status tracking or login (Decision 043 ruling).
+
+**Post-wiring cleanup (owner, 2026-08-29):** once transport is live, sweep all
+pages for stale "no transport / nothing stored / static prototype" code
+comments and remove them — economics-gate.html's access-form script header
+carries an explicit REMINDER marker; the contact-form, propose-a-topic, and
+leave-a-message script comments say the same thing and go in the same sweep.
