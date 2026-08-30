@@ -962,12 +962,13 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
      Hairlines reuse the page greys (slate-300 axes, slate-100 grid). */
   function renderChart(metric, range) {
     var pts = (metric.series && metric.series[range]) || [];
+    /* 16:10 frame — 460x288; baseline y=280, top y=8, gridline quarters */
     var body =
-      '<line x1="2" y1="132" x2="458" y2="132" stroke="#C3CBD6"/>' +
-      '<line x1="2" y1="8" x2="2" y2="132" stroke="#C3CBD6"/>' +
-      '<g stroke="#EEF1F5"><line x1="2" y1="100" x2="458" y2="100"/>' +
-      '<line x1="2" y1="68" x2="458" y2="68"/>' +
-      '<line x1="2" y1="36" x2="458" y2="36"/></g>';
+      '<line x1="2" y1="280" x2="458" y2="280" stroke="#C3CBD6"/>' +
+      '<line x1="2" y1="8" x2="2" y2="280" stroke="#C3CBD6"/>' +
+      '<g stroke="#EEF1F5"><line x1="2" y1="212" x2="458" y2="212"/>' +
+      '<line x1="2" y1="144" x2="458" y2="144"/>' +
+      '<line x1="2" y1="76" x2="458" y2="76"/></g>';
 
     if (pts.length > 1) {
       var lo = Math.min.apply(null, pts);
@@ -976,7 +977,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       var coords = [];
       for (var i = 0; i < pts.length; i++) {
         var x = 2 + (i / (pts.length - 1)) * 456;
-        var y = 132 - ((pts[i] - lo) / span) * 116;
+        var y = 280 - ((pts[i] - lo) / span) * 264;
         coords.push(x.toFixed(1) + ',' + y.toFixed(1));
       }
       body += '<polyline fill="none" stroke="#204374" stroke-width="1.6" ' +
@@ -987,7 +988,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       ? metric.name + ' — ' + range + ' history.'
       : metric.name + ' — chart area. No history is connected yet.';
 
-    return '<svg viewBox="0 0 460 140" role="img" aria-label="' + label + '">' + body + '</svg>';
+    return '<svg viewBox="0 0 460 288" role="img" aria-label="' + label + '">' + body + '</svg>';
   }
 
   function renderCard(m) {
