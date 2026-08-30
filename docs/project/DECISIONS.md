@@ -736,6 +736,12 @@ Every form collecting email or phone must block submission until formats are val
 
 The footer line "FurnitureRx is a product of Risk Assurance Partners." is removed from all pages, with its `.foot__note` CSS. Rationale: this is the B2B corporate site; FurnitureRx is the B2C property — the ownership note belongs on FurnitureRx surfaces, not here. Amends the MASTER_SPEC brand-presentation guidance ("Where appropriate, FurnitureRx may be presented as FurnitureRx by Risk Assurance Partners") for footer chrome only; the brand-hierarchy FACTS (Decision 001) are unchanged, and in-content uses like "FurnitureRx Subscription" remain.
 
+## Decision 054 — Market Intelligence AI: Automated Analysis Only, No Interactivity
+
+**Status:** Approved / Locked (Owner, 2026-08-30)
+
+Confirms and finalizes the Decision 052 trail: the Market Intelligence AI is **not interactive — ever**. No chat, no visitor question interface, no Q&A. The AI's sole function: read the page's structured indicator data on a schedule, then create and publish a written analysis for retailers (per the AI output contract in DEV_NOTES — analysis always ends with the Furniture Retail Outlook score, once scoring methodology and disclaimer are owner-approved). This is the fully automated, press-releasable intelligence service. Do not propose interactive AI features for this page.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
