@@ -218,6 +218,10 @@ button{font:inherit;cursor:pointer}
    PROGRAMS PAGE — page-specific
    ============================================================ */
 
+/* page-intro bulleted list (reset kills list markers) */
+.intro-list{list-style:disc;padding-left:1.25em}
+.intro-list li{margin-top:var(--s-2)}
+
 /* section-jump strip */
 .jump{
   position:sticky;top:var(--hdr-h);z-index:50;background:#fff;
@@ -604,10 +608,10 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
     <h1 class="d2" id="intro-h" style="max-width:22ch">
       Four ways to create profit from <span class="acc">your foot traffic.</span>
     </h1>
-    <p class="lead" style="margin-top:var(--s-5);max-width:74ch">
-      Protection programs for furniture &amp; mattress retail dealers, as well as custom interior
-      designer programs &mdash; all home furnishings categories.
-    </p>
+    <ul class="lead intro-list" style="margin-top:var(--s-5);max-width:74ch">
+      <li>Choose a program type, (1) Subscription, (2) Multi-Year or both.</li>
+      <li>Select an Underwriting type, (3) Reinsurance &amp; Share Underwriting profit, or (4) Standard, just pay the lowest price.</li>
+    </ul>
   </div>
 </section>
 
