@@ -7,15 +7,15 @@
 
 ## Where all updates are written (canonical locations)
 
-- **docs/project/DECISIONS.md** — every material owner ruling, numbered, with implementing commits. 049 (research pass), 050 (contact routes form), 051 (form validation standard), 052 (MI refactor, many amendments — ON BRANCH), 053 (FurnitureRx footer note removed — ON BRANCH; code deployed both sides).
+- **docs/project/DECISIONS.md** — every material owner ruling, numbered, with implementing commits. 049 (research pass), 050 (contact routes form), 051 (form validation standard), 052 (MI refactor, many amendments — merged), 053 (FurnitureRx footer note removed). All 001–053 on main.
 - **docs/project/HANDOFF.md** — this file; session state for the next master.
-- **docs/project/DEV_NOTES.md** — work orders for later phases: Adrian's back-links; Supabase lead-capture wiring (source tags `calculator` / `infosheet` / `contact`+route / `research-topic`); post-Supabase comment cleanup sweep; MI snapshot-archive persistence; **AI output contract** (analysis must always end with the Furniture Retail Outlook score). Partially ON BRANCH.
-- **docs/design/MOBILE_AUDIT.md** — living mobile punch list (research items closed; MI items M1–M4 resolved by the branch work, not yet marked — update at merge).
-- **Code:** production pages on `main`, MI refactor on `mi-refactor` — never merge without explicit owner approval.
+- **docs/project/DEV_NOTES.md** — work orders for later phases: Adrian's back-links; Supabase lead-capture wiring (source tags `calculator` / `infosheet` / `contact`+route / `research-topic`); post-Supabase comment cleanup sweep; MI snapshot-archive persistence; **AI output contract** (analysis must always end with the Furniture Retail Outlook score). All on main.
+- **docs/design/MOBILE_AUDIT.md** — living mobile punch list (research items closed; MI items M1–M4 closed at merge; still open sitewide: S6, S14, newswire state bar).
+- **Code:** everything on `main`. mi-refactor merged and deleted. Any future big page pass repeats the review-branch flow (branch → Netlify preview → owner approval → merge).
 
 ## Current state
 
-**Phase 2, page passes. Done: home (048), research (049). In flight: market-intelligence on `mi-refactor` — owner-directed polish iterations, NOT signed off; owner reviews `https://mi-refactor--riskassurancepartners.netlify.app/market-intelligence` desktop + phone. Queue after MI: programs.html, then newswire; full-site audit agent runs after all pages.**
+**Phase 2, page passes. Done: home (048), research (049), market-intelligence (052 — merged to main `cfbf853`, owner-approved, live on production). Remaining MI scope deliberately deferred: AI interpretation wiring and Supabase snapshot persistence (DEV_NOTES work orders). NEXT: programs.html pass, then newswire; full-site audit agent runs after all pages.**
 
 MI page as built (Decision 052 trail): masthead + full-width how-to paragraph → 1Y/3Y/5Y/10Y global selector ("Select Time Frame") → ink console (8-indicator quick-look list with aligned values + ink-inset AI analysis panel: intro line, empty `#mic-article` with pre-styled serif typography, "No analysis yet.") → collapsed "View Charts" accordion (8 cards, themed pairs, 16:10 shape-only SVG frames, all text HTML) → left-justified ember RAP Research button → footer. Data layer: one `METRICS` array; `snapshotValue()`/`setSnapshot()` archive plumbing with empty `SNAPSHOTS` store — date picker + "Return to current" + howto sentence render ONLY when snapshots exist. Q&A/chat feature cancelled; outlook score UI removed (score lives in future AI text). Page swept clean (dead code, syntax, runtime) at `2b11fc9` — re-sweep after any further polish.
 
@@ -50,4 +50,4 @@ Owner instructions override docs; one-liners inline by master; Opus subagents fo
 
 ## Road ahead
 
-MI sign-off → owner merge approval (update MOBILE_AUDIT + merge 052/053 into main's DECISIONS via the branch merge) → programs.html pass → newswire pass → remaining mobile items (S6, S14, newswire state bar) → full-site audit agent → Phase 3 UI_SPEC.md → Phase 4 architecture proposal (Supabase work packages already scoped in DEV_NOTES) → per IMPLEMENTATION_PLAN.md.
+programs.html pass → newswire pass → remaining mobile items (S6, S14, newswire state bar) → full-site audit agent → Phase 3 UI_SPEC.md → Phase 4 architecture proposal (Supabase work packages already scoped in DEV_NOTES, including MI AI-interpretation v1 — the press-releasable service) → per IMPLEMENTATION_PLAN.md.
