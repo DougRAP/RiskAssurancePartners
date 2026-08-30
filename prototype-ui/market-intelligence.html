@@ -224,7 +224,8 @@ button{font:inherit;cursor:pointer}
    MARKET INTELLIGENCE — page-specific
    ============================================================ */
 
-/* masthead — title over one mono subline carrying the update date.
+/* masthead — title over one mono subline carrying the update date,
+   then the single how-to-read paragraph, all above one ink rule.
    The date span is a JS hook: once dated snapshots exist it is
    replaced by a native select (see SNAPSHOTS in the metric-grid
    script). With none published it is plain text and no control is
@@ -245,15 +246,10 @@ button{font:inherit;cursor:pointer}
 }
 .mast__ret:hover{color:var(--rap-ink)}
 
-/* Page intro — the layer is named once, in ink, above the controls it
-   describes, with a single line of instruction under it. It is not part
-   of the console; the console below carries no header of its own. */
-.miintro{margin-top:var(--s-6)}
-.miintro__t{
-  font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.4vw,34px);
-  line-height:1.1;letter-spacing:-.01em;color:var(--rap-ink);
-}
-.miintro__p{font-size:15px;line-height:1.55;color:var(--rap-slate-700);max-width:60ch;margin-top:var(--s-3)}
+/* How to read the page — one paragraph, stated once, inside the
+   masthead above its rule. Full content width: it runs the .wrap
+   measure and wraps to two lines on desktop. No max-width cap. */
+.mast__how{font-size:15px;line-height:1.55;color:var(--rap-slate-700);margin-top:var(--s-4)}
 
 /* RAP Intelligence console — the page's focal surface, and an honest
    awaiting state throughout. Ink ground under a brass rule so it reads
@@ -709,19 +705,18 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 <section class="sec sec--first" aria-labelledby="mi-h">
   <div class="wrap">
 
-    <!-- masthead — title and one subline. The date sits in #mi-updated;
-         the archive picker replaces its contents only once SNAPSHOTS
-         carries an entry, so today it is plain text. -->
+    <!-- masthead — title, one subline, and the how-to-read paragraph.
+         The date sits in #mi-updated; the archive picker replaces its
+         contents only once SNAPSHOTS carries an entry, so today it is
+         plain text. #mi-howto states once how the page is read; while
+         snapshots exist the script appends one further sentence to it
+         (#mi-howto-date) naming the date control — see renderUpdated()
+         in the metric-grid script. With none published that sentence
+         is not in the document at all. -->
     <div class="mast">
       <h1 class="mast__t" id="mi-h">Market Intelligence</h1>
       <p class="mast__s">Key Indicators &middot; Last Updated <span id="mi-updated">08/25/26</span></p>
-    </div>
-
-    <!-- Page intro — names the layer and states, once, how the page is
-         read. #mic-h is the accessible name of the console below. -->
-    <div class="miintro">
-      <h2 class="miintro__t" id="mic-h">RAP Intelligence</h2>
-      <p class="miintro__p">Pick a time frame, scan today&rsquo;s key indicators, and read the AI&rsquo;s interpretation beside them. Open View Charts for the underlying history.</p>
+      <p class="mast__how" id="mi-howto">We&rsquo;ve selected key indicators that together exert influence over home furnishings sales. We added an AI analyst to assist in understanding the data. The page always opens on the latest update. Use the Time Frame picker and View Charts to see the data in chart form and track change through time.</p>
     </div>
 
     <!-- ============================================================
@@ -737,9 +732,9 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 
     <!-- ============================================================
          RAP INTELLIGENCE CONSOLE
-         No header of its own — the page intro above names the layer,
-         and this section borrows that heading for its accessible name.
-         Straight into a 1×2 grid of equal cells.
+         No header of its own — the page carries one h1 and the console
+         is named for assistive tech by aria-label alone, so no heading
+         level is spent on it. Straight into a 1×2 grid of equal cells.
          Left: the eight indicators at a glance, values in one shared
          column, rendered from the SAME METRICS array the cards use —
          see renderConsoleList() in the metric-grid script — so no
@@ -749,13 +744,15 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
          state: the field is empty and the footer says so. No model,
          no score, no cadence, no sample output.
          ============================================================ -->
-    <section class="mic" aria-labelledby="mic-h">
+    <section class="mic" aria-label="Key indicators and AI analysis">
       <div class="mic__body">
         <!-- One grid, two cells per indicator: identity, then value. -->
         <div class="mic__list" id="mic-list"></div>
 
         <div class="mic__ai">
-          <h3 class="mic__lbl">AI analysis</h3>
+          <!-- A panel label, not a document heading — kept as a styled
+               p so the outline stays h1 → theme h2s → card h3s. -->
+          <p class="mic__lbl">AI analysis</p>
           <!-- The article panel. #mic-article is the field the copy
                lands in — it stays empty until real analysis exists,
                and nothing is written into it here. -->
@@ -832,6 +829,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
   var seg = document.getElementById('range-seg');
   var micList = document.getElementById('mic-list');
   var updEl = document.getElementById('mi-updated');
+  var howEl = document.getElementById('mi-howto');
   if (!grid && !micList) { return; }
 
   var RANGES = ['1Y', '3Y', '5Y', '10Y'];
@@ -940,6 +938,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
      the span's contents. */
   var CURRENT_LABEL = updEl ? updEl.textContent : '';
   var retBtn = null;
+  var howSpan = null;
 
   function findSnapshot(date) {
     for (var i = 0; i < SNAPSHOTS.length; i++) {
@@ -1111,8 +1110,28 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
      control is created on entering an archived view and removed on
      leaving it, so the page never carries a control that does
      nothing.
+
+     The how-to paragraph follows the same rule: the sentence naming
+     the date control is created only while the select exists and is
+     removed from the DOM otherwise — never parked hidden.
      ------------------------------------------------------------ */
+  var HOWTO_DATE = ' You can also change the update date to review previous updates.';
+
+  function renderHowtoDate() {
+    if (!howEl) { return; }
+    if (SNAPSHOTS.length && !howSpan) {
+      howSpan = document.createElement('span');
+      howSpan.id = 'mi-howto-date';
+      howSpan.textContent = HOWTO_DATE;
+      howEl.appendChild(howSpan);
+    } else if (!SNAPSHOTS.length && howSpan) {
+      if (howSpan.parentNode) { howSpan.parentNode.removeChild(howSpan); }
+      howSpan = null;
+    }
+  }
+
   function renderUpdated() {
+    renderHowtoDate();
     if (!updEl) { return; }
     if (!SNAPSHOTS.length) {
       updEl.textContent = activeSnapshot ? activeSnapshot.label : CURRENT_LABEL;
