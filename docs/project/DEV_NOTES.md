@@ -73,7 +73,14 @@ exist. When the FRED automation phase lands: persist a dated snapshot of the
 changeLabel}}}`), and the picker + "Return to current" UI activates itself.
 Current always = latest published snapshot (data is monthly; mid-month
 visitors see the prior update). Also populate per-range `series` arrays for
-the charts and the AI article/outlook fields at the same time.
+the charts and the AI article fields at the same time.
+
+**AI output contract (owner, 2026-08-30):** the outlook score UI was removed
+from the page — the AI agent's article output MUST always end with the
+Furniture Retail Outlook score (x / 100) as part of its written commentary
+(methodology + disclaimer language still require owner approval before any
+real score ships). The article renders into `#mic-article` (pre-styled
+serif p / brass h4 / ul-li on the ink inset).
 
 **Post-wiring cleanup (owner, 2026-08-29):** once transport is live, sweep all
 pages for stale "no transport / nothing stored / static prototype" code
