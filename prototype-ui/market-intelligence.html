@@ -10,16 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RISK ASSURANCE PARTNERS — MARKET INTELLIGENCE (placeholder)
-   Created after the homepage Market Pulse section was removed;
-   the four stat tiles that lived there now live here.
+   RISK ASSURANCE PARTNERS — MARKET INTELLIGENCE
 
-   ALL VALUES, DELTAS AND UPDATE STAMPS ON THIS PAGE ARE
-   PLACEHOLDERS pending approved data sources (Phase 9). No figure
-   below is an approved fact. Historical charts render empty axes
-   only — the series arrive with the Market Intelligence
-   automation phase, which also supplies real source attribution,
-   update cadence and stale-data thresholds.
+   Eight indicators in four themed pairs, all rendered through one
+   card component from a single data array (see the metric-grid
+   script near the end of the file).
+
+   CLAIMS HYGIENE: a card shows a figure only where a named public
+   source has published one. The remaining metrics carry an
+   em-dash, their real source lineage, and "awaiting first update".
+   Nothing on this page is invented.
+
+   Charts draw shapes only. Every label, value and stamp is HTML
+   outside the SVG — no SVG text element appears anywhere on the
+   page. One global range control governs all eight charts
+   (Decision 052: global, never per-card).
 
    DESIGN ONLY. Not production code. No framework, no build.
    Shared chrome copied verbatim from home.html.
@@ -71,7 +76,9 @@ button{font:inherit;cursor:pointer}
 /* ---------- layout primitives ---------- */
 .wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
 .sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
-.sec--first{border-top:0;padding-top:var(--s-7)}
+/* First section sits under the fixed header; the masthead rule carries
+   the page opening, so the top pad is half a normal section's. */
+.sec--first{border-top:0;padding-top:var(--s-5);padding-bottom:var(--s-5)}
 .sec--ink{
   background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
   background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
@@ -88,7 +95,6 @@ button{font:inherit;cursor:pointer}
 .lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:46ch}
 .sec--ink .lead{color:rgba(255,255,255,.78)}
 .body{color:var(--rap-slate-700);max-width:68ch}
-.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -142,8 +148,6 @@ button{font:inherit;cursor:pointer}
   border-radius:var(--radius-sm);padding:6px 10px;
 }
 .hdr__util .hdr__login:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
-.hdr__claim{display:none}
-@media (min-width:1280px){.hdr.is-condensed .hdr__claim{display:inline}}
 .lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
 .lockup__mark{
   width:34px;height:34px;flex:0 0 34px;border-radius:var(--radius-sm);
@@ -219,25 +223,180 @@ button{font:inherit;cursor:pointer}
    MARKET INTELLIGENCE — page-specific
    ============================================================ */
 
-/* masthead */
-.mast{border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4);display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-5);flex-wrap:wrap}
+/* masthead — title over one mono subline carrying the update date,
+   then the single how-to-read paragraph, all above one ink rule.
+   The date span is a JS hook: once dated snapshots exist it is
+   replaced by a native select (see SNAPSHOTS in the metric-grid
+   script). With none published it is plain text and no control is
+   drawn at all. */
+.mast{border-bottom:2px solid var(--rap-ink);padding-bottom:var(--s-4)}
 .mast__t{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
 .mast__s{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:8px}
-.mast__r{text-align:right}
-.mast__upd{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:6px}
-.mast__cta{margin-bottom:var(--s-3)}
-
-/* stale-data note */
-.stale{
-  display:flex;gap:var(--s-3);align-items:flex-start;border:1px solid var(--rap-slate-300);
-  border-left:3px solid var(--rap-slate-500);border-radius:var(--radius-sm);
-  background:var(--rap-mist);padding:14px 16px;margin-top:var(--s-5);
+/* Archive controls — only ever present while SNAPSHOTS has entries. */
+.mast__sel{
+  font-family:var(--mono);font-size:16px;letter-spacing:normal;text-transform:none;
+  color:var(--rap-ink);background:#fff;border:1px solid var(--rap-slate-300);
+  border-radius:var(--radius-sm);padding:8px 10px;min-height:44px;max-width:100%;
 }
-.stale b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block}
-.stale p{font-size:14px;color:var(--rap-slate-700);margin-top:4px}
+.mast__ret{
+  margin-left:var(--s-3);padding:12px 10px;min-height:44px;background:none;border:0;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rap-ember-700);text-decoration:underline;
+}
+.mast__ret:hover{color:var(--rap-ink)}
 
-/* metric cards */
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);margin-top:var(--s-7)}
+/* How to read the page — one paragraph, stated once, inside the
+   masthead above its rule. Full content width: it runs the .wrap
+   measure and wraps to two lines on desktop. No max-width cap. */
+.mast__how{font-size:15px;line-height:1.55;color:var(--rap-slate-700);margin-top:var(--s-4)}
+
+/* RAP Intelligence console — the page's focal surface, and an honest
+   awaiting state throughout. Ink ground under a brass rule so it reads
+   as the interpretation layer above the evidence; flat colour, no
+   gauge, no control of any kind. The card opens straight onto a 1×2
+   grid of equal-width, equal-height cells — the eight indicators at a
+   glance on the left, the bounded container that will hold the analysis
+   on the right. Extra top pad gives the list air under the brass rule
+   now that no header stands between them. Nothing is wired, so nothing
+   is claimed: every interpretation slot carries an em-dash. */
+.mic{
+  margin-top:var(--s-4);background:var(--rap-ink);color:#fff;
+  border-top:2px solid var(--rap-brass);padding:var(--s-7) var(--s-6) var(--s-6);
+}
+/* Equal cells, equal height: two 1fr columns stretched onto one row.
+   The row is sized by the left list alone — see .mic__panelwrap. */
+.mic__body{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:var(--s-7);align-items:stretch;
+}
+.mic__lbl{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-brass);line-height:1.7;
+}
+
+/* Indicator list. ONE grid for the whole list — each row contributes
+   its identity cell and its value cell directly — so every value sits
+   in a single shared right-hand column and all eight align, em-dashes
+   included, at every width. */
+.mic__list{
+  display:grid;grid-template-columns:minmax(0,1fr) max-content;
+  column-gap:var(--s-5);align-content:start;
+}
+.mic__list > *{border-bottom:1px solid var(--rap-ink-700);padding:var(--s-3) 0}
+.mic__list > :nth-child(-n+2){padding-top:0}
+.mic__list > :nth-last-child(-n+2){border-bottom:0;padding-bottom:0}
+.microw__name{
+  font-size:15px;font-weight:600;line-height:1.35;color:#fff;
+  position:relative;padding-left:1.1em;
+}
+.microw__name::before{
+  content:"";position:absolute;left:0;top:.5em;
+  width:.34em;height:.34em;border-radius:50%;background:var(--rap-brass);
+}
+.microw__desc{
+  font-size:13px;line-height:1.45;color:rgba(255,255,255,.58);
+  margin-top:3px;padding-left:1.1em;
+}
+.microw__val{
+  font-family:var(--mono);font-size:14px;line-height:1.45;color:#fff;
+  font-variant-numeric:tabular-nums;text-align:right;
+}
+
+/* AI analysis. The label sits in normal flow; the panel is taken out
+   of it so the right cell contributes only the label's height to the
+   row. The row is therefore as tall as the list, the stretched cell
+   passes that height down, and the panel fills what is left — matching
+   the list exactly instead of growing past it. */
+.mic__ai{display:flex;flex-direction:column;min-height:0}
+.mic__panelwrap{position:relative;flex:1 1 auto;min-height:0;margin-top:var(--s-4)}
+/* The panel is an inset of the console, not a card on top of it: the
+   same ink ground lifted a few percent, an ink hairline round it, and
+   type in the console's own light-on-ink register — a financial article
+   waiting to be written. Intro sentence, then the article field itself,
+   then a quiet footer stating plainly that nothing has been produced. */
+.mic__panel{
+  position:absolute;inset:0;overflow-y:auto;
+  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.045);color:#fff;
+  padding:var(--s-5);display:flex;flex-direction:column;
+}
+.micart__intro{font-size:14px;line-height:1.55;color:rgba(255,255,255,.72)}
+/* The article field takes the space between intro and footer, so the
+   blank field reads as a field and the footer sits on the bottom rule. */
+#mic-article{flex:1 1 auto;min-height:0}
+/* Article typography, pre-set for the copy that will land here. The
+   container is empty today — no placeholder, no sample analysis. */
+#mic-article p{font-family:var(--serif);font-size:16px;line-height:1.6;color:rgba(255,255,255,.88);margin-top:var(--s-4)}
+#mic-article p:first-child{margin-top:var(--s-5)}
+#mic-article h4{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-brass);line-height:1.7;margin-top:var(--s-5);
+}
+#mic-article ul{margin-top:var(--s-3);padding-left:1.1em;list-style:disc}
+#mic-article li{
+  font-family:var(--serif);font-size:15px;line-height:1.55;
+  color:rgba(255,255,255,.78);margin-top:var(--s-2);
+}
+.micart__foot{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
+.micart__none{font-family:var(--mono);font-size:12px;line-height:1.5;color:rgba(255,255,255,.55)}
+
+/* range control — ONE global selector governing all eight charts
+   (Decision 052: global, never per-card). Same segmented-control
+   family as the economics page: hairline frame, mono segments, ink
+   ground with white text on the active one. It leads the page, above
+   the console, with its caption beneath in the masthead's register. */
+.rangebar{margin-top:var(--s-4)}
+.rangebar__cap{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rap-slate-500);margin-top:var(--s-2);
+}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm)}
+.seg button{
+  background:#fff;border:0;border-left:1px solid var(--rap-slate-200);
+  padding:10px 18px;min-height:40px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rap-slate-700);transition:background .12s,color .12s;
+}
+.seg button:first-child{border-left:0}
+.seg button:hover{background:var(--rap-mist);color:var(--rap-ink)}
+.seg button[aria-pressed=true]{background:var(--rap-ink);color:#fff}
+
+/* charts accordion — the evidence is one row away, collapsed by
+   default. Native <details>: the label swaps in CSS off [open], the
+   chevron is the same border-chevron the drawer accordions use, and
+   no script touches it. */
+.acc{margin-top:var(--s-7);border-top:1px solid var(--rap-slate-200);border-bottom:1px solid var(--rap-slate-200)}
+.acc > summary{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
+  cursor:pointer;list-style:none;min-height:52px;padding:14px 0;
+  font-family:var(--mono);font-size:13px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-ink);
+}
+.acc > summary::-webkit-details-marker{display:none}
+.acc > summary::after{
+  content:"";flex-shrink:0;width:9px;height:9px;margin-right:4px;
+  border-right:1.5px solid var(--rap-brass);border-bottom:1.5px solid var(--rap-brass);
+  transform:translateY(-3px) rotate(45deg);transition:transform .18s ease;
+}
+.acc[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
+.acc__open{display:none}
+.acc[open] .acc__open{display:inline}
+.acc[open] .acc__closed{display:none}
+
+/* research handoff — one button above the footer, left-justified */
+.mirsc{margin:var(--s-5) 0 0}
+
+/* metric grid — four themed rows, two cards per row on desktop.
+   Normal page scroll only: no internal scrollers, no carousels. */
+.metrics{display:grid;gap:var(--s-8);margin-top:var(--s-7)}
+.acc > .metrics{margin:var(--s-6) 0 var(--s-8)}
+.metrics__theme{
+  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--rap-slate-500);line-height:1.7;margin-bottom:var(--s-4);
+}
+.metrics__pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6)}
+
+/* metric card — one component, eight instances */
 .metric{border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
 .metric__label{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);min-height:2.6em}
 .metric__val{font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;margin:var(--s-3) 0 var(--s-2);font-variant-numeric:tabular-nums}
@@ -248,23 +407,12 @@ button{font:inherit;cursor:pointer}
   margin-top:var(--s-5);border:1px solid var(--rap-slate-200);border-radius:var(--radius-sm);
   background:#fff;padding:var(--s-4);
 }
-.metric__cap{
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--rap-slate-500);margin-top:var(--s-3);
-}
+.metric__chart svg{display:block;width:100%;height:auto}
 .metric__src{
   margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);
 }
 .metric__src b{color:var(--rap-slate-700);font-weight:500}
-
-/* cross links */
-.xlinks{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-8);padding-top:var(--s-6);border-top:2px solid var(--rap-ink)}
-.xlink{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:var(--s-5);text-decoration:none;display:block;transition:border-color .12s}
-.xlink:hover{border-color:var(--rap-ink)}
-.xlink b{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);display:block}
-.xlink span{font-family:var(--serif);font-size:24px;font-weight:500;display:block;margin-top:8px;color:var(--rap-ink)}
-.xlink i{font-style:normal;color:var(--rap-ember-700);font-weight:600;font-size:14px;display:block;margin-top:var(--s-3)}
 
 /* contact block in footer */
 .contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
@@ -297,7 +445,6 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 .foot__cols a:hover{color:#fff}
 .foot__legal{margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);display:flex;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap}
 .foot__legal,.foot__legal a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none}
-.foot__note{margin-top:var(--s-3);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55)}
 .foot__acc{display:none}
 
 /* ============================================================
@@ -319,13 +466,34 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 @media (max-width:860px){
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
+  .sec--first{padding-bottom:var(--s-4)}
   .sec--ink{padding:var(--s-9) 0}
-  .metrics{grid-template-columns:1fr;gap:var(--s-7)}
-  .metric__label{min-height:0}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
-  .xlinks{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  /* Console collapses to one column, list above analysis box. The
+     panel returns to normal flow and the internal scroller is dropped
+     entirely — on touch the content flows and the page scrolls.
+     Nothing scrolls sideways. */
+  .mic__body{grid-template-columns:1fr;gap:var(--s-6)}
+  .mic__panelwrap{position:static;flex:0 0 auto;min-height:0}
+  .mic__panel{position:static;max-height:none;overflow:visible}
 }
 @media (max-width:680px){
+  /* 2×4 → 1×8. Page simply runs longer; nothing scrolls sideways. */
+  .mic{padding:var(--s-6) var(--s-5) var(--s-5)}
+  .mic__panel{padding:var(--s-4)}
+  /* Tighter gutter keeps name and value on one shared line at 390px,
+     so the value column stays aligned rather than dropping. 12px floor. */
+  .mic__list{column-gap:var(--s-4)}
+  .microw__desc{font-size:12px}
+  .microw__val{font-size:13px}
+  /* range segments grow to a comfortable thumb target and the row
+     wraps rather than scrolling sideways. */
+  .seg button{min-height:44px;padding:12px 20px}
+  .metrics{gap:var(--s-7)}
+  .metrics__pair{grid-template-columns:1fr;gap:var(--s-7)}
+  .metric__label{min-height:0}
   .utility__inner{min-height:32px}
   .utility a{font-size:12px}
   .utility__secondary{display:none}
@@ -532,150 +700,490 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 <section class="sec sec--first" aria-labelledby="mi-h">
   <div class="wrap">
 
-    <!-- masthead -->
+    <!-- masthead — title, one subline, and the how-to-read paragraph.
+         The date sits in #mi-updated; the archive picker replaces its
+         contents only once SNAPSHOTS carries an entry, so today it is
+         plain text. #mi-howto states once how the page is read; while
+         snapshots exist the script appends one further sentence to it
+         (#mi-howto-date) naming the date control — see renderUpdated()
+         in the metric-grid script. With none published that sentence
+         is not in the document at all. -->
     <div class="mast">
-      <div>
-        <h1 class="mast__t" id="mi-h">Market Intelligence</h1>
-        <p class="mast__s">What is changing.</p>
-      </div>
-      <div class="mast__r">
-        <!-- DECISION 040 — prominent CTA to the sibling Market Intel page. -->
-        <a class="btn btn--secondary mast__cta" href="research.html">RAP Research &rarr;</a>
-        <p class="mast__upd">Last updated 25 Aug 2026</p>
-        <p class="mast__upd">Next update &mdash; [pending cadence]</p>
-      </div>
-    </div>
-
-    <!-- Stale-data state. Shown whenever a metric has not refreshed within its
-         expected cadence; the cadence itself is defined in Phase 9. Cached values
-         keep rendering — a stale figure is more useful than an empty page. -->
-    <div class="stale">
-      <span aria-hidden="true">&#9888;</span>
-      <div>
-        <b>Placeholder data &middot; updates not yet live</b>
-        <p>Every figure below is a placeholder pending approved data sources. In production, a
-        metric that misses its expected update window keeps its last good value, greys its
-        source line and appends <span class="meta">&middot; stale</span>.</p>
-      </div>
+      <h1 class="mast__t" id="mi-h">Market Intelligence</h1>
+      <p class="mast__s">Key Indicators &middot; Last Updated <span id="mi-updated">08/25/26</span></p>
+      <p class="mast__how" id="mi-howto">We&rsquo;ve selected key indicators that together exert influence over home furnishings sales. We added an AI analyst to assist in understanding the data. The page always opens on the latest update. Use the Time Frame picker and View Charts to see the data in chart form and track change through time.</p>
     </div>
 
     <!-- ============================================================
-         FOUR METRICS — relocated from the homepage Market Pulse section.
-         PLACEHOLDER VALUES pending approved data sources (Phase 9).
-         Source names are indicative of the kind of primary source
-         intended; neither the values nor the attributions are approved
-         facts. Charts render empty axes only — historical series arrive
-         with the Market Intelligence automation phase.
+         RANGE CONTROL — one global selector for every chart on the
+         page, leading the page above the console. The segments are
+         rendered from the RANGES array in the metric-grid script, so
+         the list has exactly one definition.
          ============================================================ -->
-    <div class="metrics">
-
-      <!-- METRIC 1 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Furniture &amp; home furnishings store sales</p>
-        <p class="metric__val">$11.20B</p>
-        <p class="metric__delta down">&#9660; 4.5% <span>vs 2022 run rate</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="0" y="134">$&mdash;</text><text x="0" y="102">$&mdash;</text><text x="0" y="70">$&mdash;</text><text x="0" y="38">$&mdash;</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 1 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>Census / FRED</b> &middot; UPD 08 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 2 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Existing-home sales (SAAR)</p>
-        <p class="metric__val">4.06M</p>
-        <p class="metric__delta flat">&#9654; 0.0% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 2 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>NAR / FRED</b> &middot; UPD 21 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 3 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Housing starts</p>
-        <p class="metric__val">1.31M</p>
-        <p class="metric__delta up">&#9650; 2.1% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="6" y="134">&mdash;M</text><text x="6" y="102">&mdash;M</text><text x="6" y="70">&mdash;M</text><text x="6" y="38">&mdash;M</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 3 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>Census</b> &middot; UPD 19 Aug &middot; monthly</p>
-      </div>
-
-      <!-- METRIC 4 — placeholder -->
-      <div class="metric">
-        <p class="metric__label">Furniture CPI</p>
-        <p class="metric__val">&minus;1.2%</p>
-        <p class="metric__delta down">&#9660; 0.4% <span>year over year</span></p>
-        <div class="metric__chart">
-          <svg viewBox="0 0 460 160" role="img" aria-label="Empty chart frame. The historical series for this metric is not yet connected." style="width:100%;height:auto">
-            <line x1="46" y1="130" x2="460" y2="130" stroke="#C3CBD6"/>
-            <line x1="46" y1="10" x2="46" y2="130" stroke="#C3CBD6"/>
-            <g stroke="#EEF1F5"><line x1="46" y1="98" x2="460" y2="98"/><line x1="46" y1="66" x2="460" y2="66"/><line x1="46" y1="34" x2="460" y2="34"/></g>
-            <g font-family="IBM Plex Mono" font-size="10" fill="#C3CBD6">
-              <text x="10" y="134">&mdash;%</text><text x="10" y="102">&mdash;%</text><text x="10" y="70">&mdash;%</text><text x="10" y="38">&mdash;%</text>
-              <text x="46" y="150">2022</text><text x="250" y="150">2024</text><text x="424" y="150">2026</text>
-            </g>
-            <text x="253" y="72" font-family="IBM Plex Mono" font-size="11" letter-spacing="1.2" fill="#C3CBD6" text-anchor="middle">HISTORICAL SERIES &mdash; PHASE 9</text>
-          </svg>
-          <p class="metric__cap">Figure 4 &middot; Placeholder &mdash; no series plotted</p>
-        </div>
-        <p class="metric__src"><b>BLS</b> &middot; UPD 13 Aug &middot; monthly</p>
-      </div>
-
+    <div class="rangebar">
+      <div class="seg" id="range-seg" role="group" aria-label="Chart time range"></div>
+      <p class="rangebar__cap">Select Time Frame</p>
     </div>
 
-    <p class="meta" style="margin-top:var(--s-6)">
-      Metric list, sources, update cadence and history depth are defined in the Market
-      Intelligence phase. Every metric ships with a source and a last-updated stamp.
-    </p>
+    <!-- ============================================================
+         RAP INTELLIGENCE CONSOLE
+         No header of its own — the page carries one h1 and the console
+         is named for assistive tech by aria-label alone, so no heading
+         level is spent on it. Straight into a 1×2 grid of equal cells.
+         Left: the eight indicators at a glance, values in one shared
+         column, rendered from the SAME METRICS array the cards use —
+         see renderConsoleList() in the metric-grid script — so no
+         figure is written twice.
+         Right: the article panel. An inset field waiting for the
+         analysis, its typography already set. Shown in its true
+         state: the field is empty and the footer says so. No model,
+         no score, no cadence, no sample output.
+         ============================================================ -->
+    <section class="mic" aria-label="Key indicators and AI analysis">
+      <div class="mic__body">
+        <!-- One grid, two cells per indicator: identity, then value. -->
+        <div class="mic__list" id="mic-list"></div>
 
-    <!-- cross-links: the three information products stay separate but reachable -->
-    <div class="xlinks">
-      <a class="xlink" href="newswire.html">
-        <b>Furniture Retail Newswire</b>
-        <span>What happened?</span>
-        <i>Read the wire &rarr;</i>
-      </a>
-      <a class="xlink" href="research.html">
-        <b>RAP Research</b>
-        <span>What does it mean?</span>
-        <i>Read the research &rarr;</i>
-      </a>
+        <div class="mic__ai">
+          <!-- A panel label, not a document heading — kept as a styled
+               p so the outline stays h1 → theme h2s → card h3s. -->
+          <p class="mic__lbl">AI analysis</p>
+          <!-- The article panel. #mic-article is the field the copy
+               lands in — it stays empty until real analysis exists,
+               and nothing is written into it here. -->
+          <div class="mic__panelwrap">
+            <div class="mic__panel" id="mic-panel">
+              <p class="micart__intro">Automated AI analysis of these indicators and what they mean for home furnishings retail.</p>
+              <div id="mic-article"></div>
+              <div class="micart__foot">
+                <p class="micart__none">No analysis yet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CHARTS — eight indicators in four themed pairs, rendered from
+         one data array through one card component (see the metric-grid
+         script below the main element). Native <details>, collapsed by
+         default: the grid renders at load whether the row is open or
+         not, and re-renders on every range change regardless of state.
+         The summary label swaps in CSS off [open] — no script.
+         ============================================================ -->
+    <details class="acc" id="charts-acc">
+      <summary><span class="acc__closed">View Charts</span><span class="acc__open">Hide Charts</span></summary>
+      <div class="metrics" id="metric-grid"></div>
+    </details>
+
+    <!-- DECISION 040 — handoff to the sibling Research page. -->
+    <div class="mirsc">
+      <a class="btn btn--primary" href="research.html">RAP Research &rarr;</a>
     </div>
+
   </div>
 </section>
 </main>
+
+<script>
+/* ============================================================
+   METRIC GRID
+   Eight indicators, four themed pairs, one card component, one
+   data array. Add or correct a figure in METRICS below and the
+   card follows — there is no second place to edit.
+
+   CLAIMS HYGIENE. currentValue and changeLabel are populated only
+   where a named public source has published the figure. The rest
+   carry an em-dash plus "awaiting first update"; nothing here is
+   estimated, modelled or invented.
+
+   TIME RANGES. Each metric carries one series array per range
+   (1Y / 3Y / 5Y / 10Y), all empty until live data lands.
+   activeRange is the single piece of state: ONE global range for
+   the whole page, never one per card (Decision 052). The segments
+   are built from RANGES, so the range list is defined once. Empty
+   series simply plot nothing — the frame is the honest state and
+   no placeholder message is written over it.
+
+   CHARTS. SVG draws shapes only: axes, hairline gridlines and,
+   once a series exists, a polyline. No SVG text element, ever —
+   every label on this page is HTML outside the SVG.
+
+   SNAPSHOTS. The page publishes one dated set of figures at a time
+   and archives the ones it replaces. SNAPSHOTS holds those archives,
+   newest first; it is EMPTY until the first archive is published.
+   activeSnapshot === null means "current" — every value resolves
+   straight from METRICS. Nothing in the UI appears until an archive
+   exists: with no snapshots there is no picker and no return
+   control, only the plain date in the masthead.
+   ============================================================ */
+(function () {
+  var grid = document.getElementById('metric-grid');
+  var seg = document.getElementById('range-seg');
+  var micList = document.getElementById('mic-list');
+  var updEl = document.getElementById('mi-updated');
+  var howEl = document.getElementById('mi-howto');
+  if (!grid && !micList) { return; }
+
+  var RANGES = ['1Y', '3Y', '5Y', '10Y'];
+  var activeRange = '1Y';
+  var THEMES = ['Furniture demand', 'Housing', 'Consumer', 'Affordability'];
+  var GLYPH = { up: '▲', down: '▼', flat: '▶' };
+
+  /* { '1Y': [], '3Y': [], '5Y': [], '10Y': [] } */
+  function emptySeries() {
+    var s = {};
+    for (var i = 0; i < RANGES.length; i++) { s[RANGES[i]] = []; }
+    return s;
+  }
+
+  var METRICS = [
+    {
+      id: 'furniture-sales',
+      name: 'Furniture &amp; Home Furnishings Sales',
+      currentValue: '$11.20B',
+      changeLabel: { dir: 'down', value: '4.5%', note: 'vs 2022 run rate' },
+      source: 'Census / FRED',
+      lastUpdated: 'UPD 08 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'furniture-sales-real',
+      name: 'Inflation-Adjusted Furniture Sales',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Census / BLS / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'existing-home-sales',
+      name: 'Existing-Home Sales (SAAR)',
+      currentValue: '4.06M',
+      changeLabel: { dir: 'flat', value: '0.0%', note: 'year over year' },
+      source: 'NAR / FRED',
+      lastUpdated: 'UPD 21 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'housing-starts',
+      name: 'Housing Starts',
+      currentValue: '1.31M',
+      changeLabel: { dir: 'up', value: '2.1%', note: 'year over year' },
+      source: 'Census',
+      lastUpdated: 'UPD 19 Aug · monthly',
+      series: emptySeries()
+    },
+    {
+      id: 'consumer-sentiment',
+      name: 'Consumer Sentiment',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Univ. of Michigan / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'real-dpi',
+      name: 'Real Disposable Personal Income',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'BEA / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'mortgage-30y',
+      name: '30-Year Mortgage Rate',
+      currentValue: '—',
+      changeLabel: null,
+      source: 'Freddie Mac / FRED',
+      lastUpdated: 'awaiting first update',
+      series: emptySeries()
+    },
+    {
+      id: 'furniture-cpi',
+      name: 'Furniture CPI',
+      currentValue: '−1.2%',
+      changeLabel: { dir: 'down', value: '0.4%', note: 'year over year' },
+      source: 'BLS',
+      lastUpdated: 'UPD 13 Aug · monthly',
+      series: emptySeries()
+    }
+  ];
+
+  /* ------------------------------------------------------------
+     ARCHIVE BY DATE
+     One entry per published set of figures that METRICS has since
+     replaced, newest first:
+
+       { date: '08/25/26', label: '08/25/26',
+         metrics: { 'furniture-sales': { currentValue: '$11.20B',
+                                         changeLabel: {dir,value,note} } } }
+
+     EMPTY today: nothing has been archived, so nothing is listed and
+     no archive UI is drawn. Never seed this with example rows.
+     ------------------------------------------------------------ */
+  var SNAPSHOTS = [];
+  var activeSnapshot = null;
+
+  /* The masthead's current date, captured before any control replaces
+     the span's contents. */
+  var CURRENT_LABEL = updEl ? updEl.textContent : '';
+  var retBtn = null;
+  var howSpan = null;
+
+  function findSnapshot(date) {
+    for (var i = 0; i < SNAPSHOTS.length; i++) {
+      if (SNAPSHOTS[i].date === date) { return SNAPSHOTS[i]; }
+    }
+    return null;
+  }
+
+  /* THE resolver. Every path that prints a figure — console list and
+     metric cards alike — reads through this, so an archived view can
+     never mix an old figure with a current one. A metric absent from
+     the archive shows an em-dash rather than borrowing today's value. */
+  function snapshotValue(m) {
+    if (activeSnapshot) {
+      var v = (activeSnapshot.metrics || {})[m.id];
+      return {
+        currentValue: (v && v.currentValue) ? v.currentValue : '—',
+        changeLabel: (v && v.changeLabel) ? v.changeLabel : null
+      };
+    }
+    return { currentValue: m.currentValue, changeLabel: m.changeLabel };
+  }
+
+  /* Plot frame. Fluid: viewBox plus width:100% — no fixed pixel width.
+     Hairlines reuse the page greys (slate-300 axes, slate-100 grid). */
+  function renderChart(metric, range) {
+    var pts = (metric.series && metric.series[range]) || [];
+    /* 16:10 frame — 460x288; baseline y=280, top y=8, gridline quarters */
+    var body =
+      '<line x1="2" y1="280" x2="458" y2="280" stroke="#C3CBD6"/>' +
+      '<line x1="2" y1="8" x2="2" y2="280" stroke="#C3CBD6"/>' +
+      '<g stroke="#EEF1F5"><line x1="2" y1="212" x2="458" y2="212"/>' +
+      '<line x1="2" y1="144" x2="458" y2="144"/>' +
+      '<line x1="2" y1="76" x2="458" y2="76"/></g>';
+
+    if (pts.length > 1) {
+      var lo = Math.min.apply(null, pts);
+      var hi = Math.max.apply(null, pts);
+      var span = (hi - lo) || 1;
+      var coords = [];
+      for (var i = 0; i < pts.length; i++) {
+        var x = 2 + (i / (pts.length - 1)) * 456;
+        var y = 280 - ((pts[i] - lo) / span) * 264;
+        coords.push(x.toFixed(1) + ',' + y.toFixed(1));
+      }
+      body += '<polyline fill="none" stroke="#204374" stroke-width="1.6" ' +
+        'stroke-linejoin="round" stroke-linecap="round" points="' + coords.join(' ') + '"/>';
+    }
+
+    var label = pts.length
+      ? metric.name + ' — ' + range + ' history.'
+      : metric.name + ' — chart area. No history is connected yet.';
+
+    return '<svg viewBox="0 0 460 288" role="img" aria-label="' + label + '">' + body + '</svg>';
+  }
+
+  function renderCard(m) {
+    var v = snapshotValue(m);
+    var d = v.changeLabel;
+    var delta = d
+      ? '<p class="metric__delta ' + d.dir + '">' + GLYPH[d.dir] + ' ' + d.value +
+        ' <span>' + d.note + '</span></p>'
+      : '<p class="metric__delta flat">—</p>';
+
+    return '<article class="metric" data-metric="' + m.id + '">' +
+      '<h3 class="metric__label">' + m.name + '</h3>' +
+      '<p class="metric__val">' + v.currentValue + '</p>' +
+      delta +
+      '<div class="metric__chart">' + renderChart(m, activeRange) + '</div>' +
+      '<p class="metric__src"><b>' + m.source + '</b> · ' + m.lastUpdated + '</p>' +
+      '</article>';
+  }
+
+  /* ------------------------------------------------------------
+     RAP INTELLIGENCE CONSOLE — indicator list
+     The list is drawn from METRICS above — the same array the cards
+     use — so a figure has exactly one definition on this page.
+     DESCRIPTIONS adds the one plain-language line each indicator
+     needs in the console and nowhere else; it is keyed by metric id
+     so it cannot drift out of order.
+
+     The console's right cell is the article panel. It is authored in
+     the markup, not here: no script writes analysis, because none
+     has been produced.
+     ------------------------------------------------------------ */
+  var DESCRIPTIONS = {
+    'furniture-sales': 'Monthly retail sales at furniture and home furnishings stores.',
+    'furniture-sales-real': 'Furniture sales with price inflation stripped out — real demand.',
+    'existing-home-sales': 'Annualized pace of existing-home sales — moves drive furniture purchases.',
+    'housing-starts': 'New residential construction begun each month.',
+    'consumer-sentiment': 'How consumers feel about spending and the economy.',
+    'real-dpi': 'Household income after taxes and inflation — spending capacity.',
+    'mortgage-30y': 'The benchmark cost of financing a home purchase.',
+    'furniture-cpi': 'Price inflation for furniture and bedding.'
+  };
+
+  /* Two children per row, straight into .mic__list, so all eight
+     values share one column and stay aligned at every width. */
+  function renderConsoleList() {
+    if (!micList) { return; }
+    var html = '';
+    for (var i = 0; i < METRICS.length; i++) {
+      var m = METRICS[i];
+      html +=
+        '<div class="microw__id">' +
+          '<p class="microw__name">' + m.name + '</p>' +
+          '<p class="microw__desc">' + (DESCRIPTIONS[m.id] || '') + '</p>' +
+        '</div>' +
+        '<p class="microw__val">' + snapshotValue(m).currentValue + '</p>';
+    }
+    micList.innerHTML = html;
+  }
+
+  function renderGrid() {
+    if (!grid) { return; }
+    var html = '';
+    for (var i = 0; i < METRICS.length; i += 2) {
+      html += '<section class="metrics__row">' +
+        '<h2 class="metrics__theme">' + THEMES[i / 2] + '</h2>' +
+        '<div class="metrics__pair">' +
+          renderCard(METRICS[i]) + renderCard(METRICS[i + 1]) +
+        '</div>' +
+      '</section>';
+    }
+    grid.innerHTML = html;
+  }
+
+  /* One segment per entry in RANGES — the array is the only place the
+     range list is written down. */
+  function renderSeg() {
+    if (!seg) { return; }
+    var html = '';
+    for (var i = 0; i < RANGES.length; i++) {
+      html += '<button type="button" data-range="' + RANGES[i] + '" aria-pressed="' +
+        (RANGES[i] === activeRange) + '">' + RANGES[i] + '</button>';
+    }
+    seg.innerHTML = html;
+  }
+
+  function syncSeg() {
+    if (!seg) { return; }
+    var bs = seg.querySelectorAll('button[data-range]');
+    for (var i = 0; i < bs.length; i++) {
+      bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-range') === activeRange));
+    }
+  }
+
+  /* Global state change: set the range, move the pressed segment, redraw
+     all eight cards together. Cards hold no interactive element, so a
+     full rebuild costs no focus. */
+  function setRange(range) {
+    if (RANGES.indexOf(range) === -1) { return; }
+    activeRange = range;
+    syncSeg();
+    renderGrid();
+  }
+
+  if (seg) {
+    seg.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-range]') : null;
+      if (b && seg.contains(b)) { setRange(b.getAttribute('data-range')); }
+    });
+  }
+
+  /* ------------------------------------------------------------
+     ARCHIVE UI
+     Drawn only when there is something to draw. renderUpdated()
+     leaves the masthead date as plain text while SNAPSHOTS is empty
+     and swaps in a native select the moment it is not; the return
+     control is created on entering an archived view and removed on
+     leaving it, so the page never carries a control that does
+     nothing.
+
+     The how-to paragraph follows the same rule: the sentence naming
+     the date control is created only while the select exists and is
+     removed from the DOM otherwise — never parked hidden.
+     ------------------------------------------------------------ */
+  var HOWTO_DATE = ' You can also change the update date to review previous updates.';
+
+  function renderHowtoDate() {
+    if (!howEl) { return; }
+    if (SNAPSHOTS.length && !howSpan) {
+      howSpan = document.createElement('span');
+      howSpan.id = 'mi-howto-date';
+      howSpan.textContent = HOWTO_DATE;
+      howEl.appendChild(howSpan);
+    } else if (!SNAPSHOTS.length && howSpan) {
+      if (howSpan.parentNode) { howSpan.parentNode.removeChild(howSpan); }
+      howSpan = null;
+    }
+  }
+
+  function renderUpdated() {
+    renderHowtoDate();
+    if (!updEl) { return; }
+    if (!SNAPSHOTS.length) {
+      updEl.textContent = activeSnapshot ? activeSnapshot.label : CURRENT_LABEL;
+      return;
+    }
+    /* 16px on the select — iOS zooms the page on anything smaller. */
+    var html = '<select class="mast__sel" id="mi-snap" aria-label="Choose an update date">' +
+      '<option value=""' + (activeSnapshot ? '' : ' selected') + '>' + CURRENT_LABEL + '</option>';
+    for (var i = 0; i < SNAPSHOTS.length; i++) {
+      var s = SNAPSHOTS[i];
+      html += '<option value="' + s.date + '"' +
+        (activeSnapshot && activeSnapshot.date === s.date ? ' selected' : '') + '>' +
+        s.label + '</option>';
+    }
+    updEl.innerHTML = html + '</select>';
+  }
+
+  function renderReturn() {
+    if (!updEl || !updEl.parentNode) { return; }
+    if (activeSnapshot && !retBtn) {
+      retBtn = document.createElement('button');
+      retBtn.type = 'button';
+      retBtn.id = 'mi-return';
+      retBtn.className = 'mast__ret';
+      retBtn.textContent = 'Return to current';
+      retBtn.addEventListener('click', function () { setSnapshot(null); });
+      updEl.parentNode.appendChild(retBtn);
+    } else if (!activeSnapshot && retBtn) {
+      if (retBtn.parentNode) { retBtn.parentNode.removeChild(retBtn); }
+      retBtn = null;
+    }
+  }
+
+  /* The one state change for the archive: null returns to current. */
+  function setSnapshot(dateOrNull) {
+    activeSnapshot = dateOrNull ? findSnapshot(dateOrNull) : null;
+    renderConsoleList();
+    renderGrid();
+    renderUpdated();
+    renderReturn();
+  }
+
+  /* Delegated: the select is rebuilt on every render, the span is not. */
+  if (updEl) {
+    updEl.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t && t.id === 'mi-snap') { setSnapshot(t.value || null); }
+    });
+  }
+
+  renderConsoleList();
+  renderSeg();
+  renderGrid();
+  renderUpdated();
+  renderReturn();
+})();
+</script>
 
 <!-- ============ FOOTER ============ -->
 <footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
@@ -780,7 +1288,6 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       <span>&copy; 2026 Risk Assurance Partners</span>
       <span>Privacy &middot; Terms &middot; <a href="admin.html">Admin</a></span>
     </div>
-    <p class="foot__note">FurnitureRx is a product of Risk Assurance Partners.</p>
   </div>
 </footer>
 
