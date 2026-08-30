@@ -2,8 +2,8 @@
 
 **From:** Master Agent 3 (active session, 2026-08-30)
 **To:** Next Fabel Master session (owner will direct you to this update)
-**Baselines:** main @ `47d8df6` (production) · branch `mi-refactor` @ `2b11fc9`+ (owner review surface — check `git log` for later commits)
-**Read first, in order:** AGENT_RULES.md → DECISIONS.md (001–051 on main; **052–053 live on the `mi-refactor` branch**, authoritative) → docs/design/MI_REFACTOR_SPEC.md (as amended by Decision 052) → this file → MASTER_SPEC.md / LOCKED_WIREFRAME.md when structural work needs them → docs/design/MOBILE_AUDIT.md.
+**Baseline:** main @ `cfbf853` (production; mi-refactor MERGED 2026-08-30, branch deleted). Tree clean.
+**Read first, in order:** AGENT_RULES.md → DECISIONS.md (001–**053**, all on main, authoritative) → docs/design/MI_REFACTOR_SPEC.md (as amended by Decision 052) → this file → MASTER_SPEC.md / LOCKED_WIREFRAME.md when structural work needs them → docs/design/MOBILE_AUDIT.md.
 
 ## Where all updates are written (canonical locations)
 
