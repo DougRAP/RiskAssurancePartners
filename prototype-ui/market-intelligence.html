@@ -76,7 +76,9 @@ button{font:inherit;cursor:pointer}
 /* ---------- layout primitives ---------- */
 .wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
 .sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
-.sec--first{border-top:0;padding-top:var(--s-7)}
+/* First section sits under the fixed header; the masthead rule carries
+   the page opening, so the top pad is half a normal section's. */
+.sec--first{border-top:0;padding-top:var(--s-5)}
 .sec--ink{
   background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
   background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
@@ -245,24 +247,29 @@ button{font:inherit;cursor:pointer}
 }
 .mast__ret:hover{color:var(--rap-ink)}
 
+/* Page intro — the layer is named once, in ink, above the controls it
+   describes, with a single line of instruction under it. It is not part
+   of the console; the console below carries no header of its own. */
+.miintro{margin-top:var(--s-6)}
+.miintro__t{
+  font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.4vw,34px);
+  line-height:1.1;letter-spacing:-.01em;color:var(--rap-ink);
+}
+.miintro__p{font-size:15px;line-height:1.55;color:var(--rap-slate-700);max-width:60ch;margin-top:var(--s-3)}
+
 /* RAP Intelligence console — the page's focal surface, and an honest
    awaiting state throughout. Ink ground under a brass rule so it reads
    as the interpretation layer above the evidence; flat colour, no
-   gauge, no control of any kind. A full-width header names the layer;
-   under it a 1×2 grid of equal-width, equal-height cells — the eight
-   indicators at a glance on the left, the bounded container that will
-   hold the analysis on the right. Nothing is wired, so nothing is
-   claimed: every interpretation slot carries an em-dash. */
+   gauge, no control of any kind. The card opens straight onto a 1×2
+   grid of equal-width, equal-height cells — the eight indicators at a
+   glance on the left, the bounded container that will hold the analysis
+   on the right. Extra top pad gives the list air under the brass rule
+   now that no header stands between them. Nothing is wired, so nothing
+   is claimed: every interpretation slot carries an em-dash. */
 .mic{
   margin-top:var(--s-7);background:var(--rap-ink);color:#fff;
-  border-top:2px solid var(--rap-brass);padding:var(--s-6);
+  border-top:2px solid var(--rap-brass);padding:var(--s-7) var(--s-6) var(--s-6);
 }
-.mic__eyebrow{
-  font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-brass);line-height:1.7;
-}
-.mic__t{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.1;letter-spacing:-.01em;margin-top:2px}
-.mic__head{margin-bottom:var(--s-6)}
 /* Equal cells, equal height: two 1fr columns stretched onto one row.
    The row is sized by the left list alone — see .mic__panelwrap. */
 .mic__body{
@@ -309,43 +316,36 @@ button{font:inherit;cursor:pointer}
    the list exactly instead of growing past it. */
 .mic__ai{display:flex;flex-direction:column;min-height:0}
 .mic__panelwrap{position:relative;flex:1 1 auto;min-height:0;margin-top:var(--s-4)}
-/* The panel is a paper field set into the ink console: white ground,
-   ink text, slate hairlines — a financial article waiting to be
-   written. Intro sentence, then the article field itself, then a
-   quiet footer stating plainly that nothing has been produced. */
+/* The panel is an inset of the console, not a card on top of it: the
+   same ink ground lifted a few percent, an ink hairline round it, and
+   type in the console's own light-on-ink register — a financial article
+   waiting to be written. Intro sentence, then the article field itself,
+   then a quiet footer stating plainly that nothing has been produced. */
 .mic__panel{
   position:absolute;inset:0;overflow-y:auto;
-  border:1px solid var(--rap-slate-200);background:var(--rap-paper);color:var(--rap-ink);
+  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.045);color:#fff;
   padding:var(--s-5);display:flex;flex-direction:column;
 }
-.micart__intro{font-size:14px;line-height:1.55;color:var(--rap-slate-700)}
+.micart__intro{font-size:14px;line-height:1.55;color:rgba(255,255,255,.72)}
 /* The article field takes the space between intro and footer, so the
    blank field reads as a field and the footer sits on the bottom rule. */
 #mic-article{flex:1 1 auto;min-height:0}
 /* Article typography, pre-set for the copy that will land here. The
    container is empty today — no placeholder, no sample analysis. */
-#mic-article p{font-family:var(--serif);font-size:16px;line-height:1.6;color:var(--rap-ink);margin-top:var(--s-4)}
+#mic-article p{font-family:var(--serif);font-size:16px;line-height:1.6;color:rgba(255,255,255,.88);margin-top:var(--s-4)}
 #mic-article p:first-child{margin-top:var(--s-5)}
 #mic-article h4{
   font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-slate-500);line-height:1.7;margin-top:var(--s-5);
+  color:var(--rap-brass);line-height:1.7;margin-top:var(--s-5);
 }
 #mic-article ul{margin-top:var(--s-3);padding-left:1.1em;list-style:disc}
-#mic-article li{font-size:15px;line-height:1.55;color:var(--rap-slate-700);margin-top:var(--s-2)}
-.micart__foot{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
-.micart__none{font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--rap-slate-500)}
-.micart__out{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-4)}
-.micart__lbl{
-  flex:1 1 100%;font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-slate-500);line-height:1.7;
+#mic-article li{
+  font-family:var(--serif);font-size:15px;line-height:1.55;
+  color:rgba(255,255,255,.78);margin-top:var(--s-2);
 }
-.micart__cap{font-family:var(--mono);font-size:12px;color:var(--rap-slate-500)}
-/* Score treatment, sized to sit on one compact row inside the panel. */
-.mic__score{
-  font-family:var(--serif);font-weight:500;font-size:clamp(20px,2vw,26px);line-height:1;
-  color:var(--rap-slate-500);font-variant-numeric:tabular-nums;letter-spacing:.02em;
-}
-.mic__score b{font-weight:500;color:var(--rap-slate-700)}
+.micart__foot{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--rap-ink-700)}
+.micart__none{font-family:var(--mono);font-size:12px;line-height:1.5;color:rgba(255,255,255,.55)}
 
 /* range control — ONE global selector governing all eight charts
    (Decision 052: global, never per-card). Same segmented-control
@@ -492,7 +492,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 }
 @media (max-width:680px){
   /* 2×4 → 1×8. Page simply runs longer; nothing scrolls sideways. */
-  .mic{padding:var(--s-5)}
+  .mic{padding:var(--s-6) var(--s-5) var(--s-5)}
   .mic__panel{padding:var(--s-4)}
   /* Tighter gutter keeps name and value on one shared line at 390px,
      so the value column stays aligned rather than dropping. 12px floor. */
@@ -719,6 +719,13 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       <p class="mast__s">Key Indicators &middot; Last Updated <span id="mi-updated">08/25/26</span></p>
     </div>
 
+    <!-- Page intro — names the layer and states, once, how the page is
+         read. #mic-h is the accessible name of the console below. -->
+    <div class="miintro">
+      <h2 class="miintro__t" id="mic-h">RAP Intelligence</h2>
+      <p class="miintro__p">Pick a time frame, scan today&rsquo;s key indicators, and read the AI&rsquo;s interpretation beside them. Open View Charts for the underlying history.</p>
+    </div>
+
     <!-- ============================================================
          RANGE CONTROL — one global selector for every chart on the
          page, leading the page above the console. The segments are
@@ -732,22 +739,19 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 
     <!-- ============================================================
          RAP INTELLIGENCE CONSOLE
-         Header names the layer; under it a 1×2 grid of equal cells.
+         No header of its own — the page intro above names the layer,
+         and this section borrows that heading for its accessible name.
+         Straight into a 1×2 grid of equal cells.
          Left: the eight indicators at a glance, values in one shared
          column, rendered from the SAME METRICS array the cards use —
          see renderConsoleList() in the metric-grid script — so no
          figure is written twice.
-         Right: the article panel. A paper field waiting for the
+         Right: the article panel. An inset field waiting for the
          analysis, its typography already set. Shown in its true
          state: the field is empty and the footer says so. No model,
          no score, no cadence, no sample output.
          ============================================================ -->
     <section class="mic" aria-labelledby="mic-h">
-      <div class="mic__head">
-        <p class="mic__eyebrow">Interpretation layer</p>
-        <h2 class="mic__t" id="mic-h">RAP Intelligence</h2>
-      </div>
-
       <div class="mic__body">
         <!-- One grid, two cells per indicator: identity, then value. -->
         <div class="mic__list" id="mic-list"></div>
@@ -763,11 +767,6 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
               <div id="mic-article"></div>
               <div class="micart__foot">
                 <p class="micart__none">No analysis yet.</p>
-                <div class="micart__out">
-                  <p class="micart__lbl">Furniture Retail Outlook</p>
-                  <p class="mic__score"><b>--</b> / 100</p>
-                  <p class="micart__cap">Not yet scored</p>
-                </div>
               </div>
             </div>
           </div>
