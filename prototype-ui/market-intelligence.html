@@ -235,9 +235,11 @@ button{font:inherit;cursor:pointer}
 /* RAP Intelligence console — the page's focal surface, and an honest
    awaiting state throughout. Ink ground under a brass rule so it reads
    as the interpretation layer above the evidence; flat colour, no
-   gauge, no control of any kind. A 1×2 hero: naming half left, the
-   future analysis container right, a brass arrow between them. The
-   container states that nothing has been scored yet. */
+   gauge, no control of any kind. A full-width header names the layer;
+   under it a 1×2 grid of equal-width, equal-height cells — the eight
+   indicators at a glance on the left, the bounded container that will
+   hold the analysis on the right. Nothing is wired, so nothing is
+   claimed: every interpretation slot carries an em-dash. */
 .mic{
   margin-top:var(--s-7);background:var(--rap-ink);color:#fff;
   border-top:2px solid var(--rap-brass);padding:var(--s-6);
@@ -247,40 +249,73 @@ button{font:inherit;cursor:pointer}
   color:var(--rap-brass);line-height:1.7;
 }
 .mic__t{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.4vw,34px);line-height:1.1;letter-spacing:-.01em;margin-top:2px}
-/* Equal cells, equal height: two 1fr columns stretched onto one row
-   with a generous relative floor so each reads as a substantial block. */
+.mic__head{margin-bottom:var(--s-6)}
+/* Equal cells, equal height: two 1fr columns stretched onto one row.
+   The row is sized by the left list alone — see .mic__panelwrap. */
 .mic__body{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:var(--s-7);align-items:stretch;grid-auto-rows:minmax(15em,auto);
-}
-.mic__lede{display:flex;flex-direction:column}
-.mic__sub{
-  font-family:var(--serif);font-weight:400;font-size:clamp(17px,1.5vw,21px);line-height:1.35;
-  color:rgba(255,255,255,.62);margin-top:var(--s-4);margin-bottom:auto;max-width:26ch;
-}
-/* Sits at the foot of the left cell, hard against the gap, aimed at
-   the container opposite. Shapes only — decorative, never focusable. */
-.mic__arrow{
-  display:block;width:min(9em,60%);height:auto;color:var(--rap-brass);
-  margin:var(--s-6) 0 0 auto;
-}
-/* The destination: quietly bounded so it reads as a container waiting
-   for content, not as empty page. */
-.mic__dest{
-  border:1px solid var(--rap-ink-700);padding:var(--s-6);
-  display:grid;align-content:center;
+  gap:var(--s-7);align-items:stretch;
 }
 .mic__lbl{
   font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;
   color:var(--rap-brass);line-height:1.7;
 }
-.mic .meta{font-size:12px;color:rgba(255,255,255,.5)}
+
+/* Indicator list. ONE grid for the whole list — each row contributes
+   its identity cell and its value cell directly — so every value sits
+   in a single shared right-hand column and all eight align, em-dashes
+   included, at every width. */
+.mic__list{
+  display:grid;grid-template-columns:minmax(0,1fr) max-content;
+  column-gap:var(--s-5);align-content:start;
+}
+.mic__list > *{border-bottom:1px solid var(--rap-ink-700);padding:var(--s-3) 0}
+.mic__list > :nth-child(-n+2){padding-top:0}
+.mic__list > :nth-last-child(-n+2){border-bottom:0;padding-bottom:0}
+.microw__name{
+  font-size:15px;font-weight:600;line-height:1.35;color:#fff;
+  position:relative;padding-left:1.1em;
+}
+.microw__name::before{
+  content:"";position:absolute;left:0;top:.5em;
+  width:.34em;height:.34em;border-radius:50%;background:var(--rap-brass);
+}
+.microw__desc{
+  font-size:13px;line-height:1.45;color:rgba(255,255,255,.58);
+  margin-top:3px;padding-left:1.1em;
+}
+.microw__val{
+  font-family:var(--mono);font-size:14px;line-height:1.45;color:#fff;
+  font-variant-numeric:tabular-nums;text-align:right;
+}
+
+/* AI analysis. The label sits in normal flow; the panel is taken out
+   of it so the right cell contributes only the label's height to the
+   row. The row is therefore as tall as the list, the stretched cell
+   passes that height down, and the panel fills what is left — matching
+   the list exactly instead of growing past it. */
+.mic__ai{display:flex;flex-direction:column;min-height:0}
+.mic__panelwrap{position:relative;flex:1 1 auto;min-height:0;margin-top:var(--s-4)}
+.mic__panel{
+  position:absolute;inset:0;overflow-y:auto;
+  border:1px solid var(--rap-ink-700);background:rgba(255,255,255,.03);
+  padding:var(--s-5);
+}
+.micslot{padding-bottom:var(--s-4);margin-bottom:var(--s-4);border-bottom:1px solid var(--rap-ink-700)}
+.micwait{font-family:var(--mono);font-size:14px;color:rgba(255,255,255,.42);margin-top:4px}
+.micsum{padding-top:var(--s-2)}
+.micout{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:var(--s-4);flex-wrap:wrap;margin-top:var(--s-4);
+}
 .mic__score{
   font-family:var(--serif);font-weight:500;font-size:var(--fs-stat);line-height:1;
   color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;
   margin:var(--s-3) 0 var(--s-2);letter-spacing:.02em;
 }
 .mic__score b{font-weight:500;color:rgba(255,255,255,.68)}
+/* Same treatment, sized to sit on one compact row inside the panel. */
+.mic__score--sm{font-size:clamp(20px,2vw,26px);margin:0}
 
 /* range control — ONE global selector governing all eight charts
    (Decision 052: global, never per-card). Same segmented-control
@@ -387,19 +422,23 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
 }
 @media (max-width:860px){
-  /* Console collapses to one column, left cell above right. The arrow
-     turns a quarter-turn so it still points at the container, now
-     below it; its margins reserve the height the rotation needs.
+  /* Console collapses to one column, list above analysis box. The
+     panel returns to normal flow and the internal scroller is dropped
+     entirely — on touch the content flows and the page scrolls.
      Nothing scrolls sideways. */
-  .mic__body{grid-template-columns:1fr;gap:var(--s-6);grid-auto-rows:auto}
-  .mic__sub{margin-bottom:0}
-  .mic__arrow{width:2.5em;transform:rotate(90deg);margin:2em auto}
+  .mic__body{grid-template-columns:1fr;gap:var(--s-6)}
+  .mic__panelwrap{position:static;flex:0 0 auto;min-height:0}
+  .mic__panel{position:static;max-height:none;overflow:visible}
 }
 @media (max-width:680px){
   /* 2×4 → 1×8. Page simply runs longer; nothing scrolls sideways. */
   .mic{padding:var(--s-5)}
-  .mic__sub{max-width:none}
-  .mic__dest{padding:var(--s-5)}
+  .mic__panel{padding:var(--s-4)}
+  /* Tighter gutter keeps name and value on one shared line at 390px,
+     so the value column stays aligned rather than dropping. 12px floor. */
+  .mic__list{column-gap:var(--s-4)}
+  .microw__desc{font-size:12px}
+  .microw__val{font-size:13px}
   /* range segments grow to a comfortable thumb target and the row
      wraps rather than scrolling sideways. */
   .rangebar{gap:var(--s-3)}
@@ -617,7 +656,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
     <div class="mast">
       <div>
         <h1 class="mast__t" id="mi-h">Market Intelligence</h1>
-        <p class="mast__s">What is changing.</p>
+        <p class="mast__s">AI analysis of the key indicators</p>
       </div>
       <div class="mast__r">
         <!-- DECISION 040 — prominent CTA to the sibling Market Intel page. -->
@@ -628,32 +667,34 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 
     <!-- ============================================================
          RAP INTELLIGENCE CONSOLE
-         A 1×2 hero inside the console: the naming half on the left,
-         the future analysis container on the right, a brass arrow
-         carrying the eye across. Shown in its true state — nothing is
-         wired, so nothing is claimed. No model, no score, no cadence,
-         no sample output. The console holds no control — not a link,
-         a field or a button — because the evidence sits directly
-         below and a control that does nothing is worse than none.
+         Header names the layer; under it a 1×2 grid of equal cells.
+         Left: the eight indicators at a glance, values in one shared
+         column. Right: the bounded container that will hold the
+         analysis. Both cells are rendered from the SAME METRICS array
+         used by the grid below — see renderConsole() in the
+         metric-grid script — so no figure is written twice.
+         Shown in its true state: nothing is wired, so nothing is
+         claimed. No model, no score, no cadence, no sample output.
+         The console holds no control — not a link, a field or a
+         button — because the evidence sits directly below and a
+         control that does nothing is worse than none.
          ============================================================ -->
     <section class="mic" aria-labelledby="mic-h">
-      <div class="mic__body">
-        <div class="mic__lede">
-          <p class="mic__eyebrow">Interpretation layer</p>
-          <h2 class="mic__t" id="mic-h">RAP Intelligence</h2>
-          <p class="mic__sub">AI analysis of the key indicators</p>
-          <!-- Pointing device only: shapes, no text, no interactivity.
-               Rotates to point down when the cells stack. -->
-          <svg class="mic__arrow" viewBox="0 0 96 24" aria-hidden="true" focusable="false">
-            <path d="M1 12 H83" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M73 4 L84 12 L73 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
-          </svg>
-        </div>
+      <div class="mic__head">
+        <p class="mic__eyebrow">Interpretation layer</p>
+        <h2 class="mic__t" id="mic-h">RAP Intelligence</h2>
+      </div>
 
-        <div class="mic__dest">
-          <h3 class="mic__lbl">Furniture Retail Outlook</h3>
-          <p class="mic__score"><b>--</b> / 100</p>
-          <p class="meta">Not yet scored</p>
+      <div class="mic__body">
+        <!-- One grid, two cells per indicator: identity, then value. -->
+        <div class="mic__list" id="mic-list"></div>
+
+        <div class="mic__ai">
+          <h3 class="mic__lbl">AI analysis</h3>
+          <!-- Scroll container for future analysis. Not a control. -->
+          <div class="mic__panelwrap">
+            <div class="mic__panel" id="mic-panel"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -706,7 +747,9 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 (function () {
   var grid = document.getElementById('metric-grid');
   var seg = document.getElementById('range-seg');
-  if (!grid) { return; }
+  var micList = document.getElementById('mic-list');
+  var micPanel = document.getElementById('mic-panel');
+  if (!grid && !micList && !micPanel) { return; }
 
   var RANGES = ['1Y', '3Y', '5Y', '10Y'];
   var activeRange = '5Y';
@@ -843,7 +886,73 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
       '</article>';
   }
 
+  /* ------------------------------------------------------------
+     RAP INTELLIGENCE CONSOLE
+     Both console cells are drawn from METRICS above — the same array
+     the cards use — so a figure has exactly one definition on this
+     page. DESCRIPTIONS adds the one plain-language line each
+     indicator needs in the console and nowhere else; it is keyed by
+     metric id so it cannot drift out of order.
+
+     The analysis panel renders one empty slot per indicator plus a
+     summary. Every slot carries an em-dash: no sample interpretation
+     is written, because none has been produced.
+     ------------------------------------------------------------ */
+  var DESCRIPTIONS = {
+    'furniture-sales': 'Monthly retail sales at furniture and home furnishings stores.',
+    'furniture-sales-real': 'Furniture sales with price inflation stripped out — real demand.',
+    'existing-home-sales': 'Annualized pace of existing-home sales — moves drive furniture purchases.',
+    'housing-starts': 'New residential construction begun each month.',
+    'consumer-sentiment': 'How consumers feel about spending and the economy.',
+    'real-dpi': 'Household income after taxes and inflation — spending capacity.',
+    'mortgage-30y': 'The benchmark cost of financing a home purchase.',
+    'furniture-cpi': 'Price inflation for furniture and bedding.'
+  };
+
+  /* Two children per row, straight into .mic__list, so all eight
+     values share one column and stay aligned at every width. */
+  function renderConsoleList() {
+    if (!micList) { return; }
+    var html = '';
+    for (var i = 0; i < METRICS.length; i++) {
+      var m = METRICS[i];
+      html +=
+        '<div class="microw__id">' +
+          '<p class="microw__name">' + m.name + '</p>' +
+          '<p class="microw__desc">' + (DESCRIPTIONS[m.id] || '') + '</p>' +
+        '</div>' +
+        '<p class="microw__val">' + m.currentValue + '</p>';
+    }
+    micList.innerHTML = html;
+  }
+
+  function renderConsolePanel() {
+    if (!micPanel) { return; }
+    var html = '';
+    for (var i = 0; i < METRICS.length; i++) {
+      html += '<div class="micslot">' +
+        '<p class="mic__lbl">' + METRICS[i].name + '</p>' +
+        '<p class="micwait">—</p>' +
+      '</div>';
+    }
+    html += '<div class="micsum">' +
+      '<p class="mic__lbl">Summary</p>' +
+      '<p class="micwait">—</p>' +
+      '<div class="micout">' +
+        '<p class="mic__lbl">Furniture Retail Outlook</p>' +
+        '<p class="mic__score mic__score--sm"><b>--</b> / 100</p>' +
+      '</div>' +
+    '</div>';
+    micPanel.innerHTML = html;
+  }
+
+  function renderConsole() {
+    renderConsoleList();
+    renderConsolePanel();
+  }
+
   function renderGrid() {
+    if (!grid) { return; }
     var html = '';
     for (var i = 0; i < METRICS.length; i += 2) {
       html += '<section class="metrics__row">' +
@@ -893,6 +1002,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
     });
   }
 
+  renderConsole();
   renderSeg();
   renderGrid();
 })();
