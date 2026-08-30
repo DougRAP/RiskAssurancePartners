@@ -78,7 +78,7 @@ button{font:inherit;cursor:pointer}
 .sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
 /* First section sits under the fixed header; the masthead rule carries
    the page opening, so the top pad is half a normal section's. */
-.sec--first{border-top:0;padding-top:var(--s-5)}
+.sec--first{border-top:0;padding-top:var(--s-5);padding-bottom:var(--s-7)}
 .sec--ink{
   background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
   background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
@@ -261,7 +261,7 @@ button{font:inherit;cursor:pointer}
    now that no header stands between them. Nothing is wired, so nothing
    is claimed: every interpretation slot carries an em-dash. */
 .mic{
-  margin-top:var(--s-7);background:var(--rap-ink);color:#fff;
+  margin-top:var(--s-4);background:var(--rap-ink);color:#fff;
   border-top:2px solid var(--rap-brass);padding:var(--s-7) var(--s-6) var(--s-6);
 }
 /* Equal cells, equal height: two 1fr columns stretched onto one row.
@@ -346,7 +346,7 @@ button{font:inherit;cursor:pointer}
    family as the economics page: hairline frame, mono segments, ink
    ground with white text on the active one. It leads the page, above
    the console, with its caption beneath in the masthead's register. */
-.rangebar{margin-top:var(--s-7)}
+.rangebar{margin-top:var(--s-4)}
 .rangebar__cap{
   font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--rap-slate-500);margin-top:var(--s-2);
@@ -385,7 +385,7 @@ button{font:inherit;cursor:pointer}
 .acc[open] .acc__closed{display:none}
 
 /* research handoff — one button above the footer, left-justified */
-.mirsc{margin:var(--s-7) 0 var(--s-6)}
+.mirsc{margin:var(--s-7) 0 0}
 
 /* metric grid — four themed rows, two cards per row on desktop.
    Normal page scroll only: no internal scrollers, no carousels. */
@@ -468,6 +468,7 @@ button.contact__route{width:100%;text-align:left;background:transparent;font:inh
 @media (max-width:860px){
   :root{--margin:24px}
   .sec{padding:var(--s-8) 0}
+  .sec--first{padding-bottom:var(--s-6)}
   .sec--ink{padding:var(--s-9) 0}
   .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
 }
