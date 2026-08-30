@@ -730,6 +730,12 @@ Every form collecting email or phone must block submission until formats are val
 - **Console restructured to 1×2 hero (Owner, 2026-08-30 — amends spec §2):** AI-interpretation await copy, Key signals area, and the "Ask RAP Intelligence" teaser REMOVED — **Q&A/chat feature cancelled** ("no chatting with AI"; supersedes the spec's v2 Q&A orientation). Left cell: eyebrow + "RAP Intelligence" (size kept) + subhead "AI analysis of the key indicators" + brass arrow pointing to the right cell (rotates downward when stacked ≤860). Right cell: hairline-bounded future-analysis container, TBD content; holds the `-- / 100` outlook placeholder meanwhile (bffd6c6).
 - **Control EXPOSED (Owner, 2026-08-29 — amends the spec's "controls hidden" clause):** segmented 1Y/3Y/5Y/10Y bar above the grid, rendered from the same `RANGES` array, aria-pressed states, 44px phone targets, styled on the gate page's `.seg` Horizon precedent (d25e584). Ranges plot nothing until Phase 9 data lands — accepted by owner; no "no data" messaging added.
 
+## Decision 053 — FurnitureRx Footer Note Removed Sitewide
+
+**Status:** Approved (Owner, 2026-08-30) — deployed (main 47d8df6; MI copy f902d2f on branch)
+
+The footer line "FurnitureRx is a product of Risk Assurance Partners." is removed from all pages, with its `.foot__note` CSS. Rationale: this is the B2B corporate site; FurnitureRx is the B2C property — the ownership note belongs on FurnitureRx surfaces, not here. Amends the MASTER_SPEC brand-presentation guidance ("Where appropriate, FurnitureRx may be presented as FurnitureRx by Risk Assurance Partners") for footer chrome only; the brand-hierarchy FACTS (Decision 001) are unchanged, and in-content uses like "FurnitureRx Subscription" remain.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
