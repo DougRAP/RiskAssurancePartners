@@ -11,7 +11,7 @@
 - **docs/project/HANDOFF.md** — this file; session state for the next master.
 - **docs/project/DEV_NOTES.md** — work orders for later phases: Adrian's back-links; Supabase lead-capture wiring (source tags `calculator` / `infosheet` / `contact`+route / `research-topic`); post-Supabase comment cleanup sweep; MI snapshot-archive persistence; **AI output contract** (analysis must always end with the Furniture Retail Outlook score). All on main.
 - **docs/design/MOBILE_AUDIT.md** — living mobile punch list (research items closed; MI items M1–M4 closed at merge; still open sitewide: S6, S14, newswire state bar).
-- **Code:** everything on `main`. mi-refactor merged and deleted. Any future big page pass repeats the review-branch flow (branch → Netlify preview → owner approval → merge).
+- **Code:** everything on `main`. **Branch rule (unconditional, all page passes):** create the review branch (`<page>-refactor`) BEFORE the first edit; commit and push to it continuously as you work — never batch locally — so the Netlify branch preview always reflects current state for the owner's rolling desktop + phone review; `main` receives nothing until the owner says "merge". (Home/research ran on main in an earlier era; that flow is retired.)
 
 ## Current state
 
@@ -21,7 +21,7 @@ MI page as built (Decision 052 trail): masthead + full-width how-to paragraph �
 
 ## Work cadence (unchanged, owner-confirmed)
 
-Owner instructions override docs; one-liners inline by master; Opus subagents for multi-line work (self-contained briefs, no subagent commits); mobile impact stated BEFORE each change; QA greps before every push (classics + mobile + no dev chrome + no dead controls); DECISIONS entry per material ruling; assessment-first on "thoughts?" questions; owner screenshots issues — diagnose the code cause (beware: owner full-page screenshots can show stale deploys and stitching artifacts — verify locally with headless Chrome before believing a rendering bug; pattern established, screenshots in scratchpad workflow).
+Owner instructions override docs; **all page-pass work on the review branch per the branch rule above (branch before first edit; push continuously)**; one-liners inline by master; Opus subagents for multi-line work (self-contained briefs, no subagent commits); mobile impact stated BEFORE each change; QA greps before every push (classics + mobile + no dev chrome + no dead controls); DECISIONS entry per material ruling; assessment-first on "thoughts?" questions; owner screenshots issues — diagnose the code cause (beware: owner full-page screenshots can show stale deploys and stitching artifacts — verify locally with headless Chrome before believing a rendering bug; pattern established, screenshots in scratchpad workflow).
 
 ## Sitewide work done this session (all on main, deployed)
 
