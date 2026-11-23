@@ -4,1305 +4,176 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Programs — Risk Assurance Partners</title>
+<title>Programs &mdash; Subscription, Multi-Year, Reinsurance | Risk Assurance Partners</title>
+<meta name="description" content="Build a furniture protection program in two choices: plan types (Subscription, Multi-Year) and underwriting (Reinsurance, Standard).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   RISK ASSURANCE PARTNERS — PROGRAMS PAGE (placeholder build)
-   Per DECISION 038 (one page, four sections) and DECISION 039
-   (mini calculators, coverage grids, Care Kits).
-   DESIGN ONLY. Not production code. No framework, no build.
-   Shared chrome is copied verbatim from home.html so the two
-   pages stay identical; only the page-specific block below the
-   "PROGRAMS PAGE" banner is new.
-   ============================================================ */
-
-:root{
-  --rap-ink:#0C172A; --rap-ink-800:#16243C; --rap-ink-700:#22334F;
-  --rap-paper:#FFFFFF; --rap-mist:#F3F5F8; --rap-cream:#FCF8F5;
-  --rap-blue:#204374; --rap-blue-600:#2E5A96; --rap-blue-050:#E8EEF6;
-  --rap-ember:#C8581B; --rap-ember-700:#A3450F; --rap-ember-050:#FBEFE8;
-  --rap-brass:#C19541; --rap-brass-050:#F7F0E2;
-  --rap-slate-700:#3D4A5C; --rap-slate-500:#64748B; --rap-slate-300:#C3CBD6;
-  --rap-slate-200:#DFE4EB; --rap-slate-100:#EEF1F5;
-  --rap-up:#1E6F50; --rap-down:#A8331F; --rap-flat:#64748B;
-
-  --serif:"Playfair Display","Iowan Old Style",Georgia,serif;
-  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-
-  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;
-  --s-7:48px;--s-8:64px;--s-9:96px;--s-10:128px;--s-11:160px;
-
-  --radius-sm:2px; --radius-md:4px;
-  --content:1240px; --wide:1440px; --margin:48px;
-  --hdr-h:84px;
-
-  --fs-d1:clamp(30px,4.2vw,54px);
-  --fs-d2:clamp(30px,4.2vw,56px);
-  --fs-d3:clamp(25px,2.9vw,40px);
-  --fs-stat:clamp(34px,3.9vw,52px);
-  --fs-h3:clamp(19px,1.6vw,22px);
-  --fs-lead:clamp(17px,1.4vw,20px);
-}
-
-*,*::before,*::after{box-sizing:border-box}
-[hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:140px}
-body{
-  margin:0;background:var(--rap-paper);color:var(--rap-ink);
-  font-family:var(--sans);font-size:16px;line-height:1.6;
-  font-feature-settings:"cv05","ss01";-webkit-font-smoothing:antialiased;
-}
-img,svg{max-width:100%}
-a{color:inherit}
-h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
-ul{padding:0;list-style:none}
-button{font:inherit;cursor:pointer}
-:focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px;border-radius:1px}
-
-/* ---------- layout primitives ---------- */
-.wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
-.sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
-.sec--first{border-top:0;padding-top:var(--s-7)}
-.sec--mist{background:var(--rap-mist);border-top-color:var(--rap-slate-200)}
-.sec--ink{
-  background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
-  background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
-}
-.sec--ink a{color:#fff}
-
-/* ---------- type ---------- */
-.eyebrow{
-  font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.10em;
-  text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4);line-height:1.7;
-}
-.sec--ink .eyebrow{color:var(--rap-brass)}
-.d2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d2);line-height:1.04;letter-spacing:-.02em}
-.d3{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.1;letter-spacing:-.01em}
-.acc{font-style:italic;color:var(--rap-ember)}
-.sec--ink .acc{font-style:italic;color:var(--rap-brass)}
-.lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:46ch}
-.sec--ink .lead{color:rgba(255,255,255,.78)}
-.body{color:var(--rap-slate-700);max-width:68ch}
-.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
-.center{text-align:center}
-.center .lead{margin-left:auto;margin-right:auto}
-
-/* ---------- buttons ---------- */
-.btn{
-  display:inline-flex;align-items:center;gap:10px;padding:14px 28px;
-  font-weight:600;font-size:15px;line-height:1;text-decoration:none;
-  border-radius:var(--radius-sm);border:1px solid transparent;transition:background .12s,color .12s,border-color .12s;
-  min-height:46px;
-}
-.btn--primary{background:var(--rap-ember-700);color:#fff}
-.btn--primary:hover{background:#8E3B0C}
-.btn--secondary{border-color:var(--rap-ink);color:var(--rap-ink);background:transparent}
-.btn--secondary:hover{background:var(--rap-ink);color:#fff}
-.sec--ink .btn--secondary{border-color:rgba(255,255,255,.45);color:#fff}
-.sec--ink .btn--secondary:hover{background:#fff;color:var(--rap-ink)}
-.btn:active{transform:translateY(1px)}
-.btns{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-7)}
-
-/* ---------- prototype banner ---------- */
-/* Prototype banner removed — the prototype matches production chrome. */
-
-/* ---------- 00 utility bar ---------- */
-.utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
-.utility__inner{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:var(--s-5)}
-.utility a{
-  font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(255,255,255,.88);text-decoration:none;
-}
-.utility a:hover{color:#fff}
-.utility__left,.utility__right{display:flex;gap:var(--s-5);align-items:center;flex-wrap:wrap}
-.utility__login{
-  color:var(--rap-brass)!important;border:1px solid rgba(193,149,65,.55);
-  border-radius:var(--radius-sm);padding:5px 10px;
-}
-.utility__login:hover{background:var(--rap-brass);color:var(--rap-ink)!important}
-
-/* ---------- 01 header ---------- */
-.hdr{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--rap-slate-200);transition:box-shadow .16s}
-.hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);min-height:84px;transition:min-height .16s}
-.hdr.is-condensed .hdr__inner{min-height:64px}
-.hdr.is-condensed .lockup__tag{display:none}
-.hdr.is-condensed{box-shadow:0 1px 0 var(--rap-slate-200),0 8px 24px rgba(12,23,42,.08)}
-.hdr__util{display:none;align-items:center;gap:var(--s-4);flex-shrink:0}
-.hdr.is-condensed .hdr__util{display:flex}
-.hdr__util a{
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  text-decoration:none;color:var(--rap-slate-700);white-space:nowrap;
-}
-.hdr__util a:hover{color:var(--rap-ink)}
-.hdr__util .hdr__login{
-  color:var(--rap-ember-700);border:1px solid var(--rap-slate-300);
-  border-radius:var(--radius-sm);padding:6px 10px;
-}
-.hdr__util .hdr__login:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
-.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
-.lockup__mark{
-  width:34px;height:34px;flex:0 0 34px;border-radius:var(--radius-sm);
-  background:var(--rap-blue);display:grid;place-items:center;
-}
-.lockup__mark svg{display:block}
-.lockup__name{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.1;color:var(--rap-ink);white-space:nowrap}
-.lockup__tag{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:2px}
-.nav{display:flex;align-items:center;gap:28px}
-.nav a{
-  text-decoration:none;font-size:15px;font-weight:500;color:var(--rap-ink);
-  padding:8px 0;border-bottom:2px solid transparent;white-space:nowrap;
-}
-.nav a:hover{border-bottom-color:var(--rap-ember)}
-.nav a[aria-current=page]{border-bottom-color:var(--rap-ember)}
-.nav__drop{position:relative}
-.nav__drop>.nav__progs{
-  background:none;border:0;padding:8px 0;font-size:15px;font-weight:500;color:var(--rap-ink);
-  display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid transparent;text-decoration:none;
-}
-.nav__drop:hover>.nav__progs,.nav__drop:focus-within>.nav__progs{border-bottom-color:var(--rap-ember)}
-.nav__panel{
-  position:absolute;top:calc(100% + 10px);left:-20px;min-width:330px;background:#fff;
-  border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:8px;
-  box-shadow:0 8px 24px rgba(12,23,42,.08);opacity:0;visibility:hidden;transition:opacity .12s;
-}
-.nav__panel::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
-.nav__drop:hover .nav__panel,.nav__drop:focus-within .nav__panel{opacity:1;visibility:visible}
-.nav__panel a{display:block;padding:12px 14px;border-bottom:0;border-radius:var(--radius-sm)}
-.nav__panel a:hover{background:var(--rap-mist)}
-.nav__panel b{display:block;font-weight:600;font-size:15px}
-.nav__panel span{display:block;font-size:13px;color:var(--rap-slate-500);margin-top:2px}
-.hdr__cta{flex-shrink:0}
-.burger{display:none;background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:46px;height:46px;place-items:center}
-.burger span{display:block;width:18px;height:2px;background:var(--rap-ink);box-shadow:0 -6px 0 var(--rap-ink),0 6px 0 var(--rap-ink)}
-#navtoggle{position:absolute;opacity:0;pointer-events:none}
-
-/* mobile drawer */
-.drawer{
-  position:fixed;inset:0;z-index:80;background:var(--rap-ink);color:#fff;
-  padding:0;display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
-}
-.drawer a{text-decoration:none;color:#fff}
-.drawer__top{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);flex-shrink:0;padding:var(--s-6) var(--s-5) var(--s-5)}
-.drawer__close{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;width:46px;height:46px;border-radius:var(--radius-sm);font-size:20px;line-height:1;flex-shrink:0}
-/* R4 — 22px serif primary rows; Programs / Market Intel are native <details> accordions, collapsed by default */
-.drawer__nav{flex-shrink:0;padding:0 var(--s-5)}
-.drawer__nav > a,.drawer__acc > summary{
-  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
-  font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.2;
-  color:#fff;padding:14px 0;min-height:52px;
-}
-.drawer__acc > summary{cursor:pointer;list-style:none}
-.drawer__acc > summary::-webkit-details-marker{display:none}
-.drawer__acc > summary::after{
-  content:"";flex-shrink:0;width:9px;height:9px;margin-right:4px;
-  border-right:1.5px solid rgba(255,255,255,.6);border-bottom:1.5px solid rgba(255,255,255,.6);
-  transform:translateY(-3px) rotate(45deg);transition:transform .18s ease;
-}
-.drawer__acc[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
-.drawer__sub{padding-left:var(--s-4);border-left:1px solid var(--rap-ink-700);margin:var(--s-1) 0 var(--s-3)}
-.drawer__sub a{display:block;font-family:var(--sans);font-size:16px;font-weight:500;line-height:1.35;padding:12px 0;color:rgba(255,255,255,.8)}
-/* R4 — customers cluster sits BELOW the primary nav, under a hairline */
-.drawer__util{flex-shrink:0;margin-top:var(--s-5);padding:var(--s-5) var(--s-5) var(--s-3);border-top:1px solid var(--rap-ink-700);display:grid}
-.drawer__util a{display:block;font-family:var(--sans);font-size:15px;font-weight:500;line-height:1.4;letter-spacing:normal;text-transform:none;padding:12px 0;color:rgba(255,255,255,.88)}
-.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-2)}
-/* R4 — CTA pinned to the drawer's bottom edge: sticky + in-flow, ink ground so rows slide beneath it */
-.drawer__cta{position:sticky;bottom:0;flex-shrink:0;margin-top:auto;padding:var(--s-4) var(--s-5) var(--s-5);background:var(--rap-ink);box-shadow:0 -14px 18px -6px var(--rap-ink)}
-.drawer__cta .btn{width:100%;justify-content:center}
-#navtoggle:checked ~ .drawer{display:flex}
-
-/* ============================================================
-   PROGRAMS PAGE — page-specific
-   ============================================================ */
-
-/* page-intro bulleted list (reset kills list markers) */
-.intro-list{list-style:disc;padding-left:1.25em}
-.intro-list li{margin-top:var(--s-2)}
-
-/* section-jump strip */
-.jump{
-  position:sticky;top:var(--hdr-h);z-index:50;background:#fff;
-  border-bottom:1px solid var(--rap-slate-200);transition:top .16s;
-}
-.jump__inner{display:flex;align-items:center;gap:var(--s-6);min-height:44px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.jump a{
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--rap-slate-500);text-decoration:none;white-space:nowrap;
-  padding:12px 0;border-bottom:2px solid transparent;
-}
-.jump a:hover{color:var(--rap-ink)}
-.jump a.is-active{color:var(--rap-ink);border-bottom-color:var(--rap-ember)}
-
-/* program section head */
-.pgm__top{display:grid;grid-template-columns:7fr 5fr;gap:var(--s-8);align-items:start}
-.pgm__name{font-family:var(--serif);font-size:clamp(28px,3.4vw,44px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
-.pgm__phrase{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-style:italic;color:var(--rap-ember);line-height:1.2;margin-top:var(--s-2)}
-.pgm__intro{font-size:17px;color:var(--rap-slate-700);margin-top:var(--s-5);max-width:60ch}
-.pgm__intro p + p{margin-top:var(--s-4)}
-
-/* stat panel */
-.statp{border-top:2px solid var(--rap-ink);background:#fff;border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-ink);border-radius:var(--radius-md);padding:var(--s-5)}
-.sec--mist .statp{background:#fff}
-.statp__row{padding:var(--s-4) 0;border-bottom:1px solid var(--rap-slate-200)}
-.statp__row:first-child{padding-top:0}
-.statp__row:last-child{border-bottom:0;padding-bottom:0}
-.statp__k{font-weight:600;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.statp__v{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1.1;margin-top:6px}
-.statp__n{font-size:13px;color:var(--rap-slate-700);margin-top:4px}
-
-/* block heading shared by coverage / calc / fit / kits */
-.blk{margin-top:var(--s-8)}
-.blk__h{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4)}
-
-/* coverage grid */
-.cov__types{font-size:17px;color:var(--rap-slate-700);margin-bottom:var(--s-5)}
-.cov__types b{color:var(--rap-ink);font-weight:600}
-.cov__types span{color:var(--rap-slate-300);padding:0 6px}
-.placeholder-wrap{border:1px dashed var(--rap-ember);border-radius:var(--radius-md);padding:var(--s-5);background:var(--rap-ember-050)}
-.placeholder-ribbon{
-  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--rap-ember-700);margin-bottom:var(--s-4);display:flex;align-items:center;gap:8px;
-}
-.placeholder-ribbon::before{content:"";width:8px;height:8px;background:var(--rap-ember);border-radius:50%;flex:0 0 8px}
-.covtbl{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius-sm);overflow:hidden}
-.covtbl th,.covtbl td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rap-slate-200);font-size:15px}
-.covtbl thead th{
-  font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
-  color:var(--rap-slate-500);border-bottom:2px solid var(--rap-ink);background:#fff;
-}
-.covtbl th[scope=col]:not(:first-child),.covtbl td:not(:first-child){text-align:center;width:96px}
-.covtbl tbody tr:last-child th,.covtbl tbody tr:last-child td{border-bottom:0}
-.covtbl tbody th{font-weight:500;color:var(--rap-slate-700);border-right:1px solid var(--rap-slate-200)}
-.yes{color:var(--rap-ember-700);font-weight:700;font-size:17px}
-.no{color:var(--rap-slate-300);font-size:17px}
-
-/* mini calculator */
-.calc{border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-ink);border-radius:var(--radius-md);background:#fff;padding:var(--s-6)}
-.calc__inputs{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);padding-bottom:var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
-.calc__f{display:flex;flex-direction:column;gap:6px}
-.calc__f label{font-weight:600;font-size:13px}
-.calc__f small{font-family:var(--mono);font-size:11px;color:var(--rap-slate-500);letter-spacing:.02em}
-.calc__in{display:flex;align-items:center;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);background:#fff;height:48px;overflow:hidden}
-.calc__in span{font-family:var(--mono);font-size:15px;color:var(--rap-slate-500);padding:0 0 0 12px}
-.calc__in input{
-  border:0;outline:0;width:100%;height:100%;padding:0 12px;background:transparent;
-  font-family:var(--mono);font-size:17px;color:var(--rap-ink);font-variant-numeric:tabular-nums;
-}
-.calc__in:focus-within{border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
-.calc__out{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);padding:var(--s-5) 0;border-bottom:1px solid var(--rap-slate-200)}
-.calc__ok{font-weight:600;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.calc__ov{font-family:var(--serif);font-size:clamp(32px,3.4vw,44px);font-weight:500;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
-
-/* fixed illustrative assumptions — displayed, never editable (DECISION 013) */
-.calc__fixed{
-  display:flex;gap:var(--s-5);flex-wrap:wrap;padding:var(--s-4) 0;
-  border-bottom:1px solid var(--rap-slate-200);
-}
-.calc__fx{display:flex;align-items:baseline;gap:8px}
-.calc__fx b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500);font-weight:500}
-.calc__fx span{font-weight:600;font-size:14px;color:var(--rap-ink)}
-
-/* 60-month cohort waterfall — milestone bars */
-.mile{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-3);padding:var(--s-6) 0 var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
-.mile__c{display:flex;flex-direction:column;gap:8px;min-width:0}
-.mile__bw{height:104px;display:flex;align-items:flex-end;border-bottom:1px solid var(--rap-slate-300)}
-.mile__b{width:100%;background:var(--rap-blue);border-radius:1px 1px 0 0;transition:height .18s;min-height:2px}
-.mile__c:last-child .mile__b{background:var(--rap-ember)}
-.mile__m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
-.mile__v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;color:var(--rap-ink);font-weight:500;line-height:1.2;word-break:break-word}
-.calc__note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
-.calc__cta{margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200);display:flex;align-items:center;gap:var(--s-5);flex-wrap:wrap}
-.calc__cta p{font-size:13px;color:var(--rap-slate-700);max-width:44ch}
-
-/* good fit bullets */
-.fit{display:grid;gap:var(--s-4)}
-.fit li{padding-left:var(--s-5);border-left:2px solid var(--rap-ember)}
-.fit b{display:block;font-weight:600;font-size:17px;line-height:1.3}
-.fit span{display:block;font-size:14px;color:var(--rap-slate-700);margin-top:3px}
-
-/* care kits */
-.kits{margin-top:var(--s-8);padding-top:var(--s-6);border-top:1px solid var(--rap-slate-200)}
-.kits__grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--s-5);margin-top:var(--s-5)}
-.kits__i{border-top:2px solid var(--rap-slate-300);padding-top:var(--s-4)}
-.kits__k{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.kits__b{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-3)}
-.kits__b b{color:var(--rap-ink)}
-
-/* contact block in footer */
-.contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
-.contact__grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-8);align-items:start;margin-top:var(--s-5)}
-.contact__routes{display:grid;gap:var(--s-3)}
-.contact__route{
-  display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
-  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);padding:14px 16px;
-  text-decoration:none;color:#fff;transition:border-color .12s,background .12s;
-}
-.contact__route:hover{border-color:var(--rap-brass);background:rgba(193,149,65,.08)}
-.contact__route b{display:block;font-size:15px;font-weight:600}
-.contact__route span{display:block;font-size:13px;color:rgba(255,255,255,.6);margin-top:2px}
-.contact__route i{font-style:normal;color:var(--rap-brass)}
-/* The three routes are buttons now — they open the inline form instead of
-   navigating. Strip the UA button chrome so they render as the anchors did. */
-button.contact__route{width:100%;text-align:left;background:transparent;font:inherit;cursor:pointer}
-/* .pf was authored for the white support panel; on the ink footer labels invert. */
-.contact .pf__f label{color:#fff}
-.btn--sm{padding:10px 18px;font-size:14px;min-height:40px}
-.contact__det{display:grid;gap:var(--s-4)}
-.contact__det div{border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3)}
-.contact__det dt{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass)}
-.contact__det dd{font-size:20px;margin-top:6px}
-.contact__det dd a{text-decoration:none}
-.foot__brand{margin-bottom:var(--s-8)}
-.foot__cols{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-6)}
-.foot__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass);margin-bottom:var(--s-4)}
-.foot__cols a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:6px 0}
-.foot__cols a:hover{color:#fff}
-.foot__legal{margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);display:flex;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap}
-.foot__legal,.foot__legal a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none}
-.foot__acc{display:none}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width:1100px){
-  :root{--margin:32px}
-  .nav{gap:20px}
-  .nav a,.nav__drop>.nav__progs{font-size:14px}
-}
-@media (max-width:1024px){
-  .nav{display:none}
-  .burger{display:grid}
-  .hdr__inner{min-height:64px;gap:var(--s-4)}
-  .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
-  .hdr.is-condensed .hdr__util{display:none}
-  .foot__cols{grid-template-columns:1fr 1fr 1fr}
-}
-@media (max-width:900px){
-  .pgm__top{grid-template-columns:1fr;gap:var(--s-6)}
-  .kits__grid{grid-template-columns:1fr}
-}
-@media (max-width:860px){
-  :root{--margin:24px}
-  .sec{padding:var(--s-8) 0}
-  .sec--ink{padding:var(--s-9) 0}
-  .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
-}
-@media (max-width:680px){
-  .utility__inner{min-height:32px}
-  .utility a{font-size:12px}
-  .utility__secondary{display:none}
-  .utility__login{padding:4px 8px}
-  .hdr__inner{gap:10px}
-  .lockup{min-width:0;flex-shrink:1}
-  .lockup__mark{width:30px;height:30px;flex:0 0 30px}
-  .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
-  .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
-  .burger{width:42px;height:42px;flex:0 0 42px}
-  .calc__inputs,.calc__out{grid-template-columns:1fr;gap:var(--s-4)}
-  /* six milestones become 3x2 — six bars at 375px are unreadable */
-  .mile{grid-template-columns:repeat(3,1fr);gap:var(--s-4) var(--s-3)}
-  .mile__bw{height:72px}
-  .mile__v{font-size:12px}
-  .btns .btn{width:100%;justify-content:center}
-  .covtbl th[scope=col]:not(:first-child),.covtbl td:not(:first-child){width:60px}
-  .covtbl th,.covtbl td{padding:10px 8px;font-size:14px}
-  .foot__cols{display:none}
-  .foot__acc{display:block}
-  .foot__acc details{border-bottom:1px solid var(--rap-ink-700)}
-  .foot__acc summary{
-    font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
-    color:var(--rap-brass);padding:16px 0;cursor:pointer;
-  }
-  .foot__acc a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:8px 0 8px 16px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  html{scroll-behavior:auto}
-}
-/* ---------- customer support popup + chat (DECISION 042) ----------
-   Static prototype states — local demo only, no transport.
-   Shared block, byte-identical on every page. */
-.sup{position:fixed;inset:0;z-index:200;display:none;overflow-y:auto}
-.sup.is-open{display:block}
-.sup__scrim{position:fixed;inset:0;background:rgba(12,23,42,.6)}
-.sup__panel{
-  position:relative;width:min(540px,calc(100% - 32px));margin:7vh auto;background:#fff;
-  border-radius:var(--radius-md);border-top:3px solid var(--rap-ember);
-  box-shadow:0 24px 60px rgba(12,23,42,.28);
-}
-.sup__head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4);padding:var(--s-6) var(--s-6) 0}
-.sup__t{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1}
-.sup__x{background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:38px;height:38px;flex:0 0 38px;font-size:18px;line-height:1;color:var(--rap-slate-700)}
-.sup__x:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
-.sup__body{padding:var(--s-5) var(--s-6) var(--s-6)}
-.sup__hours{display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap;padding-bottom:var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
-.sup__hrs{font-family:var(--mono);font-size:12px;color:var(--rap-slate-700)}
-.hchip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:var(--radius-sm);padding:4px 9px;border:1px solid}
-.hchip--open{color:var(--rap-up);border-color:rgba(30,111,80,.4);background:rgba(30,111,80,.07)}
-.hchip--closed{color:var(--rap-slate-500);border-color:var(--rap-slate-300);background:var(--rap-mist)}
-.hchip__dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 7px}
-.sup__steer{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-5)}
-.sup__acts{display:grid;gap:var(--s-3);margin-top:var(--s-4)}
-.sup__acts .btn{width:100%;justify-content:center}
-.sup__phone{margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200)}
-.sup__phk{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
-.sup__phv{font-family:var(--serif);font-size:26px;font-weight:500;text-decoration:none;color:var(--rap-ink);display:inline-block;margin-top:2px}
-.sup__phv:hover{color:var(--rap-ember-700)}
-.sup__note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
-.sup__view{display:none}
-.sup__view.is-active{display:block}
-.sup__back{background:none;border:0;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-4)}
-.pf{display:grid;gap:var(--s-4)}
-.pf__f{display:flex;flex-direction:column;gap:6px}
-.pf__f label{font-weight:600;font-size:13px}
-.pf__f label i{color:var(--rap-ember-700);font-style:normal}
-.pf__f input,.pf__f textarea{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 12px;height:46px;font-family:var(--sans);font-size:16px;color:var(--rap-ink);background:#fff}
-.pf__f textarea{height:auto;padding:12px;min-height:76px;resize:vertical}
-.pf__f input:focus,.pf__f textarea:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
-.pf__hint{font-family:var(--mono);font-size:11px;color:var(--rap-slate-500)}
-.pf__err{display:none;color:var(--rap-down);font-size:13px;font-weight:500;gap:6px;align-items:flex-start}
-.pf__err.is-on{display:flex}
-.chat{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:210;display:none}
-.chat.is-open{display:block}
-.chat__panel{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;box-shadow:-16px 0 48px rgba(12,23,42,.18);border-left:1px solid var(--rap-slate-200)}
-.chat__head{background:var(--rap-ink);color:#fff;padding:var(--s-5);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4)}
-.chat__who{font-weight:600;font-size:16px}
-.chat__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-brass);margin-top:5px;display:flex;align-items:center;gap:7px}
-.chat__x{background:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);color:#fff;width:34px;height:34px;flex:0 0 34px;font-size:16px;line-height:1}
-.chat__x:hover{background:#fff;color:var(--rap-ink)}
-.chat__log{flex:1;overflow-y:auto;padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4);background:var(--rap-mist)}
-.msg{max-width:84%;padding:11px 14px;border-radius:var(--radius-md);font-size:15px;line-height:1.45}
-.msg--agent{background:#fff;border:1px solid var(--rap-slate-200);align-self:flex-start}
-.msg--cust{background:var(--rap-ink);color:#fff;align-self:flex-end}
-.msg--sys{align-self:center;background:none;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);text-align:center}
-.msg__m{font-family:var(--mono);font-size:10px;letter-spacing:.06em;opacity:.6;margin-top:5px}
-.chat__form{border-top:1px solid var(--rap-slate-200);padding:var(--s-4);display:flex;gap:var(--s-3);background:#fff}
-.chat__in{flex:1;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);height:46px;padding:0 12px;font-family:var(--sans);font-size:16px}
-.chat__in:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
-.chat__send{background:var(--rap-ember-700);color:#fff;border:0;border-radius:var(--radius-sm);padding:0 18px;font-weight:600;font-size:14px}
-.chat__send:hover{background:#8E3B0C}
-.chat__off{padding:var(--s-5);overflow-y:auto;flex:1}
-.typing{display:inline-flex;gap:3px;align-items:center}
-.typing i{width:5px;height:5px;border-radius:50%;background:var(--rap-brass);animation:blink 1.2s infinite}
-.typing i:nth-child(2){animation-delay:.2s}
-.typing i:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
-@media (max-width:560px){
-  .sup__panel{margin:0;width:100%;min-height:100vh;border-radius:0;border-top:0}
-  .sup__head{padding-top:var(--s-5)}
-}
-@media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.6}}
-@media print{.hdr,.jump,.drawer,.sup,.chat{display:none}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<input type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
-
-<!-- ============ 00 UTILITY BAR ============ -->
-<div class="utility">
-  <div class="wrap utility__inner">
-    <div class="utility__left">
-      <a href="https://www.5starservice.net/">File a Claim</a>
-      <a class="utility__secondary" href="customers.html">Customer Service</a>
-    </div>
-    <div class="utility__right">
-      <a class="utility__secondary" href="#contact">Contact</a>
-      <a href="https://portal.furniturerx.net/" class="utility__login">Dealer Login &rarr;</a>
-    </div>
-  </div>
-</div>
-
-<!-- ============ 01 PRIMARY HEADER ============ -->
 <header class="hdr">
-  <div class="wrap hdr__inner">
-    <a class="lockup" href="home.html">
-      <span class="lockup__mark" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
-        </svg>
-      </span>
-      <span><span class="lockup__name">Risk Assurance Partners</span></span>
-    </a>
-
+  <div class="wrap hdr__in">
+    <a class="lockup" href="index.html"><span class="lockup__mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/></svg></span><span class="lockup__name">Risk Assurance Partners</span></a>
+    <input class="navtoggle" type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
     <nav class="nav" aria-label="Primary">
-      <a href="home.html">Home</a>
-      <div class="nav__drop">
-        <a href="#subscription" class="nav__progs" aria-current="page">Programs <span aria-hidden="true">▾</span></a>
-        <div class="nav__panel">
-          <a href="#subscription"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
-          <a href="#multi-year"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
-          <a href="#reinsurance"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
-          <a href="#standard"><b>Standard Programs</b><span>Protection income with RAP retaining the underwriting</span></a>
-        </div>
-      </div>
-      <a href="home.html#why">Why RAP</a>
+      <a href="index.html">For Dealers</a>
+      <a href="programs.html" aria-current="page">Programs</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="customers.html">For Customers</a>
+      <a href="https://portal.furniturerx.net/">Dealer Login</a>
     </nav>
-
-    <div class="hdr__util">
-      <a class="hdr__login" href="https://portal.furniturerx.net/">Dealer Login &rarr;</a>
+    <div class="hdr__acts">
+      <a class="btn btn--ghost btn--sm" href="customers.html">Customer Service</a>
+      <a class="btn btn--primary btn--sm" href="index.html#contact">Talk to RAP</a>
     </div>
-
-    <a class="btn btn--primary hdr__cta" href="customers.html">Customer Service &rarr;</a>
-    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Open menu"><span></span></label>
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Menu"><span></span></label>
   </div>
 </header>
 
-<!-- mobile drawer -->
-<div class="drawer" role="dialog" aria-label="Site menu">
-  <div class="drawer__top">
-    <a class="lockup__name" style="color:#fff" href="home.html">Risk Assurance Partners</a>
-    <label class="drawer__close" for="navtoggle" role="button" tabindex="0" aria-label="Close menu">&times;</label>
-  </div>
-  <nav class="drawer__nav" aria-label="Mobile">
-    <details class="drawer__acc">
-      <summary>Programs</summary>
-      <div class="drawer__sub">
-        <a href="#top">All programs &rarr;</a>
-        <a href="#subscription">FurnitureRx Subscription</a>
-        <a href="#multi-year">Multi-Year Protection</a>
-        <a href="#reinsurance">Reinsurance</a>
-        <a href="#standard">Standard Programs</a>
-      </div>
-    </details>
-    <a href="home.html#why">Why RAP</a>
-  </nav>
-  <div class="drawer__util">
-    <p class="drawer__utillabel">Customers</p>
-    <a href="https://www.5starservice.net/">File a Claim</a>
-    <a href="customers.html">Customer Service</a>
-    <a href="#contact">Contact</a>
-    <a href="https://portal.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
-  </div>
-  <div class="drawer__cta"><a class="btn btn--primary" href="customers.html">Customer Service &rarr;</a></div>
-</div>
+<main>
 
-<main id="top">
-
-<!-- ============ PAGE INTRO ============ -->
-<section class="sec sec--first sec--mist" aria-labelledby="intro-h">
+<section class="sec sec--hero" aria-labelledby="pg-h">
   <div class="wrap">
-    <p class="eyebrow">Furniture, Mattress &amp; Interior Designer Protection Programs</p>
-    <h1 class="d2" id="intro-h" style="max-width:22ch">
-      Four ways to create profit from <span class="acc">your foot traffic.</span>
-    </h1>
-    <ul class="lead intro-list" style="margin-top:var(--s-5);max-width:74ch">
-      <li>Choose a program type, (1) Subscription, (2) Multi-Year or both.</li>
-      <li>Select an Underwriting type, (3) Reinsurance &amp; Share Underwriting profit, or (4) Standard, just pay the lowest price.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ SECTION JUMP STRIP ============ -->
-<nav class="jump" aria-label="Programs on this page">
-  <div class="wrap jump__inner">
-    <a href="#subscription">Subscription</a>
-    <a href="#multi-year">Multi-Year</a>
-    <a href="#reinsurance">Reinsurance</a>
-    <a href="#standard">Standard</a>
-  </div>
-</nav>
-
-<!-- ============ §1 SUBSCRIPTION ============ -->
-<section class="sec" id="subscription" aria-labelledby="sub-h">
-  <div class="wrap">
-    <div class="pgm__top">
-      <div>
-        <p class="eyebrow">Subscription &middot; protection plan type</p>
-        <h2 class="pgm__name" id="sub-h">FurnitureRx Subscription</h2>
-        <p class="pgm__phrase">Another way for the customer to say yes.</p>
-        <div class="pgm__intro">
-          <p>A monthly protection plan for the
-          customer who wants protection but not another large purchase on the day they buy
-          furniture. The same coverage as a multi-year program, paid monthly.</p>
-          <p>The customer can cancel, start, or restart at any time, so they stay in control of
-          the relationship. Roughly 70% of customers say no to Multi-Year plans; this is a way to
-          earn income from that group. <span class="meta">Source: RAP program experience</span></p>
-        </div>
-      </div>
-
-      <div class="statp">
-        <div class="statp__row">
-          <p class="statp__k">Customer pays</p>
-          <p class="statp__v">$19.99</p>
-          <p class="statp__n">per month, cancel anytime</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Dealer remits</p>
-          <p class="statp__v">$0</p>
-          <p class="statp__n">nothing to participate</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Dealer earns</p>
-          <p class="statp__v">$8</p>
-          <p class="statp__n">per successful monthly payment</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Income arrives</p>
-          <p class="statp__v" style="font-size:20px">Monthly, recurring</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- coverage grid -->
-    <div class="blk">
-      <p class="blk__h">What&rsquo;s covered</p>
-      <p class="cov__types">
-        <b>Furniture</b><span>&middot;</span><b>Adjustable beds</b><span>&middot;</span><b>Mattress</b><span>&middot;</span><b>Rugs</b><span>&middot;</span><b>Outdoor</b>
-      </p>
-    </div>
-
-    <!-- mini calculator -->
-    <div class="blk">
-      <p class="blk__h">Estimate the opportunity</p>
-      <div class="calc" data-calc="sub">
-        <div class="calc__inputs">
-          <div class="calc__f">
-            <label for="sub-units">New subscription sales per month</label>
-            <div class="calc__in"><input id="sub-units" type="number" min="0" step="1" value="200" inputmode="numeric"></div>
-            <small>Subscriptions added each month</small>
-          </div>
-          <div class="calc__f">
-            <label for="sub-rate">Dealer share per payment</label>
-            <div class="calc__in"><span>$</span><input id="sub-rate" type="number" min="0" step="0.01" value="8" inputmode="decimal"></div>
-            <small>Default $8 &middot; editable</small>
-          </div>
-        </div>
-
-        <!-- Fixed illustrative assumptions. Displayed, never editable — cancellation
-             and retention modeling stay behind the gate (DECISION 013). -->
-        <div class="calc__fixed">
-          <span class="calc__fx"><b>Payments per subscriber</b><span>60 average</span></span>
-          <span class="calc__fx"><b>Term</b><span>60 months</span></span>
-          <span class="calc__fx"><b>New sales</b><span>Continue monthly</span></span>
-        </div>
-
-        <div class="calc__out" aria-live="polite">
-          <div>
-            <p class="calc__ok">Cumulative dealer income &mdash; 60 months</p>
-            <p class="calc__ov" id="sub-total">$2,928,000</p>
-          </div>
-          <div>
-            <p class="calc__ok">Net earned per subscriber</p>
-            <p class="calc__ov" id="sub-per">$480</p>
-          </div>
-        </div>
-
-        <div class="mile" aria-live="polite">
-          <div class="mile__c">
-            <div class="mile__bw"><div class="mile__b" id="sub-b12"></div></div>
-            <p class="mile__m">12 mo</p><p class="mile__v" id="sub-m12">$124,800</p>
-          </div>
-          <div class="mile__c">
-            <div class="mile__bw"><div class="mile__b" id="sub-b24"></div></div>
-            <p class="mile__m">24 mo</p><p class="mile__v" id="sub-m24">$480,000</p>
-          </div>
-          <div class="mile__c">
-            <div class="mile__bw"><div class="mile__b" id="sub-b36"></div></div>
-            <p class="mile__m">36 mo</p><p class="mile__v" id="sub-m36">$1,065,600</p>
-          </div>
-          <div class="mile__c">
-            <div class="mile__bw"><div class="mile__b" id="sub-b48"></div></div>
-            <p class="mile__m">48 mo</p><p class="mile__v" id="sub-m48">$1,881,600</p>
-          </div>
-          <div class="mile__c">
-            <div class="mile__bw"><div class="mile__b" id="sub-b60"></div></div>
-            <p class="mile__m">60 mo</p><p class="mile__v" id="sub-m60">$2,928,000</p>
-          </div>
-        </div>
-
-        <p class="calc__note">
-          Illustrative &mdash; assumes continued monthly sales and an average 60 successful
-          payments per subscriber over a 60-month term. Not a forecast.
-        </p>
-
-        <div class="calc__cta">
-          <a class="btn btn--primary" href="#contact">Talk to RAP &rarr;</a>
-          <p>Want these numbers run for your stores? We&rsquo;ll walk through them with you.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- care kits — ranked below the program content (DECISION 019 / 039) -->
-    <div class="kits">
-      <p class="blk__h">Also available &mdash; Care Kits</p>
-      <p class="body" style="font-size:15px">
-        Care Kits are a secondary product alongside the subscription, not a lead offer.
-      </p>
-      <div class="kits__grid">
-        <div class="kits__i">
-          <p class="kits__k">How they ship</p>
-          <p class="kits__b">Kits <b>drop-ship directly to the customer</b>, or the dealer can
-          stock them and hand them over in store.</p>
-        </div>
-        <div class="kits__i">
-          <p class="kits__k">Dealer commission</p>
-          <p class="kits__b">On drop-ship, the dealer earns <b>$20 per kit</b> shipped to a zip
-          code inside the dealer&rsquo;s claimed trading area.</p>
-        </div>
-        <div class="kits__i">
-          <p class="kits__k">Trading areas</p>
-          <p class="kits__b">A trading area <b>must be claimed by the dealer</b> and cannot
-          overlap a previously claimed dealer&rsquo;s territory.</p>
-        </div>
-      </div>
+    <p class="eyebrow">Furniture, mattress &amp; interior designer protection programs</p>
+    <h1 class="h1" id="pg-h" style="max-width:20ch">Build your program in <span class="acc">two choices.</span></h1>
+    <p class="lead" style="margin-top:var(--s-5)">Choose the plan types you sell: Subscription, Multi-Year, or both. Then choose your underwriting: Reinsurance to share the underwriting profit, or Standard to keep it simple.</p>
+    <div class="btns">
+      <a class="btn btn--primary" href="index.html#contact">Talk to RAP &rarr;</a>
+      <a class="btn btn--ghost" href="index.html#calc">Estimate your income</a>
     </div>
   </div>
 </section>
 
-<!-- ============ §2 MULTI-YEAR ============ -->
-<section class="sec sec--mist" id="multi-year" aria-labelledby="my-h">
+<section class="sec" aria-labelledby="s1-h">
   <div class="wrap">
-    <div class="pgm__top">
-      <div>
-        <p class="eyebrow">Multi-Year &middot; protection plan type</p>
-        <h2 class="pgm__name" id="my-h">Multi-Year Protection</h2>
-        <p class="pgm__phrase">One decision, made once.</p>
-        <div class="pgm__intro">
-          <p>Protection bought once, at the
-          original sale, for the customer who prefers to settle the whole decision on the day
-          they buy. It stays the dealer&rsquo;s first ask.</p>
-          <p>The customer pays on average $300 one time. If they cancel, they receive a prorated
-          share back.</p>
-        </div>
-      </div>
-
-      <div class="statp">
-        <div class="statp__row">
-          <p class="statp__k">Customer pays</p>
-          <p class="statp__v">~$300</p>
-          <p class="statp__n">one time, average</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">On cancellation</p>
-          <p class="statp__v" style="font-size:20px">Prorated share returned</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Income arrives</p>
-          <p class="statp__v" style="font-size:20px">At the original sale</p>
-        </div>
-      </div>
+    <div class="sec__head">
+      <p class="eyebrow">Step 1</p>
+      <h2 class="h2" id="s1-h">Choose your plan types.</h2>
+      <p class="lead">Most dealers offer both: Multi-Year as the first ask, Subscription for the customers who say no.</p>
     </div>
 
-    <!-- coverage grid -->
-    <div class="blk">
-      <p class="blk__h">What&rsquo;s covered</p>
-      <p class="cov__types">
-        <b>Furniture</b><span>&middot;</span><b>Adjustable beds</b><span>&middot;</span><b>Mattress</b><span>&middot;</span><b>Rugs</b><span>&middot;</span><b>Outdoor</b>
-      </p>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><td></td><th scope="col" id="subscription">FurnitureRx Subscription</th><th scope="col" id="multi-year">Multi-Year Protection</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Best for</th><td>The customer who won&rsquo;t add a large purchase today</td><td>The customer who wants to settle it once</td></tr>
+          <tr><th scope="row">Customer pays</th><td>$19.99 a month, cancel anytime</td><td>About $300, one time</td></tr>
+          <tr><th scope="row">You earn</th><td>$8 per successful monthly payment</td><td>Margin at the sale (illustration: $250 retail &times; 72% = $180)</td></tr>
+          <tr><th scope="row">You remit</th><td>$0 &mdash; nothing to participate</td><td><span class="ph-text">Placeholder &mdash; owner to supply</span></td></tr>
+          <tr><th scope="row">Income arrives</th><td>Monthly, recurring</td><td>At the original sale</td></tr>
+          <tr><th scope="row">If the customer cancels</th><td>They can cancel, start or restart at any time</td><td>They receive a prorated share back</td></tr>
+          <tr><th scope="row">Qualifies for reinsurance</th><td>Yes &mdash; RAP is the only provider offering this</td><td>Yes</td></tr>
+        </tbody>
+      </table>
     </div>
 
-    <!-- mini calculator -->
-    <div class="blk">
-      <p class="blk__h">Estimate the opportunity</p>
-      <div class="calc" data-calc="my">
-        <div class="calc__inputs">
-          <div class="calc__f">
-            <label for="my-units">Annual units</label>
-            <div class="calc__in"><input id="my-units" type="number" min="0" step="1" value="1200" inputmode="numeric"></div>
-            <small>Multi-year plans sold per year</small>
-          </div>
-          <div class="calc__f">
-            <label for="my-rate">Gross margin per unit</label>
-            <div class="calc__in"><span>$</span><input id="my-rate" type="number" min="0" step="1" value="180" inputmode="decimal"></div>
-            <small>Default $180 &middot; editable</small>
-          </div>
-        </div>
-
-        <div class="calc__fixed">
-          <span class="calc__fx"><b>Term</b><span>60 months</span></span>
-          <span class="calc__fx"><b>Payment</b><span>One upfront payment covers the term</span></span>
-        </div>
-
-        <div class="calc__out" aria-live="polite">
-          <div>
-            <p class="calc__ok">Annual income</p>
-            <p class="calc__ov" id="my-annual">$216,000</p>
-          </div>
-          <div>
-            <p class="calc__ok">5-year income</p>
-            <p class="calc__ov" id="my-five">$1,080,000</p>
-          </div>
-        </div>
-
-        <p class="calc__note">
-          Illustrative only. Not a forecast. Annual = units &times; margin.
-          5-year = annual &times; 5 &mdash; the same 60-month term as the subscription above.
-        </p>
-
-        <div class="calc__cta">
-          <a class="btn btn--primary" href="#contact">Talk to RAP &rarr;</a>
-          <p>Want these numbers run for your stores? We&rsquo;ll walk through them with you.</p>
-        </div>
-      </div>
+    <p class="subhead">What&rsquo;s covered</p>
+    <ul class="chips"><li>Furniture</li><li>Adjustable beds</li><li>Mattress</li><li>Rugs</li><li>Outdoor</li></ul>
+    <div class="grid2" style="margin-top:var(--s-5)">
+      <div class="ph" style="min-height:120px">PLACEHOLDER<br>Coverage list &mdash; Basic plan</div>
+      <div class="ph" style="min-height:120px">PLACEHOLDER<br>Coverage list &mdash; Premium plan</div>
     </div>
 
-    <!-- care kits -->
-    <div class="kits">
-      <p class="blk__h">Also available &mdash; Care Kits</p>
-      <p class="body" style="font-size:15px">
-        Care Kits are a secondary product alongside the program, not a lead offer.
-      </p>
-      <div class="kits__grid">
-        <div class="kits__i">
-          <p class="kits__k">How they ship</p>
-          <p class="kits__b">Kits <b>drop-ship directly to the customer</b>, or the dealer can
-          stock them and hand them over in store.</p>
-        </div>
-        <div class="kits__i">
-          <p class="kits__k">Dealer commission</p>
-          <p class="kits__b">On drop-ship, the dealer earns <b>$20 per kit</b> shipped to a zip
-          code inside the dealer&rsquo;s claimed trading area.</p>
-        </div>
-        <div class="kits__i">
-          <p class="kits__k">Trading areas</p>
-          <p class="kits__b">A trading area <b>must be claimed by the dealer</b> and cannot
-          overlap a previously claimed dealer&rsquo;s territory.</p>
-        </div>
-      </div>
+    <p class="subhead">Also available &middot; Care Kits</p>
+    <div class="grid3">
+      <div class="card"><h3 class="h3">How they ship</h3><p class="body">Kits drop-ship directly to the customer, or you can stock them and hand them over in store.</p></div>
+      <div class="card"><h3 class="h3">Your commission</h3><p class="body">On drop-ship, you earn $20 per kit shipped to a zip code inside your claimed trading area.</p></div>
+      <div class="card"><h3 class="h3">Trading areas</h3><p class="body">A trading area must be claimed by the dealer and cannot overlap a previously claimed dealer&rsquo;s territory.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ §3 REINSURANCE ============ -->
-<section class="sec" id="reinsurance" aria-labelledby="ri-h">
+<section class="sec" aria-labelledby="s2-h">
   <div class="wrap">
-    <div class="pgm__top">
-      <div>
-        <p class="eyebrow">Reinsurance &middot; underwriting type</p>
-        <h2 class="pgm__name" id="ri-h">Reinsurance</h2>
-        <p class="pgm__phrase">Keep the underwriting profit.</p>
-        <div class="pgm__intro">
-          <p>An underwriting structure that
-          pairs with a protection plan. Rather than the underwriting profit staying with the
-          vendor, the dealer takes a share of it, along with tax benefits.</p>
-          <p>The value accrues over time rather than arriving as commission income does, so this
-          is a long-horizon position rather than immediate profit.</p>
-          <p>RAP has built and operated reinsurance protection programs for retail dealers since 2012,
-          and is the only provider offering subscription programs that qualify for reinsurance.
-          Every service contract is backed by A+ underwriting from Zurich or Sentruity Casualty Company.</p>
-          <p class="meta" style="margin-top:var(--s-4)">
-            Tax treatment depends on your circumstances &mdash; consult your own tax advisor.
-          </p>
-        </div>
-      </div>
-
-      <div class="statp">
-        <div class="statp__row">
-          <p class="statp__k">Dealer receives</p>
-          <p class="statp__v" style="font-size:20px">A share of the underwriting profits</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Also</p>
-          <p class="statp__v" style="font-size:20px">Tax benefits</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Income arrives</p>
-          <p class="statp__v" style="font-size:20px">Accrues over time</p>
-          <p class="statp__n">Not immediate profit</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Customer price</p>
-          <p class="statp__n" style="margin-top:6px">Set by the plan type it pairs with.</p>
-        </div>
-      </div>
+    <div class="sec__head">
+      <p class="eyebrow">Step 2</p>
+      <h2 class="h2" id="s2-h">Choose your underwriting.</h2>
+      <p class="lead">Either option works with either plan type. Every service contract is backed by A+ underwriting from Zurich or Sentruity Casualty Company.</p>
     </div>
 
-    <!-- good fit for -->
-    <div class="blk">
-      <p class="blk__h">This is a good fit for</p>
-      <ul class="fit">
-          <li>
-            <b>Dealers taking a long view of the protection relationship</b>
-            <span>The value accrues over time rather than arriving at the sale.</span>
-          </li>
-          <li>
-            <b>Dealers who want the underwriting result, not just the commission</b>
-            <span>The underwriting profit stays with the dealer rather than the vendor.</span>
-          </li>
+    <div class="grid2">
+      <article class="card card--top" id="reinsurance">
+        <p class="card__k">Underwriting option</p>
+        <h3 class="h3">Reinsurance</h3>
+        <p class="card__tag">Keep the underwriting profit. Rather than it staying with the vendor, you take a share of it, along with tax benefits.</p>
+        <dl class="facts">
+          <div><dt>You receive</dt><dd>A share of underwriting profit</dd></div>
+          <div><dt>Income arrives</dt><dd>Accrues over time</dd></div>
+          <div><dt>Works with</dt><dd>Subscription and Multi-Year</dd></div>
+        </dl>
+        <ul class="ticks">
+          <li>For dealers taking a long view &mdash; the value accrues over time rather than arriving at the sale.</li>
+          <li>For dealers who want the underwriting result, not just the commission.</li>
         </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ §4 STANDARD ============ -->
-<section class="sec sec--mist" id="standard" aria-labelledby="st-h">
-  <div class="wrap">
-    <div class="pgm__top">
-      <div>
-        <p class="eyebrow">Standard &middot; underwriting type</p>
-        <h2 class="pgm__name" id="st-h">Standard Programs</h2>
-        <p class="pgm__phrase">The simplest way to run a protection program.</p>
-        <div class="pgm__intro">
-          <p>The dealer earns protection income
-          at the sale, and RAP retains the underwriting. There is no reinsurance participation to
-          set up or administer.</p>
-          <p>This is the simplest of the four structures to run.</p>
-        </div>
-      </div>
-
-      <div class="statp">
-        <div class="statp__row">
-          <p class="statp__k">Dealer earns</p>
-          <p class="statp__v" style="font-size:20px">Protection income</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Underwriting</p>
-          <p class="statp__v" style="font-size:20px">Retained by RAP</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Income arrives</p>
-          <p class="statp__v" style="font-size:20px">At the sale</p>
-        </div>
-        <div class="statp__row">
-          <p class="statp__k">Structure</p>
-          <p class="statp__v" style="font-size:20px">Simplest to run</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- good fit for -->
-    <div class="blk">
-      <p class="blk__h">This is a good fit for</p>
-      <ul class="fit">
-          <li>
-            <b>Dealers who want protection income without a reinsurance structure</b>
-            <span>RAP retains the underwriting; there is nothing additional to set up.</span>
-          </li>
-          <li>
-            <b>Dealers who want income at the point of sale</b>
-            <span>The income arrives with the transaction rather than accruing.</span>
-          </li>
+        <p class="body">RAP has built and operated reinsurance protection programs for retail dealers since 2012, generating additional wealth and tax benefits for owners.</p>
+        <p class="note">This is a long-horizon position, not immediate profit. Tax treatment depends on your circumstances &mdash; consult your own tax advisor.</p>
+      </article>
+      <article class="card card--top" id="standard">
+        <p class="card__k">Underwriting option</p>
+        <h3 class="h3">Standard</h3>
+        <p class="card__tag">The simplest way to run a protection program. You earn protection income at the sale, and RAP retains the underwriting.</p>
+        <dl class="facts">
+          <div><dt>You receive</dt><dd>Protection income</dd></div>
+          <div><dt>Underwriting</dt><dd>Retained by RAP</dd></div>
+          <div><dt>Works with</dt><dd>Subscription and Multi-Year</dd></div>
+        </dl>
+        <ul class="ticks">
+          <li>For dealers who want protection income without a reinsurance structure &mdash; nothing additional to set up.</li>
+          <li>For dealers who want income at the point of sale.</li>
         </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ============ CONVERSION ============ -->
-<section class="sec sec--ink" aria-labelledby="cta-h">
-  <div class="wrap center">
-    <h2 class="d2" id="cta-h" style="max-width:20ch;margin:0 auto">
-      Run your numbers, or <span class="acc">just ask.</span>
-    </h2>
-    <div class="btns" style="justify-content:center">
-      <a class="btn btn--primary" href="#contact">Talk to RAP &rarr;</a>
+<section class="sec" aria-labelledby="pg-cta-h">
+  <div class="wrap">
+    <div class="custband">
+      <div>
+        <h2 class="h3" id="pg-cta-h">Not sure which combination fits?</h2>
+        <p class="body">Tell us about your stores and we&rsquo;ll walk through the numbers with you.</p>
+      </div>
+      <div class="btns" style="margin-top:0">
+        <a class="btn btn--primary" href="index.html#contact">Talk to RAP &rarr;</a>
+        <a class="btn btn--ghost" href="index.html#calc">Estimate your income</a>
+      </div>
     </div>
-    <p class="meta" style="margin-top:var(--s-7);color:rgba(255,255,255,.55)">
-      1.800.732.5856 &middot; sales@raptns.com &middot; Monday&ndash;Friday 8:00 AM &ndash; 6:00 PM EST
-    </p>
   </div>
 </section>
 
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
+<footer class="foot">
   <div class="wrap">
-
-    <div class="contact" id="contact">
-      <p class="eyebrow">Contact</p>
-      <h2 class="d3">Talk to Risk Assurance Partners.</h2>
-      <div class="contact__grid">
-        <div class="contact__routes">
-          <button type="button" class="contact__route" data-route="dealer" aria-controls="contact-form" aria-expanded="false">
-            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-          <button type="button" class="contact__route" data-route="subscription" aria-controls="contact-form" aria-expanded="false">
-            <span><b>How do I start selling subscription programs</b><span>Get started with the FurnitureRx subscription program</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-          <button type="button" class="contact__route" data-route="media" aria-controls="contact-form" aria-expanded="false">
-            <span><b>Media or other</b><span>Everything else</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-
-          <!-- static prototype — Supabase lead capture wires this with source tag "contact" + route value (DEV_NOTES) -->
-          <form class="pf" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-            <input type="hidden" name="form-name" value="contact">
-            <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-            <input type="hidden" id="contact-route" name="route" value="">
-            <div class="pf__f">
-              <label for="contact-name">Name <i>*</i></label>
-              <input id="contact-name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="pf__f">
-              <label for="contact-email">Email <i>*</i></label>
-              <input id="contact-email" name="email" type="email" autocomplete="email" required pattern="[^@\s]+@[^@\s]+\.[A-Za-z]{2,}" title="Enter a valid email address.">
-            </div>
-            <div class="pf__f">
-              <label for="contact-phone">Phone <i>*</i></label>
-              <input id="contact-phone" name="phone" type="tel" autocomplete="tel" required>
-            </div>
-            <div class="pf__f">
-              <label for="contact-msg">What are you interested in? <i>*</i></label>
-              <textarea id="contact-msg" name="message" required></textarea>
-            </div>
-            <button type="submit" class="btn btn--primary btn--sm">Send &rarr;</button>
-          </form>
-          <p id="contact-done" hidden style="font-size:15px;line-height:1.55">
-            Thank you &mdash; we received your message. The RAP team will follow up.
-          </p>
-        </div>
-        <dl class="contact__det">
-          <div><dt>Phone</dt><dd><a href="tel:+18007325856">1.800.732.5856</a></dd></div>
-          <div><dt>Email</dt><dd><a href="mailto:sales@raptns.com">sales@raptns.com</a></dd></div>
-          <div><dt>Hours</dt><dd>8:00 AM &ndash; 6:00 PM, Monday&ndash;Friday, EST</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <a class="lockup foot__brand" href="home.html">
-      <span class="lockup__mark" style="background:#fff" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#204374" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
-        </svg>
-      </span>
-      <span>
-        <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
-        <span class="lockup__tag" style="color:rgba(255,255,255,.55)">Protection Programs for Furniture Retailers &amp; Designers</span>
-      </span>
-    </a>
-
     <div class="foot__cols">
       <div>
-        <p class="foot__h">Programs</p>
-        <a href="#subscription">FurnitureRx</a><a href="#multi-year">Multi-Year Protection</a><a href="#reinsurance">Reinsurance</a><a href="#standard">Standard Programs</a>
+        <a class="lockup" href="index.html"><span class="lockup__mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#204374" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/></svg></span><span class="lockup__name">Risk Assurance Partners</span></a>
+        <p style="margin-top:var(--s-4);max-width:34ch">Protection programs for furniture retailers and designers. Established 2012.</p>
       </div>
       <div>
-        <p class="foot__h">Company</p>
-        <a href="home.html#why">Why RAP</a><a href="#contact">Contact</a>
+        <p class="foot__h">Dealers</p>
+        <a href="programs.html">Programs</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#contact">Talk to RAP</a>
+        <a href="https://portal.furniturerx.net/">Dealer login</a>
       </div>
       <div>
-        <p class="foot__h">Customer</p>
-        <a href="https://www.5starservice.net/">File a Claim</a><a href="customers.html">Customer Service</a>
+        <p class="foot__h">Customers</p>
+        <a href="https://www.5starservice.net/">File a claim</a>
+        <a href="customers.html">Customer service</a>
       </div>
       <div>
-        <p class="foot__h">Dealer</p>
-        <a href="https://portal.furniturerx.net/">Dealer Login</a><a href="programs.html">Programs</a>
+        <p class="foot__h">Contact</p>
+        <a href="tel:+18007325856">1.800.732.5856</a>
+        <a href="mailto:sales@raptns.com">sales@raptns.com</a>
       </div>
     </div>
-
-    <div class="foot__acc">
-      <details><summary>Programs</summary><a href="#subscription">FurnitureRx</a><a href="#multi-year">Multi-Year Protection</a><a href="#reinsurance">Reinsurance</a><a href="#standard">Standard Programs</a></details>
-      <details><summary>Company</summary><a href="home.html#why">Why RAP</a><a href="#contact">Contact</a></details>
-      <details><summary>Customer</summary><a href="https://www.5starservice.net/">File a Claim</a><a href="customers.html">Customer Service</a></details>
-      <details><summary>Dealer</summary><a href="https://portal.furniturerx.net/">Dealer Login</a><a href="programs.html">Programs</a></details>
-    </div>
-
-    <div class="foot__legal">
-      <span>&copy; 2026 Risk Assurance Partners</span>
-      
-    </div>
+    <p class="foot__legal">&copy; 2026 Risk Assurance Partners</p>
   </div>
 </footer>
 
-<script>
-/* Sticky header condense, matching home.html. Also publishes the current
-   header height as --hdr-h so the section-jump strip sticks directly beneath
-   it at both heights. */
-(function () {
-  var hdr = document.querySelector('.hdr');
-  var root = document.documentElement;
-  var ticking = false;
-  function apply() {
-    var condensed = window.scrollY > 40;
-    hdr.classList.toggle('is-condensed', condensed);
-    root.style.setProperty('--hdr-h', (condensed ? 64 : 84) + 'px');
-    ticking = false;
-  }
-  window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-  }, { passive: true });
-  apply();
-})();
-
-/* Drawer: close on Esc. */
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    var t = document.getElementById('navtoggle');
-    if (t && t.checked) { t.checked = false; }
-  }
-});
-
-/* Section-jump: mark the section currently under the header. */
-(function () {
-  var links = Array.prototype.slice.call(document.querySelectorAll('.jump a'));
-  var sections = links.map(function (a) {
-    return document.querySelector(a.getAttribute('href'));
-  });
-  var ticking = false;
-  function apply() {
-    var probe = window.scrollY + 180;
-    var idx = 0;
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i] && sections[i].offsetTop <= probe) { idx = i; }
-    }
-    links.forEach(function (a, i) { a.classList.toggle('is-active', i === idx); });
-    ticking = false;
-  }
-  window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-  }, { passive: true });
-  apply();
-})();
-
-/* Mini calculators.
-   SUBSCRIPTION rebuilt 2026-08-25 to match the owner's proforma spreadsheet
-   (cohort waterfall), replacing the earlier annual-units version.
-   Horizon corrected the same day from 36 to 60 months: a typical standard
-   plan runs a 60-month term, so a subscription over the same term is 60
-   payments — which also matches the homepage $8 x 60 = $480 illustration.
-
-   MODEL — each month adds a cohort of m new subscribers. Every active
-   subscriber pays `rate` once a month, and each subscriber makes at most
-   TERM = 60 payments. Cumulative dealer income at month M is therefore
-
-       cum(M) = m * rate * SUM_{j=1..M} min(M - j + 1, 60)
-
-   The inner sum counts, for every cohort j, how many payments it has made by
-   month M, capped at 60. Substituting k = M - j + 1 gives SUM_{k=1..M} min(k,60),
-   which reduces to M(M+1)/2 while M <= 60, and to 1830 + 60*(M-60) beyond it.
-
-   Milestone multipliers (M <= 60): 12->78, 24->300, 36->666, 48->1176,
-   60->1830.
-   Check at defaults m=200, rate=$8 (m*rate = 1,600):
-       12 mo $124,800    24 mo $480,000    36 mo $1,065,600
-       48 mo $1,881,600  60 mo $2,928,000
-       net earned per subscriber = rate * 60 = $480
-   These reproduce the owner's spreadsheet exactly.
-
-   MULTI-YEAR — income lands at the sale, so it does not stack:
-       annual = units * margin ; 5-year = annual * 5
-   Both calculators now share the same 60-month horizon, so the two sections
-   are read off a common term.
-
-   Public-teaser level only (DECISION 013): the 60-payment average is shown as
-   a fixed illustrative assumption. No cancellation, churn or retention curve
-   is exposed or editable here — that modeling stays behind the gate. */
-(function () {
-  var TERM = 60;
-  var MILES = [12, 24, 36, 48, 60];
-
-  function money(n) {
-    if (!isFinite(n) || n < 0) { n = 0; }
-    return '$' + Math.round(n).toLocaleString('en-US');
-  }
-  function read(el) {
-    var v = parseFloat(el.value) || 0;
-    return v < 0 ? 0 : v;
-  }
-  /* SUM_{k=1..M} min(k, TERM) */
-  function factor(M) {
-    if (M <= TERM) { return M * (M + 1) / 2; }
-    return TERM * (TERM + 1) / 2 + TERM * (M - TERM);
-  }
-
-  /* Subscription — 36-month cohort waterfall */
-  (function () {
-    var u = document.getElementById('sub-units');
-    var r = document.getElementById('sub-rate');
-    var total = document.getElementById('sub-total');
-    var per = document.getElementById('sub-per');
-
-    function calc() {
-      var m = read(u);
-      var rate = read(r);
-      var base = m * rate;
-      var peak = base * factor(TERM);
-
-      MILES.forEach(function (M) {
-        var v = base * factor(M);
-        document.getElementById('sub-m' + M).textContent = money(v);
-        document.getElementById('sub-b' + M).style.height =
-          (peak > 0 ? (v / peak) * 100 : 0) + '%';
-      });
-
-      total.textContent = money(peak);
-      per.textContent = money(rate * TERM);
-    }
-
-    u.addEventListener('input', calc);
-    r.addEventListener('input', calc);
-    calc();
-  })();
-
-  /* Multi-Year — income at the sale */
-  (function () {
-    var u = document.getElementById('my-units');
-    var r = document.getElementById('my-rate');
-    var a = document.getElementById('my-annual');
-    var f = document.getElementById('my-five');
-    function calc() {
-      var annual = read(u) * read(r);
-      a.textContent = money(annual);
-      f.textContent = money(annual * 5);
-    }
-    u.addEventListener('input', calc);
-    r.addEventListener('input', calc);
-    calc();
-  })();
-})();
-</script>
-
-<script>
-/* Footer contact routes. The three route cards open one shared form and record
-   which route was chosen. Static prototype: native `required` plus an email
-   pattern and a 10–15 digit phone check; transport arrives with the Supabase
-   lead-capture package, source tag "contact". */
-(function () {
-  var form = document.getElementById('contact-form');
-  var done = document.getElementById('contact-done');
-  var route = document.getElementById('contact-route');
-  var name = document.getElementById('contact-name');
-  var phone = document.getElementById('contact-phone');
-  var btns = document.querySelectorAll('.contact__route[data-route]');
-  if (!form || !done || !route || !name || !phone || !btns.length) { return; }
-  function phoneOk(v) { var d = String(v).replace(/[^0-9]/g, ''); return d.length >= 10 && d.length <= 15; }
-  phone.addEventListener('input', function () { phone.setCustomValidity(''); });
-  Array.prototype.forEach.call(btns, function (b) {
-    b.addEventListener('click', function () {
-      route.value = b.getAttribute('data-route');
-      form.hidden = false;
-      done.hidden = true;
-      Array.prototype.forEach.call(btns, function (o) {
-        o.setAttribute('aria-expanded', o === b ? 'true' : 'false');
-      });
-      name.focus();
-    });
-  });
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!phoneOk(phone.value)) {
-      phone.setCustomValidity('Enter a valid phone number (10–15 digits).');
-      phone.reportValidity();
-      return;
-    }
-    phone.setCustomValidity('');
-    var btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    }).then(function (r) {
-      if (!r.ok) { throw new Error('send failed'); }
-      form.hidden = true;
-      done.hidden = false;
-    }).catch(function () {
-      btn.disabled = false;
-      done.textContent = 'Sorry \u2014 your message did not send. Please call 1.800.732.5856 or email sales@raptns.com.';
-      done.hidden = false;
-    });
-  });
-})();
-</script>
-
-
+<script src="assets/site.js"></script>
 </body>
 </html>

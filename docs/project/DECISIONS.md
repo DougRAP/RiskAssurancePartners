@@ -767,6 +767,17 @@ Owner direction: an uncomplicated rebuild — dealer home page, a clear consumer
 
 Owner: ratings are Google-published; the point is their value in winning dealers. Home gets a named comparison section above Why RAP: RAP 4.4, Montage 3.7, ProtectAll 3.3, Guardian 2.6, Furniture Care Protection 2.2 (November 2026). Replaces the unnamed caption from 056. Ratings must be re-checked periodically; Guardian has two Google listings (2.6 and 2.5) and the higher is shown.
 
+## Decision 058 — Ground-Up Rebuild (2026-11-23, branch `ground-up`, pending owner merge)
+
+Owner asked for a rebuild from the ground up, with placeholders for owner-supplied material.
+
+- Pages: `index.html` (dealers), `programs.html`, `customers.html`, sharing `assets/site.css` and `assets/site.js`. `home.html` removed; `/home.html` redirects to `/`.
+- Home leads with what only RAP offers (4.4 Google rating, $19.99 subscription, reinsurance on both plan types with A+ underwriting), then: what you earn, why subscription, rating comparison, how it works, dealer questions, contact form.
+- The cost-structure bar and attachment slider are replaced by one income estimate (Multi-Year $180 per plan; Subscription $8 x 60 payments).
+- Programs is presented as two choices (plan types, then underwriting) per 029/048, not "four ways".
+- Lighter look: white ground, hairline section rules, cards; tokens unchanged.
+- Placeholders awaiting owner: dealer quotes and logos, three product screenshots, five dealer FAQ answers, two customer FAQ answers, coverage lists, Multi-Year remit.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:

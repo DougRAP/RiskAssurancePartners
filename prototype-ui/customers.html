@@ -8,1227 +8,137 @@
 <meta name="description" content="Have a furniture protection plan administered by Risk Assurance Partners? File a claim online or call 1.800.732.5856.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   RISK ASSURANCE PARTNERS — Phase 2 UI/UX prototype · R10.2 revision
-   R10.2: narrative voice is first-person plural ("we"); the company name
-   anchors the eyebrow, labels, and claims. R10.1: RAP named and made the
-   grammatical actor in the hero, orientation
-   claim made visible, ink section closes with RAP as the answer.
-   R10: hero rebuilt (clarity-first), trust strip added, section rhythm
-   tightened (96/128px), axes matrix moved to the Programs page, Market Pulse moved
-   adjacent to Newswire, backgrounds alternated so no two match.
-   DESIGN ONLY. Not production code. No framework, no build.
-   Palette pixel-sampled from the RAP corporate site (#204374)
-   and the live FurnitureRx kiosk (#0C172A #C8581B #C19541
-   #FCF8F5 #F3F5F8).
-   ============================================================ */
-
-:root{
-  --rap-ink:#0C172A; --rap-ink-800:#16243C; --rap-ink-700:#22334F;
-  --rap-paper:#FFFFFF; --rap-mist:#F3F5F8; --rap-cream:#FCF8F5;
-  --rap-blue:#204374; --rap-blue-600:#2E5A96; --rap-blue-050:#E8EEF6;
-  --rap-ember:#C8581B; --rap-ember-700:#A3450F; --rap-ember-050:#FBEFE8;
-  --rap-brass:#C19541; --rap-brass-050:#F7F0E2;
-  --rap-slate-700:#3D4A5C; --rap-slate-500:#64748B; --rap-slate-300:#C3CBD6;
-  --rap-slate-200:#DFE4EB; --rap-slate-100:#EEF1F5;
-  --rap-up:#1E6F50; --rap-down:#A8331F; --rap-flat:#64748B;
-
-  --serif:"Playfair Display","Iowan Old Style",Georgia,serif;
-  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-
-  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;
-  --s-7:48px;--s-8:64px;--s-9:96px;--s-10:128px;--s-11:160px;
-
-  --radius-sm:2px; --radius-md:4px;
-  --content:1240px; --wide:1440px; --margin:48px;
-
-  --fs-d1:clamp(30px,4.2vw,54px);
-  --fs-d2:clamp(30px,4.2vw,56px);
-  --fs-d3:clamp(25px,2.9vw,40px);
-  --fs-stat:clamp(34px,3.9vw,52px);
-  --fs-h3:clamp(19px,1.6vw,22px);
-  --fs-lead:clamp(17px,1.4vw,20px);
-}
-
-*,*::before,*::after{box-sizing:border-box}
-[hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;scroll-padding-top:72px}
-body{
-  margin:0;background:var(--rap-paper);color:var(--rap-ink);
-  font-family:var(--sans);font-size:16px;line-height:1.6;
-  font-feature-settings:"cv05","ss01";-webkit-font-smoothing:antialiased;
-}
-img,svg{max-width:100%}
-a{color:inherit}
-h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
-ul{padding:0;list-style:none}
-button{font:inherit;cursor:pointer}
-
-:focus-visible{outline:2px solid var(--rap-blue-600);outline-offset:2px;border-radius:1px}
-
-/* ---------- layout primitives ---------- */
-.wrap{max-width:var(--content);margin:0 auto;padding:0 var(--margin)}
-.sec{padding:var(--s-9) 0;border-top:1px solid var(--rap-slate-200)}
-.sec--first{border-top:0;padding-top:var(--s-7);padding-bottom:var(--s-6)}
-.sec--mist{background:var(--rap-mist);border-top-color:var(--rap-slate-200)}
-/* .sec--cream removed with the Research section — cream is the editorial ground
-   and now lives on research.html. */
-/* R10 — same-background adjacency: kill the border and halve the top padding
-   so identical backgrounds never show a stranded hairline in dead space.
-   The section order alternates backgrounds, so this is a safety net. */
-.sec--ink{
-  background:var(--rap-ink);color:#fff;border-top:0;padding:var(--s-10) 0;
-  background-image:linear-gradient(180deg,var(--rap-ink) 0%,var(--rap-ink-800) 100%);
-}
-.sec--ink a{color:#fff}
-
-/* ---------- type ---------- */
-.eyebrow{
-  font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.10em;
-  text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-4);
-  line-height:1.7;
-}
-.sec--ink .eyebrow{color:var(--rap-brass)}
-/* hybrid eyebrow-header — hero only */
-.hero .eyebrow{
-  font-size:clamp(15px,1.5vw,20px);letter-spacing:.08em;line-height:1.6;
-  color:var(--rap-slate-700);margin-bottom:var(--s-5);
-}
-.d1{font-family:var(--serif);font-weight:500;font-size:var(--fs-d1);line-height:.99;letter-spacing:-.02em;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
-.d2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d2);line-height:1.04;letter-spacing:-.02em}
-.d3{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.1;letter-spacing:-.01em}
-.acc{font-style:italic;color:var(--rap-ember)}
-.sec--ink .acc{font-style:italic;color:var(--rap-brass)}
-.lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:46ch}
-.sec--ink .lead{color:rgba(255,255,255,.78)}
-.body{color:var(--rap-slate-700);max-width:68ch}
-.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500)}
-.center{text-align:center}
-.center .lead{margin-left:auto;margin-right:auto}
-
-/* ---------- buttons ---------- */
-.btn{
-  display:inline-flex;align-items:center;gap:10px;padding:14px 28px;
-  font-weight:600;font-size:15px;line-height:1;text-decoration:none;
-  border-radius:var(--radius-sm);border:1px solid transparent;transition:background .12s,color .12s,border-color .12s;
-  min-height:46px;
-}
-.btn--primary{background:var(--rap-ember-700);color:#fff}
-.btn--primary:hover{background:#8E3B0C}
-.btn--secondary{border-color:var(--rap-ink);color:var(--rap-ink);background:transparent}
-.btn--secondary:hover{background:var(--rap-ink);color:#fff}
-.sec--ink .btn--secondary{border-color:rgba(255,255,255,.45);color:#fff}
-.sec--ink .btn--secondary:hover{background:#fff;color:var(--rap-ink)}
-.btn:active{transform:translateY(1px)}
-.btns{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-7)}
-.qlink{
-  display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;
-  color:var(--rap-ember-700);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;
-}
-.qlink:hover{color:#8E3B0C}
-.sec--ink .qlink{color:var(--rap-brass)}
-
-/* Prototype banner removed — the prototype matches production chrome. */
-
-/* ---------- 00 utility bar (R3: +1 contrast step, CUSTOMERS label, Contact) ---------- */
-.utility{background:var(--rap-ink);color:rgba(255,255,255,.88)}
-.utility__inner{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:var(--s-5)}
-.utility a{
-  font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(255,255,255,.88);text-decoration:none;
-}
-.utility a:hover{color:#fff}
-.utility__left,.utility__right{display:flex;gap:var(--s-5);align-items:center;flex-wrap:wrap}
-.utility__label{
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--rap-slate-500);border-right:1px solid var(--rap-ink-700);padding-right:var(--s-5);
-}
-.utility__login{
-  color:var(--rap-brass)!important;border:1px solid rgba(193,149,65,.55);
-  border-radius:var(--radius-sm);padding:5px 10px;
-}
-.utility__login:hover{background:var(--rap-brass);color:var(--rap-ink)!important}
-
-/* ---------- 01 header ---------- */
-.hdr{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--rap-slate-200);transition:box-shadow .16s}
-.hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s-6);min-height:84px;transition:min-height .16s}
-/* R4 — condensed sticky header: tagline drops, utility returns */
-.hdr.is-condensed .hdr__inner{min-height:64px}
-.hdr.is-condensed .lockup__tag{display:none}
-.hdr.is-condensed{box-shadow:0 1px 0 var(--rap-slate-200),0 8px 24px rgba(12,23,42,.08)}
-.hdr__util{display:none;align-items:center;gap:var(--s-4);flex-shrink:0}
-.hdr.is-condensed .hdr__util{display:flex}
-.hdr__util a{
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  text-decoration:none;color:var(--rap-slate-700);white-space:nowrap;
-}
-.hdr__util a:hover{color:var(--rap-ink)}
-.hdr__util .hdr__login{
-  color:var(--rap-ember-700);border:1px solid var(--rap-slate-300);
-  border-radius:var(--radius-sm);padding:6px 10px;
-}
-.hdr__util .hdr__login:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
-.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
-.lockup__mark{
-  width:34px;height:34px;flex:0 0 34px;border-radius:var(--radius-sm);
-  background:var(--rap-blue);display:grid;place-items:center;
-}
-.lockup__mark svg{display:block}
-.lockup__name{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:-.01em;line-height:1.1;color:var(--rap-ink);white-space:nowrap}
-.lockup__tag{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:2px}
-.nav{display:flex;align-items:center;gap:28px}
-.nav a{
-  text-decoration:none;font-size:15px;font-weight:500;color:var(--rap-ink);
-  padding:8px 0;border-bottom:2px solid transparent;white-space:nowrap;
-}
-.nav a:hover{border-bottom-color:var(--rap-ember)}
-.nav__drop{position:relative}
-.nav__drop>.nav__progs{
-  background:none;border:0;padding:8px 0;font-size:15px;font-weight:500;color:var(--rap-ink);
-  display:inline-flex;align-items:center;gap:6px;border-bottom:2px solid transparent;text-decoration:none;
-}
-.nav__drop:hover>.nav__progs,.nav__drop:focus-within>.nav__progs{border-bottom-color:var(--rap-ember)}
-.nav__panel{
-  position:absolute;top:calc(100% + 10px);left:-20px;min-width:330px;background:#fff;
-  border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);padding:8px;
-  box-shadow:0 8px 24px rgba(12,23,42,.08);opacity:0;visibility:hidden;transition:opacity .12s;
-}
-.nav__panel::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
-.nav__drop:hover .nav__panel,.nav__drop:focus-within .nav__panel{opacity:1;visibility:visible}
-.nav__panel a{display:block;padding:12px 14px;border-bottom:0;border-radius:var(--radius-sm)}
-.nav__panel a:hover{background:var(--rap-mist)}
-.nav__panel b{display:block;font-weight:600;font-size:15px}
-.nav__panel span{display:block;font-size:13px;color:var(--rap-slate-500);margin-top:2px}
-.hdr__cta{flex-shrink:0}
-.burger{display:none;background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:46px;height:46px;place-items:center}
-.burger span{display:block;width:18px;height:2px;background:var(--rap-ink);box-shadow:0 -6px 0 var(--rap-ink),0 6px 0 var(--rap-ink)}
-#navtoggle{position:absolute;opacity:0;pointer-events:none}
-
-/* mobile drawer */
-.drawer{
-  position:fixed;inset:0;z-index:80;background:var(--rap-ink);color:#fff;
-  padding:0;display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
-}
-.drawer a{text-decoration:none;color:#fff}
-.drawer__top{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);flex-shrink:0;padding:var(--s-6) var(--s-5) var(--s-5)}
-.drawer__close{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;width:46px;height:46px;border-radius:var(--radius-sm);font-size:20px;line-height:1;flex-shrink:0}
-/* R4 — 22px serif primary rows; Programs / Market Intel are native <details> accordions, collapsed by default */
-.drawer__nav{flex-shrink:0;padding:0 var(--s-5)}
-.drawer__nav > a,.drawer__acc > summary{
-  display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);
-  font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.2;
-  color:#fff;padding:14px 0;min-height:52px;
-}
-.drawer__acc > summary{cursor:pointer;list-style:none}
-.drawer__acc > summary::-webkit-details-marker{display:none}
-.drawer__acc > summary::after{
-  content:"";flex-shrink:0;width:9px;height:9px;margin-right:4px;
-  border-right:1.5px solid rgba(255,255,255,.6);border-bottom:1.5px solid rgba(255,255,255,.6);
-  transform:translateY(-3px) rotate(45deg);transition:transform .18s ease;
-}
-.drawer__acc[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
-.drawer__sub{padding-left:var(--s-4);border-left:1px solid var(--rap-ink-700);margin:var(--s-1) 0 var(--s-3)}
-.drawer__sub a{display:block;font-family:var(--sans);font-size:16px;font-weight:500;line-height:1.35;padding:12px 0;color:rgba(255,255,255,.8)}
-/* R4 — customers cluster sits BELOW the primary nav, under a hairline */
-.drawer__util{flex-shrink:0;margin-top:var(--s-5);padding:var(--s-5) var(--s-5) var(--s-3);border-top:1px solid var(--rap-ink-700);display:grid}
-.drawer__util a{display:block;font-family:var(--sans);font-size:15px;font-weight:500;line-height:1.4;letter-spacing:normal;text-transform:none;padding:12px 0;color:rgba(255,255,255,.88)}
-.drawer__utillabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-slate-500);margin-bottom:var(--s-2)}
-/* R4 — CTA pinned to the drawer's bottom edge: sticky + in-flow, ink ground so rows slide beneath it */
-.drawer__cta{position:sticky;bottom:0;flex-shrink:0;margin-top:auto;padding:var(--s-4) var(--s-5) var(--s-5);background:var(--rap-ink);box-shadow:0 -14px 18px -6px var(--rap-ink)}
-.drawer__cta .btn{width:100%;justify-content:center}
-#navtoggle:checked ~ .drawer{display:flex}
-
-/* ---------- 02 hero ---------- */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-9);align-items:center}
-.hero__fig{border:1px solid var(--rap-slate-200);background:#fff;border-radius:var(--radius-md);padding:var(--s-6)}
-.figcap{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--rap-slate-200);font-size:13px;color:var(--rap-slate-700)}
-.figcap b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-ember-700);display:block;margin-bottom:4px}
-
-/* ---------- GM comparison figure — shared HTML pattern (home + gate) ----------
-   DECISION 045 (audit H1/E1). Replaces the 520x350 SVG whose labels scaled with
-   the container (5.3-6.9px at 390px). Same reason the .rev cost bar is HTML:
-   geometry scales, type does not. Every label below is a real pixel size and
-   never drops under 12px. Bar LENGTH carries the comparison — one scale for both
-   columns ($480 vs $180 = 100% vs 37.5%) — and the bars are aria-hidden
-   decoration; the numerals are real text. */
-.gmf{--gmf-h:clamp(156px,25vw,222px)}
-.gmf__kick{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
-.gmf__cols{display:grid;grid-template-columns:1fr 3px 1fr;gap:var(--s-5);align-items:end;margin-top:var(--s-5)}
-.gmf__rule{align-self:stretch;background:var(--rap-slate-300)}
-.gmf__col{min-width:0}
-.gmf__name{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ink)}
-.gmf__f{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--rap-slate-500);line-height:1.4}
-.gmf__plot{position:relative;height:var(--gmf-h);margin-top:var(--s-5);border-bottom:1px solid var(--rap-slate-300)}
-.gmf__bar{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);background:var(--c,var(--rap-brass))}
-.gmf__lbl{position:absolute;left:0;right:0;bottom:0;height:var(--h,100%);display:flex;flex-direction:column;justify-content:space-between;gap:6px;padding:10px 6px;min-width:0}
-.gmf__val{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,36px);line-height:1;letter-spacing:-.01em;text-align:center;color:var(--rap-cream);overflow-wrap:anywhere}
-.gmf__cap{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--rap-cream);line-height:1.2}
-/* Short bar — the numeral parks above the bar top in ink, as the SVG did. */
-.gmf__lbl--valout{justify-content:flex-end}
-.gmf__lbl--valout .gmf__val{position:absolute;left:0;right:0;bottom:100%;margin-bottom:8px;color:var(--rap-ink)}
-/* Very short bar — caption and numeral both stack above it. */
-.gmf__lbl--allout{height:auto;bottom:var(--h,100%);margin-bottom:8px;flex-direction:column-reverse;padding:0}
-.gmf__lbl--allout .gmf__val{color:var(--rap-ink)}
-.gmf__lbl--allout .gmf__cap{color:var(--rap-slate-500)}
-.gmf__foot{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-3);line-height:1.4}
-@media (max-width:680px){
-  .hero__fig{padding:var(--s-4)}
-  .gmf__cols{gap:var(--s-4)}
-  .gmf__lbl{padding:8px 4px}
-}
-
-/* ---------- 02b orientation strip (R2) — a directory object, not a pitch ---------- */
-.orient{margin-top:var(--s-7);border-top:2px solid var(--rap-ink);padding-top:var(--s-5)}
-.orient__claim{font-family:var(--serif);font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--s-3)}
-.orient__desc{font-size:17px;line-height:1.55;color:var(--rap-slate-700);max-width:92ch;text-wrap:balance}
-.orient__progs{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  margin-top:var(--s-5);border-top:1px solid var(--rap-slate-200);
-}
-.orient__prog{
-  padding:var(--s-4) var(--s-5) var(--s-4) 0;border-right:1px solid var(--rap-slate-200);
-  display:flex;flex-direction:column;gap:6px;
-}
-.orient__prog:first-child{padding-left:0}
-.orient__prog:not(:first-child){padding-left:var(--s-5)}
-.orient__prog:last-child{border-right:0}
-.orient__k{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-slate-500)}
-.orient__n{font-weight:600;font-size:15px;line-height:1.3}
-.orient__d{font-size:14px;color:var(--rap-slate-700);flex:1}
-.orient__prog .qlink{font-size:13px;align-self:flex-start}
-/* .orient__note and the two-axis matrix styles were removed with the axes fold —
-   that content now lives on programs.html. */
-
-/* ---------- 02b trust strip (R10) ---------- */
-.trust{background:var(--rap-paper);border-top:1px solid var(--rap-slate-200);border-bottom:1px solid var(--rap-slate-200);padding:var(--s-6) 0}
-/* One compact line per credential — the 10px mono kickers were dropped, so the
-   strip is a single row of hairline-separated labels rather than a two-tier
-   block. Items are content-sized (not 1fr tracks): "All Furniture Categories"
-   is 3x the width of "15+ Years", and equal tracks would either clip the long
-   label or leave the short one stranded. Flex-wrap is a safety net only —
-   at 18px the five labels + separators measure ~856px against ~1005px of
-   content at the narrowest desktop width, so the row does not wrap here. */
-.trust__row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;column-gap:var(--s-4);row-gap:var(--s-3)}
-.trust__i{border-left:1px solid var(--rap-slate-200);padding-left:var(--s-4)}
-.trust__i:first-child{border-left:0;padding-left:0}
-.trust__v{font-family:var(--serif);font-size:clamp(17px,1.6vw,20px);font-weight:500;line-height:1.3}
-/* .62em of 18px would fall below the 12px floor, so the stars ride at .72em
-   (~13px). nowrap keeps the five glyphs together; the label itself may wrap. */
-.trust__stars{font-size:.72em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:1px;white-space:nowrap}
-
-
-/* ---------- 04 revenue structure: where the dollar goes ----------
-   Replaces the converging-costs SVG. Built in HTML/flex rather than SVG on
-   purpose: SVG text scales with the viewBox, so in-bar percentages would fall
-   to ~5px at phone width. In flex the bar keeps its exact proportions at every
-   width while the type stays at its real size, and the labels can be dropped
-   or re-flowed per breakpoint.
-
-   Every row below (heads, rule, bar) shares the same 91.5 / 8.5 split, so the
-   headline numerals sit over the span of bar they describe.
-
-   Segment colors are tokens only, alternating the blue and slate families so
-   no two neighbours share a tone; the 2px gaps let the ink ground through as
-   the separator. The 8.5% remainder is the one brass element — per the design
-   system, brass (6.53:1 on ink) is THE accent on ink grounds; ember is display
-   only there (4.16:1) so it is used for no text in this figure. */
-.rev{margin:var(--s-7) 0 0;text-align:left}
-.rev__heads{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-5)}
-.rev__head--acc{text-align:right}
-.rev__num{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.4vw,58px);line-height:1;letter-spacing:-.02em;color:#fff}
-.rev__num--acc{color:var(--rap-brass)}
-.rev__cap{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:var(--s-3)}
-.rev__cap--acc{color:var(--rap-brass)}
-
-/* Ticked hairlines tying each headline to its span of the bar. */
-.rev__rule{display:flex;gap:2px;margin-top:var(--s-4)}
-.rev__rule span{position:relative;height:10px;border-top:1px solid rgba(255,255,255,.28)}
-.rev__rule span::before,.rev__rule span::after{content:"";position:absolute;top:0;width:1px;height:10px;background:rgba(255,255,255,.28)}
-.rev__rule span::before{left:0}
-.rev__rule span::after{right:0}
-.rev__rule .rev__rule--acc{border-top-color:var(--rap-brass)}
-.rev__rule .rev__rule--acc::before,.rev__rule .rev__rule--acc::after{background:var(--rap-brass)}
-
-/* The bar. flex-grow carries the percentage, so the geometry is the data. */
-.rev__bar{display:flex;gap:2px;height:62px;margin-top:2px}
-.rev__seg{display:flex;align-items:center;justify-content:center;flex-basis:0;min-width:0;overflow:hidden;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;border-radius:1px;
-  transition:flex-grow .25s ease}
-@media (prefers-reduced-motion:reduce){.rev__seg{transition:none}}
-.rev__seg--acc{background:var(--rap-brass);color:var(--rap-ink);font-weight:600}
-
-/* Legend. Carries every segment name; at desktop the bar shows percentages
-   too, below 900px the bar goes label-free and this becomes the only reading. */
-.rev__key{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--s-3) var(--s-5);
-  margin-top:var(--s-6);padding:0;list-style:none}
-.rev__item{display:flex;align-items:baseline;gap:10px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);
-  border-top:1px solid var(--rap-ink-700);padding-top:10px}
-.rev__chip{flex:0 0 10px;width:10px;height:10px;border-radius:1px;transform:translateY(-1px)}
-.rev__name{flex:1;min-width:0}
-.rev__pct{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
-.rev__item--acc{color:var(--rap-brass);border-top-color:var(--rap-brass)}
-.rev__item--acc .rev__pct{color:var(--rap-brass)}
-/* ---------- attachment-rate control under the revenue bar ----------
-   Ink-ground twin of the economics-gate .rng: identical geometry (44px hit
-   area over a 4px visual track, 18px thumb) with the palette swapped to the
-   ink section's own — brass is THE accent on ink, ember is display-only there.
-   The compact numeric twin is what makes a 60-step range landable on a phone,
-   and its 16px type keeps iOS from zooming on focus.
-   Both the WebKit and Gecko pseudo-elements are written out separately; they
-   cannot be combined into one selector list, one bad selector drops the rule. */
-.atr{margin-top:var(--s-4);text-align:left}
-.atr__head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-4)}
-.atr__lab{font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;
-  color:rgba(255,255,255,.72)}
-.atr__val{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.06em;
-  font-variant-numeric:tabular-nums;color:var(--rap-brass)}
-.atr__row{display:flex;align-items:center;gap:var(--s-3);margin-top:2px}
-.atr__row .rng{flex:1 1 auto;min-width:0}
-.rng{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;padding:0;background:transparent}
-.rng:focus{outline:none}
-.rng::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:rgba(255,255,255,.28)}
-.rng::-moz-range-track{height:4px;border-radius:2px;background:rgba(255,255,255,.28)}
-.rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-7px;
-  border-radius:50%;background:var(--rap-brass);border:1px solid var(--rap-brass);cursor:pointer}
-.rng::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
-  background:var(--rap-brass);border:1px solid var(--rap-brass);cursor:pointer}
-.rng:hover::-webkit-slider-thumb{background:#fff;border-color:#fff}
-.rng:hover::-moz-range-thumb{background:#fff;border-color:#fff}
-.rng:active::-webkit-slider-thumb{background:#fff;border-color:#fff}
-.rng:active::-moz-range-thumb{background:#fff;border-color:#fff}
-.rng:focus-visible::-webkit-slider-thumb{outline:2px solid #fff;outline-offset:2px}
-.rng:focus-visible::-moz-range-thumb{outline:2px solid #fff;outline-offset:2px}
-.num{flex:0 0 auto;width:5ch;height:44px;padding:0 4px;border:1px solid rgba(255,255,255,.38);
-  border-radius:var(--radius-sm);background:transparent;color:#fff;font-family:var(--mono);font-size:16px;
-  font-variant-numeric:tabular-nums;text-align:center;-moz-appearance:textfield;appearance:textfield}
-.num:focus-visible{outline:2px solid #fff;outline-offset:1px}
-.num::-webkit-outer-spin-button,.num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.atr__out{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s-2) var(--s-5);margin-top:var(--s-4)}
-.atr__o{display:flex;align-items:baseline;gap:8px;margin:0;font-family:var(--mono);font-size:12px;
-  letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.62);font-variant-numeric:tabular-nums}
-.atr__o i{font-style:normal;color:rgba(255,255,255,.45)}
-.atr__o b{color:#fff;font-weight:600}
-.atr__o--acc{color:var(--rap-brass)}
-.atr__o--acc b{color:var(--rap-brass)}
-.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);
-  white-space:nowrap;border:0}
-
-
-/* ---------- 06 changed customer ---------- */
-/* Plain stacked text, no cards: two pain points side by side, then the solution
-   block full width under a hairline as the section's landing point. */
-.cust__pains{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6) var(--s-7);
-  max-width:900px;margin:var(--s-7) auto 0;text-align:left}
-.cust__lead{margin:0 0 var(--s-2);font-weight:600;font-size:17px;line-height:1.35;color:var(--rap-ink)}
-.cust__body{margin:0;font-size:15px;line-height:1.6;color:var(--rap-slate-700)}
-.cust__sol{max-width:900px;margin:var(--s-7) auto 0;padding-top:var(--s-6);
-  border-top:1px solid var(--rap-slate-200);text-align:center}
-.cust__sol .cust__lead{font-size:19px}
-.cust__sol .cust__body{max-width:70ch;margin-left:auto;margin-right:auto}
-/* The arrow link keeps its 14px underline look; the pseudo-element lifts the
-   effective tap target to 44px without padding the underline away from the text. */
-.cust__cta{margin:var(--s-5) 0 0}
-.cust__cta .qlink{position:relative}
-.cust__cta .qlink::after{content:"";position:absolute;left:0;right:0;top:50%;
-  transform:translateY(-50%);height:44px}
-
-
-/* ---------- 08 profit calculator ---------- */
-/* Single centred lead-gen column. The illustrative chart, the preview panel and
-   their styles were removed with the markup; .figcap survives on the hero figure. */
-.econ{max-width:750px;margin:0 auto}
-.econ .lead{max-width:52ch}
-.econ .btns{justify-content:center;margin-top:var(--s-6)}
-.econ__note{margin-top:var(--s-5);font-family:var(--mono);font-size:12px;
-  letter-spacing:.06em;color:var(--rap-slate-500)}
-
-/* ---------- 09 newswire ---------- */
-
-/* ---------- 10 research ---------- */
-/* Research section styles (.research, .cover*, .figs, .fig*) removed with the
-   section — that content now lives on research.html. */
-
-/* ---------- 11b directory band ---------- */
-/* Slim wayfinding strip: four peers, whole card clickable, no imagery. */
-.dir{padding:var(--s-7) 0}
-.dir__row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4)}
-.dir__card{
-  display:grid;grid-template-columns:1fr auto;align-items:end;gap:var(--s-3);
-  background:#fff;border:1px solid var(--rap-slate-200);border-top:2px solid var(--rap-ink);
-  border-radius:var(--radius-md);padding:var(--s-5);text-decoration:none;color:var(--rap-ink);
-  transition:border-color .12s,background .12s;min-height:104px;
-}
-.dir__card:hover{border-color:var(--rap-ink);background:var(--rap-mist)}
-.dir__card:hover .dir__a{color:var(--rap-ember-700);transform:translateX(2px)}
-.dir__k{
-  grid-column:1/-1;font-family:var(--mono);font-size:10px;letter-spacing:.10em;
-  text-transform:uppercase;color:var(--rap-slate-500);
-}
-.dir__n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-.01em}
-.dir__a{color:var(--rap-slate-300);font-size:18px;line-height:1;transition:color .12s,transform .12s}
-
-/* ---------- 11 why rap — closing proof ---------- */
-/* Separator dots trail their item rather than leading the next one, so a wrap
-   ends a line with a dot instead of starting one with it. The dot travels with
-   the item, so the widest wrap unit is "4.5 ★★★★☆ Google Rating ·" (~205px at
-   390px width) against ~342px of content — the row never overflows, it wraps. */
-.wproof{list-style:none;margin:var(--s-5) 0 0;padding:0;display:flex;flex-wrap:wrap;
-  align-items:baseline;justify-content:center;column-gap:var(--s-4);row-gap:var(--s-2)}
-.wproof li{font-family:var(--serif);font-size:clamp(15px,1.4vw,17px);font-weight:500;line-height:1.4}
-.wproof li:not(:last-child)::after{content:"\00B7";margin-left:var(--s-4);color:var(--rap-slate-300)}
-/* U+200A is a breakable space, so the numeral + stars are held together. */
-.wproof__n{white-space:nowrap}
-/* .8em of the 15px floor lands exactly on 12px; nowrap keeps the five glyphs
-   together the way the top strip does. */
-.wproof__stars{font-size:.8em;letter-spacing:.06em;color:var(--rap-brass);font-family:var(--sans);vertical-align:1px;white-space:nowrap}
-/* Same plain-block idiom as .cust__pains — no cards, bold lead over one line. */
-.wproof__pts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6) var(--s-7);
-  max-width:900px;margin:var(--s-7) auto 0;text-align:left}
-.wproof__lead{margin:0 0 var(--s-2);font-weight:600;font-size:17px;line-height:1.35;color:var(--rap-ink)}
-.wproof__body{margin:0;font-size:15px;line-height:1.6;color:var(--rap-slate-700)}
-
-/* ---------- 12/13 ---------- */
-.final .btns{justify-content:center}
-
-/* ---------- contact block, inside the footer region (R6) ---------- */
-.contact{padding-bottom:var(--s-8);margin-bottom:var(--s-8);border-bottom:1px solid var(--rap-ink-700)}
-.contact__grid{display:grid;grid-template-columns:5fr 7fr;gap:var(--s-8);align-items:start;margin-top:var(--s-5)}
-.contact__routes{display:grid;gap:var(--s-3)}
-.contact__route{
-  display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
-  border:1px solid var(--rap-ink-700);border-radius:var(--radius-sm);padding:14px 16px;
-  text-decoration:none;color:#fff;transition:border-color .12s,background .12s;
-}
-.contact__route:hover{border-color:var(--rap-brass);background:rgba(193,149,65,.08)}
-.contact__route b{display:block;font-size:15px;font-weight:600}
-.contact__route span{display:block;font-size:13px;color:rgba(255,255,255,.6);margin-top:2px}
-.contact__route i{font-style:normal;color:var(--rap-brass)}
-/* The three routes are buttons now — they open the inline form instead of
-   navigating. Strip the UA button chrome so they render as the anchors did. */
-button.contact__route{width:100%;text-align:left;background:transparent;font:inherit;cursor:pointer}
-/* .pf was authored for the white support panel; on the ink footer labels invert. */
-.contact .pf__f label{color:#fff}
-.btn--sm{padding:10px 18px;font-size:14px;min-height:40px}
-.contact__det{display:grid;gap:var(--s-4)}
-.contact__det div{border-top:1px solid var(--rap-ink-700);padding-top:var(--s-3)}
-.contact__det dt{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass)}
-.contact__det dd{font-size:20px;margin-top:6px}
-.contact__det dd a{text-decoration:none}
-.pending-owner{
-  display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--rap-slate-500);border:1px dashed var(--rap-ink-700);border-radius:var(--radius-sm);padding:4px 8px;
-}
-.foot__brand{margin-bottom:var(--s-8)}
-.foot__cols{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-6)}
-.foot__h{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-brass);margin-bottom:var(--s-4)}
-.foot__cols a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:6px 0}
-.foot__cols a:hover{color:#fff}
-.foot__legal{margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--rap-ink-700);display:flex;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap}
-.foot__legal,.foot__legal a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none}
-.foot__acc{display:none}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width:1100px){
-  :root{--margin:32px}
-  .hero{gap:var(--s-7)}
-  .dir__row{grid-template-columns:1fr 1fr}
-  .nav{gap:20px}
-  .nav a,.nav__drop>.nav__progs{font-size:14px}
-}
-@media (max-width:1024px){
-  .nav{display:none}
-  .burger{display:grid}
-  .hdr__inner{min-height:64px;gap:var(--s-4)}
-  /* R9.2 — the single primary conversion verb stays visible on tablet and phone.
-     The condensed-header utility cluster stands down here; the slim utility
-     strip (R3a) already carries File a Claim + Dealer Login persistently. */
-  .hdr__cta{display:inline-flex;padding:11px 16px;font-size:13px;min-height:42px}
-  .hdr.is-condensed .hdr__util{display:none}
-  /* Tablet: two columns, with the fifth (longest) label spanning the full
-     width rather than sitting alone in column 1. That kills the ragged 3+2
-     shape the old five-across grid produced here. Odd children are column 1,
-     so they lose the hairline; the rule survives on column 2 only. */
-  .trust__row{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s-5);row-gap:var(--s-4)}
-  .trust__i:nth-child(odd){border-left:0;padding-left:0}
-  .trust__i:last-child{grid-column:1/-1}
-  .foot__cols{grid-template-columns:1fr 1fr 1fr}
-}
-/* A one-decimal percentage in 11px mono runs ~29-34px wide. Below ~1000px the
-   smallest segment drops under 40px, leaving no clearance, so every in-bar
-   percentage goes at once — a bar labelled only where the label happens to fit
-   reads as a bug. The legend carries the numbers from here down; the bar keeps
-   its exact proportions and stays the picture. */
-@media (max-width:1000px){
-  .rev__seg{font-size:0}
-  .rev__bar{height:52px}
-}
-@media (max-width:860px){
-  :root{--margin:24px}
-  .sec{padding:var(--s-8) 0}
-  .sec--ink{padding:var(--s-9) 0}
-  .hero{grid-template-columns:1fr}
-  .hero__fig{order:2}
-  .cust__pains{gap:var(--s-6) var(--s-5)}
-  /* Tablet: three tracks of ~195px. "Administration" (~130px) is the longest
-     unbreakable word, so the leads wrap to two lines rather than overflow. */
-  .wproof__pts{gap:var(--s-6) var(--s-5)}
-  .contact__grid{grid-template-columns:1fr;gap:var(--s-6)}
-  .orient__progs{grid-template-columns:1fr}
-  .orient__prog{border-right:0;border-bottom:1px solid var(--rap-slate-200);padding-left:0!important;padding-right:0}
-  .orient__prog:last-child{border-bottom:0}
-}
-@media (max-width:680px){
-  /* R3(a) — slim utility strip survives on mobile: File a Claim + Dealer Login only */
-  .utility__inner{min-height:32px}
-  .utility a{font-size:12px}
-  .utility__label,.utility__secondary{display:none}
-  .utility__login{padding:4px 8px}
-  /* R9.2 — make room for the CTA without dropping the corporate wordmark:
-     the mark shrinks, the tagline hides, and the name wraps to two lines. */
-  .hdr__inner{gap:10px}
-  .lockup{min-width:0;flex-shrink:1}
-  .lockup__mark{width:30px;height:30px;flex:0 0 30px}
-  .lockup__name{font-size:14px;white-space:normal;line-height:1.15}
-  .lockup__tag{display:none}
-  .hdr__cta{padding:10px 12px;font-size:12px;min-height:44px;gap:6px}
-  .burger{width:42px;height:42px;flex:0 0 42px}
-  /* Phone: one label per row. Two columns would give ~163px tracks at 390px,
-     which "A-Rated Underwriting" (~177px) and "All Furniture Categories"
-     (~193px) overrun; single column gives them the full ~342px. */
-  .trust__row{grid-template-columns:1fr;row-gap:var(--s-3)}
-  .trust__i{border-left:0;padding-left:0}
-  /* Phone: the two headline numerals stack rather than sit at opposite ends of
-     a ~310px row, and the right-hand block flips back to left alignment so both
-     read off the same margin. The rule + bar keep the live split. */
-  .rev__heads{flex-direction:column;align-items:stretch;gap:var(--s-5)}
-  .rev__head--acc{text-align:left}
-  .rev__key{grid-template-columns:1fr;gap:0}
-  .rev__item{padding:10px 0}
-  .rev__bar{height:44px}
-  /* Phone: the control keeps the full column and the three readouts stack, so
-     nothing sets a floor wider than the ~342px of content. */
-  .atr__out{flex-direction:column;gap:var(--s-2)}
-  .atr__head{gap:var(--s-3)}
-  /* Phone: the strip keeps its 15px type (the stars ride on it and must clear
-     12px) and tightens the separator gaps instead, so the four labels land in
-     two lines at 390px rather than three. */
-  .wproof{column-gap:var(--s-2)}
-  .wproof li:not(:last-child)::after{margin-left:var(--s-2)}
-  .wproof__pts{grid-template-columns:1fr;gap:var(--s-6)}
-  .dir__row{grid-template-columns:1fr;gap:var(--s-3)}
-  .dir__card{min-height:0}
-  .cust__pains{grid-template-columns:1fr;gap:var(--s-6)}
-  .btns .btn{width:100%;justify-content:center}
-  .foot__cols{display:none}
-  .foot__acc{display:block}
-  .foot__acc details{border-bottom:1px solid var(--rap-ink-700)}
-  .foot__acc summary{
-    font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
-    color:var(--rap-brass);padding:16px 0;cursor:pointer;
-  }
-  .foot__acc a{display:block;font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;padding:8px 0 8px 16px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-}
-/* ---------- customer support popup + chat (DECISION 042) ----------
-   Static prototype states — local demo only, no transport.
-   Shared block, byte-identical on every page. */
-.sup{position:fixed;inset:0;z-index:200;display:none;overflow-y:auto}
-.sup.is-open{display:block}
-.sup__scrim{position:fixed;inset:0;background:rgba(12,23,42,.6)}
-.sup__panel{
-  position:relative;width:min(540px,calc(100% - 32px));margin:7vh auto;background:#fff;
-  border-radius:var(--radius-md);border-top:3px solid var(--rap-ember);
-  box-shadow:0 24px 60px rgba(12,23,42,.28);
-}
-.sup__head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4);padding:var(--s-6) var(--s-6) 0}
-.sup__t{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1}
-.sup__x{background:none;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);width:38px;height:38px;flex:0 0 38px;font-size:18px;line-height:1;color:var(--rap-slate-700)}
-.sup__x:hover{background:var(--rap-ink);border-color:var(--rap-ink);color:#fff}
-.sup__body{padding:var(--s-5) var(--s-6) var(--s-6)}
-.sup__hours{display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap;padding-bottom:var(--s-5);border-bottom:1px solid var(--rap-slate-200)}
-.sup__hrs{font-family:var(--mono);font-size:12px;color:var(--rap-slate-700)}
-.hchip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:var(--radius-sm);padding:4px 9px;border:1px solid}
-.hchip--open{color:var(--rap-up);border-color:rgba(30,111,80,.4);background:rgba(30,111,80,.07)}
-.hchip--closed{color:var(--rap-slate-500);border-color:var(--rap-slate-300);background:var(--rap-mist)}
-.hchip__dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 7px}
-.sup__steer{font-size:15px;color:var(--rap-slate-700);margin-top:var(--s-5)}
-.sup__acts{display:grid;gap:var(--s-3);margin-top:var(--s-4)}
-.sup__acts .btn{width:100%;justify-content:center}
-.sup__phone{margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--rap-slate-200)}
-.sup__phk{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-slate-500)}
-.sup__phv{font-family:var(--serif);font-size:26px;font-weight:500;text-decoration:none;color:var(--rap-ink);display:inline-block;margin-top:2px}
-.sup__phv:hover{color:var(--rap-ember-700)}
-.sup__note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);margin-top:var(--s-4)}
-.sup__view{display:none}
-.sup__view.is-active{display:block}
-.sup__back{background:none;border:0;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-4)}
-.pf{display:grid;gap:var(--s-4)}
-.pf__f{display:flex;flex-direction:column;gap:6px}
-.pf__f label{font-weight:600;font-size:13px}
-.pf__f label i{color:var(--rap-ember-700);font-style:normal}
-.pf__f input,.pf__f textarea{border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);padding:0 12px;height:46px;font-family:var(--sans);font-size:16px;color:var(--rap-ink);background:#fff}
-.pf__f textarea{height:auto;padding:12px;min-height:76px;resize:vertical}
-.pf__f input:focus,.pf__f textarea:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
-.pf__hint{font-family:var(--mono);font-size:11px;color:var(--rap-slate-500)}
-.pf__err{display:none;color:var(--rap-down);font-size:13px;font-weight:500;gap:6px;align-items:flex-start}
-.pf__err.is-on{display:flex}
-.chat{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:210;display:none}
-.chat.is-open{display:block}
-.chat__panel{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;box-shadow:-16px 0 48px rgba(12,23,42,.18);border-left:1px solid var(--rap-slate-200)}
-.chat__head{background:var(--rap-ink);color:#fff;padding:var(--s-5);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4)}
-.chat__who{font-weight:600;font-size:16px}
-.chat__st{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rap-brass);margin-top:5px;display:flex;align-items:center;gap:7px}
-.chat__x{background:none;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius-sm);color:#fff;width:34px;height:34px;flex:0 0 34px;font-size:16px;line-height:1}
-.chat__x:hover{background:#fff;color:var(--rap-ink)}
-.chat__log{flex:1;overflow-y:auto;padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4);background:var(--rap-mist)}
-.msg{max-width:84%;padding:11px 14px;border-radius:var(--radius-md);font-size:15px;line-height:1.45}
-.msg--agent{background:#fff;border:1px solid var(--rap-slate-200);align-self:flex-start}
-.msg--cust{background:var(--rap-ink);color:#fff;align-self:flex-end}
-.msg--sys{align-self:center;background:none;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rap-slate-500);text-align:center}
-.msg__m{font-family:var(--mono);font-size:10px;letter-spacing:.06em;opacity:.6;margin-top:5px}
-.chat__form{border-top:1px solid var(--rap-slate-200);padding:var(--s-4);display:flex;gap:var(--s-3);background:#fff}
-.chat__in{flex:1;border:1px solid var(--rap-slate-300);border-radius:var(--radius-sm);height:46px;padding:0 12px;font-family:var(--sans);font-size:16px}
-.chat__in:focus{outline:none;border-color:var(--rap-blue-600);box-shadow:0 0 0 3px rgba(46,90,150,.18)}
-.chat__send{background:var(--rap-ember-700);color:#fff;border:0;border-radius:var(--radius-sm);padding:0 18px;font-weight:600;font-size:14px}
-.chat__send:hover{background:#8E3B0C}
-.chat__off{padding:var(--s-5);overflow-y:auto;flex:1}
-.typing{display:inline-flex;gap:3px;align-items:center}
-.typing i{width:5px;height:5px;border-radius:50%;background:var(--rap-brass);animation:blink 1.2s infinite}
-.typing i:nth-child(2){animation-delay:.2s}
-.typing i:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
-@media (max-width:560px){
-  .sup__panel{margin:0;width:100%;min-height:100vh;border-radius:0;border-top:0}
-  .sup__head{padding-top:var(--s-5)}
-}
-@media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.6}}
-@media print{.hdr,.drawer,.sup,.chat{display:none}}
-
-/* ---------- customers page ---------- */
-.cs-hero{max-width:60ch}
-.cs-hero .lead{max-width:54ch}
-.cs-hours{margin-top:var(--s-5);font-size:15px;color:var(--rap-slate-700)}
-.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);margin-top:var(--s-7)}
-.cs-card{border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:var(--rap-paper);padding:var(--s-6);display:flex;flex-direction:column;gap:var(--s-3)}
-.cs-card__k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-ember-700)}
-.cs-card__h{font-family:var(--serif);font-weight:500;font-size:var(--fs-h3);line-height:1.2}
-.cs-card__b{font-size:15px;line-height:1.55;color:var(--rap-slate-700)}
-.cs-two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-7) var(--s-8);margin-top:var(--s-7)}
-.cs-two h3{font-family:var(--serif);font-weight:500;font-size:var(--fs-h3);line-height:1.2;margin-bottom:var(--s-4)}
-.cs-list{list-style:none;padding:0;margin:0;display:grid;gap:var(--s-4)}
-.cs-list li{font-size:15px;line-height:1.55;color:var(--rap-slate-700);padding-top:var(--s-4);border-top:1px solid var(--rap-slate-200)}
-.cs-list b{display:block;color:var(--rap-ink);font-weight:600;margin-bottom:2px}
-.cs-reach{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6);margin-top:var(--s-7);text-align:left}
-.cs-reach__k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-brass);margin-bottom:var(--s-2)}
-.cs-reach__v{font-family:var(--serif);font-size:var(--fs-h3);line-height:1.25;color:#fff}
-.cs-reach__v a{color:#fff}
-.cs-dealer{padding-top:var(--s-6);padding-bottom:var(--s-6);font-size:15px;color:var(--rap-slate-700)}
-@media (max-width:860px){
-  .cs-grid,.cs-reach{grid-template-columns:1fr}
-  .cs-two{grid-template-columns:1fr}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<input type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
-
-<!-- ============ 00 UTILITY BAR ============ -->
-<div class="utility">
-  <div class="wrap utility__inner">
-    <div class="utility__left">
-      <a href="https://www.5starservice.net/">File a Claim</a>
-      <a class="utility__secondary" href="customers.html">Customer Service</a>
-    </div>
-    <div class="utility__right">
-      <a class="utility__secondary" href="#contact">Contact</a>
-      <a href="https://portal.furniturerx.net/" class="utility__login">Dealer Login &rarr;</a>
-    </div>
-  </div>
-</div>
-
-<!-- ============ 01 PRIMARY HEADER ============ -->
 <header class="hdr">
-  <div class="wrap hdr__inner">
-    <a class="lockup" href="home.html">
-      <span class="lockup__mark" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
-        </svg>
-      </span>
-      <span>
-        <span class="lockup__name">Risk Assurance Partners</span>
-      </span>
-    </a>
-
+  <div class="wrap hdr__in">
+    <a class="lockup" href="index.html"><span class="lockup__mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/></svg></span><span class="lockup__name">Risk Assurance Partners</span></a>
+    <input class="navtoggle" type="checkbox" id="navtoggle" aria-hidden="true" tabindex="-1">
     <nav class="nav" aria-label="Primary">
-      <a href="home.html">Home</a>
-      <div class="nav__drop">
-        <a href="programs.html" class="nav__progs">Programs <span aria-hidden="true">▾</span></a>
-        <div class="nav__panel">
-          <a href="programs.html#subscription"><b>FurnitureRx Subscription</b><span>Recurring protection income</span></a>
-          <a href="programs.html#multi-year"><b>Multi-Year Protection</b><span>Protection income at the original sale</span></a>
-          <a href="programs.html#reinsurance"><b>Reinsurance</b><span>Underwriting and investment economics</span></a>
-          <a href="programs.html#standard"><b>Standard Programs</b><span>Protection income with RAP retaining the underwriting</span></a>
-        </div>
-      </div>
-      <a href="home.html#why">Why RAP</a>
+      <a href="index.html">For Dealers</a>
+      <a href="programs.html">Programs</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="customers.html" aria-current="page">For Customers</a>
+      <a href="https://portal.furniturerx.net/">Dealer Login</a>
     </nav>
-
-    <div class="hdr__util">
-      <a class="hdr__login" href="https://portal.furniturerx.net/">Dealer Login &rarr;</a>
+    <div class="hdr__acts">
+      <a class="btn btn--ghost btn--sm" href="tel:+18007325856">Call Us</a>
+      <a class="btn btn--primary btn--sm" href="https://www.5starservice.net/">File a Claim</a>
     </div>
-
-    <a class="btn btn--primary hdr__cta" href="customers.html">Customer Service &rarr;</a>
-    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Open menu"><span></span></label>
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-label="Menu"><span></span></label>
   </div>
 </header>
 
-<!-- mobile drawer -->
-<div class="drawer" role="dialog" aria-label="Site menu">
-  <div class="drawer__top">
-    <a class="lockup__name" style="color:#fff" href="home.html">Risk Assurance Partners</a>
-    <label class="drawer__close" for="navtoggle" role="button" tabindex="0" aria-label="Close menu">&times;</label>
-  </div>
-  <nav class="drawer__nav" aria-label="Mobile">
-    <details class="drawer__acc">
-      <summary>Programs</summary>
-      <div class="drawer__sub">
-        <a href="programs.html">All programs &rarr;</a>
-        <a href="programs.html#subscription">FurnitureRx Subscription</a>
-        <a href="programs.html#multi-year">Multi-Year Protection</a>
-        <a href="programs.html#reinsurance">Reinsurance</a>
-        <a href="programs.html#standard">Standard Programs</a>
-      </div>
-    </details>
-    <a href="home.html#why">Why RAP</a>
-  </nav>
-  <div class="drawer__util">
-    <p class="drawer__utillabel">Customers</p>
-    <a href="https://www.5starservice.net/">File a Claim</a>
-    <a href="customers.html">Customer Service</a>
-    <a href="#contact">Contact</a>
-    <a href="https://portal.furniturerx.net/" style="color:var(--rap-brass)">Dealer Login &rarr;</a>
-  </div>
-  <div class="drawer__cta"><a class="btn btn--primary" href="customers.html">Customer Service &rarr;</a></div>
-</div>
+<main>
 
-<main id="top">
-
-<!-- ============ CUSTOMER HERO ============ -->
-<section class="sec sec--first sec--mist" aria-labelledby="cs-h">
+<section class="sec sec--hero" aria-labelledby="cs-h">
   <div class="wrap">
-    <div class="cs-hero">
-      <p class="eyebrow">Customer Service</p>
-      <h1 class="d2" id="cs-h">Need service on your <span class="acc">protection plan?</span></h1>
-      <p class="lead" style="margin-top:var(--s-5)">
-        Risk Assurance Partners administers the protection plan you bought with your
-        furniture. File a claim online, or call and talk to our team.
-      </p>
-      <div class="btns">
+    <p class="eyebrow">Customer service</p>
+    <h1 class="h1" id="cs-h" style="max-width:18ch">Need service on your <span class="acc">protection plan?</span></h1>
+    <p class="lead" style="margin-top:var(--s-5)">Risk Assurance Partners administers the protection plan you bought with your furniture. File a claim online, or call and talk to our team.</p>
+    <div class="btns">
+      <a class="btn btn--primary" href="https://www.5starservice.net/">File a Claim &rarr;</a>
+      <a class="btn btn--ghost" href="tel:+18007325856">Call 1.800.732.5856</a>
+    </div>
+    <p class="body" style="margin-top:var(--s-5)">Customer service hours: 9 AM &ndash; 6 PM ET, Monday&ndash;Saturday.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="cs-how-h">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">How a claim works</p>
+      <h2 class="h2" id="cs-how-h">Three steps to get service.</h2>
+    </div>
+    <div class="grid3">
+      <div class="card"><p class="step__n">1</p><h3 class="h3">Gather your details</h3><p class="body">Have your sales receipt or plan paperwork handy, and take a few clear photos of the damage.</p></div>
+      <div class="card"><p class="step__n">2</p><h3 class="h3">File your claim</h3><p class="body">File online, or call us and we&rsquo;ll take the details by phone.</p><a class="link" href="https://www.5starservice.net/">File a claim online &rarr;</a></div>
+      <div class="card"><p class="step__n">3</p><h3 class="h3">We take it from there</h3><p class="body">Our claims team reviews your claim and contacts you with the next step.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="cs-tips-h">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">Good to know</p>
+      <h2 class="h2" id="cs-tips-h">When something happens.</h2>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3 class="h3">Report it soon</h3><p class="body">Don&rsquo;t wait &mdash; file as soon as you notice a stain or damage.</p></div>
+      <div class="card"><h3 class="h3">Blot, don&rsquo;t rub</h3><p class="body">For spills, blot gently with a clean white cloth. Rubbing can spread the stain.</p></div>
+      <div class="card"><h3 class="h3">File before you fix</h3><p class="body">Contact us before trying a repair or a cleaning product, so we can point you to the right next step.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="cs-faq-h">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h2" id="cs-faq-h">About your plan.</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>What does my plan cover?</summary><div><p class="body">Coverage depends on the plan you bought. Your plan terms list exactly what is and isn&rsquo;t covered.</p></div></details>
+      <details><summary>I bought my plan at a furniture store. Who do I contact?</summary><div><p class="body">Come straight to us. We administer the plan for your retailer, so you can file your claim here or call us.</p></div></details>
+      <details><summary>I can&rsquo;t find my paperwork.</summary><div><p class="body">Call us at 1.800.732.5856 and our team will help. Your sales receipt is the quickest way for us to find your plan.</p></div></details>
+      <details><summary>Who backs my plan?</summary><div><p class="body">Every service contract is backed by A+ underwriting from Zurich or Sentruity Casualty Company.</p></div></details>
+      <details><summary>How long does a claim take?</summary><div><p class="ph-text">Placeholder &mdash; owner to supply answer.</p></div></details>
+      <details><summary>How do I check the status of my claim?</summary><div><p class="ph-text">Placeholder &mdash; owner to supply answer.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="cs-reach-h">
+  <div class="wrap">
+    <div class="custband">
+      <div>
+        <h2 class="h3" id="cs-reach-h">Ready to file?</h2>
+        <p class="body">Online any time, or by phone 9 AM &ndash; 6 PM ET, Monday&ndash;Saturday.</p>
+      </div>
+      <div class="btns" style="margin-top:0">
         <a class="btn btn--primary" href="https://www.5starservice.net/">File a Claim &rarr;</a>
-        <a class="btn btn--secondary" href="tel:+18007325856">Call 1.800.732.5856</a>
-      </div>
-      <p class="cs-hours">Customer service hours: 9 AM &ndash; 6 PM ET, Monday&ndash;Saturday.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HOW A CLAIM WORKS ============ -->
-<section class="sec" aria-labelledby="cs-how-h" style="padding:var(--s-8) 0">
-  <div class="wrap">
-    <p class="eyebrow">How a claim works</p>
-    <h2 class="d3" id="cs-how-h">Three steps to get service.</h2>
-    <div class="cs-grid">
-      <div class="cs-card">
-        <p class="cs-card__k">Step 1</p>
-        <p class="cs-card__h">Gather your details</p>
-        <p class="cs-card__b">Have your sales receipt or plan paperwork handy, and take a few clear photos of the damage.</p>
-      </div>
-      <div class="cs-card">
-        <p class="cs-card__k">Step 2</p>
-        <p class="cs-card__h">File your claim</p>
-        <p class="cs-card__b">File online in a few minutes, or call us and we&rsquo;ll take the details by phone.</p>
-        <a class="qlink" href="https://www.5starservice.net/">File a claim online &rarr;</a>
-      </div>
-      <div class="cs-card">
-        <p class="cs-card__k">Step 3</p>
-        <p class="cs-card__h">We take it from there</p>
-        <p class="cs-card__b">Our claims team reviews your claim and contacts you with the next step.</p>
+        <a class="btn btn--ghost" href="tel:+18007325856">Call 1.800.732.5856</a>
       </div>
     </div>
+    <p class="body" style="margin-top:var(--s-6)">Are you a furniture retailer? <a class="link" href="index.html">See RAP dealer programs &rarr;</a></p>
   </div>
 </section>
-
-<!-- ============ GOOD TO KNOW ============ -->
-<section class="sec" aria-labelledby="cs-know-h" style="padding:var(--s-8) 0">
-  <div class="wrap">
-    <p class="eyebrow">Good to know</p>
-    <h2 class="d3" id="cs-know-h">Before you file.</h2>
-    <div class="cs-two">
-      <div>
-        <h3>When something happens</h3>
-        <ul class="cs-list">
-          <li><b>Report it soon</b>Don&rsquo;t wait &mdash; file as soon as you notice a stain or damage.</li>
-          <li><b>Blot, don&rsquo;t rub</b>For spills, blot gently with a clean white cloth. Rubbing can spread the stain.</li>
-          <li><b>Keep your receipt</b>Your sales receipt is the quickest way for us to find your plan.</li>
-          <li><b>File before you fix</b>Contact us before trying a repair or a cleaning product, so we can point you to the right next step.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>About your coverage</h3>
-        <ul class="cs-list">
-          <li><b>Coverage depends on your plan</b>Your plan terms list exactly what is and isn&rsquo;t covered.</li>
-          <li><b>Your plan is backed</b>Every service contract is backed by A+ underwriting from Zurich or Sentruity Casualty Company.</li>
-          <li><b>Can&rsquo;t find your paperwork?</b>Call us and our team will help.</li>
-          <li><b>Bought your plan at a furniture store?</b>You can come straight to us for service &mdash; we administer the plan for your retailer.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ REACH US ============ -->
-<section class="sec sec--ink" aria-labelledby="cs-reach-h">
-  <div class="wrap">
-    <h2 class="d3" id="cs-reach-h">Reach <span class="acc">customer service.</span></h2>
-    <div class="cs-reach">
-      <div>
-        <p class="cs-reach__k">Online</p>
-        <p class="cs-reach__v"><a href="https://www.5starservice.net/">File a claim &rarr;</a></p>
-      </div>
-      <div>
-        <p class="cs-reach__k">Phone</p>
-        <p class="cs-reach__v"><a href="tel:+18007325856">1.800.732.5856</a></p>
-      </div>
-      <div>
-        <p class="cs-reach__k">Hours</p>
-        <p class="cs-reach__v">9 AM &ndash; 6 PM ET<br>Monday&ndash;Saturday</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DEALER POINTER ============ -->
-<div class="wrap cs-dealer">
-  Are you a furniture retailer? <a class="qlink" href="home.html">See RAP dealer programs &rarr;</a>
-</div>
 
 </main>
 
-<!-- ============ 13 FOOTER ============ -->
-<footer class="sec sec--ink" style="padding:var(--s-8) 0 var(--s-7);border-top:1px solid var(--rap-ink-700)">
+<footer class="foot">
   <div class="wrap">
-
-    <!-- R6 — Contact. Lives inside the footer region (Section 13), so no fifteenth section
-         is introduced. Details are owner-approved (DECISION 027). -->
-    <div class="contact" id="contact">
-      <p class="eyebrow">Contact</p>
-      <h2 class="d3">Talk to Risk Assurance Partners.</h2>
-
-      <div class="contact__grid">
-        <div class="contact__routes">
-          <button type="button" class="contact__route" data-route="dealer" aria-controls="contact-form" aria-expanded="false">
-            <span><b>I&rsquo;m a dealer</b><span>Programs, dealer economics, and getting started</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-          <button type="button" class="contact__route" data-route="subscription" aria-controls="contact-form" aria-expanded="false">
-            <span><b>How do I start selling subscription programs</b><span>Get started with the FurnitureRx subscription program</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-          <button type="button" class="contact__route" data-route="media" aria-controls="contact-form" aria-expanded="false">
-            <span><b>Media or other</b><span>Everything else</span></span>
-            <i aria-hidden="true">&rarr;</i>
-          </button>
-
-          <!-- static prototype — Supabase lead capture wires this with source tag "contact" + route value (DEV_NOTES) -->
-          <form class="pf" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-            <input type="hidden" name="form-name" value="contact">
-            <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-            <input type="hidden" id="contact-route" name="route" value="">
-            <div class="pf__f">
-              <label for="contact-name">Name <i>*</i></label>
-              <input id="contact-name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="pf__f">
-              <label for="contact-email">Email <i>*</i></label>
-              <input id="contact-email" name="email" type="email" autocomplete="email" required pattern="[^@\s]+@[^@\s]+\.[A-Za-z]{2,}" title="Enter a valid email address.">
-            </div>
-            <div class="pf__f">
-              <label for="contact-phone">Phone <i>*</i></label>
-              <input id="contact-phone" name="phone" type="tel" autocomplete="tel" required>
-            </div>
-            <div class="pf__f">
-              <label for="contact-msg">What are you interested in? <i>*</i></label>
-              <textarea id="contact-msg" name="message" required></textarea>
-            </div>
-            <button type="submit" class="btn btn--primary btn--sm">Send &rarr;</button>
-          </form>
-          <p id="contact-done" hidden style="font-size:15px;line-height:1.55">
-            Thank you &mdash; we received your message. The RAP team will follow up.
-          </p>
-        </div>
-
-        <dl class="contact__det">
-          <div>
-            <dt>Phone</dt>
-            <dd><a href="tel:+18007325856">1.800.732.5856</a></dd>
-          </div>
-          <div>
-            <dt>Email</dt>
-            <dd><a href="mailto:sales@raptns.com">sales@raptns.com</a></dd>
-          </div>
-          <div>
-            <dt>Hours</dt>
-            <dd>8:00 AM &ndash; 6:00 PM, Monday&ndash;Friday, EST</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-
-    <a class="lockup foot__brand" href="home.html">
-      <span class="lockup__mark" style="background:#fff" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#204374" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/>
-        </svg>
-      </span>
-      <span>
-        <span class="lockup__name" style="color:#fff">Risk Assurance Partners</span>
-        <span class="lockup__tag" style="color:rgba(255,255,255,.55)">Protection Programs for Furniture Retailers &amp; Designers</span>
-      </span>
-    </a>
-
     <div class="foot__cols">
       <div>
-        <p class="foot__h">Programs</p>
-        <a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a>
+        <a class="lockup" href="index.html"><span class="lockup__mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 14 L7 4 L10 10 L13 6 L18 14" stroke="#204374" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17 H18" stroke="#C19541" stroke-width="1.6"/></svg></span><span class="lockup__name">Risk Assurance Partners</span></a>
+        <p style="margin-top:var(--s-4);max-width:34ch">Protection programs for furniture retailers and designers. Established 2012.</p>
       </div>
       <div>
-        <p class="foot__h">Company</p>
-        <a href="home.html#why">Why RAP</a><a href="#contact">Contact</a>
+        <p class="foot__h">Dealers</p>
+        <a href="programs.html">Programs</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#contact">Talk to RAP</a>
+        <a href="https://portal.furniturerx.net/">Dealer login</a>
       </div>
       <div>
-        <p class="foot__h">Customer</p>
-        <a href="https://www.5starservice.net/">File a Claim</a><a href="customers.html">Customer Service</a>
+        <p class="foot__h">Customers</p>
+        <a href="https://www.5starservice.net/">File a claim</a>
+        <a href="customers.html">Customer service</a>
       </div>
       <div>
-        <p class="foot__h">Dealer</p>
-        <a href="https://portal.furniturerx.net/">Dealer Login</a><a href="programs.html">Programs</a>
+        <p class="foot__h">Contact</p>
+        <a href="tel:+18007325856">1.800.732.5856</a>
+        <a href="mailto:sales@raptns.com">sales@raptns.com</a>
       </div>
     </div>
-
-    <div class="foot__acc">
-      <details><summary>Programs</summary><a href="programs.html#subscription">FurnitureRx</a><a href="programs.html#multi-year">Multi-Year Protection</a><a href="programs.html#reinsurance">Reinsurance</a><a href="programs.html#standard">Standard Programs</a></details>
-      <details><summary>Company</summary><a href="home.html#why">Why RAP</a><a href="#contact">Contact</a></details>
-      <details><summary>Customer</summary><a href="https://www.5starservice.net/">File a Claim</a><a href="customers.html">Customer Service</a></details>
-      <details><summary>Dealer</summary><a href="https://portal.furniturerx.net/">Dealer Login</a><a href="programs.html">Programs</a></details>
-    </div>
-
-    <div class="foot__legal">
-      <span>&copy; 2026 Risk Assurance Partners</span>
-      
-    </div>
+    <p class="foot__legal">&copy; 2026 Risk Assurance Partners</p>
   </div>
 </footer>
 
-<script>
-/* R4 — sticky header condenses past 40px: the tagline drops and the utility
-   functions (Dealer Login, plus File a Claim at >=1280px) return to the bar,
-   so they are reachable for the whole page rather than one screen. */
-(function () {
-  var hdr = document.querySelector('.hdr');
-  var ticking = false;
-  function apply() {
-    hdr.classList.toggle('is-condensed', window.scrollY > 40);
-    ticking = false;
-  }
-  window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-  }, { passive: true });
-  apply();
-})();
-
-/* Revenue bar × protection attachment rate.
-   Owner-approved arithmetic, normalised to 100 furniture sales:
-     baseline dollars  COGS 112,500 · payroll 40,500 · rent 18,000 ·
-       advertising 13,500 · freight-in 11,250 · warehouse/delivery/other 16,875 ·
-       operating profit 12,375  =  225,000 revenue
-     per attached plan  +250 revenue, +70 COGS, +50 payroll, +130 operating
-       profit (70 + 50 + 130 = 250, so the ledger always closes)
-   Rent, advertising, freight-in and warehouse/delivery/other are fixed in
-   dollars and only fall as a share. Every segment is dollars ÷ revenue, so the
-   seven percentages sum to 100 at any attachment rate. The bar's aria-label is
-   the static baseline description and is deliberately never rewritten — the
-   readout below is the live region. */
-(function () {
-  var rng = document.getElementById('atr-rng');
-  var num = document.getElementById('atr-num');
-  var bar = document.querySelector('.rev__bar');
-  if (!rng || !num || !bar) { return; }
-
-  var MIN = 0, MAX = 60;
-  var BASE = [112500, 40500, 18000, 13500, 11250, 16875, 12375];
-  var PER  = [70, 50, 0, 0, 0, 0, 130];
-  var BASE_REV = 225000, PER_REV = 250, BASE_OP = 12375;
-
-  var segs  = bar.querySelectorAll('.rev__seg');
-  var pcts  = document.querySelectorAll('.rev__key .rev__pct');
-  var rExp  = document.querySelector('[data-rev-rule-exp]');
-  var rOp   = document.querySelector('[data-rev-rule-op]');
-  var hExp  = document.querySelector('[data-rev-exp]');
-  var hOp   = document.querySelector('[data-rev-op]');
-  var val   = document.getElementById('atr-val');
-  var mgn   = document.getElementById('atr-mgn');
-  var prf   = document.getElementById('atr-prf');
-  var inc   = document.getElementById('atr-inc');
-  var live  = document.getElementById('atr-live');
-  if (segs.length !== BASE.length || pcts.length !== BASE.length) { return; }
-
-  var liveTimer = null;
-
-  /* Matches the bar's existing convention: integer when whole, else one
-     decimal — "50%", "7.5%". */
-  function pct(x) {
-    var r = Math.round(x * 10) / 10;
-    return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1)) + '%';
-  }
-  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
-  function clamp(v) {
-    if (!isFinite(v)) { return MIN; }
-    return v < MIN ? MIN : (v > MAX ? MAX : v);
-  }
-
-  function render() {
-    var plans = clamp(parseInt(rng.value, 10));
-    var rev = BASE_REV + PER_REV * plans;
-    var i, d, p, op = 0, exp = 0;
-
-    for (i = 0; i < BASE.length; i++) {
-      d = BASE[i] + PER[i] * plans;
-      p = d / rev * 100;
-      segs[i].style.flexGrow = p;
-      segs[i].textContent = pct(p);
-      pcts[i].textContent = pct(p);
-      if (i === BASE.length - 1) { op = p; } else { exp += p; }
-    }
-
-    rExp.style.flex = '0 0 calc((100% - 12px)*' + (exp / 100) + ' + 10px)';
-    hExp.textContent = pct(exp);
-    hOp.textContent = pct(op);
-
-    var opD = BASE_OP + PER[6] * plans;
-    var mgnT = (Math.round(op * 10) / 10).toFixed(1) + '%';
-    var incT = '+' + Math.round((opD / BASE_OP - 1) * 100) + '%';
-    val.textContent = plans + '%';
-    mgn.textContent = mgnT;
-    prf.textContent = money(opD);
-    inc.textContent = incT;
-    rng.setAttribute('aria-valuetext', plans + ' percent');
-
-    /* Announce once the slider settles, so dragging does not flood the queue.
-       The visible readouts above are already current at this point. */
-    if (liveTimer) { clearTimeout(liveTimer); }
-    liveTimer = setTimeout(function () {
-      live.textContent = plans + ' percent attachment rate. Operating margin ' +
-        mgnT + ', operating profit ' + money(opD) + ', ' + incT + '.';
-    }, 350);
-  }
-
-  /* Two-way sync with the numeric twin: the field is left alone while it is
-     being typed in unless the typed value is out of range; on blur an empty or
-     unparseable field falls back to the slider. */
-  rng.addEventListener('input', function () { num.value = clamp(parseInt(rng.value, 10)); render(); });
-  num.addEventListener('input', function () {
-    var raw = parseInt(num.value, 10);
-    if (!isFinite(raw)) { return; }
-    var v = clamp(raw);
-    if (v !== raw) { num.value = v; }
-    rng.value = v;
-    render();
-  });
-  num.addEventListener('blur', function () {
-    var raw = parseInt(num.value, 10);
-    var v = isFinite(raw) ? clamp(raw) : clamp(parseInt(rng.value, 10));
-    num.value = v;
-    rng.value = v;
-    render();
-  });
-
-  render();
-})();
-
-/* Drawer: close on Esc. */
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    var t = document.getElementById('navtoggle');
-    if (t && t.checked) { t.checked = false; }
-  }
-});
-</script>
-
-<script>
-/* Footer contact routes. The three route cards open one shared form and record
-   which route was chosen. Static prototype: native `required` plus an email
-   pattern and a 10–15 digit phone check; transport arrives with the Supabase
-   lead-capture package, source tag "contact". */
-(function () {
-  var form = document.getElementById('contact-form');
-  var done = document.getElementById('contact-done');
-  var route = document.getElementById('contact-route');
-  var name = document.getElementById('contact-name');
-  var phone = document.getElementById('contact-phone');
-  var btns = document.querySelectorAll('.contact__route[data-route]');
-  if (!form || !done || !route || !name || !phone || !btns.length) { return; }
-  function phoneOk(v) { var d = String(v).replace(/[^0-9]/g, ''); return d.length >= 10 && d.length <= 15; }
-  phone.addEventListener('input', function () { phone.setCustomValidity(''); });
-  Array.prototype.forEach.call(btns, function (b) {
-    b.addEventListener('click', function () {
-      route.value = b.getAttribute('data-route');
-      form.hidden = false;
-      done.hidden = true;
-      Array.prototype.forEach.call(btns, function (o) {
-        o.setAttribute('aria-expanded', o === b ? 'true' : 'false');
-      });
-      name.focus();
-    });
-  });
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!phoneOk(phone.value)) {
-      phone.setCustomValidity('Enter a valid phone number (10–15 digits).');
-      phone.reportValidity();
-      return;
-    }
-    phone.setCustomValidity('');
-    var btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    }).then(function (r) {
-      if (!r.ok) { throw new Error('send failed'); }
-      form.hidden = true;
-      done.hidden = false;
-    }).catch(function () {
-      btn.disabled = false;
-      done.textContent = 'Sorry \u2014 your message did not send. Please call 1.800.732.5856 or email sales@raptns.com.';
-      done.hidden = false;
-    });
-  });
-})();
-</script>
-
-
+<script src="assets/site.js"></script>
 </body>
 </html>

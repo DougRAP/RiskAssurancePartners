@@ -9,8 +9,8 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Site root serves the dealer home page.
+# Old home URL points at the new root page.
 [[redirects]]
-  from = "/"
-  to = "/home.html"
-  status = 200
+  from = "/home.html"
+  to = "/"
+  status = 301
