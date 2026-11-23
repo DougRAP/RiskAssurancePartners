@@ -11,32 +11,34 @@
     });
   }
 
-  /* Dealer income estimate. Illustrative constants from the approved program
-     figures: Multi-Year $180 gross margin per plan; Subscription $8 per
-     monthly payment over 60 payments ($480 per subscriber). */
+  /* Multi-Year vs Subscription over the same four years. Owner-supplied
+     illustration: $300 retail, dealer keeps 75% ($225) and remits $75;
+     70% of customers decline Multi-Year; Subscription pays the dealer $8
+     per monthly payment for 48 payments, all starting on day one. */
   var calc = document.getElementById('calc');
   if (calc) {
-    var MY_GM = 180, SUB_GM = 480;
-    var tickets = document.getElementById('c-tickets');
-    var attach = document.getElementById('c-attach');
-    var sub = document.getElementById('c-sub');
-    var usd = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+    var MY_KEEP = 225, MY_REMIT = 75, ATTACH = 0.30, SUB_PAY = 8, SUB_PAYMENTS = 48;
+    var plansEl = document.getElementById('c-plans');
+    var shareEl = document.getElementById('c-share');
+    var num = function (n) { return Math.round(n).toLocaleString('en-US'); };
+    var usd = function (n) { return '$' + num(n); };
     var set = function (id, v) { document.getElementById(id).textContent = v; };
     var render = function () {
-      var t = +tickets.value, a = +attach.value / 100, s = +sub.value / 100;
-      var plans = t * 12 * a;
-      var subs = t * 12 * (1 - a) * s;
-      var my = plans * MY_GM, sb = subs * SUB_GM;
-      set('c-tickets-o', (+tickets.value).toLocaleString('en-US'));
-      set('c-attach-o', attach.value + '%');
-      set('c-sub-o', sub.value + '%');
+      var plans = +plansEl.value, share = +shareEl.value;
+      var nos = Math.round(plans / ATTACH - plans);
+      var subs = Math.round(nos * share / 100);
+      var my = plans * MY_KEEP, sb = subs * SUB_PAY * SUB_PAYMENTS;
+      set('c-plans-o', num(plans));
+      set('c-share-o', share + '%');
+      set('c-nos', num(nos));
+      set('c-subs', num(subs));
       set('c-my', usd(my));
-      set('c-my-n', Math.round(plans).toLocaleString('en-US') + ' plans a year × $' + MY_GM);
+      set('c-remit', usd(plans * MY_REMIT));
       set('c-sb', usd(sb));
-      set('c-sb-n', Math.round(subs).toLocaleString('en-US') + ' subscribers a year × $' + SUB_GM);
       set('c-total', usd(my + sb));
+      set('c-lift', '+' + Math.round(sb / my * 100) + '% from customers who said no');
     };
-    [tickets, attach, sub].forEach(function (el) { el.addEventListener('input', render); });
+    [plansEl, shareEl].forEach(function (el) { el.addEventListener('input', render); });
     render();
   }
 

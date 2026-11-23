@@ -778,6 +778,19 @@ Owner asked for a rebuild from the ground up, with placeholders for owner-suppli
 - Lighter look: white ground, hairline section rules, cards; tokens unchanged.
 - Placeholders awaiting owner: dealer quotes and logos, three product screenshots, five dealer FAQ answers, two customer FAQ answers, coverage lists, Multi-Year remit.
 
+## Decision 059 - Photo-Led Home Redesign (2026-11-23, branch `ground-up`, pending owner merge)
+
+Owner: "there are no rules, we are free to design what we want." Supersedes the 058 look (white ground, hairline-only sections, no dark bands) on Home.
+
+- Wireframed first in `wireframes/home-wireframe.html`, then built into `prototype-ui/index.html`.
+- Order: utility bar (File a claim), header, hero (copy left; wine-to-gold photo right with "Turn common damage to gold with RAP." and five bullets), navy trust band (4.4 Google Stars, A Rated Underwriting, Millions Served, File Claims 24/7, US Based Service), two program cards with photos, Reinsurance band with photo and caption, three pain-point cards, Multi-Year vs Subscription comparison, rating chart, how it works, dealer questions with contact card, navy contact band.
+- Priorities (owner): protection programs first, then reinsurance, then plan types (Multi-Year; Subscription is new). Service and rating are supporting proof, not the lead.
+- Comparison replaces the income estimate. Owner figures: $300 retail, dealer keeps 75% ($225) on a 4-year plan; 70% decline Multi-Year; Subscription $8 per payment x 48 payments, all starting day one. Supersedes the $180 margin and 60-payment figures on Home.
+- "A-rated" replaces "A+" on Home. Programs and Customers still say "A+".
+- Owner-supplied copy: hero, trust band, both program cards, Reinsurance section. Owner-supplied photos (AI-generated), served as WebP from `prototype-ui/assets/img/`.
+- Agent drafts needing owner read: Reinsurance photo caption; third pain-point card (underwriting profit); "RAP answer" lines.
+- Header nav on all three pages: Programs, Reinsurance, How It Works, For Customers, Dealer Login ("For Dealers" removed).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
