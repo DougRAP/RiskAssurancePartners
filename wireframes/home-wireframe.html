@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Home wireframe v2</title>
+<style>
+  :root{--k:#1b2230;--d:#4a5464;--m:#8a93a1;--l:#c9cfd8;--xl:#e6e9ee;--bg:#f5f6f8;--w:#fff;--acc:#a3450f}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.45 Inter,Arial,sans-serif;color:var(--k);background:var(--w)}
+  h1,h2,h3,p,ul{margin:0;padding:0;list-style:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 48px}
+  .lab{font:600 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
+  .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;font:700 11px/1 Arial;margin-right:8px;flex:0 0 22px}
+  .note{display:flex;align-items:center;font-size:12px;color:var(--acc);font-weight:600;margin-bottom:14px}
+  .img{position:relative;background:
+      linear-gradient(to top right,transparent calc(50% - .5px),var(--l) calc(50% - .5px),var(--l) calc(50% + .5px),transparent calc(50% + .5px)),
+      linear-gradient(to bottom right,transparent calc(50% - .5px),var(--l) calc(50% - .5px),var(--l) calc(50% + .5px),transparent calc(50% + .5px)),
+      var(--xl);border:1px solid var(--l);border-radius:4px;display:grid;place-items:center;min-height:120px}
+  .img span{background:var(--w);border:1px solid var(--l);padding:5px 10px;border-radius:2px;font:600 10px/1.3 ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--d);text-align:center}
+  .ln{height:9px;border-radius:2px;background:var(--l);margin-top:9px}
+  .ln.s{width:60%}.ln.m{width:82%}.ln.xs{width:38%}
+  .hd{font:600 30px/1.12 Georgia,serif;letter-spacing:-.01em}
+  .btn{display:inline-grid;place-items:center;height:46px;padding:0 24px;border-radius:2px;font-weight:600;font-size:14px;border:1px solid var(--k)}
+  .btn.p{background:var(--k);color:#fff}
+  .box{border:1px solid var(--l);border-radius:4px;background:var(--w)}
+  .sec{padding:72px 0}
+  .fill{background:var(--bg)}
+  .sechead{max-width:640px;margin-bottom:36px}
+  .sechead.c{margin-left:auto;margin-right:auto;text-align:center}
+  .sechead.c .ln{margin-left:auto;margin-right:auto}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+  /* 1 utility */
+  .util{background:var(--k);color:#fff;font-size:12px}
+  .util .wrap{display:flex;justify-content:space-between;align-items:center;height:36px}
+  .util b{text-decoration:underline}
+  /* 2 header */
+  .hdr{border-bottom:1px solid var(--xl)}
+  .hdr .wrap{display:flex;align-items:center;gap:28px;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font:600 18px Georgia,serif}
+  .logo i{width:32px;height:32px;background:var(--k);border-radius:2px}
+  .nav{display:flex;gap:26px;margin-left:auto;color:var(--d);font-weight:500}
+  .hdr .btn{height:40px;padding:0 16px;font-size:13px}
+  /* 3 hero */
+  .hero{padding:40px 0}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:stretch}
+  .hero .copy{display:flex;flex-direction:column;justify-content:space-between;height:460px}
+  .hero .copy > *{margin:0!important}
+  .hero h1{font:600 50px/1.1 Georgia,serif;letter-spacing:-.02em;white-space:nowrap}
+  .hero .ln{height:11px;margin-top:12px}
+  .cta{display:flex;gap:12px;margin-top:28px}
+  .svc{margin-top:18px;font-size:13px;color:var(--d)}
+  .stage{position:relative;height:460px}
+  .stage .img{position:absolute;inset:0;place-items:start;padding:18px}
+  .stage::after{content:"";position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,rgba(2,9,34,.9) 0,rgba(2,9,34,.85) 38%,rgba(2,9,34,0) 62%)}
+  .stage h2{position:absolute;z-index:1;left:28px;top:28px;width:60%;color:#fff;font:600 30px/1.15 Georgia,serif;letter-spacing:-.01em}
+  .stage h2 em{font-style:normal;color:#e0b04a}
+  .only{position:absolute;z-index:1;left:28px;bottom:24px;width:50%;background:none;border:0;color:#fff}
+  .only li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px;line-height:1.35;font-weight:600}
+  .only li i{flex:0 0 8px;height:8px;margin-top:5px;border-radius:50%;background:#e0b04a}
+  .only .v{font:600 26px/1 Georgia,serif;color:var(--acc)}
+  .only .t{font-weight:600;font-size:13px}
+  .only .ln{margin-top:6px;height:7px}
+  /* 4 trust band */
+  .trust{background:var(--k);color:#fff}
+  .trust ul{display:grid;grid-template-columns:repeat(5,1fr)}
+  .trust li{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 12px;text-align:center;font:600 14px/1.2 Georgia,serif;border-left:1px solid rgba(255,255,255,.16)}
+  .trust li:first-child{border-left:0}
+  .trust i{width:22px;height:22px;border:1.5px solid rgba(255,255,255,.7);border-radius:50%}
+  /* 5 product cards */
+  .pc{overflow:hidden;display:flex;flex-direction:column}
+  .pc .img{border:0;border-radius:0;border-bottom:1px solid var(--l);height:190px}
+  .pc .pimg{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+  .pc .tagl{font:600 17px/1.35 Georgia,serif;color:var(--acc)}
+  .pc .cp{font-size:14.5px;line-height:1.6;color:var(--d)}
+  .pc .in > .lab{margin-top:auto;padding-top:8px}
+  .pc .in{padding:28px;flex:1;display:flex;flex-direction:column;gap:12px}
+  .pc h3{font:600 22px Georgia,serif;display:flex;align-items:center;gap:10px}
+  .badge{font:700 10px/1 Arial;letter-spacing:.08em;background:var(--acc);color:#fff;padding:4px 7px;border-radius:2px}
+  .pc .big{font:600 40px/1 Georgia,serif}
+  .rows div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--xl)}
+  .rows .ln{margin:0;flex:0 0 34%}.rows .ln + .ln{flex-basis:22%;background:var(--m)}
+  /* 6 reinsurance split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch}
+  .split .img{height:100%;min-height:340px}
+  .rp{font-size:15.5px;line-height:1.65;color:var(--d);margin-top:16px}
+  .ticks li{display:flex;gap:10px;align-items:center;margin-top:14px}
+  .ticks i{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--d);flex:0 0 16px}
+  .ticks .ln{margin:0;flex:1}
+  .capfig{position:relative;margin:0;height:100%;min-height:340px;border-radius:4px;overflow:hidden}
+  .capfig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+  .capfig figcaption{position:absolute;left:0;right:0;bottom:0;padding:72px 28px 24px;color:#fff;font:600 21px/1.3 Georgia,serif;background:linear-gradient(180deg,rgba(2,9,34,0),rgba(2,9,34,.88) 55%)}
+  .capfig figcaption span{display:block;font:600 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#e0b04a;margin-bottom:8px}
+  /* 7 pain */
+  .pain{padding:24px}
+  .pain .ic{width:40px;height:40px;border:1.5px solid var(--d);border-radius:50%;margin-bottom:16px}
+  .pain .arrow{margin:16px 0 4px;font:600 10px ui-monospace,Consolas,monospace;letter-spacing:.1em;color:var(--acc)}
+  /* 8 estimate */
+  .est{display:grid;grid-template-columns:1fr 1fr;background:var(--k);color:#fff;border-radius:4px;overflow:hidden}
+  .est > div{padding:36px}
+  .est .r{background:#262f40}
+  .sl{margin-top:24px}.sl .bar{height:4px;background:rgba(255,255,255,.25);margin-top:10px;position:relative}
+  .sl .bar::after{content:"";position:absolute;left:40%;top:-6px;width:16px;height:16px;border-radius:50%;background:#fff}
+  .est .ln{background:rgba(255,255,255,.3)}
+  .est .tot{font:600 60px/1 Georgia,serif;margin-top:12px}
+  .est .sub{font:600 30px/1 Georgia,serif;margin-top:8px}
+  /* 9 proof */
+  .bars div{display:grid;grid-template-columns:150px 1fr 30px;gap:12px;align-items:center;margin-top:12px}
+  .bars .ln{margin:0;height:16px}
+  .bars div:first-child .ln:nth-child(2){background:var(--acc)}
+  .quote{padding:28px}
+  .logos{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px}
+  .logos .img{min-height:64px}
+  /* 10 steps */
+  .step .img{height:200px;margin-bottom:16px}
+  .step b{font:600 18px Georgia,serif}
+  /* 11 faq */
+  .faq{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start}
+  .q{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-top:1px solid var(--l)}
+  .q .ln{margin:0;flex:0 0 55%}
+  .side{padding:28px}
+  /* 12 contact */
+  .contact{background:var(--k);color:#fff}
+  .contact .split{align-items:start}
+  .contact .ln{background:rgba(255,255,255,.3)}
+  .f{height:44px;border:1px solid rgba(255,255,255,.4);border-radius:2px;margin-top:12px}
+  .f.t{height:96px}
+  .ftr{background:#0e131c;color:#fff;padding:40px 0}
+  .ftr .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+  .ftr .ln{background:rgba(255,255,255,.25)}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap"><span>Have a protection plan? <b>File a claim →</b></span><span>1.800.732.5856</span></div></div>
+
+<header class="hdr"><div class="wrap">
+  <div class="logo"><i></i>Risk Assurance Partners</div>
+  <nav class="nav"><span>Programs</span><span>Reinsurance</span><span>How It Works</span><span>For Customers</span><span>Dealer Login</span></nav>
+  <span class="btn">Customer Service</span><span class="btn p">Talk to RAP</span>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="copy">
+    <div class="lab" style="color:var(--acc);font-size:11px">Protection Programs for Furniture Retailers &amp; Designers</div>
+    <h1>More protection profit.<br><span style="color:var(--acc)">Happier customers.</span></h1>
+    <p style="font-size:21px;line-height:1.55;color:var(--d)">Turn more profit per customer with RAP protection programs — Subscription, Multi-Year, and Reinsurance — generate more cash from each sale without added inventory or overhead.</p>
+    <div class="cta"><span class="btn p">Talk to RAP →</span><span class="btn">See the programs</span></div>
+    <p class="svc">Have a protection plan and need service? <b style="text-decoration:underline">Customer service →</b></p>
+  </div>
+  <div class="stage">
+    <img src="hero.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;border-radius:4px">
+    <h2>Turn common damage to <em>gold</em> with RAP.</h2>
+    <div class="box only">
+      <ul>
+        <li><i></i>Best Rated Service in Category</li>
+        <li><i></i>Furniture, Adj. Beds, Rugs, Outdoor, Mattress &amp; Lamps</li>
+        <li><i></i>Custom Coverage Available, Cost Plus Pricing</li>
+        <li><i></i>Reinsurance &amp; Standard Programs</li>
+        <li><i></i>Coverage Terms from 30 Days to 10 Years</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="trust"><div class="wrap">
+  <ul>
+    <li><i></i>4.4 Google Stars</li><li><i></i>A Rated Underwriting</li><li><i></i>Millions Served</li><li><i></i>File Claims 24/7</li><li><i></i>US Based Service</li>
+  </ul>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sechead" style="max-width:none"><div class="lab">Programs</div><h2 class="hd">Choose Coverage Terms then Customize Coverage</h2><div class="ln m" style="max-width:520px"></div></div>
+  <div class="g2">
+    <div class="box pc"><img class="pimg" src="card-multiyear.jpg" alt=""><div class="in">
+      <h3>Multi-Year Protection</h3>
+      <p class="tagl">Protect the purchase they’ve been waiting to make.</p>
+      <p class="cp">When customers find the sectional they’ve been looking for or invest in a new bedroom set, many want to take care of protection at the same time. With one upfront payment, they get two to five years of comprehensive coverage. It’s a natural fit for larger purchases and for shoppers who prefer to pay once and know exactly how long their coverage lasts.</p>
+      <p class="cp">On average, 25% to 30% of customers choose a multi-year plan. RAP customizes coverage to fit your assortment and the way you sell, with programs for furniture, rugs, adjustable beds, mattresses, and outdoor furniture.</p>
+      <span class="lab" style="color:var(--acc)">Details →</span></div></div>
+    <div class="box pc"><img class="pimg" src="card-subscription.jpg" alt=""><div class="in">
+      <h3>Monthly Subscription Protection <span class="badge">NEW</span></h3>
+      <p class="tagl">Full protection for a home that gets lived in.</p>
+      <p class="cp">Juice cups, kids climbing on the cushions, and a dog at their feet. For young families, that’s everyday life. With full coverage starting at $19.99 a month, shoppers can protect the furniture they use every day while keeping their upfront costs down. They can cancel or restart their subscription as their needs and budgets change.</p>
+      <p class="cp">Roughly 70% to 75% of customers pass on a multi-year plan. A monthly option gives your sales team a second way to offer protection that fits how many millennials, young families, and budget-conscious shoppers prefer to pay. Subscriptions are available for furniture, rugs, adjustable beds, mattresses, and outdoor furniture.</p>
+      <span class="lab" style="color:var(--acc)">Details →</span></div></div>
+  </div>
+</div></section>
+
+<section class="sec fill"><div class="wrap">
+  <div class="split">
+    <figure class="capfig"><img src="reinsurance.jpg" alt="">
+      <figcaption><span>Generational wealth</span>Built one protection plan at a time, and passed on to the next generation.</figcaption></figure>
+    <div>
+      <div class="lab">Reinsurance</div><h2 class="hd" style="margin-top:10px">Reinsurance That Builds Wealth for Retailers</h2>
+      <p class="rp">Every protection plan you sell can help build long-term wealth for your dealership. With RAP’s reinsurance program, you own the reinsurance company behind your protection plans. After covered claims and program expenses are paid, your company keeps the underwriting profit an insurance company would typically retain. You can invest those profits so they have the opportunity to grow as you continue selling plans.</p>
+      <p class="rp">Every RAP program is backed by an A-rated insurance carrier. RAP and its blue-chip partners manage the program from setup through claims, reporting, and trust administration. Your team focuses on selling protection plans, and your dealership shares in the financial upside of the business it generates.</p>
+      <div class="cta"><span class="btn">Reinsurance details →</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="note"><span class="n">5</span>Dealer pain points: three cards, problem on top, RAP answer below.</div>
+  <div class="sechead c"><div class="lab">Why dealers switch</div><h2 class="hd">Section headline</h2></div>
+  <div class="g3">
+    <div class="box pain"><div class="ic"></div><b>Pain point</b><div class="ln"></div><div class="ln s"></div><div class="arrow">RAP ANSWER ↓</div><div class="ln m"></div><div class="ln xs"></div></div>
+    <div class="box pain"><div class="ic"></div><b>Pain point</b><div class="ln"></div><div class="ln s"></div><div class="arrow">RAP ANSWER ↓</div><div class="ln m"></div><div class="ln xs"></div></div>
+    <div class="box pain"><div class="ic"></div><b>Pain point</b><div class="ln"></div><div class="ln s"></div><div class="arrow">RAP ANSWER ↓</div><div class="ln m"></div><div class="ln xs"></div></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="note"><span class="n">6</span>Comparison: two sliders left; Multi-Year (today) beside Subscription (added) right. Example figures only.</div>
+  <div class="est" style="grid-template-columns:.9fr 1.1fr">
+    <div><div class="lab" style="color:#fff">Multi-Year vs Subscription</div>
+      <div class="sl"><div style="display:flex;justify-content:space-between"><span>Multi-Year plans sold per year</span><b id="oU">100</b></div><input id="iU" type="range" min="25" max="2000" step="25" value="100" style="width:100%;margin-top:10px"></div>
+      <div style="margin-top:24px;padding:14px 16px;border:1px dashed rgba(255,255,255,.4);border-radius:4px;font-size:13px">About 70% say no → <b><span id="oN">233</span> customers</b> bought nothing</div>
+      <div class="sl"><div style="display:flex;justify-content:space-between"><span>Of those, share who take Subscription</span><b id="oP">20%</b></div><input id="iP" type="range" min="5" max="50" step="1" value="20" style="width:100%;margin-top:10px"></div>
+      <div style="margin-top:24px;font-size:13px">= <b><span id="oS">47</span> subscribers</b> you didn't have before</div></div>
+    <div class="r" style="padding:0;display:grid;grid-template-rows:1fr auto">
+      <div style="display:grid;grid-template-columns:1fr 1fr">
+        <div style="padding:32px"><div class="lab" style="color:#fff">Multi-Year · 4-year plan</div>
+          <div class="sub" style="margin-top:18px">$225</div><div style="font-size:12px;opacity:.7">you keep per sale (75% of $300), once</div>
+          <div class="tot" style="font-size:44px;margin-top:24px" id="oM">$22,500</div><div style="font-size:12px;opacity:.7">over 4 years</div>
+          <div style="font-size:13px;margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)">You remit <b id="oR">$7,500</b></div></div>
+        <div style="padding:32px;border-left:1px solid rgba(255,255,255,.16)"><div class="lab" style="color:#fff">Subscription · same 4 years</div>
+          <div class="sub" style="margin-top:18px">$8</div><div style="font-size:12px;opacity:.7">to you per payment × 48 payments</div>
+          <div class="tot" style="font-size:44px;margin-top:24px" id="oB">$18,048</div><div style="font-size:12px;opacity:.7">over 4 years</div>
+          <div style="font-size:13px;margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)">You remit <b>$0</b></div></div>
+      </div>
+      <div style="padding:24px 32px;border-top:1px solid rgba(255,255,255,.16);display:flex;justify-content:space-between;align-items:center;gap:16px"><span><span style="font-size:12px;opacity:.7">Combined over 4 years</span><br><b style="font:600 26px Georgia,serif" id="oT">$40,548</b> <span style="font-size:13px" id="oL">+80% from customers who said no</span></span><span class="btn" style="border-color:#fff">Talk to RAP →</span></div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--m);margin-top:12px">Assumptions line: $300 retail, dealer keeps 75%; 70% decline Multi-Year; subscriptions start day one and pay all 48 months.</p>
+  <script>
+  (function(){var $=function(i){return document.getElementById(i)},f=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+    function go(){var u=+$('iU').value,p=+$('iP').value,n=Math.round(u/0.3-u),s=Math.round(n*p/100),m=u*225,b=s*8*48;
+      $('oU').textContent=u.toLocaleString('en-US');$('oP').textContent=p+'%';$('oN').textContent=n.toLocaleString('en-US');$('oS').textContent=s.toLocaleString('en-US');
+      $('oM').textContent=f(m);$('oR').textContent=f(u*75);$('oB').textContent=f(b);$('oT').textContent=f(m+b);$('oL').textContent='+'+Math.round(b/m*100)+'% from customers who said no';}
+    $('iU').oninput=go;$('iP').oninput=go;go();})();
+  </script>
+</div></section>
+
+<section class="sec fill"><div class="wrap">
+  <div class="note"><span class="n">7</span>Proof: rating chart beside a dealer quote, logo row beneath.</div>
+  <div class="sechead"><div class="lab">Reputation</div><h2 class="hd">Section headline</h2></div>
+  <div class="g2">
+    <div class="box" style="padding:28px"><div class="lab">Google ratings</div>
+      <div class="bars"><div><i class="ln"></i><i class="ln"></i><b>0.0</b></div><div><i class="ln"></i><i class="ln" style="width:80%"></i><b>0.0</b></div><div><i class="ln"></i><i class="ln" style="width:70%"></i><b>0.0</b></div><div><i class="ln"></i><i class="ln" style="width:56%"></i><b>0.0</b></div><div><i class="ln"></i><i class="ln" style="width:48%"></i><b>0.0</b></div></div></div>
+    <div class="box quote"><div class="lab">Dealer quote</div><div class="ln" style="height:14px;margin-top:18px"></div><div class="ln m" style="height:14px"></div><div class="ln s" style="height:14px"></div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:28px"><div class="img" style="width:48px;min-height:48px;border-radius:50%"></div><div style="flex:1"><div class="ln xs" style="margin:0"></div><div class="ln xs"></div></div></div></div>
+  </div>
+  <div class="logos"><div class="img"><span>Logo</span></div><div class="img"><span>Logo</span></div><div class="img"><span>Logo</span></div><div class="img"><span>Logo</span></div><div class="img"><span>Logo</span></div></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="note"><span class="n">8</span>How it works: three steps, each led by a product screenshot.</div>
+  <div class="sechead c"><div class="lab">How it works</div><h2 class="hd">Section headline</h2></div>
+  <div class="g3">
+    <div class="step"><div class="img"><span>Screenshot</span></div><b>1 · Step</b><div class="ln"></div><div class="ln s"></div></div>
+    <div class="step"><div class="img"><span>Screenshot</span></div><b>2 · Step</b><div class="ln"></div><div class="ln s"></div></div>
+    <div class="step"><div class="img"><span>Screenshot</span></div><b>3 · Step</b><div class="ln"></div><div class="ln s"></div></div>
+  </div>
+</div></section>
+
+<section class="sec fill"><div class="wrap">
+  <div class="note"><span class="n">9</span>Questions fill the left; a contact card fills the right (no empty column).</div>
+  <div class="faq">
+    <div><div class="lab">Dealer questions</div><h2 class="hd" style="margin:10px 0 24px">Section headline</h2>
+      <div class="q"><i class="ln"></i>+</div><div class="q"><i class="ln"></i>+</div><div class="q"><i class="ln"></i>+</div><div class="q"><i class="ln"></i>+</div><div class="q"><i class="ln"></i>+</div><div class="q"><i class="ln"></i>+</div></div>
+    <div class="box side"><div class="lab">Talk to a person</div><div class="hd" style="font-size:22px;margin-top:12px">Phone</div><div class="ln s"></div><div class="hd" style="font-size:22px;margin-top:20px">Email</div><div class="ln s"></div><div class="cta"><span class="btn p">Talk to RAP →</span></div></div>
+  </div>
+</div></section>
+
+<section class="sec contact"><div class="wrap">
+  <div class="note" style="color:#fff"><span class="n">10</span>Closing band: headline left, form right, navy to match the trust band.</div>
+  <div class="split">
+    <div><div class="lab" style="color:#fff">Talk to RAP</div><h2 class="hd" style="margin-top:10px">Closing headline</h2><div class="ln"></div><div class="ln s"></div></div>
+    <div><div class="g2" style="gap:12px"><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div></div><div class="f t"></div><div class="cta"><span class="btn" style="background:#fff;color:var(--k)">Send →</span></div></div>
+  </div>
+</div></section>
+
+<footer class="ftr"><div class="wrap">
+  <div><div class="logo"><i style="background:#fff"></i>Risk Assurance Partners</div><div class="ln s"></div></div>
+  <div><div class="ln xs"></div><div class="ln s"></div><div class="ln s"></div></div>
+  <div><div class="ln xs"></div><div class="ln s"></div><div class="ln s"></div></div>
+  <div><div class="ln xs"></div><div class="ln s"></div><div class="ln s"></div></div>
+</div></footer>
+
+</body>
+</html>
