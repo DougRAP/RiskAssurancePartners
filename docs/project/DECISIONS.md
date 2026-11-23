@@ -763,6 +763,10 @@ Owner direction: an uncomplicated rebuild — dealer home page, a clear consumer
 - Reinsurance: building and operating reinsurance programs for retail dealers since 2012; only provider offering subscription programs that qualify for reinsurance.
 - Google comparison shown unnamed: other national providers 2.2 to 3.7 (owner-pulled, November 2026).
 
+## Decision 057 — Named Google Rating Comparison on Home (2026-11-23, branch `site-rebuild`)
+
+Owner: ratings are Google-published; the point is their value in winning dealers. Home gets a named comparison section above Why RAP: RAP 4.4, Montage 3.7, ProtectAll 3.3, Guardian 2.6, Furniture Care Protection 2.2 (November 2026). Replaces the unnamed caption from 056. Ratings must be re-checked periodically; Guardian has two Google listings (2.6 and 2.5) and the higher is shown.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
