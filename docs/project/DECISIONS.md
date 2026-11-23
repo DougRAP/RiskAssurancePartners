@@ -756,6 +756,13 @@ Owner direction: an uncomplicated rebuild — dealer home page, a clear consumer
 - Programs page: unsupplied coverage tables, Multi-Year commission row, and owner-to-supply bullets removed; "sample copy" markers removed but the copy itself still needs owner sign-off.
 - Still open: hours conflict (027 vs 042), subscription payments 60 vs 36 (039), noindex header and site password stay until owner says launch.
 
+## Decision 056 — Owner-Supplied Proof Points (2026-11-23, branch `site-rebuild`)
+
+- Underwriters are now named: "Every service contract is backed by A+ underwriting from Zurich or Sentruity Casualty Company." Supersedes 035 (partner never named).
+- "Established 2012" replaces "15+ Years" (supersedes 030). "Millions of Customers Served" added.
+- Reinsurance: building and operating reinsurance programs for retail dealers since 2012; only provider offering subscription programs that qualify for reinsurance.
+- Google comparison shown unnamed: other national providers 2.2 to 3.7 (owner-pulled, November 2026).
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
