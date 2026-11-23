@@ -1,53 +1,119 @@
-# Fabel Master Agent — Session Handoff (v3)
+# Session Handoff (v4)
 
-**From:** Master Agent 3 (active session, 2026-08-30)
-**To:** Next Fabel Master session (owner will direct you to this update)
-**Baseline:** main @ `cfbf853` (production; mi-refactor MERGED 2026-08-30, branch deleted). Tree clean.
-**Read first, in order:** AGENT_RULES.md → DECISIONS.md (001–**053**, all on main, authoritative) → docs/design/MI_REFACTOR_SPEC.md (as amended by Decision 052) → this file → MASTER_SPEC.md / LOCKED_WIREFRAME.md when structural work needs them → docs/design/MOBILE_AUDIT.md.
+**Written:** 2026-11-23, end of the strategy + rebuild session.
+**Next session's focus (owner-stated):** design elements of the new site.
+**Read first:** this file, then `docs/project/DECISIONS.md` entries 055–058. Older docs (MASTER_SPEC, LOCKED_WIREFRAME, IMPLEMENTATION_PLAN, AGENT_RULES phase gates) describe the August prototype and are largely superseded by 055–058; where they conflict, the owner and the newer decisions win.
 
-## Where all updates are written (canonical locations)
+## Scope rule from the owner
 
-- **docs/project/DECISIONS.md** — every material owner ruling, numbered, with implementing commits. 049 (research pass), 050 (contact routes form), 051 (form validation standard), 052 (MI refactor, many amendments — merged), 053 (FurnitureRx footer note removed). All 001–053 on main.
-- **docs/project/HANDOFF.md** — this file; session state for the next master.
-- **docs/project/DEV_NOTES.md** — work orders for later phases: Adrian's back-links; Supabase lead-capture wiring (source tags `calculator` / `infosheet` / `contact`+route / `research-topic`); post-Supabase comment cleanup sweep; MI snapshot-archive persistence; **AI output contract** (analysis must always end with the Furniture Retail Outlook score). All on main.
-- **docs/design/MOBILE_AUDIT.md** — living mobile punch list (research items closed; MI items M1–M4 closed at merge; still open sitewide: S6, S14, newswire state bar).
-- **Code:** everything on `main`. **Branch rule (unconditional, all page passes):** create the review branch (`<page>-refactor`) BEFORE the first edit; commit and push to it continuously as you work — never batch locally — so the Netlify branch preview always reflects current state for the owner's rolling desktop + phone review; `main` receives nothing until the owner says "merge". (Home/research ran on main in an earlier era; that flow is retired.)
+**Website only.** The owner is answering a dealer RFP separately and has said twice not to bring it into this work. Do not reference it, plan around it, or justify choices with it. Judge the site on what wins retail furniture dealers in general.
 
-## Current state
+## What the site is for
 
-**Phase 2, page passes. Done: home (048), research (049), market-intelligence (052 — merged to main `cfbf853`, owner-approved, live on production). Remaining MI scope deliberately deferred: AI interpretation wiring and Supabase snapshot persistence (DEV_NOTES work orders). NEXT: programs.html pass, then newswire; full-site audit agent runs after all pages.**
+Risk Assurance Partners (RAP) sells furniture protection programs through retail dealers, who resell to their customers. The site must:
 
-MI page as built (Decision 052 trail): masthead + full-width how-to paragraph → 1Y/3Y/5Y/10Y global selector ("Select Time Frame") → ink console (8-indicator quick-look list with aligned values + ink-inset AI analysis panel: intro line, empty `#mic-article` with pre-styled serif typography, "No analysis yet.") → collapsed "View Charts" accordion (8 cards, themed pairs, 16:10 shape-only SVG frames, all text HTML) → left-justified ember RAP Research button → footer. Data layer: one `METRICS` array; `snapshotValue()`/`setSnapshot()` archive plumbing with empty `SNAPSHOTS` store — date picker + "Return to current" + howto sentence render ONLY when snapshots exist. Q&A/chat feature cancelled; outlook score UI removed (score lives in future AI text). Page swept clean (dead code, syntax, runtime) at `2b11fc9` — re-sweep after any further polish.
+1. Speak first to **retail dealers**: their pain points and how RAP answers them.
+2. Give **consumers** an obvious way to get service (file a claim).
 
-## Work cadence (unchanged, owner-confirmed)
+Competitors' sites (Montage, Guardian, Guardsman, ServeCo, Furniture Care Protection, ProtectAll) are generic consumer/dealer hybrids; none quantifies dealer economics or names a subscription program. RAP's differentiators, all owner-supplied:
 
-Owner instructions override docs; **all page-pass work on the review branch per the branch rule above (branch before first edit; push continuously)**; one-liners inline by master; Opus subagents for multi-line work (self-contained briefs, no subagent commits); mobile impact stated BEFORE each change; QA greps before every push (classics + mobile + no dev chrome + no dead controls); DECISIONS entry per material ruling; assessment-first on "thoughts?" questions; owner screenshots issues — diagnose the code cause (beware: owner full-page screenshots can show stale deploys and stitching artifacts — verify locally with headless Chrome before believing a rendering bug; pattern established, screenshots in scratchpad workflow).
+- Google rating **4.4** (229 reviews); competitors 2.2–3.7 (Montage 3.7, ProtectAll 3.3, Guardian 2.6, Furniture Care Protection 2.2; pulled by the owner November 2026).
+- **$19.99/month subscription** plan; dealer earns $8 per monthly payment, remits $0.
+- **Only provider** whose subscription programs qualify for reinsurance.
+- Every service contract backed by **A+ underwriting from Zurich or Sentruity Casualty Company**.
+- **Established 2012.** Millions of customers served. Claims in-house.
 
-## Sitewide work done this session (all on main, deployed)
+FurnitureRx (kiosk.furniturerx.net) is the owner's direct-to-consumer subscription brand. Keep consumer-facing kiosk links **off** the RAP site; subscription appears only as a program dealers earn on.
 
-- Contact routes open a shared lead form (050): I'm a dealer / How do I start selling subscription programs / Media or other → Name/Email/Phone/interest, hidden route field.
-- Validation standard (051): email `name@domain.tld`, phone 10–15 digits, all lead forms incl. gate + popup pre-chat; leave-a-message now collects Name/Company/Position + email-or-phone; pre-chat focuses first invalid field; "Demo only" line removed.
-- Research page rebuilt (049): 3-up cover grid + coming-soon card with propose-a-topic form.
-- Dead chrome removed sitewide: `.hdr__claim`, FurnitureRx footer note (053), prototype footer notes.
+## Branches
 
-## Open questions for the owner (carry-forward)
+| Branch | State | Deployed at |
+|---|---|---|
+| `ground-up` | **Current work.** Full rebuild, Decision 058. Not merged. | https://ground-up--riskassurancepartners.netlify.app/ |
+| `main` | The earlier trim of the August prototype (Decisions 055–057). | https://riskassurancepartners.netlify.app/ |
+| `site-rebuild` | Same as `main`; can be ignored. | — |
+| `programs-refactor` | Already contained in `main`. | — |
 
-1. **Hours conflict** — footer 8–6 M–F (027) vs popup 9–6 M–Sat (042). Still unanswered (asked 3×).
-2. **Programs-page descriptor** — old 025 copy; raise during the programs pass.
-3. Gate-page GM kicker sync + slider m=1 default — raise when touching gate.
-4. Owner-owed content: chat agent name, lunch-popup copy, Support final URL, Basic|Premium coverage lists, Reinsurance/Standard good-fit bullets, Multi-Year commission stat, tax-advisor qualifier, vector logo, Supabase connection.
-5. MI: AI copy/wording owner may still tweak on preview; outlook scoring methodology + disclaimer need approval before any real score ships.
+The owner compares `ground-up` against `main` side by side. **Merge `ground-up` into `main` only when the owner says "merge."** Commit and push to the working branch continuously so the Netlify preview stays current.
 
-## Technical traps (updated)
+The whole Netlify site is password-protected and sends a no-index header. An agent cannot see the deployed pages (every URL returns 401); a 401 on a preview URL does confirm the deploy exists.
 
-1. Never pair `hidden` with author CSS `display` — sitewide guard exists.
-2. No text inside scaling SVGs — shapes only; every label HTML (MI charts are the reference implementation).
-3. Proportional flex bars need `flex-basis:0`; cost-bar bracket needs gap compensation.
-4. CRLF fenced by .gitattributes; expected checkout warnings on docs.
-5. Newswire keeps its `#stub` anchors/fabricated feed until its pass; research report buttons still `#stub` (Phase 11).
-6. Headless Chrome verification: `--headless=new --screenshot` with `cygpath -w` paths; min-window clamp makes ≤500px phone captures unreliable for header chrome — owner's real phone is the mobile authority.
-7. Shared chrome (popup/contact/footer) must stay byte-identical across pages — hash-compare after edits; the popup chat classes (`msg--*`, `m--*`, `hchip--open`, `is-*`) are JS-composed, never "dead".
+## The ground-up build (`ground-up`)
 
-## Road ahead
+Static HTML, no framework, no build step. Netlify publishes `prototype-ui/`.
 
-programs.html pass → newswire pass → remaining mobile items (S6, S14, newswire state bar) → full-site audit agent → Phase 3 UI_SPEC.md → Phase 4 architecture proposal (Supabase work packages already scoped in DEV_NOTES, including MI AI-interpretation v1 — the press-releasable service) → per IMPLEMENTATION_PLAN.md.
+- `prototype-ui/index.html` — dealer home
+- `prototype-ui/programs.html` — programs, as two choices (plan types, then underwriting)
+- `prototype-ui/customers.html` — customer service / file a claim
+- `prototype-ui/assets/site.css` — the one shared stylesheet
+- `prototype-ui/assets/site.js` — mobile menu, income estimate, contact form
+- `deferred-pages/` — Newswire, Market Intelligence, Research, gated calculator, Admin. Out of the publish folder, kept for later. They use the old inline-CSS chrome.
+- `netlify.toml` — publish folder, no-index header, `/home.html` → `/` redirect
+
+**The header and footer are duplicated in the three HTML files.** They were generated once by a throwaway script that no longer exists; edit the HTML directly and keep the three copies in sync. (The customers page deliberately differs: its header buttons are "Call Us" and "File a Claim".)
+
+Home section order: hero with "Only at RAP" panel and proof strip → what you earn (plan cards, underwriting cards, income estimate) → why subscription → Google rating comparison, dealer quotes and logos → how it works (three steps, three screenshots) → dealer questions → contact form.
+
+Links that matter: claims go to `https://www.5starservice.net/`; dealer login is `https://portal.furniturerx.net/`; phone 1.800.732.5856; sales@raptns.com.
+
+The contact form posts to Netlify Forms (form name `contact`). It has never been tested on a live deploy.
+
+## Design rules
+
+- **Use only the existing tokens** in `:root` of `assets/site.css` (copied verbatim from the approved design system). Do not invent colours, fonts or spacing values; ask the owner first if a new value seems needed.
+- **No alternating section background fills.** Separate sections with spacing and hairline rules. The only dark band is the footer.
+- Type: Playfair Display for headings, Inter for body, IBM Plex Mono for small labels.
+- Mobile counts as part of "done": 44px tap targets, 12px type floor, no text inside scaling SVGs, never pair the `hidden` attribute with an author `display` rule.
+- Copy: do not invent claims, coverage terms or numbers. Use "Reinsurance," never "Captive." Do not present Reinsurance as immediate profit. Keep the tax-advisor note next to tax-benefit claims.
+
+The owner's reaction to the first pass on `main` was that it looked like the old site with edits. The `ground-up` design is the response; the owner has not yet given feedback on it.
+
+## Checking your work
+
+Headless Chrome screenshots from the local files work well:
+
+```
+"/c/Program Files/Google/Chrome/Application/chrome.exe" --headless=new --disable-gpu --hide-scrollbars \
+  --window-size=1280,6600 --screenshot="<scratchpad>/home.png" \
+  "file:///c:/Newco/AI/RAP%20Website/Website%20Refactor/prototype-ui/index.html"
+```
+
+Widths below about 500px are unreliable in headless Chrome; the owner's phone is the authority for mobile. As of this handoff, Home and Programs were checked at desktop width and Home at 520px; the Customers page on `ground-up` was not screenshotted.
+
+`gh` is not installed. Git line-ending warnings (LF → CRLF) on commit are expected.
+
+## Placeholders awaiting the owner
+
+Each renders as a grey dashed box (`.ph`) or a "Placeholder — owner to supply" line (`.ph-text`).
+
+| Page | Placeholder |
+|---|---|
+| Home, under the rating chart | Three dealer quotes; five dealer logos |
+| Home, How it works | Screenshots: claim app, subscription sign-up, dealer portal |
+| Home, Dealer questions | Answers: plans sold under the current provider; associate training; point-of-sale; how and when the dealer is paid; time to launch |
+| Programs | Basic and Premium coverage lists; what the dealer remits on Multi-Year |
+| Customers | Answers: how long a claim takes; how to check claim status |
+
+## Open questions for the owner
+
+1. **Subscription math:** the site uses $8 × 60 payments = $480 per subscriber; Decision 039 says 36 payments / $288.
+2. **"Since 2012" vs "decade and a half":** the owner's reinsurance line said a decade and a half; 2012 to 2026 is 14 years, so the site says "since 2012."
+3. **A+ for both carriers:** written as the owner gave it; not independently confirmed for Sentruity.
+4. **Hours:** sales 8–6 ET Mon–Fri (Decision 027); customer service 9–6 ET Mon–Sat (Decision 042). Both are shown, each in its own context.
+5. **Income estimate defaults** (500 tickets, 30% Multi-Year, 15% Subscription) were chosen by the agent, not the owner.
+6. **Guardian** has two Google listings (2.6 and 2.5); the site shows 2.6. Guardsman and ServeCo are not in the chart because the owner did not supply their ratings.
+7. Draft copy throughout the new pages needs the owner's read.
+
+## Before the site can go live
+
+- DNS access for riskassurancepartners.com (the owner does not have the old site's code; the new site replaces it).
+- Owner's go-ahead to remove the Netlify password and the no-index header (`netlify.toml` and the `<meta name="robots">` tag in each page).
+- Privacy and Terms pages do not exist.
+- A test submission of the contact form on a live deploy.
+
+## Owner working preferences
+
+- Replies: extremely concise.
+- For coding tasks, name the matching skill in one line before starting.
+- The owner reviews on desktop and phone via the Netlify previews and often sends screenshots.
+- Log each material ruling as a numbered entry in `docs/project/DECISIONS.md`.
