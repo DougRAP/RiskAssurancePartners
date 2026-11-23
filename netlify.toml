@@ -8,3 +8,9 @@
   for = "/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Site root serves the dealer home page.
+[[redirects]]
+  from = "/"
+  to = "/home.html"
+  status = 200

@@ -742,6 +742,20 @@ The footer line "FurnitureRx is a product of Risk Assurance Partners." is remove
 
 Confirms and finalizes the Decision 052 trail: the Market Intelligence AI is **not interactive — ever**. No chat, no visitor question interface, no Q&A. The AI's sole function: read the page's structured indicator data on a schedule, then create and publish a written analysis for retailers (per the AI output contract in DEV_NOTES — analysis always ends with the Furniture Retail Outlook score, once scoring methodology and disclaimer are owner-approved). This is the fully automated, press-releasable intelligence service. Do not propose interactive AI features for this page.
 
+## Decision 055 — Three-Page Launch Site (2026-11-23, branch `site-rebuild`, pending owner merge)
+
+Owner direction: an uncomplicated rebuild — dealer home page, a clear consumer button to a customer page linking the claim app, and one programs page.
+
+- Launch pages: `home.html` (dealers), `programs.html`, `customers.html` (new).
+- Deferred, moved to `deferred-pages/` (out of the publish folder): Newswire, Market Intelligence, Research, gated Profit Calculator, Admin. Supersedes their nav placement (006/007/008/013/032/040) until revisited.
+- Reverses 044: File a Claim returns to the utility bar on every page; header button is "Customer Service" -> `customers.html`.
+- Support popup and mock chat (042) removed from launch pages. Kiosk links removed from chrome.
+- Primary dealer CTA is "Talk to RAP" (replaces "Profit Calculator" while the gate is deferred).
+- Google rating shown as 4.4 (owner-supplied Google listing, 229 reviews); supersedes the 4.5 in 021/030.
+- Contact form posts to Netlify Forms (form name `contact`).
+- Programs page: unsupplied coverage tables, Multi-Year commission row, and owner-to-supply bullets removed; "sample copy" markers removed but the copy itself still needs owner sign-off.
+- Still open: hours conflict (027 vs 042), subscription payments 60 vs 36 (039), noindex header and site password stay until owner says launch.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
