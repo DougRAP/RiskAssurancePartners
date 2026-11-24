@@ -36,7 +36,6 @@
       set('c-remit', usd(plans * MY_REMIT));
       set('c-sb', usd(sb));
       set('c-total', usd(my + sb));
-      set('c-lift', '+' + Math.round(sb / my * 100) + '% from customers who said no');
     };
     [plansEl, shareEl].forEach(function (el) { el.addEventListener('input', render); });
     render();

@@ -213,7 +213,6 @@ img{max-width:100%;display:block}
 .cmp__sum{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-4);padding:var(--s-5) var(--s-6);border-top:1px solid var(--rap-ink-700)}
 .cmp__sum .cmp__n{display:block;margin:0 0 4px}
 .cmp__total{display:block;font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1}
-.cmp__lift{display:block;font-size:14px;color:var(--rap-brass);font-weight:600;margin-top:4px}
 
 /* ---------- proof ---------- */
 .proofgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--s-5);align-items:stretch}
