@@ -182,6 +182,8 @@ img{max-width:100%;display:block}
 .lrow__a .body{color:var(--rap-ink)}
 .lrow .body,.lrow .h3,.lrow__h{text-wrap:pretty}
 .sec__head + .cmp{margin-top:0}
+.lrow:last-child{border-bottom:0;padding-bottom:0}
+.sec--join{border-top:0;padding-top:0}
 @media (max-width:860px){
   .ledger__cap{display:block;height:0;padding:0;overflow:hidden}
   .lrow{grid-template-columns:40px 1fr;column-gap:var(--s-4);padding:var(--s-6) 0}
