@@ -46,7 +46,7 @@ img{max-width:100%;display:block}
 /* ---------- type ---------- */
 .eyebrow{font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-3);line-height:1.7}
 .h1{font-family:var(--serif);font-weight:500;font-size:var(--fs-d1);line-height:1.06;letter-spacing:-.02em}
-.h2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.12;letter-spacing:-.01em}
+.h2{font-family:var(--serif);font-weight:500;font-size:var(--fs-d3);line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
 .h3{font-family:var(--serif);font-weight:500;font-size:var(--fs-h3);line-height:1.25}
 .lead{font-size:var(--fs-lead);line-height:1.55;color:var(--rap-slate-700);max-width:56ch}
 .body{font-size:15px;line-height:1.6;color:var(--rap-slate-700)}
