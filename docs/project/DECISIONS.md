@@ -797,6 +797,8 @@ Owner: "there are no rules, we are free to design what we want." Supersedes the 
 - The Multi-Year vs Subscription comparison moves into its own section directly after, keeping the "$300 plan / $19.99 yes" heading.
 - Section position is unchanged (after Reinsurance). Open: whether to move it under the trust band; whether to trim row copy.
 - Owner confirmed row 3's "financing against earned premium" wording is cleared to publish (2026-11-24).
+- Owner then revised row 3 and cleared the firmer wording (2026-11-24): "Eligible reinsurance participants can take loans against earned premium and pay interest into the reinsurance account. Where credit is already stretched, RAP reinsurance programs can provide an alternate source of funding."
+- Row links to related sections were removed at the owner's request; row copy was edited by the owner throughout.
 
 ## Open / Not Yet Decided
 
