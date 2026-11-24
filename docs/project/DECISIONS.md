@@ -800,6 +800,10 @@ Owner: "there are no rules, we are free to design what we want." Supersedes the 
 - Owner then revised row 3 and cleared the firmer wording (2026-11-24): "Eligible reinsurance participants can take loans against earned premium and pay interest into the reinsurance account. Where credit is already stretched, RAP reinsurance programs can provide an alternate source of funding."
 - Row links to related sections were removed at the owner's request; row copy was edited by the owner throughout.
 
+## Decision 061 - Competitors Anonymised in the Home Rating Chart (2026-11-24, branch `ground-up`)
+
+- Owner ruling: the Google rating chart on Home no longer names competitors. Rows read Risk Assurance Partners, Provider A, Provider B, Provider C, Provider D, in the same order and with the same ratings as before. This reverses the naming in Decision 057.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
