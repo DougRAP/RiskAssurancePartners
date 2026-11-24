@@ -791,6 +791,12 @@ Owner: "there are no rules, we are free to design what we want." Supersedes the 
 - Agent drafts needing owner read: Reinsurance photo caption; third pain-point card (underwriting profit); "RAP answer" lines.
 - Header nav on all three pages: Programs, Reinsurance, How It Works, For Customers, Dealer Login ("For Dealers" removed).
 
+## Decision 060 - Five Challenges Ledger on Home (2026-11-24, branch `ground-up`)
+
+- The three pain-point cards (including the agent-drafted third card) are replaced by a five-row ledger: "Five Challenges Facing Furniture Retailers and How RAP Helps". Each row pairs a challenge with RAP's answer and a link to the related section. Heading and all row copy are owner-supplied.
+- The Multi-Year vs Subscription comparison moves into its own section directly after, keeping the "$300 plan / $19.99 yes" heading.
+- Section position is unchanged (after Reinsurance). Open: whether to move it under the trust band; whether row 3's "financing against earned premium" wording is cleared to publish.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
