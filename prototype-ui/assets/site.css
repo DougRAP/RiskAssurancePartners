@@ -180,7 +180,6 @@ img{max-width:100%;display:block}
 .lrow__k{display:none;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-2)}
 .lrow__h{font-family:var(--serif);font-weight:500;font-size:var(--fs-h3);line-height:1.25;color:var(--rap-ink);margin-bottom:var(--s-3)}
 .lrow__a .body{color:var(--rap-ink)}
-.lrow__a .link{display:inline-block;margin-top:var(--s-4);font-size:14px}
 .sec__head + .cmp{margin-top:0}
 @media (max-width:860px){
   .ledger__cap{display:block;height:0;padding:0;overflow:hidden}
