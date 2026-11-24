@@ -250,6 +250,7 @@ img{max-width:100%;display:block}
 .ph{border:1px dashed var(--rap-slate-300);border-radius:var(--radius-md);background:var(--rap-mist);color:var(--rap-slate-500);
   display:grid;place-items:center;text-align:center;padding:var(--s-5);font-family:var(--mono);font-size:12px;letter-spacing:.06em;line-height:1.6}
 .ph--shot{aspect-ratio:4/3}
+.shot{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:left top;border:1px solid var(--rap-slate-200);border-radius:var(--radius-md);background:var(--rap-paper)}
 .ph--logo{min-height:72px}
 .ph--quote{min-height:150px}
 .ph-text{font-family:var(--mono);font-size:13px;color:var(--rap-slate-500);border-left:2px dashed var(--rap-slate-300);padding-left:var(--s-3)}
