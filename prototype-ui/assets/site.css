@@ -216,7 +216,7 @@ img{max-width:100%;display:block}
 .cmp__total{display:block;font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1}
 
 /* ---------- proof ---------- */
-.proofgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--s-5);align-items:stretch}
+.proofgrid{display:grid;grid-template-columns:1.12fr .88fr;gap:var(--s-5);align-items:stretch}
 .svc{display:flex;flex-direction:column;justify-content:center;min-width:0}
 .svc__k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rap-ember-700);margin-bottom:var(--s-3)}
 .svc__list li{position:relative;padding:14px 0 14px 22px;border-top:1px solid var(--rap-slate-200);font-weight:600;font-size:15px;line-height:1.4;color:var(--rap-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
