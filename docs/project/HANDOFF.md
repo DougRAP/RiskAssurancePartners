@@ -34,7 +34,7 @@ FurnitureRx (kiosk.furniturerx.net) is the owner's direct-to-consumer subscripti
 | `site-rebuild` | Same as `main`; can be ignored. | — |
 | `programs-refactor` | Already contained in `main`. | — |
 
-The owner compares `ground-up` against `main` side by side. **Merge `ground-up` into `main` only when the owner says "merge."** Commit and push to the working branch continuously so the Netlify preview stays current.
+**Owner ruling 2026-11-24: push and merge as you go.** After each change, commit on `ground-up`, push it, and fast-forward `main` to match so https://riskassurancepartners.netlify.app/ stays current. (Replaces the earlier rule to merge only when the owner says "merge".)
 
 The whole Netlify site is password-protected and sends a no-index header. An agent cannot see the deployed pages (every URL returns 401); a 401 on a preview URL does confirm the deploy exists.
 
