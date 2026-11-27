@@ -1,119 +1,144 @@
-# Session Handoff (v4)
+# Session Handoff (v5)
 
-**Written:** 2026-11-23, end of the strategy + rebuild session.
-**Next session's focus (owner-stated):** design elements of the new site.
-**Read first:** this file, then `docs/project/DECISIONS.md` entries 055–058. Older docs (MASTER_SPEC, LOCKED_WIREFRAME, IMPLEMENTATION_PLAN, AGENT_RULES phase gates) describe the August prototype and are largely superseded by 055–058; where they conflict, the owner and the newer decisions win.
+**Written:** 2026-11-27, end of the home-page design session (2026-11-23 to 11-27).
+**Next session's focus:** not yet stated by the owner. Ask, or continue down the list under "What is left" below.
+**Read first:** this file, then `docs/project/DECISIONS.md` entries 058–062. Older docs (MASTER_SPEC, LOCKED_WIREFRAME, IMPLEMENTATION_PLAN, AGENT_RULES phase gates) describe the August prototype and are superseded; where they conflict, the owner and the newer decisions win.
 
 ## Scope rule from the owner
 
-**Website only.** The owner is answering a dealer RFP separately and has said twice not to bring it into this work. Do not reference it, plan around it, or justify choices with it. Judge the site on what wins retail furniture dealers in general.
+**Website only.** The owner is answering a dealer RFP separately and has said twice not to bring it into this work. Do not reference it, plan around it, or justify choices with it.
 
 ## What the site is for
 
-Risk Assurance Partners (RAP) sells furniture protection programs through retail dealers, who resell to their customers. The site must:
+Risk Assurance Partners (RAP) sells furniture protection programs through retail dealers, who resell to their customers. In the owner's words the site must do three things at once:
 
-1. Speak first to **retail dealers**: their pain points and how RAP answers them.
-2. Give **consumers** an obvious way to get service (file a claim).
+1. Speak to **dealers** and make them want to sell RAP programs.
+2. Be the place **customers** file a claim or get information.
+3. Convince dealers RAP is **tech-forward and customer-friendly**.
 
-Competitors' sites (Montage, Guardian, Guardsman, ServeCo, Furniture Care Protection, ProtectAll) are generic consumer/dealer hybrids; none quantifies dealer economics or names a subscription program. RAP's differentiators, all owner-supplied:
+Owner's priority order for the message: (1) protection programs that protect furniture from damage; (2) reinsurance that lets dealers build wealth; (3) Multi-Year and the new Subscription program. Appeal to dealer pain points. "Service is important but is not the deciding factor."
 
-- Google rating **4.4** (229 reviews); competitors 2.2–3.7 (Montage 3.7, ProtectAll 3.3, Guardian 2.6, Furniture Care Protection 2.2; pulled by the owner November 2026).
-- **$19.99/month subscription** plan; dealer earns $8 per monthly payment, remits $0.
-- **Only provider** whose subscription programs qualify for reinsurance.
-- Every service contract backed by **A+ underwriting from Zurich or Sentruity Casualty Company**.
-- **Established 2012.** Millions of customers served. Claims in-house.
+Facts in use, all owner-supplied: Google rating 4.4; $19.99/month subscription paying the dealer $8 per payment with nothing to remit; A-rated underwriting; established 2012; millions served; claims handled in-house; "RAP Diamond" is the real plan name.
 
-FurnitureRx (kiosk.furniturerx.net) is the owner's direct-to-consumer subscription brand. Keep consumer-facing kiosk links **off** the RAP site; subscription appears only as a program dealers earn on.
+FurnitureRx (kiosk.furniturerx.net) is the owner's direct-to-consumer brand. Keep consumer kiosk **links** off the RAP site.
 
-## Branches
+## Branches and publishing
 
 | Branch | State | Deployed at |
 |---|---|---|
-| `ground-up` | **Current work.** Full rebuild, Decision 058. Not merged. | https://ground-up--riskassurancepartners.netlify.app/ |
-| `main` | The earlier trim of the August prototype (Decisions 055–057). | https://riskassurancepartners.netlify.app/ |
-| `site-rebuild` | Same as `main`; can be ignored. | — |
-| `programs-refactor` | Already contained in `main`. | — |
+| `ground-up` | Working branch. | https://ground-up--riskassurancepartners.netlify.app/ |
+| `main` | Kept identical to `ground-up`. | https://riskassurancepartners.netlify.app/ |
 
-**Owner ruling 2026-11-24: push and merge as you go.** After each change, commit on `ground-up`, push it, and fast-forward `main` to match so https://riskassurancepartners.netlify.app/ stays current. (Replaces the earlier rule to merge only when the owner says "merge".)
+**Standing owner ruling (2026-11-24): push and merge as you go.** After every change: commit on `ground-up`, `git push origin ground-up`, then `git push origin ground-up:main` and `git branch -f main HEAD`. The owner reviews on the main URL within a minute or two of each change. End commit messages with the `Co-Authored-By` line the session provides.
 
-The whole Netlify site is password-protected and sends a no-index header. An agent cannot see the deployed pages (every URL returns 401); a 401 on a preview URL does confirm the deploy exists.
+The whole Netlify site is password-protected and sends a no-index header. An agent cannot view the deployed pages (every URL returns 401). Verify locally instead.
 
-## The ground-up build (`ground-up`)
+## The build
 
 Static HTML, no framework, no build step. Netlify publishes `prototype-ui/`.
 
-- `prototype-ui/index.html` — dealer home
-- `prototype-ui/programs.html` — programs, as two choices (plan types, then underwriting)
-- `prototype-ui/customers.html` — customer service / file a claim
-- `prototype-ui/assets/site.css` — the one shared stylesheet
-- `prototype-ui/assets/site.js` — mobile menu, income estimate, contact form
-- `deferred-pages/` — Newswire, Market Intelligence, Research, gated calculator, Admin. Out of the publish folder, kept for later. They use the old inline-CSS chrome.
-- `netlify.toml` — publish folder, no-index header, `/home.html` → `/` redirect
+- `prototype-ui/index.html`: dealer home. **Redesigned this session; current.**
+- `prototype-ui/programs.html`: programs page. **Not yet redesigned**; only its header, utility bar and footer were synced.
+- `prototype-ui/customers.html`: customer service / file a claim. **Not yet redesigned**; same sync only.
+- `prototype-ui/assets/site.css`: the one shared stylesheet.
+- `prototype-ui/assets/site.js`: mobile menu, comparison calculator, contact form.
+- `prototype-ui/assets/img/`: published images, WebP only, two widths each.
+- `wireframes/home-wireframe.html`: the greyscale wireframe the home page was built from. Reference only; not published.
+- `deferred-pages/`: Newswire, Market Intelligence, Research, gated calculator, Admin. Parked.
+- `netlify.toml`: publish folder, no-index header, `/home.html` → `/` redirect.
 
-**The header and footer are duplicated in the three HTML files.** They were generated once by a throwaway script that no longer exists; edit the HTML directly and keep the three copies in sync. (The customers page deliberately differs: its header buttons are "Call Us" and "File a Claim".)
+**The utility bar, header and footer are duplicated in the three HTML files.** Edit the HTML directly and keep the three in sync. The customers page deliberately differs: its header buttons are "Call Us" and "File a Claim".
 
-Home section order: hero with "Only at RAP" panel and proof strip → what you earn (plan cards, underwriting cards, income estimate) → why subscription → Google rating comparison, dealer quotes and logos → how it works (three steps, three screenshots) → dealer questions → contact form.
+Links that matter: claims `https://www.5starservice.net/`; dealer login `https://portal.furniturerx.net/`; phone 1.800.732.5856; sales@raptns.com.
 
-Links that matter: claims go to `https://www.5starservice.net/`; dealer login is `https://portal.furniturerx.net/`; phone 1.800.732.5856; sales@raptns.com.
+## Home page as built (top to bottom)
 
-The contact form posts to Netlify Forms (form name `contact`). It has never been tested on a live deploy.
+| # | Section | Background | Notes |
+|---|---|---|---|
+| 0 | Utility bar, header | navy / white | "File a claim" link and phone; nav: Programs, Reinsurance, How It Works, For Customers, Dealer Login |
+| 1 | Hero | white | Copy left; photo right with "Turn common damage to gold with RAP." and five bullets on the photo |
+| 2 | Trust band | navy | 4.4 Google Stars, A Rated Underwriting, Millions Served, File Claims 24/7, US Based Service |
+| 3 | Programs (`#programs`) | white | Heading with "Programs & Coverage →" button on the same row; two photo cards (Multi-Year, Monthly Subscription). Cards have no links. |
+| 4 | Reinsurance (`#reinsurance`) | tint | Photo with caption left, copy right |
+| 5 | Five challenges (`#challenges`) | white | Five-row ledger: challenge left, RAP answer right. Decision 060. |
+| 6 | Comparison calculator (`#calc`) | tint | "Combine a 4-year program with subscription." Two sliders. |
+| 7 | Service & training | white | "When claims go badly, you get the blame." Rating chart (competitors anonymised, Decision 061) beside a five-bullet "RAP service difference" panel |
+| 8 | How it works (`#how`) | tint | "Onboard and sell in three easy steps." Three generated photos |
+| 9 | Dealer questions (`#questions`) | white | Seven FAQs, all collapsed on load; contact side card |
+| 10 | Contact (`#contact`) | navy | Netlify form `contact` |
+| 11 | Footer | navy | |
 
-## Design rules
+Almost every line of copy on the home page was dictated or edited by the owner, word by word. **Do not rewrite home-page copy unasked.** When the owner dictates a change, apply it verbatim; fix only obvious typos and say which ones you fixed.
 
-- **Use only the existing tokens** in `:root` of `assets/site.css` (copied verbatim from the approved design system). Do not invent colours, fonts or spacing values; ask the owner first if a new value seems needed.
-- **No alternating section background fills.** Separate sections with spacing and hairline rules. The only dark band is the footer.
-- Type: Playfair Display for headings, Inter for body, IBM Plex Mono for small labels.
-- Mobile counts as part of "done": 44px tap targets, 12px type floor, no text inside scaling SVGs, never pair the `hidden` attribute with an author `display` rule.
-- Copy: do not invent claims, coverage terms or numbers. Use "Reinsurance," never "Captive." Do not present Reinsurance as immediate profit. Keep the tax-advisor note next to tax-benefit claims.
+### Calculator model (owner-supplied)
 
-The owner's reaction to the first pass on `main` was that it looked like the old site with edits. The `ground-up` design is the response; the owner has not yet given feedback on it.
+Follows one month's sales over four years. Constants are in `site.js`.
+
+- Multi-Year: $300 retail, dealer keeps $225, remits $75 per plan.
+- 70% of customers decline, so declined customers = plans ÷ 0.30 − plans.
+- Second slider: % of those who buy a subscription (0–100, default 20).
+- Subscription: $8 × 48 payments per subscriber, nothing remitted.
+- First slider: 25–5,000 plans, step 25, default 100.
+
+## Design rules (changed this session)
+
+The owner said on 2026-11-23: **"there are no rules, we are free to design what we want."** That lifted the old no-fills rule. What now holds:
+
+- **Section backgrounds alternate white / tint** down the page (see the table). If you add, remove or split a section, re-check that no two neighbours match.
+- **All section headings are left-aligned**, and the owner wants them on **one line** at desktop width where the copy allows. Headings use `text-wrap:balance` so any that do wrap break evenly.
+- Colours, fonts and spacing still come from the `:root` tokens in `site.css`. Ask before inventing a new value. The owner's global instructions specifically forbid an invented warm tan/green background.
+- Type: Playfair Display headings, Inter body, IBM Plex Mono small labels.
+- Photography: warm editorial lifestyle, navy walls, cream upholstery, brass accents. The owner generates images with an AI tool from prompts the agent writes; a photo has to **show the action its caption describes** (the owner rejected a generic "two people at a laptop" for a step about choosing coverage).
+- You are the UI design agent, not the copy agent. Lead with layout; do not pad design discussions with copy rewrites.
+- Mobile counts as part of "done": 44px tap targets, 12px type floor.
+
+## Working with images
+
+Owner originals live in `C:\Newco\Website\photos\`. For each new image: read it first, crop to the frame's shape, save WebP at two widths into `prototype-ui/assets/img/`, reference with `srcset`, write alt text, and move any original the owner dropped into the publish folder back to the photos folder (ask first). PDFs can be opened with `pymupdf` (installed).
+
+Untracked files currently sitting in `prototype-ui/assets/` (not published, originals also in the photos folder): four PNGs and `wine-to-gold-hero.webp`. One of them, **"A Quick Claim Among Family.png", appeared after the last change and has not been used or discussed**; ask the owner what it is for. `wireframes/hero.jpg` is an unused leftover.
 
 ## Checking your work
 
-Headless Chrome screenshots from the local files work well:
+Start a local server and screenshot with headless Chrome (the servers do not survive a restart):
 
 ```
+cd prototype-ui && python -m http.server 8123 --bind 127.0.0.1      # run in background
 "/c/Program Files/Google/Chrome/Application/chrome.exe" --headless=new --disable-gpu --hide-scrollbars \
-  --window-size=1280,6600 --screenshot="<scratchpad>/home.png" \
-  "file:///c:/Newco/AI/RAP%20Website/Website%20Refactor/prototype-ui/index.html"
+  --window-size=1280,9000 --screenshot="<scratchpad>/f.png" "http://127.0.0.1:8123/index.html"
 ```
 
-Widths below about 500px are unreliable in headless Chrome; the owner's phone is the authority for mobile. As of this handoff, Home and Programs were checked at desktop width and Home at 520px; the Customers page on `ground-up` was not screenshotted.
+Crop the region you changed with PIL and look at it. Check 1280 wide for desktop and about 600 for mobile; widths below about 500px are unreliable and the owner's phone is the authority. Shell heredocs containing apostrophes fail in this environment: write a short Python script to the scratchpad and run it, or use `python -c` with care. `gh` is not installed. LF → CRLF warnings on commit are expected.
 
-`gh` is not installed. Git line-ending warnings (LF → CRLF) on commit are expected.
+## What is left
 
-## Placeholders awaiting the owner
+**Open on the home page**
 
-Each renders as a grey dashed box (`.ph`) or a "Placeholder — owner to supply" line (`.ph-text`).
+1. The label "The RAP service difference" (service panel) and the eyebrow "Run the numbers" (calculator) are agent wording the owner has not confirmed.
+2. The reinsurance photo caption ("Generational wealth / Built one protection plan at a time, and passed on to the next generation.") is agent wording.
+3. The note under the rating chart still says "as published by Google, November 2026" although competitors are now anonymous.
+4. FAQ "How and when am I paid?" covers Subscription only.
+5. Wording differences the owner knows about and has not asked to change: Multi-Year card says "two to five years" while the hero bullet says "30 Days to 10 Years"; "70% to 75%" in the Subscription card versus a flat 70% in the calculator.
+6. Section position: the five challenges sit after Reinsurance. Moving them under the trust band was discussed and left.
+7. Real-phone review of the redesigned home page has not been reported back.
 
-| Page | Placeholder |
-|---|---|
-| Home, under the rating chart | Three dealer quotes; five dealer logos |
-| Home, How it works | Screenshots: claim app, subscription sign-up, dealer portal |
-| Home, Dealer questions | Answers: plans sold under the current provider; associate training; point-of-sale; how and when the dealer is paid; time to launch |
-| Programs | Basic and Premium coverage lists; what the dealer remits on Multi-Year |
-| Customers | Answers: how long a claim takes; how to check claim status |
+**Other pages (not started)**
 
-## Open questions for the owner
+8. Programs and Customers pages still have the pre-redesign body. They say "A+" where Home says "A-rated", and Programs still shows the old "$250 × 72% = $180" margin illustration, which conflicts with the home calculator's $300 / $225.
+9. Customers page: the first FAQ still loads open (Home's are all collapsed); the owner was asked and has not answered.
+10. Placeholders remain on Programs (Basic and Premium coverage lists; what the dealer remits on Multi-Year) and Customers (how long a claim takes; how to check claim status).
 
-1. **Subscription math:** the site uses $8 × 60 payments = $480 per subscriber; Decision 039 says 36 payments / $288.
-2. **"Since 2012" vs "decade and a half":** the owner's reinsurance line said a decade and a half; 2012 to 2026 is 14 years, so the site says "since 2012."
-3. **A+ for both carriers:** written as the owner gave it; not independently confirmed for Sentruity.
-4. **Hours:** sales 8–6 ET Mon–Fri (Decision 027); customer service 9–6 ET Mon–Sat (Decision 042). Both are shown, each in its own context.
-5. **Income estimate defaults** (500 tickets, 30% Multi-Year, 15% Subscription) were chosen by the agent, not the owner.
-6. **Guardian** has two Google listings (2.6 and 2.5); the site shows 2.6. Guardsman and ServeCo are not in the chart because the owner did not supply their ratings.
-7. Draft copy throughout the new pages needs the owner's read.
+**Before the site can go live**
 
-## Before the site can go live
-
-- DNS access for riskassurancepartners.com (the owner does not have the old site's code; the new site replaces it).
+- DNS access for riskassurancepartners.com.
 - Owner's go-ahead to remove the Netlify password and the no-index header (`netlify.toml` and the `<meta name="robots">` tag in each page).
 - Privacy and Terms pages do not exist.
-- A test submission of the contact form on a live deploy.
+- The contact form has never been tested on a live deploy.
 
 ## Owner working preferences
 
 - Replies: extremely concise.
 - For coding tasks, name the matching skill in one line before starting.
-- The owner reviews on desktop and phone via the Netlify previews and often sends screenshots.
+- The owner works top-down through a section, dictating one small change per message ("change this … to this …"). Make the change, publish it, confirm in a line or two, and flag anything it breaks (wrapping, misalignment, a conflict with other copy). Do not batch or wait.
+- The owner reviews on the live main URL and sends screenshots. A yellow arrow in a screenshot is the owner's own mouse pointer.
 - Log each material ruling as a numbered entry in `docs/project/DECISIONS.md`.

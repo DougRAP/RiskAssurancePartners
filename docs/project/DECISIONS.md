@@ -804,6 +804,16 @@ Owner: "there are no rules, we are free to design what we want." Supersedes the 
 
 - Owner ruling: the Google rating chart on Home no longer names competitors. Rows read Risk Assurance Partners, Provider A, Provider B, Provider C, Provider D, in the same order and with the same ratings as before. This reverses the naming in Decision 057.
 
+## Decision 062 - Home Page Lower Sections (2026-11-24 to 11-27, branch `ground-up`, merged as made)
+
+- **Publishing:** owner ruling to push and merge to `main` after every change.
+- **Backgrounds and headings:** sections alternate white / tint; all section headings left-aligned and single-line at desktop where the copy allows.
+- **Programs:** a "Programs & Coverage" button sits on the heading row; the two card links are removed.
+- **Calculator:** now its own tinted section, reframed around one month's sales followed for four years. First slider "Four-Year plans sold per month, $300 avg retail", 25 to 5,000; second slider "% of those that say no who buy a subscription", 0 to 100. The "+N% from customers who said no" line is removed. All labels owner-dictated.
+- **Service section:** eyebrow "Service & training matter", heading "When claims go badly, you get the blame." The dealer quote placeholder is replaced by five owner-supplied service points; the dealer logo strip is removed.
+- **How it works:** heading "Onboard and sell in three easy steps." Real screenshots (dealer portal, sign-up page, 5 Star Service) were tried and replaced by three AI-generated photos made from agent-written prompts. "RAP Diamond", shown in the second photo, is confirmed by the owner as the correct plan name.
+- **FAQ:** five answers supplied by Dan, then tidied by the agent with the owner's permission (tone, capitalisation, "all P.O.S. systems" softened). All rows collapsed on load.
+
 ## Open / Not Yet Decided
 
 The following remain intentionally unresolved:
